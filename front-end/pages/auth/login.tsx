@@ -1,34 +1,53 @@
-import styles from '../../styles/pages/Auth.module.scss';
-import React from 'react';
-import { connect } from 'react-redux';
+import styles from '../../styles/pages/Auth.module.scss'
+import React from 'react'
+import { connect } from 'react-redux'
+import { userActions } from '../../redux/actions/user'
 
-export default class LoginPage extends React.Component {
+interface IProps {
+    login: any
+    dispatch: any
+}
+interface IState {
+    username: string,
+    password: string,
+    submitted: boolean
+}
+class LoginPage extends React.Component<IProps, IState> {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             username: '',
             password: '',
             submitted: false
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        }
+    }
+    handleChange = (e) => {
+        const { name, value } = e.target
+        switch (name) {
+            case 'username':
+                this.setState({username: value})
+                break
+            case 'password':
+                this.setState({password: value})
+                break
+        }
     }
 
-    handleChange(e) {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-    }
+    handleSubmit = (e) => {
+        e.preventDefault()
 
-    handleSubmit(e) {
-        e.preventDefault();
-
+        this.setState({ submitted: true })
+        const { username, password } = this.state
+        const { dispatch } = this.props
+        if (username && password) {
+            dispatch(userActions.login(username, password))
+        }
     }
 
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div className="">
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div>
@@ -44,6 +63,8 @@ export default class LoginPage extends React.Component {
                     </div>
                 </form>
             </div>
-        );
+        )
     }
 }
+const connectedLoginPage = connect(state => state)(LoginPage)
+export  default connectedLoginPage

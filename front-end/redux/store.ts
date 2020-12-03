@@ -1,7 +1,11 @@
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './reducers';
+import {createStore, AnyAction} from 'redux'
+import {MakeStore, createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
+import {State, reducers} from '../redux/reducers'
 
-const store = createStore(
-    rootReducer,
-)
-export default store
+
+
+// create a makeStore function
+const makeStore: MakeStore<State> = (context: Context) => createStore(reducers)
+
+// export an assembled wrapper
+export const wrapper = createWrapper<State>(makeStore, {debug: true})  
