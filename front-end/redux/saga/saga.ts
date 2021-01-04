@@ -1,4 +1,4 @@
-import { takeEvery, all } from 'redux-saga/effects'
+import { takeEvery, takeLatest, all } from 'redux-saga/effects'
 import { userConstants } from '../../helpers/constants/user.constants'
 import { userLogin } from './users.saga'
 function *watchAll() {

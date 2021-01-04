@@ -1,23 +1,28 @@
-import {createStore, applyMiddleware} from 'redux'
-import {MakeStore, createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
-import {State, reducers} from '../redux/reducers'
-import createSagaMiddleware from 'redux-saga'
-import watchAll from './saga/saga'
+import {createStore, applyMiddleware, Store} from 'redux'
+// import {MakeStore, createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
+import { reducers } from '../redux/reducers'
+import thunk from 'redux-thunk'
+import { IUserState } from './reducers/user.reducer'
+import { IAuthState } from './reducers/auth.reducer'
+export interface IState{
+    user: IUserState
+    auth: IAuthState
+}
 
-const sagaMiddleware = createSagaMiddleware()
 const bindMiddleware = (middleware) => {
+    const applyedMiddlewares = applyMiddleware(...middleware)
     if (process.env.NODE_ENV !== 'production') {
         // tslint:disable-next-line: no-implicit-dependencies
         const { composeWithDevTools } = require('redux-devtools-extension')
         return composeWithDevTools(applyMiddleware(...middleware))
     }
-    const applyedMiddlewares = applyMiddleware(...middleware)
-    sagaMiddleware.run(watchAll)
     return applyedMiddlewares
 }
 
-// create a makeStore function
-const makeStore: MakeStore<State> = (context: Context) =>  createStore(reducers, bindMiddleware([sagaMiddleware]))
+// // create a makeStore function
+// const makeStore: MakeStore = (context: Context) => createStore(reducers, bindMiddleware([thunk]))
 
-// export an assembled wrapper
-export const wrapper = createWrapper<State>(makeStore, {debug: true})
+// // export an assembled wrapper
+// export const wrapper = createWrapper(makeStore, {debug: true})
+
+export const store: Store<IState> =  createStore(reducers, bindMiddleware([thunk]))

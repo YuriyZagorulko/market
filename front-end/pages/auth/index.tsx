@@ -1,4 +1,4 @@
-import styles from '../../styles/pages/Auth.module.scss'
+import authStyles from '../../styles/pages/Auth.module.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 

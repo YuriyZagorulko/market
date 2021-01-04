@@ -1,4 +1,5 @@
-import styles from '../../styles/pages/Auth.module.scss'
+import authStyles from '../../styles/shared/Auth.module.scss'
+import style from '../../styles/pages/Login.module.scss'
 import React from 'react'
 import { connect } from 'react-redux'
 import { userActions } from '../../redux/actions/user'
@@ -47,7 +48,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <div className="">
+            <div className={style.login}>
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
                     <div>

@@ -3,7 +3,8 @@
   "rules": {
     "jsx-wrap-multiline": false,
     "semicolon": [true, "never"],
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "jsx-boolean-value": [true, "never"]
   },
     "compilerOptions": {
       "plugins": [

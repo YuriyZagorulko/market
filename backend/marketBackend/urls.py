@@ -3,6 +3,6 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', include('marketBackend.apps.market.urls')),
+    path('market/', include('marketBackend.apps.market.urls')),
     path('admin/', admin.site.urls),
 ]

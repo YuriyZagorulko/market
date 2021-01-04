@@ -7,8 +7,15 @@ export const userActions = {
 }
 
 function login(username, password) {
-    debugger
-    return request()
+    return (dispatch) => {
+        userService.login({ username, password }).then(
+            (data) => {
+                console.log(data)
+            }
+        ).catch((err) => {
+            console.log(err)
+        })
+    }
     // return dispatch => {
     //     dispatch(request({ username }))
     //
