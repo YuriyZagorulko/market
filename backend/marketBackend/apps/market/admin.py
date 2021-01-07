@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import  ImageAlbum,Image,Product
 
-# Register your models here.
+admin.site.register(ImageAlbum)
+admin.site.register(Product)
+admin.site.register(Image)
