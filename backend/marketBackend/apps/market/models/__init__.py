@@ -1,2 +1,3 @@
 from .product import Product
-from .image import Image, ImageAlbum
+from .image import ImageAlbum
+from .image import Image

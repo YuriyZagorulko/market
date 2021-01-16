@@ -17,9 +17,7 @@ function login(username, password) {
         })
     }
     // return dispatch => {
-    //     dispatch(request({ username }))
-    //
-    //     userService.login(username, password)
+    //     userService.login({ username, password })
     //         .then(
     //             user => {
     //                 dispatch(success(user))

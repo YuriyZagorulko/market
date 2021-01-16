@@ -1,7 +1,8 @@
 import {createStore, applyMiddleware, Store} from 'redux'
 // import {MakeStore, createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
 import { reducers } from '../redux/reducers'
-import thunk from 'redux-thunk'
+import watchAll from './saga/saga'
+import createSagaMiddleware from 'redux-saga'
 import { IUserState } from './reducers/user.reducer'
 import { IAuthState } from './reducers/auth.reducer'
 export interface IState{
@@ -9,6 +10,7 @@ export interface IState{
     auth: IAuthState
 }
 
+const sagaMiddleware = createSagaMiddleware()
 const bindMiddleware = (middleware) => {
     const applyedMiddlewares = applyMiddleware(...middleware)
     if (process.env.NODE_ENV !== 'production') {
@@ -19,10 +21,6 @@ const bindMiddleware = (middleware) => {
     return applyedMiddlewares
 }
 
-// // create a makeStore function
-// const makeStore: MakeStore = (context: Context) => createStore(reducers, bindMiddleware([thunk]))
-
-// // export an assembled wrapper
-// export const wrapper = createWrapper(makeStore, {debug: true})
-
-export const store: Store<IState> =  createStore(reducers, bindMiddleware([thunk]))
+// export const store: Store<IState> =  createStore(reducers, bindMiddleware([thunk]))
+export const store: Store<IState> =  createStore(reducers, bindMiddleware([sagaMiddleware]))
+sagaMiddleware.run(watchAll)
