@@ -2,7 +2,7 @@ import config from '../config'
 import { authHeader } from '../helpers/headers'
 import { LocalStorage } from '../helpers/storage/localStorage'
 import { store } from '../redux/store'
-import { ILogin } from '../helpers/types/auth/auth'
+import { ILogin } from '../helpers/types/responces/auth'
 import { IUserState } from '../redux/reducers/user.reducer'
 
 const storage: LocalStorage = LocalStorage.Instance

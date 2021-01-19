@@ -5,9 +5,11 @@ import watchAll from './saga/saga'
 import createSagaMiddleware from 'redux-saga'
 import { IUserState } from './reducers/user.reducer'
 import { IAuthState } from './reducers/auth.reducer'
+import { IProductState } from './reducers/product.reducer'
 export interface IState{
     user: IUserState
     auth: IAuthState
+    product: IProductState
 }
 
 const sagaMiddleware = createSagaMiddleware()

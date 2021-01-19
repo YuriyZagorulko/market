@@ -7,5 +7,7 @@ class MainView(APIView):
     def get(self, request):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data) #products.values()
+        return Response({
+            'products': serializer.data
+        }) #products.values()
 
