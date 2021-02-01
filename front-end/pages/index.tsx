@@ -4,6 +4,7 @@ import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
 import { store } from '../redux/store'
 import { IProduct } from '../helpers/types/responces/products'
+import HomeHeader from '../components/home/homeHeader/homeHeader'
 
 interface IProps {
   login: any
@@ -37,7 +38,12 @@ class HomePage extends React.Component<IProps, IState> {
   render () {
     return (
     <div className={styles.container}>
-      index content
+      <div className={styles.head}>
+        <HomeHeader/>
+      </div>
+      <div>
+        content
+      </div>
     </div>
   )
   }
