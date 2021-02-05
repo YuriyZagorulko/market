@@ -1,0 +1,29 @@
+@import '../../../styles/constants.scss';
+.footer{
+    display: grid;
+    background-color: $color-black;
+    color: #fff;
+    height: $height-footer-desk;
+    box-sizing: border-box;
+}
+.footerContent{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+    padding: 20px 0;
+}
+.footerContact{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+}
+.footerSocial{
+    display: grid;
+    grid-template-columns: repeat(3, 40px);
+    justify-content: right;
+
+    svg{
+        height: 20px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

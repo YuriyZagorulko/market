@@ -1,0 +1,25 @@
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.topLeft{
+  display: flex;
+  flex-direction: column;
+}
+.topRight{
+  display: flex;
+  flex-direction: column;
+}
+.images{
+  display: flex;
+}
+.img{
+  display: flex;
+  position: relative;
+}

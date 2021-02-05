@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { store } from '../redux/store'
 import { IProduct } from '../helpers/types/responces/products'
 import HomeHeader from '../components/home/homeHeader/homeHeader'
+import ProductLine from '../components/shared/productLine/productLine'
 
 interface IProps {
   login: any
@@ -35,14 +36,24 @@ class HomePage extends React.Component<IProps, IState> {
     const { dispatch } = this.props
     dispatch({ type: productConstants.GETMAIN_REQUEST })
   }
+
+  productLines(){
+    if (this.state && this.state.products){
+      return <ProductLine products={this.state.products} />
+      } else {
+        return <div>
+          no content
+        </div>
+      }
+  }
   render () {
     return (
     <div className={styles.container}>
       <div className={styles.head}>
         <HomeHeader/>
       </div>
-      <div>
-        content
+      <div className={styles.content + ' global-width-limiter'}>
+       {this.productLines()}
       </div>
     </div>
   )
