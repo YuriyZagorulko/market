@@ -1,8 +1,9 @@
 import config from '../config'
 import { store } from '../redux/store'
-import { IMain } from '../helpers/types/responces/products'
+import { IMain, IProduct } from '../helpers/types/responces/products'
 export const productService = {
-    mainPage
+    mainPage,
+    getProduct
 }
 
 function mainPage() {
@@ -17,17 +18,19 @@ function mainPage() {
             return responce.products
         })
 }
-function getProduct({id}) {
+function getProduct(id: string): Promise<IProduct> {
+    if (id) {
     const requestOptions = {
         method: 'GET',
     }
 
-    return fetch(`${config.apiUrl}/market/product`, requestOptions)
+    return fetch(`${config.apiUrl}/market/product?productId=` + id, requestOptions)
         .then(handleResponse)
-        .then((responce: IMain) => {
+        .then((responce: {product: IProduct}) => {
             console.log(responce)
-            return responce.products
+            return responce.product
         })
+    }
 }
 function handleResponse(response) {
     return response.text().then(text => {
