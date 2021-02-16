@@ -1,12 +1,13 @@
 import { combineReducers, AnyAction } from 'redux'
-import { HYDRATE } from 'next-redux-wrapper'
 import { userReducer as user } from './user.reducer'
 import { authRerucer as auth } from './auth.reducer'
 import { productReducer as product } from './product.reducer'
+import { controlsReducer as controls } from './controls.reducer'
 
 export const reducers = combineReducers({
   // reducer,
   user,
   auth,
-  product
+  product,
+  controls
 })

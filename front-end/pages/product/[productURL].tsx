@@ -1,5 +1,5 @@
 import style from '../../styles/pages/Product.module.scss'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { IProduct, getFirstImg } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
@@ -8,7 +8,7 @@ import { withRouter, NextRouter, useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-
+import { controlsConstants } from '../../helpers/constants/controls'
 
 // interface IProps {
 //     router: NextRouter
@@ -66,17 +66,19 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 // export default withRouter(connectedProductPage)
 
 
-
-
 const Post = () => {
+const dispatch = useDispatch()
 const router = useRouter()
 const [product, setProduct] = useState(null)
-
 const { productURL } = router.query
-if (productURL) {
+if (productURL && !product) {
     productService.getProduct(productURL.toString()).then((data) => {
         setProduct(data)
     })
+}
+
+const openModal = () => {
+    dispatch({type: controlsConstants.OPEN_CART})
 }
 
 return (<div className={style.wrapper}>
@@ -106,7 +108,7 @@ return (<div className={style.wrapper}>
                             {product.price} ₴
                         </div>
                         <div className={style.buy}>
-                            <button className={`button-primary`}>
+                            <button className={`button-primary`} onClick={openModal}>
                                 <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart} />
                                 Купить
                             </button>

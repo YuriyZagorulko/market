@@ -15,7 +15,6 @@ export function productReducer(state: IProductState = { mainPage: []}, action) {
         }
         case productConstants.GETMAIN_SUCCESS:
             return {
-                loggedIn: true,
                 mainPage: action.data
             }
         case productConstants.GETMAIN_FAILURE:

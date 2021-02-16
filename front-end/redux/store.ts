@@ -6,10 +6,12 @@ import createSagaMiddleware from 'redux-saga'
 import { IUserState } from './reducers/user.reducer'
 import { IAuthState } from './reducers/auth.reducer'
 import { IProductState } from './reducers/product.reducer'
+import { IControls } from './reducers/controls.reducer'
 export interface IState{
     user: IUserState
     auth: IAuthState
     product: IProductState
+    controls: IControls
 }
 
 const sagaMiddleware = createSagaMiddleware()
