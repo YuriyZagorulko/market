@@ -9,11 +9,8 @@ import { controlsConstants } from '../../../helpers/constants/controls'
 import Button from 'antd/lib/button'
 import { Unsubscribe } from 'redux-saga'
 import { cartConstants, ICartState } from '../../../redux/reducers/cart.reducer'
-import { InputNumber } from 'antd'
-import Image from 'next/image'
-import config from '../../../config'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt } from "@fortawesome/free-regular-svg-icons"
+import CartProduct from './cartProduct/cartProduct'
+import Link from 'next/link'
 
 type IProps = {
   dispatch: any
@@ -62,44 +59,25 @@ class CartModal extends React.Component<IProps, cartModalState> {
     handleCancel = () => {
       this.props.dispatch({type: controlsConstants.CLOSE_CART})
     }
-    quantityChange = (value) => {
-      console.log('changed', value)
+    quantityChange = (product: IProduct, quantity) => {
+      console.log('changed', quantity)
+      this.props.dispatch({type: cartConstants.CHANGE_QUANTITY, product, quantity})
     }
-    removeProduct(product: IProduct){
+    removeProduct = (product: IProduct) => {
       this.props.dispatch({type: cartConstants.REMOVE_PRODUCT, product})
     }
     productsList = () => {
       if (this.state.cartProducts.length > 0) {
           return (
-            <div>{this.state.cartProducts.map((item, i) => {
+            <div className={styles.productList}>
+              {this.state.cartProducts.map((item, i) => {
               return (
-                <div key={item.product.id} className={styles.product}>
-                  <div className={styles.productContent}>
-                    <div className={styles.productImage}>
-                      <Image
-                        src={config.apiUrl + getFirstImg(item.product)}
-                        alt="Produt"
-                        layout="fill"
-                      />
-                    </div>
-                    <div className={styles.productTitle}>
-                      {item.product.title}
-                    </div>
-                    <div className={styles.productControls}>
-                      <div className={styles.productIcon + ' delete'} data-mssg="Hello!" onClick={() => this.removeProduct(item.product)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.productFooter}>
-                    <div className={styles.productQuantity}>
-                      <InputNumber min={1} max={100} defaultValue={item.quantity} onChange={this.quantityChange} />
-                    </div>
-                    <div className={styles.productPrice}>
-                      ₴{item.quantity * item.product.price}
-                    </div>
-                  </div>
-                </div>
+                <CartProduct
+                  key={item.product.id}
+                  addedProduct={item}
+                  onDelete={this.removeProduct}
+                  onQuantityChange={this.quantityChange}
+                />
               )
             })}
             </div>
@@ -120,9 +98,16 @@ class CartModal extends React.Component<IProps, cartModalState> {
           destroyOnClose
           width={'800px'}
           footer={[
-            <Button key="submit" type="primary" onClick={this.handleOk}>
-              Оформить Заказ
-            </Button>
+            <Link key="checkout" href="/checkout">
+              <Button
+                key="submit"
+                type="primary"
+                className={'cart-btn'}
+                onClick={this.handleOk}
+              >
+                Оформить Заказ
+              </Button>
+            </Link>
           ]}
         >
           {this.productsList()}
