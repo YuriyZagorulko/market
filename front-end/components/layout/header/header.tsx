@@ -4,19 +4,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { controlsConstants } from '../../../helpers/constants/controls'
+import { connect } from 'react-redux'
 
 type headerProps = {
   name?: string
+  dispatch: any
 }
 type headerState = {
   headerBanner?: string
 }
-export default class Header extends React.Component<headerProps, headerState> {
+class Header extends React.Component<headerProps, headerState> {
     constructor(props){
       super(props)
       this.state = {
         headerBanner: ''
       }
+    }
+    openModal = () => {
+      this.props.dispatch({type: controlsConstants.OPEN_CART})
     }
     render() {
       return (
@@ -61,7 +67,7 @@ export default class Header extends React.Component<headerProps, headerState> {
               <FontAwesomeIcon icon={faSearch} />
             </div>
             <div className={styles.itemsRight}>
-              <div className={styles.headerIcon}>
+              <div className={styles.headerIcon} onClick={this.openModal}>
                 <FontAwesomeIcon icon={faShoppingCart} />
               </div>
             </div>
@@ -70,3 +76,6 @@ export default class Header extends React.Component<headerProps, headerState> {
       </div>)
     }
   }
+
+const connectedConponent = connect(state => state)(Header)
+export default connectedConponent

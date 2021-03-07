@@ -1,5 +1,10 @@
+import { ICartState } from "../../redux/reducers/cart.reducer"
 import { IUserState } from "../../redux/reducers/user.reducer"
+import { IProduct } from "../types/responces/products"
 
+enum storageKeys {
+    cart = 'CART'
+}
 // Singeltone class
 // Created to simplify interraction with local storage
 export class LocalStorage
@@ -42,6 +47,18 @@ export class LocalStorage
             const user: IUserState = JSON.parse(localStorage.getItem('user'))
             return user
         }
+    }
+    public saveCart(state: ICartState){
+        if (this.isOnClient){
+            localStorage.setItem(storageKeys.cart, JSON.stringify(state.addedProducts))
+        }
+    }
+    public initCart(): ICartState{
+        if (this.isOnClient){
+            const addedProducts: { product: IProduct, quantity: number } [] = JSON.parse(localStorage.getItem(storageKeys.cart))
+            return { addedProducts }
+        }
+        return { addedProducts: [] }
     }
 
 }

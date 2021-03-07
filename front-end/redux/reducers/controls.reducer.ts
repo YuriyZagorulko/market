@@ -1,11 +1,11 @@
 
 import { controlsConstants } from '../../helpers/constants/controls'
 
-export interface IControls{
+export interface IControlsState{
     isCartOpened: boolean
 }
 
-export function controlsReducer(state: IControls = {isCartOpened: false}, action) {
+export function controlsReducer(state: IControlsState = {isCartOpened: false}, action) {
   switch (action.type) {
     case controlsConstants.OPEN_CART:
         return {

@@ -4,11 +4,11 @@ import Header from  '../header/header'
 import Footer from  '../footer/footer'
 import Head from 'next/head'
 import CartModal from '../../shared/cartModal/cartModal'
-type headerProps = {
+type layoutProps = {
   name?: string
 }
 
-export default class MainLayout extends React.Component<headerProps> {
+export default class MainLayout extends React.Component<layoutProps> {
     render() {
         return (
             <div>

@@ -4,11 +4,12 @@ import { IProduct, getFirstImg } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
-import { withRouter, NextRouter, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
+import { cartConstants } from '../../redux/reducers/cart.reducer'
 
 // interface IProps {
 //     router: NextRouter
@@ -77,7 +78,8 @@ if (productURL && !product) {
     })
 }
 
-const openModal = () => {
+const buyProduct = () => {
+    dispatch({type: cartConstants.ADD_PRODUCT, product})
     dispatch({type: controlsConstants.OPEN_CART})
 }
 
@@ -88,11 +90,11 @@ return (<div className={style.wrapper}>
                 <div className={style.topLeft}>
                     <div className={style.images}>
                         <div className={style.img} >
-                        <Image
-                            src={config.apiUrl + getFirstImg(product)}
-                            alt="Produt"
-                            layout="fill"
-                        />
+                            <Image
+                                src={config.apiUrl + getFirstImg(product)}
+                                alt="Produt"
+                                layout="fill"
+                            />
                         </div>
                     </div>
                 </div>
@@ -108,7 +110,7 @@ return (<div className={style.wrapper}>
                             {product.price} ₴
                         </div>
                         <div className={style.buy}>
-                            <button className={`button-primary`} onClick={openModal}>
+                            <button className={`button-primary`} onClick={buyProduct}>
                                 <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart} />
                                 Купить
                             </button>
