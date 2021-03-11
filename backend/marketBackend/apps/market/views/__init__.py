@@ -1,3 +1,5 @@
 from .product import ProductView
 from .index import IndexView
 from .main import MainView
+from .order import OrderView
+from .order import ShippingView
