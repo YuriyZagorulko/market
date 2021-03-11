@@ -25,6 +25,13 @@ export function cartReducer(state: ICartState = storage.initCart(), action) {
         return state
   }
 }
+export function getTotalPrice(state: ICartState): number {
+    let price = 0
+    for (const item of state.addedProducts){
+        price += item.quantity * item.product.price
+    }
+    return price
+}
 export function getProductIndex(state: ICartState, productId): number {
     let index = -1
     for (let i = 0; i < state.addedProducts.length; i++){

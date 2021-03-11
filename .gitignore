@@ -180,3 +180,4 @@ cython_debug/
 #Custom
 backend/media
 /backend/media/images/
+/backend/marketBackend/secret.py

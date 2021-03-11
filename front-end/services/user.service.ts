@@ -29,7 +29,6 @@ function login(payload: {username, password}) {
     return testSecureAction()
 }
 function testSecureAction() {
-    debugger
     const user: IUserState = store.getState().user
     const requestOptions = {
         method: 'POST',

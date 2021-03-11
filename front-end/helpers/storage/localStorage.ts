@@ -56,7 +56,9 @@ export class LocalStorage
     public initCart(): ICartState{
         if (this.isOnClient){
             const addedProducts: { product: IProduct, quantity: number } [] = JSON.parse(localStorage.getItem(storageKeys.cart))
-            return { addedProducts }
+            if (addedProducts){
+                return { addedProducts }
+            }
         }
         return { addedProducts: [] }
     }

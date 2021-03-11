@@ -1,5 +1,6 @@
 @import 'antd/dist/antd.css';
 @import './constants.scss';
+@import './custom-globals.scss';
 html,
 body {
   padding: 0;
@@ -20,44 +21,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-.global-width-limiter{
-  margin: 0 auto;
-  max-width: 1320px;
-  width: 100%;
-}
-
-.button-primary{
-  color: #fff;
-  background-color: $color-blue-boyzone;
-  padding: 5px 10px;
-  border: none;
-  outline: none;
-  box-shadow: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 24px;
-  display: flex;
-  flex-direction: row;
-
-  &:hover{
-    background-color: $color-blue-hight;
-  }
-}
-.cart-modal{
-  .ant-modal-title{
-    font-weight: normal;
-      font-size: 24px;
-  }
-  .ant-modal-body{
-    max-height: 500px;
-    overflow-y: scroll;
-  }
-  .cart-btn{
-      font-size: 20px;
-      height: 34px;
-      box-sizing: content-box;
-      background-color: $color-blue-boyzone;
-  }
 }

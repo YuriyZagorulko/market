@@ -71,15 +71,15 @@ class CartModal extends React.Component<IProps, cartModalState> {
           return (
             <div className={styles.productList}>
               {this.state.cartProducts.map((item, i) => {
-              return (
-                <CartProduct
-                  key={item.product.id}
-                  addedProduct={item}
-                  onDelete={this.removeProduct}
-                  onQuantityChange={this.quantityChange}
-                />
-              )
-            })}
+                return (
+                  <CartProduct
+                    key={item.product.id}
+                    addedProduct={item}
+                    onDelete={this.removeProduct}
+                    onQuantityChange={this.quantityChange}
+                  />
+                )
+              })}
             </div>
           )
         } else {

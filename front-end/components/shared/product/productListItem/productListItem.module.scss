@@ -1,0 +1,42 @@
+@import '../../../../styles/constants.scss';
+
+.container{
+    display: flex;
+    margin: 0;
+    cursor: pointer;
+    flex-direction: row;
+    margin-bottom: 20px;
+    &:hover{
+        .description{
+            text-decoration: underline;
+        }
+        .price{
+            text-decoration: none;
+        }
+    }
+    a{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-start;
+        color: $color-black;
+        text-decoration: none   ;
+    }
+
+}
+.image{
+    display: flex;
+    height: 70px;
+    width: 70px;
+    position: relative;
+    margin-right: 30px;
+}
+.description{
+    font-size: 14px;
+    max-height: 45px;
+    overflow: hidden;
+    margin: 10px 0 0 0;
+}
+.price{
+    font-size: 24px;
+}
