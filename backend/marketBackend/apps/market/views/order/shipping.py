@@ -7,23 +7,23 @@ from marketBackend.secret import NP_API_KEY
 import requests
 import json
 
-class ShippingView(APIView):
+class CitiesNPView(APIView):
     def get(self, request, *args, **kwargs):
+        cityName = request.GET.get('cityName')
         post_data = str(json.dumps({
             "apiKey": NP_API_KEY,
             "modelName": "Address",
             "calledMethod": "searchSettlements",
             "methodProperties": {
-                    "CityName": "київ",
+                    "CityName": cityName,
                     "Limit": 5
                 }
         })).encode('utf-8')
         response = requests.post('https://api.novaposhta.ua/v2.0/json/', data=post_data)
-        content = response.content
+        content = json.loads(response.content)
         return Response({
             'content': content
         })  # products.values()
-
     # def get(self, request, *args, **kwargs):
     #     productId = int(request.GET.get('productId'))
     #     product= Product.objects.get(pk=productId)

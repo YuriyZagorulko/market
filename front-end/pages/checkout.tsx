@@ -5,13 +5,15 @@ import { connect } from 'react-redux'
 import { store } from '../redux/store'
 import { IProduct } from '../helpers/types/responces/products'
 import { Unsubscribe } from 'redux-saga'
-import { Button, Input, Radio } from 'antd'
+import { AutoComplete, Button, Input, Radio, Select } from 'antd'
 import { getTotalPrice } from '../redux/reducers/cart.reducer'
 import classnames from 'classnames'
 import ProductListItem from '../components/shared/product/productListItem/productListItem'
 import Router from 'next/router'
-import { NPapiService } from '../services/order/NPapi.service'
+import { ICitiesResponce, NPapiService } from '../services/order/NPapi.service'
 import { deliveryTypes } from '../helpers/order/order.constants'
+
+const { Option } = Select
 interface IProps {
   login: any
   dispatch: any
@@ -23,6 +25,8 @@ interface IState {
   name: string
   surname: string
   selectedShipping: string
+  cityOptions: { value: string, cityRef: string } []
+  selectedCity: { name: string, cityRef: string }
 }
 class CheckoutPage extends React.Component<IProps, IState> {
   constructor(props){
@@ -34,6 +38,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
       storeUnsub: null,
       totalPrice: 0,
       selectedShipping: deliveryTypes.newPost,
+      cityOptions: [],
+      selectedCity: { cityRef: '', name: '' }
     }
   }
   componentWillUnmount(){
@@ -59,9 +65,29 @@ class CheckoutPage extends React.Component<IProps, IState> {
     })
     const { dispatch } = this.props
     dispatch({ type: productConstants.GETMAIN_REQUEST })
+    this.citySearch('д')
+  }
+  citySearch = (str: string) => {
+    console.log(str)
+    NPapiService.getCities(str).then((data: ICitiesResponce) => {
+      console.log('cities recived: ')
+      console.log(data)
+      const cities: { value: string, cityRef: string }[] = []
+      if (data && data.Addresses) {
+      for (const c of data.Addresses){
+        cities.push({
+          value: c.MainDescription,
+          cityRef: c.Ref
+        })
+        this.setState({
+          cityOptions: cities
+        })
+      }
+    }
+    })
   }
   checkoutOrder = () => {
-    NPapiService.getCities('')
+      
   }
   contactInfo(){
     return (
@@ -164,9 +190,37 @@ class CheckoutPage extends React.Component<IProps, IState> {
     const onChange = e => {
       this.setState({selectedShipping: e.target.value})
     }
+    const citySelect = (e) => {
+      console.log('citySelect')
+      console.log(e)
+    }
+    const filterCities = (input, option) => {
+      return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    }
     return(
       <div className={styles.shippingContainer}>
-        <Radio.Group value={this.state.selectedShipping} onChange={onChange}>
+        <div className={styles.sectionTitle}>
+          Доставка новой почтой
+        </div>
+        <div className={styles.deliveryContainer}>
+          <label>
+            Выберите ваш город
+          </label>
+          <Select
+            showSearch
+            style={{ width: 300 }}
+            placeholder="Выберите город"
+            optionFilterProp="children"
+            onChange={citySelect}
+            onSearch={this.citySearch}
+            filterOption={filterCities}
+          >
+            {this.state.cityOptions.map((val) => {
+              return (<Option key={val.value} value={val.value}>{val.value}</Option>)
+            })}
+          </Select>
+        </div>
+        {/* <Radio.Group value={this.state.selectedShipping} onChange={onChange}>
           <div className={
             classnames(
               (this.state.selectedShipping === deliveryTypes.newPost ? styles.selectedShipping : ''),
@@ -174,26 +228,44 @@ class CheckoutPage extends React.Component<IProps, IState> {
             )
           }>
             <Radio value={deliveryTypes.newPost}>NP</Radio>
+            <div className={styles.deliveryContainer}>
+              <label>
+                Выберите ваш город
+              </label>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select a person"
+                optionFilterProp="children"
+                onChange={citySelect}
+                onSearch={this.citySearch}
+                filterOption={filterCities}
+              >
+                {this.state.cityOptions.map((val) => {
+                  return (<Option key={val.value} value={val.value}>{val.value}</Option>)
+                })}
+              </Select>
+            </div>
           </div>
           <Radio value={deliveryTypes.justin}>Justin</Radio>
-        </Radio.Group>
+        </Radio.Group> */}
       </div>
     )
   }
   render () {
     return (
-    <div className={styles.container + ' global-width-limiter'}>
-      <div className={styles.content}>
-        <h1>Оформление заказа</h1>
-        {this.contactInfo()}
-        {this.productsList()}
-        {this.shippingSetup()}
+      <div className={styles.container + ' global-width-limiter'}>
+        <div className={styles.content}>
+          <h1>Оформление заказа</h1>
+          {this.contactInfo()}
+          {this.productsList()}
+          {this.shippingSetup()}
+        </div>
+        <div className={styles.sidebar}>
+          {this.sidebar()}
+        </div>
       </div>
-      <div className={styles.sidebar}>
-        {this.sidebar()}
-      </div>
-    </div>
-  )
+    )
   }
 }
 const connectedCheckoutPage = connect(state => state)(CheckoutPage)
