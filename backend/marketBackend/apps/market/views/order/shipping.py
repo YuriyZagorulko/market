@@ -31,3 +31,22 @@ class CitiesNPView(APIView):
     #     return Response({
     #         'product': serializer.data
     #     })  # products.values()
+
+class OfficesNPView(APIView):
+    def get(self, request, *args, **kwargs):
+        selectedCityRef = request.GET.get('selectedCity')
+
+        with open("media/storage/NP_Offices.json") as file:
+            try:
+                arr = []
+                content = json.load(file)
+                temp = []
+                for office in content["data"]:
+                    if selectedCityRef == office["CityRef"]:
+                        arr.append({ 'description': office["Description"], 'ref':  office["Ref"] })
+                        temp.append(office)
+            except:
+                print("An exception occurred")
+            return Response({
+                'content': arr
+            })  # products.values()

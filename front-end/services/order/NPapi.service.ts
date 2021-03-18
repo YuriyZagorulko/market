@@ -27,14 +27,12 @@ export interface ICitiesResponce{
 const storage: LocalStorage = LocalStorage.Instance
 export const NPapiService = {
     getCities,
+    getOfficess
 }
 function getCities(seatchStr: string): Promise<ICitiesResponce> {
     const requestOptions: RequestInit = {
         method: 'GET',
         headers: {  'Content-Type': 'application/json'},
-        // body: JSON.stringify({
-        //     cityName: seatchStr
-        // })
     }
     return fetch(`${config.apiUrl}/market/shipping/np/cities?cityName=${seatchStr}`, requestOptions)
         .then((responce) => {
@@ -43,6 +41,24 @@ function getCities(seatchStr: string): Promise<ICitiesResponce> {
                 if (body.content.data && body.content.data[0]){
                     return body.content.data[0]
                 }
+            })
+        }).catch(e => {
+            debugger
+            return e
+        })
+}
+function getOfficess(cityRef: string): Promise<{ description: string, ref: string } []> {
+    const requestOptions: RequestInit = {
+        method: 'GET',
+        headers: {  'Content-Type': 'application/json'},
+    }
+    return fetch(`${config.apiUrl}/market/shipping/np/offices?selectedCity=${cityRef}`, requestOptions)
+        .then((responce) => {
+            return responce.json().then(body => {
+                if (body.content){
+                    return body.content
+                }
+                return []
             })
         }).catch(e => {
             debugger

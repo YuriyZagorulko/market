@@ -4,7 +4,7 @@ import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
 import { store } from '../redux/store'
 import { IProduct } from '../helpers/types/responces/products'
-import HomeHeader from '../components/home/homeHeader/homeHeader'
+import HomeHeader from '../components/pages/home/homeHeader/homeHeader'
 import ProductLine from '../components/shared/productLine/productLine'
 
 interface IProps {

@@ -26,7 +26,9 @@ interface IState {
   surname: string
   selectedShipping: string
   cityOptions: { value: string, cityRef: string } []
-  selectedCity: { name: string, cityRef: string }
+  selectedCity: { value: string, cityRef: string }
+  officessOptions: { description: string, ref: string } []
+  selectedOffice: { description: string, ref: string }
 }
 class CheckoutPage extends React.Component<IProps, IState> {
   constructor(props){
@@ -39,7 +41,9 @@ class CheckoutPage extends React.Component<IProps, IState> {
       totalPrice: 0,
       selectedShipping: deliveryTypes.newPost,
       cityOptions: [],
-      selectedCity: { cityRef: '', name: '' }
+      selectedCity: { cityRef: '', value: '' },
+      selectedOffice: { description: '', ref: '' },
+      officessOptions: []
     }
   }
   componentWillUnmount(){
@@ -77,7 +81,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
       for (const c of data.Addresses){
         cities.push({
           value: c.MainDescription,
-          cityRef: c.Ref
+          cityRef: c.DeliveryCity,
         })
         this.setState({
           cityOptions: cities
@@ -190,12 +194,26 @@ class CheckoutPage extends React.Component<IProps, IState> {
     const onChange = e => {
       this.setState({selectedShipping: e.target.value})
     }
-    const citySelect = (e) => {
-      console.log('citySelect')
-      console.log(e)
+    const citySelect = (e: number) => {
+      const city = this.state.cityOptions[e]
+      if (city){
+        this.setState({
+          selectedCity: city
+        })
+        NPapiService.getOfficess(city.cityRef).then((data) => {
+          this.setState({
+            officessOptions: data
+          })
+        })
+      }
+      console.log(city)
     }
-    const filterCities = (input, option) => {
+    const filterOptions = (input, option) => {
       return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    }
+    const officeSelect = (e) => {
+      const office = this.state.officessOptions[e]
+      console.log(office)
     }
     return(
       <div className={styles.shippingContainer}>
@@ -213,13 +231,34 @@ class CheckoutPage extends React.Component<IProps, IState> {
             optionFilterProp="children"
             onChange={citySelect}
             onSearch={this.citySearch}
-            filterOption={filterCities}
+            filterOption={filterOptions}
           >
-            {this.state.cityOptions.map((val) => {
-              return (<Option key={val.value} value={val.value}>{val.value}</Option>)
+            {this.state.cityOptions.map((val, i) => {
+              return (<Option key={i} value={i}>{val.value}</Option>)
             })}
           </Select>
         </div>
+        {this.state.selectedCity.cityRef ?
+          (
+            <div className={styles.deliveryContainer}>
+              <label>
+                Выберите ваш город
+              </label>
+              <Select
+                showSearch
+                className={styles.officeSelect}
+                placeholder="Выберите Отделение"
+                optionFilterProp="children"
+                onChange={officeSelect}
+                filterOption={filterOptions}
+              >
+                {this.state.officessOptions.map((val, i) => {
+                  return (<Option key={val.ref} value={i}>{val.description}</Option>)
+                })}
+              </Select>
+            </div>
+          ) : ''
+        }
         {/* <Radio.Group value={this.state.selectedShipping} onChange={onChange}>
           <div className={
             classnames(
