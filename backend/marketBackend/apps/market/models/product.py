@@ -1,5 +1,6 @@
 from django.db import models
 from .image import ImageAlbum
+
 class Product(models.Model):
 
     title = models.CharField(max_length=300)
@@ -10,6 +11,7 @@ class Product(models.Model):
     # productCode = models.CharField(max_length=150)
     # discountPrice = models.IntegerField()
     # url = models.CharField(max_length=150, unique=True)
+    # minAmount = models.IntegerField()
     # def save(self, *args, **kwargs): # set values before save
     #     if self.url:
     #         self.url = self.id
