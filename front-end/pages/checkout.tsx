@@ -24,7 +24,7 @@ interface IState {
   totalPrice: number
   name: string
   surname: string
-  selectedShipping: string
+  selectedShipping: deliveryTypes
   cityOptions: { value: string, cityRef: string } []
   selectedCity: { value: string, cityRef: string }
   officessOptions: { description: string, ref: string } []
@@ -33,7 +33,6 @@ interface IState {
 class CheckoutPage extends React.Component<IProps, IState> {
   contactFormRef = React.createRef<FormInstance>()
   shippingNPFormRef = React.createRef<FormInstance>()
-  shippingNPCourierFormRef = React.createRef<FormInstance>()
   constructor(props){
     super(props)
     this.state = {
@@ -55,7 +54,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
     }
   }
   componentDidMount() {
-    const unsub = store.subscribe(() => {
+    const updateState = () => {
       const cartState  = store.getState().cart
       if (cartState && cartState.addedProducts){
         if (cartState.addedProducts.length <= 0){
@@ -66,12 +65,12 @@ class CheckoutPage extends React.Component<IProps, IState> {
           totalPrice: getTotalPrice(cartState)
         })
       }
-    })
+    }
+    updateState()
+    const unsub = store.subscribe(updateState)
     this.setState({
       storeUnsub: unsub
     })
-    const { dispatch } = this.props
-    dispatch({ type: productConstants.GETMAIN_REQUEST })
     this.citySearch('д')
   }
   citySearch = (str: string) => {
@@ -95,6 +94,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
   }
   checkoutOrder = () => {
       this.contactFormRef.current!.submit()
+      this.shippingNPFormRef.current!.submit()
+      console.log(this.shippingNPFormRef.current.getFieldsValue())
   }
   productsList = () => {
     if (this.state.products.length > 0) {
@@ -166,6 +167,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
   }
   shippingSetup(){
     const onShippingChange = e => {
+      console.log(e)
       this.setState({selectedShipping: e.target.value})
     }
     const citySelect = (e: number) => {
@@ -182,9 +184,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
       }
       console.log(city)
     }
-    // const filterOptions = (input, option) => {
-    //   return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    // }
     const officeSelect = (e) => {
       const office = this.state.officessOptions[e]
       console.log(office)
@@ -196,85 +195,12 @@ class CheckoutPage extends React.Component<IProps, IState> {
         officessOptions={this.state.officessOptions}
         onCityChange={citySelect}
         onCitySearch={this.citySearch}
-        formNP={this.contactFormRef}
+        formNP={this.shippingNPFormRef}
         selectedShipping={this.state.selectedShipping}
         selectedOffice={this.state.selectedOffice}
         onShippingTypeChange={onShippingChange}
         onOfficeChange={officeSelect}
       />
-      // <div className={styles.shippingContainer}>
-      //   <div className="sectionTitle">
-      //     Доставка новой почтой
-      //   </div>
-      //   <div className={styles.deliveryContainer}>
-      //     <label>
-      //       Выберите ваш город
-      //     </label>
-      //     <Select
-      //       showSearch
-      //       style={{ width: 300 }}
-      //       placeholder="Выберите город"
-      //       optionFilterProp="children"
-      //       onChange={citySelect}
-      //       onSearch={this.citySearch}
-      //       filterOption={filterOptions}
-      //     >
-      //       {this.state.cityOptions.map((val, i) => {
-      //         return (<Option key={i} value={i}>{val.value}</Option>)
-      //       })}
-      //     </Select>
-      //   </div>
-      //   {this.state.selectedCity.cityRef ?
-      //     (
-      //       <div className={styles.deliveryContainer}>
-      //         <label>
-      //           Выберите ваш город
-      //         </label>
-      //         <Select
-      //           showSearch
-      //           className={styles.officeSelect}
-      //           placeholder="Выберите Отделение"
-      //           optionFilterProp="children"
-      //           onChange={officeSelect}
-      //           filterOption={filterOptions}
-      //         >
-      //           {this.state.officessOptions.map((val, i) => {
-      //             return (<Option key={val.ref} value={i}>{val.description}</Option>)
-      //           })}
-      //         </Select>
-      //       </div>
-      //     ) : ''
-      //   }
-      //   {/* <Radio.Group value={this.state.selectedShipping} onChange={onChange}>
-      //     <div className={
-      //       classnames(
-      //         (this.state.selectedShipping === deliveryTypes.newPost ? styles.selectedShipping : ''),
-      //         styles.shippingOption
-      //       )
-      //     }>
-      //       <Radio value={deliveryTypes.newPost}>NP</Radio>
-      //       <div className={styles.deliveryContainer}>
-      //         <label>
-      //           Выберите ваш город
-      //         </label>
-      //         <Select
-      //           showSearch
-      //           style={{ width: 200 }}
-      //           placeholder="Select a person"
-      //           optionFilterProp="children"
-      //           onChange={citySelect}
-      //           onSearch={this.citySearch}
-      //           filterOption={filterCities}
-      //         >
-      //           {this.state.cityOptions.map((val) => {
-      //             return (<Option key={val.value} value={val.value}>{val.value}</Option>)
-      //           })}
-      //         </Select>
-      //       </div>
-      //     </div>
-      //     <Radio value={deliveryTypes.justin}>Justin</Radio>
-      //   </Radio.Group> */}
-      // </div>
     )
   }
   render () {

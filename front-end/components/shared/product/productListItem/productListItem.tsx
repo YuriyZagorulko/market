@@ -32,7 +32,7 @@ export default class ProductListItem extends React.Component<productProps> {
             </div>
             <div className={styles.content}>
               <div className={styles.description}>
-                {this.props.product.description}
+                {this.props.product.title}
               </div>
               <div className={styles.price}>
                 {this.props.product.price} ₴
