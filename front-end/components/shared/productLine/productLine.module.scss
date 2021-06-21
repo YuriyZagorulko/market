@@ -8,7 +8,7 @@
     padding: 0 10px;
 }
 .product{
-    display: gri;
+    display: grid;
 }
 .title{
     display: grid;
@@ -22,7 +22,7 @@
 }
 .content{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
     grid-template-rows: 1fr;
     width: 100%;
 }

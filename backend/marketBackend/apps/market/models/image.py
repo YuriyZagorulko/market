@@ -5,7 +5,7 @@ class ImageAlbum(models.Model):
     def default(self):
         return self.images.filter(default=True).first()
 class Image(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255) # blank=True, default=None
     image = models.ImageField(upload_to='images/')
     default = models.BooleanField(default=False)
     width = models.FloatField(default=100)

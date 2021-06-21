@@ -1,5 +1,6 @@
 from django.db import models
 from .product import Product
+from django.contrib.auth.models import User
 
 class Order(models.Model):
     class OrderType(models.TextChoices):
@@ -12,6 +13,7 @@ class Order(models.Model):
     recipientSecondName = models.CharField(max_length=100)
     recipientSurname = models.CharField(max_length=100)
     phoneNumber = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -19,7 +21,7 @@ class Order(models.Model):
 
 class OrderDetails(models.Model):
     quantity = models.IntegerField(default=1)
-    Order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -19,20 +19,22 @@ export default class ProductLine extends React.Component<productLineProps> {
       this.state = {}
     }
     render() {
-      return (<div className={styles.container}>
-        <div className={styles.head}>
-          <div className={styles.title}>Product line title</div>
-        </div>
-        <div className={styles.content}>
-          {this.props.products.map((product: IProduct, index) => {
-            if (index < 5) {
-              return <div className={styles.product} key={index}>
-                <ProductPrev product={product}/>
-              </div>
-            }
-          })}
-        </div>
+      return (
+        <div className={styles.container}>
+          <div className={styles.head}>
+            <div className={styles.title}>Product line title</div>
+          </div>
+          <div className={styles.content}>
+            {this.props.products.map((product: IProduct, index) => {
+              if (index < 5) {
+                return <div className={styles.product} key={index}>
+                  <ProductPrev product={product}/>
+                </div>
+              }
+            })}
+          </div>
 
-      </div>)
+        </div>
+      )
     }
   }

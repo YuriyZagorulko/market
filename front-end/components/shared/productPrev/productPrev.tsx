@@ -21,7 +21,7 @@ export default class ProductPrev extends React.Component<productProps> {
         <Link href={{
               pathname: '/product/' + this.props.product.id,
             }}>
-          <div>
+          <div className={styles.content}>
             <div className={styles.image}>
               <Image
                 src={config.apiUrl + getFirstImg(this.props.product)}

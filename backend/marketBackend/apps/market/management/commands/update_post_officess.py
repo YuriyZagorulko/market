@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from marketBackend.secret import NP_API_KEY
+from pathlib import Path
 import requests
 import json
 class Command(BaseCommand):
@@ -14,7 +15,8 @@ class Command(BaseCommand):
             "apiKey": NP_API_KEY
         })).encode('utf-8')
         response = requests.post('https://api.novaposhta.ua/v2.0/json/AddressGeneral/getSettlements', data=post_data)
-        with open("media/storage/NP_Offices.json", "w") as out:
+        Path("media/storage").mkdir(parents=True, exist_ok=True)
+        with open("media/storage/NP_Offices.json", "w+") as out:
             content = str(json.dumps(json.loads(response.content)))
             out.write(content)
-        self.stdout.write(self.style.SUCCESS('Test message'))
+        self.stdout.write(self.style.SUCCESS('File was updated'))

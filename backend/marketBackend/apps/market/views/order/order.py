@@ -22,10 +22,6 @@ class OrderView(APIView):
             'content': content
         })  # products.values()
 
-    # def get(self, request, *args, **kwargs):
-    #     productId = int(request.GET.get('productId'))
-    #     product= Product.objects.get(pk=productId)
-    #     serializer = ProductSerializer(product)
-    #     return Response({
-    #         'product': serializer.data
-    #     })  # products.values()
+class ConfirmOrderView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request)
