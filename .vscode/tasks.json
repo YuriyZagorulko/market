@@ -1,0 +1,53 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "python",
+			"dockerBuild": {
+				"tag": "market:latest",
+				"dockerfile": "${workspaceFolder}/Dockerfile",
+				"context": "${workspaceFolder}",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+				"docker-build"
+			],
+			"dockerRun": {
+				"volumes": [
+					{
+					"containerPath": "/app", "localPath": "${workspaceFolder}"
+					}
+				]
+			},
+			"python": {
+				"args": [
+					"runserver",
+					"0.0.0.0:8000"
+				],
+				"file": "backend/manage.py"
+			}
+		},
+		{
+			"type": "shell",
+            "label": "start_django_compose",
+			"presentation": {
+				"reveal": "always",
+			},
+            "group": {
+				"kind": "build",
+				"isDefault": true
+			},
+            "command": "/bin/bash",
+            "args": [
+                "-c",
+                "docker-compose -f docker-compose.yml -f docker-compose.debug.yml up -d && sleep 10"
+            ]
+        }
+	]
+}

@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+  market:
+    image: market
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: python ./backend/manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+      - 5678:5678
+    volumes:
+      - .:/app
+    depends_on:
+      - db
