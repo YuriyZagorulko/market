@@ -115,7 +115,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
                 // />
                 <ProductListItem
                   key={item.product.id}
-                  product={ item.product}
+                  product={ item}
                 />
               )
             })}

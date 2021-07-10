@@ -1,11 +1,12 @@
 import React from 'react'
 import styles from "./productListItem.module.scss"
+import "./productListItem.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
-import { IProduct, getFirstImg } from '../../../../helpers/types/responces/products'
+import { IProduct, getFirstImg, AddedProduct } from '../../../../helpers/types/responces/products'
 import config from '../../../../config'
 type productProps = {
-  product: IProduct;
+  product: AddedProduct;
 }
 // type headerState = {
 //   headerBanner?: string
@@ -20,23 +21,47 @@ export default class ProductListItem extends React.Component<productProps> {
       <div className={styles.container}>
         <Link
           href={{
-              pathname: '/product/' + this.props.product.id,
+              pathname: '/product/' + this.props.product.product.id,
           }}>
           <a>
             <div className={styles.image}>
               <Image
-                src={config.apiUrl + getFirstImg(this.props.product)}
+                src={config.apiUrl + getFirstImg(this.props.product.product)}
                 alt="Produt"
                 layout="fill"
               />
             </div>
             <div className={styles.content}>
-              <div className={styles.description}>
-                {this.props.product.title}
+              <div className={styles.content__row}>
+                <div className={styles.description + ' link-blue'}>
+                  {this.props.product.product.title}
+                </div>
               </div>
-              <div className={styles.price}>
-                {this.props.product.price} ₴
+              <div className={styles.content__row}>
+                <div className={styles.content__row__title}>
+                  Цена
+                </div>
+                <div className={styles.price}>
+                  {this.props.product.product.price} ₴
+                </div>
               </div>
+              <div className={styles.content__row}>
+                <div className={styles.content__row__title}>
+                  Количество
+                </div>
+                <div className={styles.content__row__text}>
+                  {this.props.product.quantity}
+                </div>
+              </div>
+              <div className={styles.content__row}>
+                <div className={styles.content__row__title}>
+                  Сумма
+                </div>
+                <div className={styles.content__row__text}>
+                    {this.props.product.quantity * this.props.product.product.price}
+                </div>
+              </div>
+
             </div>
           </a>
         </Link>

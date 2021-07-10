@@ -20,6 +20,10 @@ export interface IProduct {
     updated_at: string,
     imagesSet: IImage [],
 }
+export interface AddedProduct{
+    product: IProduct;
+    quantity: number;
+}
 export function getFirstImg(product: IProduct): string{
     if (product && product.imagesSet && product.imagesSet.length > 0) {
         return product.imagesSet[0].image

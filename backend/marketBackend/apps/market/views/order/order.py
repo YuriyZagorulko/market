@@ -1,4 +1,3 @@
-from django.views import View
 from marketBackend.apps.market.models import Product, Image
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -25,3 +24,6 @@ class OrderView(APIView):
 class ConfirmOrderView(APIView):
     def post(self, request, *args, **kwargs):
         print(request)
+        return Response({
+            'content': 'super new test 3'
+        })

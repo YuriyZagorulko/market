@@ -12,6 +12,6 @@ urlpatterns = [
     path('product', ProductView.as_view()),
     path('shipping/np/cities', CitiesNPView.as_view()),
     path('shipping/np/offices', OfficesNPView.as_view()),
+    path('confirm-order', ConfirmOrderView.as_view()),
     path('auth-token', obtain_auth_token, name='obtain-token'),
-    path('confirm-order', ConfirmOrderView, name='obtain-token')
 ]

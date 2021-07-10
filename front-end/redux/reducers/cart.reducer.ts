@@ -1,6 +1,6 @@
 
 import { LocalStorage } from '../../helpers/storage/localStorage'
-import { IProduct } from '../../helpers/types/responces/products'
+import { AddedProduct, IProduct } from '../../helpers/types/responces/products'
 import { IProductState } from './product.reducer'
 
 export const cartConstants = {
@@ -10,7 +10,7 @@ export const cartConstants = {
 }
 const storage: LocalStorage = LocalStorage.Instance
 export interface ICartState {
-    addedProducts: { product: IProduct, quantity: number } []
+    addedProducts: AddedProduct []
 }
 
 export function cartReducer(state: ICartState = storage.initCart(), action) {

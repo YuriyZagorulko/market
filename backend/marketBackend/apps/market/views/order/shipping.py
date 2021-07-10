@@ -4,8 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from marketBackend.apps.market.serializers.productSerializer import ProductSerializer
 from marketBackend.secret import NP_API_KEY
+from django.conf import settings
+import os
+
 import requests
 import json
+ROOT_DIR = os.path.join(settings.BASE_DIR)
 
 class CitiesNPView(APIView):
     def get(self, request, *args, **kwargs):
@@ -36,17 +40,22 @@ class OfficesNPView(APIView):
     def get(self, request, *args, **kwargs):
         selectedCityRef = request.GET.get('selectedCity')
 
-        with open("media/storage/NP_Offices.json") as file:
-            try:
-                arr = []
-                content = json.load(file)
-                temp = []
-                for office in content["data"]:
-                    if selectedCityRef == office["CityRef"]:
-                        arr.append({ 'description': office["Description"], 'ref':  office["Ref"] })
-                        temp.append(office)
-            except:
-                print("An exception occurred")
-            return Response({
-                'content': arr
-            })  # products.values()
+        try:
+            with open( os.path.join(ROOT_DIR, "media/storage/NP_Offices.json")) as file:
+                try:
+                    arr = []
+                    content = json.load(file)
+                    temp = []
+                    for office in content["data"]:
+                        if selectedCityRef == office["CityRef"]:
+                            arr.append({ 'description': office["Description"], 'ref':  office["Ref"] })
+                            temp.append(office)
+                except Exception as e:
+                    print("An exception occurred")
+                    print(e)
+                return Response({
+                    'content': arr
+                })  # products.values()
+
+        except Exception as e:
+            print(e)
