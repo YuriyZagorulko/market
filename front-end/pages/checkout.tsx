@@ -14,6 +14,8 @@ import { ICitiesResponce, NPapiService } from '../services/order/NPapi.service'
 import { deliveryTypes } from '../helpers/order/order.constants'
 import ContactInfo from '../components/pages/checkout/contactInfo/contactInfo'
 import Shipping from '../components/pages/checkout/shipping/shipping'
+import { INewPostData } from '../helpers/types/shipping'
+import { IOrderData, OrderService } from '../services/order/order.service'
 
 interface IProps {
   dispatch: any
@@ -92,11 +94,43 @@ class CheckoutPage extends React.Component<IProps, IState> {
     }
     })
   }
-  checkoutOrder = () => {
+  checkoutOrder = async () => {
       this.contactFormRef.current!.submit()
       this.shippingNPFormRef.current!.submit()
+      this.contactFormRef.current!.validateFields().then((contactVal: any) => {
+        this.shippingNPFormRef.current!.validateFields().then((shippingVal: any) => {
+
+          const productIds = []
+          for ( const pr of this.state.products){
+            productIds.push(pr.product.id)
+          }
+          const orderData: IOrderData = {
+            name: contactVal.name,
+            surname: contactVal.surname,
+            secondName: contactVal.secondName,
+            phone: contactVal.phone,
+            priductList: productIds,
+            shipping: {
+              type: deliveryTypes.newPost,
+              data:{
+                selectedCity: this.state.selectedCity,
+                selectedOffice: this.state.selectedOffice
+              }
+            }
+          }
+          OrderService.confirmOrder(orderData).then((val) => {
+
+          })
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+      }).catch((e) => {
+        console.log(e)
+      })
       console.log(this.shippingNPFormRef.current.getFieldsValue())
   }
+
   productsList = () => {
     if (this.state.products.length > 0) {
         return (

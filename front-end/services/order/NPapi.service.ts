@@ -1,8 +1,4 @@
 import config from '../../config'
-import { LocalStorage } from '../../helpers/storage/localStorage'
-import { store } from '../../redux/store'
-import { ILogin } from '../../helpers/types/responces/auth'
-import { IUserState } from '../../redux/reducers/user.reducer'
 
 export interface IArea {
     AddressDeliveryAllowed: boolean
@@ -24,7 +20,6 @@ export interface ICitiesResponce{
     Addresses: IArea []
     TotalCount: number
 }
-const storage: LocalStorage = LocalStorage.Instance
 export const NPapiService = {
     getCities,
     getOfficess

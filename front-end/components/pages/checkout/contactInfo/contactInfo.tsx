@@ -66,7 +66,7 @@ export default class ContactInfo extends React.Component<Props> {
             <div className="column50">
               <label><i className="red">*</i>Номер телефона</label>
               <Form.Item
-                name="surname"
+                name="phone"
                 rules={[{ required: true, message: 'Пожалуйста введите номер телефона!' }]}
               >
                 <Input prefix="+380" type="number" style={{width: 300}}/>

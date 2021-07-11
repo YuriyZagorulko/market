@@ -38,8 +38,7 @@ class CitiesNPView(APIView):
 
 class OfficesNPView(APIView):
     def get(self, request, *args, **kwargs):
-        selectedCityRef = request.GET.get('selectedCity')
-
+        selectedCityRef = request.query_params.get('selectedCity')
         try:
             with open( os.path.join(ROOT_DIR, "media/storage/NP_Offices.json")) as file:
                 try:
@@ -56,6 +55,5 @@ class OfficesNPView(APIView):
                 return Response({
                     'content': arr
                 })  # products.values()
-
         except Exception as e:
             print(e)
