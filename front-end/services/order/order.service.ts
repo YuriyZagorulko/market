@@ -7,7 +7,7 @@ export interface IOrderData {
     surname: string,
     secondName: string,
     phone: string,
-    priductList: number [],
+    productList: {id: number, quantity: number} [],
     shipping: IShipping< INewPostData | INewPostCourierData | IJustinData >
 }
 

@@ -18,13 +18,13 @@ class Product(models.Model):
     barcode = models.CharField(max_length=150, default='')
     productCode = models.CharField(max_length=150, default='')
     discountPrice = models.IntegerField(blank=True, default=None)
-    url = models.CharField(max_length=150, unique=True, default='') # blank=True
+    url = models.CharField(max_length=150, unique=True, default='', blank=True)
     minAmount = models.IntegerField(default=1)
-    # def save(self, *args, **kwargs): # set values before save
-    #     print(self.id)
-    #     if self.url:
-    #         self.url = self.id
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs): # set values before save
+        print(self.id)
+        if self.url:
+            self.url = self.id
+        super().save(*args, **kwargs)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

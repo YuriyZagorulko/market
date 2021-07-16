@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from marketBackend.apps.market.serializers.productSerializer import ProductSerializer
 from marketBackend.secret import NP_API_KEY
+import marketBackend.apps.market.helpers.orders as orderHelpers
 
 class OrderView(APIView):
     def get(self, request, *args, **kwargs):
@@ -22,8 +23,11 @@ class OrderView(APIView):
         })  # products.values()
 
 class ConfirmOrderView(APIView):
+
+    # add data validation
     def post(self, request, *args, **kwargs):
-        print(request)
+        data = request.data
+        order = orderHelpers.createOrder(data)
         return Response({
             'content': 'super new test 3'
         })

@@ -102,14 +102,14 @@ class CheckoutPage extends React.Component<IProps, IState> {
 
           const productIds = []
           for ( const pr of this.state.products){
-            productIds.push(pr.product.id)
+            productIds.push( { id: pr.product.id, quantity: pr.quantity})
           }
           const orderData: IOrderData = {
             name: contactVal.name,
             surname: contactVal.surname,
             secondName: contactVal.secondName,
             phone: contactVal.phone,
-            priductList: productIds,
+            productList: productIds,
             shipping: {
               type: deliveryTypes.newPost,
               data:{
