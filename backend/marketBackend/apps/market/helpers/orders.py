@@ -9,22 +9,30 @@ def createOrder(data):
     productList = data.get('productList', [])
     shipping = data.get('shipping', '')
 
-
     try:
         newOrder = Order.objects.create(
             recipientName = name,
             recipientSecondName = secondName,
             recipientSurname = surname,
             phoneNumber = phone,
-            city = city,
             street = '',
             house = '',
             officeRef = '',
-            officeDescription = '',
             apartment = '',
-            user = None
+            user = None,
+            orderType = shipping.get('type'),
+            city = shipping.get('data').get('selectedCity').get('value'),
+            officeDescription = shipping['data']['selectedOffice']['description'],
         )
         print(newOrder)
+        newOrder.save()
+        for product in productList:
+            details = OrderDetails(
+                quantity = product['quantity'], 
+                order = newOrder, 
+                product = int(product['id'])
+            )
+            details.save()
     except Exception as e:
 	    print(e)
 

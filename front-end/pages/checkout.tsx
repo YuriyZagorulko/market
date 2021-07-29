@@ -220,6 +220,11 @@ class CheckoutPage extends React.Component<IProps, IState> {
     }
     const officeSelect = (e) => {
       const office = this.state.officessOptions[e]
+      if (office){
+        this.setState({
+          selectedOffice: office
+        })
+      }
       console.log(office)
     }
     return(

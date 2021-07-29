@@ -8,7 +8,7 @@ class Order(models.Model):
         NewPost = 'NEW_POST'
         NewPostCourier = 'NEW_POST_COURIER'
         
-    orderType = models.CharField(max_length=100, choices=OrderType.choices)
+    orderType = models.CharField(max_length=100, choices=OrderType.choices) # shippingType
     recipientName = models.CharField(max_length=100)
     recipientSecondName = models.CharField(max_length=100)
     recipientSurname = models.CharField(max_length=100)

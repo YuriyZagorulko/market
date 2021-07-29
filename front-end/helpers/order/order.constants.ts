@@ -1,5 +1,5 @@
 export enum deliveryTypes {
-    newPost = 'NOVAYA_POCHTA',
-    newPostCourier = 'NOVAYA_POCHTA_COURIER',
+    newPost = 'NEW_POST',
+    newPostCourier = 'NEW_POST_COURIER',
     justin = 'JUSTIN',
 }
