@@ -1,4 +1,5 @@
 from marketBackend.apps.market.models import Order, OrderDetails
+from marketBackend.apps.market.helpers.notifications import email as notifier
 
 def createOrder(data):
     name = data.get('name', '')
@@ -33,6 +34,7 @@ def createOrder(data):
                 product = int(product['id'])
             )
             details.save()
+        notifier.notify_by_email(data)
     except Exception as e:
 	    print(e)
 
