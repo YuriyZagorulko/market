@@ -8,13 +8,22 @@ import config from '../../../../config'
 type productProps = {
   product: AddedProduct;
 }
-// type headerState = {
-//   headerBanner?: string
-// }
-export default class ProductListItem extends React.Component<productProps> {
+type productItemState = {
+  isImageError: boolean
+}
+
+
+export default class ProductListItem extends React.Component<productProps, productItemState > {
     constructor(props){
       super(props)
-      this.state = {}
+      this.state = {
+        isImageError: false
+      }
+    }
+    imageErrorHandler = () => {
+      this.setState({
+        isImageError: true
+      })
     }
     render() {
       return (
@@ -26,9 +35,10 @@ export default class ProductListItem extends React.Component<productProps> {
           <a>
             <div className={styles.image}>
               <Image
-                src={config.apiUrl + getFirstImg(this.props.product.product)}
-                alt="Produt"
+                src={ !this.state.isImageError ? config.apiUrl + getFirstImg(this.props.product.product) : '/images/icons/shared/product-default.svg'}
+                alt="Produt image"
                 layout="fill"
+                onError={this.imageErrorHandler}
               />
             </div>
             <div className={styles.content}>

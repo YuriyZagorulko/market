@@ -27,13 +27,13 @@ def createOrder(data):
         )
         print(newOrder)
         newOrder.save()
-        for product in productList:
-            details = OrderDetails(
-                quantity = product['quantity'], 
-                order = newOrder, 
-                product = int(product['id'])
-            )
-            details.save()
+        # for product in productList:
+        #     details = OrderDetails(
+        #         quantity = product['quantity'], 
+        #         order = newOrder, 
+        #         product = int(product['id'])
+        #     )
+        #     details.save()
         notifier.notify_by_email(data)
     except Exception as e:
 	    print(e)
