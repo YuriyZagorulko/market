@@ -16,6 +16,9 @@ import ContactInfo from '../components/pages/checkout/contactInfo/contactInfo'
 import Shipping from '../components/pages/checkout/shipping/shipping'
 import { INewPostData } from '../helpers/types/shipping'
 import { IOrderData, OrderService } from '../services/order/order.service'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { controlsConstants } from '../helpers/constants/controls'
 
 interface IProps {
   dispatch: any
@@ -131,12 +134,23 @@ class CheckoutPage extends React.Component<IProps, IState> {
       console.log(this.shippingNPFormRef.current.getFieldsValue())
   }
 
+  openModal = () => {
+    this.props.dispatch({type: controlsConstants.OPEN_CART})
+  }
   productsList = () => {
     if (this.state.products.length > 0) {
         return (
           <div className={styles.productListWrapper}>
-            <div className="sectionTitle">
-              Список товаров
+            <div className={styles.listHead}>
+              <div className="sectionTitle">
+                Список товаров
+              </div>
+              <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
+                <div>
+                  <FontAwesomeIcon height="12px" icon={faEdit} />
+                </div>
+                Редактировать
+              </a>
             </div>
             <div className={styles.productList}>
             {this.state.products.map((item, i) => {

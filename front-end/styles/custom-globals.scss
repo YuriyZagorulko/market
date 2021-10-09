@@ -97,3 +97,18 @@
     color: #3e77aa;
   }
 }
+.wrapper{
+  display: flex;
+}
+.wrapper-horizontal{
+  display: flex;
+  flex-direction: column;
+}
+
+.text-title-xl{
+  display: flex;
+  font-weight: 500;
+  font-size: 22px;
+  justify-content: center;
+  padding-bottom: 10px;
+}

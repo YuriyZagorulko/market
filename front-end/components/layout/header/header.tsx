@@ -40,11 +40,11 @@ class Header extends React.Component<headerProps, headerState> {
             </div>
             <div className={styles.navigationCenter}/>
             <div className={styles.navigationRight}>
-              <Link href="/sign-in">
+              <Link href="/auth/sign-in">
                 <a>Войти</a>
               </Link>
                или
-               <Link href="/sign-up">
+               <Link href="/auth/sign-up">
                 <a>зарегистрироваться</a>
               </Link>
             </div>

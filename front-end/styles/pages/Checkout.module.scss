@@ -32,6 +32,21 @@
   width: calc(100% - 200px);
   margin-right: 30px;
 }
+.listHead{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.product-list-head{
+  display: flex;
+}
+.editList{
+  display: flex;
+
+  svg{
+    margin-right: 10px;
+  }
+}
 .sidebar{
   display: flex;
   width: 300px;

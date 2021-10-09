@@ -1,0 +1,14 @@
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    max-width: 600px;
+}
+.ant-form-item-label{
+    display: flex;
+    min-width: 128px;
+    justify-content: flex-end;
+}
+.ant-picker{
+    width: 100%;
+}

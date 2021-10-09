@@ -1,6 +1,6 @@
-import authStyles from '../../styles/shared/Auth.module.scss'
 import style from '../../styles/pages/Login.module.scss'
 import React from 'react'
+import { Form, Input, Button, Checkbox } from 'antd'
 import { connect } from 'react-redux'
 import { userActions } from '../../redux/actions/user'
 
@@ -23,47 +23,62 @@ class LoginPage extends React.Component<IProps, IState> {
             submitted: false
         }
     }
-    handleChange = (e) => {
-        const { name, value } = e.target
-        switch (name) {
-            case 'username':
-                this.setState({username: value})
-                break
-            case 'password':
-                this.setState({password: value})
-                break
+
+    Demo = () => {
+        const onFinish = (values: any) => {
+            console.log('Success:', values)
         }
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
+    onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo)
+    }
 
-        this.setState({ submitted: true })
-        const { username, password } = this.state
-        const { dispatch } = this.props
-        if (username && password) {
-            dispatch(userActions.login(username, password))
-        }
+    onFinish = (data: any) => {
+        console.log('Finish', data)
     }
 
     render() {
         return (
-            <div className={style.login}>
-                <h2>Login</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" onChange={this.handleChange} />
-                    </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
-                    </div>
-                </form>
+          <div className={"wrapper " + style.login}>
+            <div className="text-title-xl">
+              Войти
             </div>
+            <div className="">
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={this.onFinish}
+                onFinishFailed={this.onFinishFailed}
+              >
+                <Form.Item
+                  label="Имейл"
+                  labelCol={{span: 6}}
+                  name="имейл"
+                  wrapperCol={{ span: 24 }}
+                  rules={[{ required: true, message: 'Пожалуйста введите свой имейл!' }]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  label="Пароль"
+                  labelCol={{span: 6}}
+                  name="пароль"
+                  wrapperCol={{ span: 24 }}
+                  rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item wrapperCol={{ span: 24 }}>
+                  <Button type="primary" htmlType="submit">
+                    Войти
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
         )
     }
 }
