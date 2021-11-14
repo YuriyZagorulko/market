@@ -14,4 +14,5 @@ urlpatterns = [
     path('shipping/np/offices', OfficesNPView.as_view()),
     path('shipping/confirm-order', ConfirmOrderView.as_view()),
     path('auth-token', obtain_auth_token, name='obtain-token'),
+    path('auth/', include('marketBackend.apps.auth.urls')),
 ]

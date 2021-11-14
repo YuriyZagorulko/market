@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'marketBackend.apps.market',
+    'marketBackend.apps.auth',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',

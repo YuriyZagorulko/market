@@ -1,6 +1,6 @@
 import style from '../../styles/pages/Registration.module.scss'
 import React from 'react'
-import { Form, Input, Button, Checkbox, DatePicker } from 'antd'
+import { Form, Input, Button, Checkbox, DatePicker, Row, Col, Space } from 'antd'
 import { connect } from 'react-redux'
 import { userActions } from '../../redux/actions/user'
 
@@ -34,7 +34,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
     render() {
         return (
-          <div className={"wrapper " + style.login}>
+          <div className={"wrapper " + style.register}>
             <div className="text-title-xl">
               Регистрация
             </div>
@@ -96,17 +96,27 @@ class LoginPage extends React.Component<IProps, IState> {
                   wrapperCol={{ span: 24 }}
                   rules={[
                     { required: true, message: 'Пожалуйста введите ваш имейл!' },
-                    { pattern: '', message: 'Пожалуйста введите ваш имейл!' }
+                    { pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, message: 'Пожалуйста введите ваш имейл!' }
                   ]}
                 >
                   <Input />
                 </Form.Item>
 
-                <Form.Item wrapperCol={{ span: 24 }}>
-                  <Button type="primary" htmlType="submit">
-                    Войти
-                  </Button>
+                <Form.Item
+                  label="Телефон"
+                  name="phone"
+                  wrapperCol={{ span: 24 }}
+                  rules={[
+                    { required: true, message: 'Пожалуйста введите ваш  телефон!' },
+                    { pattern: /^[0-9]{9,9}$/, message: 'введенное значение не является телефоном!' }
+                  ]}
+                >
+                  <Input addonBefore="+380" maxLength={9} type="number" />
                 </Form.Item>
+
+                  <Button type="primary" htmlType="submit" style={{marginLeft: '128px'}}>
+                    Зарегистрироваться
+                  </Button>
               </Form>
             </div>
           </div>
