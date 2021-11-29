@@ -1,3 +1,4 @@
+import { IUserRegister } from './../helpers/types/auth';
 import config from '../config'
 import { authHeader } from '../helpers/headers'
 import { LocalStorage } from '../helpers/storage/localStorage'
@@ -8,7 +9,8 @@ import { IUserState } from '../redux/reducers/user.reducer'
 const storage: LocalStorage = LocalStorage.Instance
 export const userService = {
     login,
-    logout
+    logout,
+    registerUser
 }
 
 function login(payload: {username, password}) {
@@ -51,15 +53,36 @@ function logout() {
     localStorage.removeItem('user')
 }
 
-function getAll() {
+// function getAll() {
+//     const requestOptions = {
+//         method: 'GET',
+//         headers: authHeader()
+//     }
+
+//     return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse)
+// }
+
+function registerUser(user: IUserRegister) {
     const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
+        method: 'POST',
+        headers: {  'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            ...user,
+            'confirm_password': user.confirmPassword,
+            'second_name': user.secondName,
+            'last_name': user.lastName,
+        })
     }
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse)
+    return fetch(`${config.apiUrl}/register/`, requestOptions)
+        .then((responce) => {
+            debugger
+            console.log(responce)
+            return responce.json()
+        }).catch(e => {
+            debugger
+            return e
+        })
 }
-
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text)

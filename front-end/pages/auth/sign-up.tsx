@@ -47,7 +47,7 @@ class LoginPage extends React.Component<IProps, IState> {
               >
                 <Form.Item
                   label="Имя"
-                  name="имя"
+                  name="name"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
                 >
@@ -56,7 +56,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
                 <Form.Item
                   label="Фамилия"
-                  name="фамилия"
+                  name="secondName"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свою Фамилию!' }]}
                 >
@@ -65,7 +65,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
                 <Form.Item
                   label="Отчество"
-                  name="отчество"
+                  name="lastName"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое отчество!' }]}
                 >
@@ -74,7 +74,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
                 <Form.Item
                   label="Дата Рождения"
-                  name="дата рождения"
+                  name="birtdate"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
                 >
@@ -83,7 +83,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
                 <Form.Item
                   label="Пароль"
-                  name="пароль"
+                  name="password"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
                 >
@@ -111,7 +111,7 @@ class LoginPage extends React.Component<IProps, IState> {
                     { pattern: /^[0-9]{9,9}$/, message: 'введенное значение не является телефоном!' }
                   ]}
                 >
-                  <Input addonBefore="+380" maxLength={9} type="number" />
+                  <Input className={"no-arrows"} addonBefore="+380" maxLength={9} type="number" />
                 </Form.Item>
 
                   <Button type="primary" htmlType="submit" style={{marginLeft: '128px'}}>

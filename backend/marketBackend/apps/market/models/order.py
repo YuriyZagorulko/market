@@ -1,6 +1,6 @@
 from django.db import models
 from .product import Product
-from django.contrib.auth.models import User
+from .custom_user  import CustomUser
 
 class Order(models.Model):
     class OrderType(models.TextChoices):
@@ -13,7 +13,7 @@ class Order(models.Model):
     recipientSecondName = models.CharField(max_length=100)
     recipientSurname = models.CharField(max_length=100)
     phoneNumber = models.CharField(max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     street = models.CharField( max_length=1000, blank=True, default='')
     city = models.CharField( max_length=1000, blank=True, default='')
     house = models.CharField( max_length=100, blank=True, default='')

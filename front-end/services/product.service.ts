@@ -1,5 +1,4 @@
 import config from '../config'
-import { store } from '../redux/store'
 import { IMain, IProduct } from '../helpers/types/responces/products'
 export const productService = {
     mainPage,

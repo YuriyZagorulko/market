@@ -9,6 +9,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
+# Debug tools
+# RUN apt-get update
+# RUN apt update
+# RUN apt-get install -y postgresql
+# RUN apt-get install -y net-tools
+
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
