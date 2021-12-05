@@ -5,6 +5,8 @@ import { LocalStorage } from '../helpers/storage/localStorage'
 import { store } from '../redux/store'
 import { ILogin } from '../helpers/types/responces/auth'
 import { IUserState } from '../redux/reducers/user.reducer'
+import { urlencodedBody } from './service.helpers';
+import { handleRequestError } from '../helpers/interceptors';
 
 const storage: LocalStorage = LocalStorage.Instance
 export const userService = {
@@ -53,35 +55,24 @@ function logout() {
     localStorage.removeItem('user')
 }
 
-// function getAll() {
-//     const requestOptions = {
-//         method: 'GET',
-//         headers: authHeader()
-//     }
-
-//     return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse)
-// }
-
 function registerUser(user: IUserRegister) {
     const requestOptions = {
         method: 'POST',
-        headers: {  'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
             ...user,
             'confirm_password': user.confirmPassword,
             'second_name': user.secondName,
             'last_name': user.lastName,
         })
     }
-    return fetch(`${config.apiUrl}/register/`, requestOptions)
+    return fetch(`${config.apiUrl}/market/auth/register/`, requestOptions)
+        // .then(handleResponse)
         .then((responce) => {
             debugger
             console.log(responce)
             return responce.json()
-        }).catch(e => {
-            debugger
-            return e
-        })
+        }).catch(handleRequestError)
 }
 function handleResponse(response) {
     return response.text().then(text => {

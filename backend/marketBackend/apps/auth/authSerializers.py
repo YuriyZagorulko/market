@@ -4,7 +4,6 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
@@ -33,6 +32,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'phone': {'required': True},
             'birthday': {'required': True},
         }
+        error_messages = {"birthday": {"required": "Give yourself a birthday"}}
 
     def validate(self, attrs):
         if attrs['password'] != attrs['confirm_password']:
@@ -44,7 +44,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = CustomUser.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
-            first_name=validated_data['second_name'],
+            second_name=validated_data['second_name'],
             last_name=validated_data['last_name'],
             phone=validated_data['phone'],
             birthday=validated_data['birthday'],

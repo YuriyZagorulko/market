@@ -3,36 +3,23 @@ import React from 'react'
 import { Form, Input, Button, Checkbox, DatePicker, Row, Col, Space } from 'antd'
 import { connect } from 'react-redux'
 import { userActions } from '../../redux/actions/user'
+import { userService } from '../../services/user.service'
 
-interface IProps {
-    login: any
-    dispatch: any
+
+const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo)
 }
-interface IState {
-    username: string,
-    password: string,
-    submitted: boolean
+
+const onFinish = (data: any) => {
+    console.log('Finish', data)
+    userService.registerUser(data).then((val) => {
+      console.log(val)
+    })
 }
-class LoginPage extends React.Component<IProps, IState> {
-    constructor(props) {
-        super(props)
+function RegisterPage (){
 
-        this.state = {
-            username: '',
-            password: '',
-            submitted: false
-        }
-    }
+        const [form] = Form.useForm()
 
-    onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo)
-    }
-
-    onFinish = (data: any) => {
-        console.log('Finish', data)
-    }
-
-    render() {
         return (
           <div className={"wrapper " + style.register}>
             <div className="text-title-xl">
@@ -42,8 +29,8 @@ class LoginPage extends React.Component<IProps, IState> {
               <Form
                 name="basic"
                 initialValues={{ remember: true }}
-                onFinish={this.onFinish}
-                onFinishFailed={this.onFinishFailed}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
               >
                 <Form.Item
                   label="Имя"
@@ -74,7 +61,7 @@ class LoginPage extends React.Component<IProps, IState> {
 
                 <Form.Item
                   label="Дата Рождения"
-                  name="birtdate"
+                  name="birthdate"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
                 >
@@ -86,6 +73,23 @@ class LoginPage extends React.Component<IProps, IState> {
                   name="password"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                  label="Повтоите пароль"
+                  name="confirmPassword"
+                  wrapperCol={{ span: 24 }}
+                  rules={[
+                    { required: true, message: 'Пожалуйста введите пароль повторно!' },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue('password') === value) return Promise.resolve()
+                        return Promise.reject(new Error('Пароли не совпадают!'))
+                      },
+                    }),
+                  ]}
                 >
                   <Input.Password />
                 </Form.Item>
@@ -121,7 +125,6 @@ class LoginPage extends React.Component<IProps, IState> {
             </div>
           </div>
         )
-    }
 }
-const connectedLoginPage = connect(state => state)(LoginPage)
-export  default connectedLoginPage
+const connectedRegisterPage = connect(state => state)(RegisterPage)
+export  default connectedRegisterPage
