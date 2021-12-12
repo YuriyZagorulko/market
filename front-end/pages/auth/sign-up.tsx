@@ -1,24 +1,56 @@
 import style from '../../styles/pages/Registration.module.scss'
-import React from 'react'
-import { Form, Input, Button, Checkbox, DatePicker, Row, Col, Space } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button, Checkbox, notification, DatePicker, Row, Col, Space } from 'antd'
 import { connect } from 'react-redux'
-import { userActions } from '../../redux/actions/user'
 import { userService } from '../../services/user.service'
+import Router , {useRouter}  from 'next/router'
 
-
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
+function handleRegisterErrors(errors: { email: string[], phone: string[]}) {
+  for (const err of errors.email) {
+    if (err.includes('This field must be unique.')) {
+      notification.error({
+        message: 'Ошибка',
+        description:
+          'Пользователь с таким имейлом уже существует',
+      })
+    }
+  }
+  for (const err of errors.phone) {
+    if (err.includes('user with this phone already exists.')) {
+      notification.error({
+        message: 'Ошибка',
+        description:
+          'Пользователь с таким телефоном уже существует',
+      })
+    }
+  }
 }
-
-const onFinish = (data: any) => {
-    console.log('Finish', data)
-    userService.registerUser(data).then((val) => {
-      console.log(val)
-    })
-}
-function RegisterPage (){
-
+function RegisterPage () {
+        const [{isDisabledButton}, setSate] = useState({
+          isDisabledButton: false
+        })
         const [form] = Form.useForm()
+
+        const onFinishFailed = (errorInfo: any) => {
+            console.log('Failed:', errorInfo)
+        }
+
+        const onFinish = (data: any) => {
+            setSate({isDisabledButton: true})
+            setTimeout(() => {
+              setSate({isDisabledButton: false})
+            }, 4000)
+            userService.registerUser(data).then((val) => {
+              if (val?.errors) {
+                handleRegisterErrors(val.errors)
+              } else {
+                Router.push('auth/login')
+              }
+            })
+        }
+        const validateConfirmPassword = () => {
+          form.validateFields(['confirmPassword'])
+        }
 
         return (
           <div className={"wrapper " + style.register}>
@@ -27,6 +59,7 @@ function RegisterPage (){
             </div>
             <div className={'form-wrapper'}>
               <Form
+                form={form}
                 name="basic"
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
@@ -34,7 +67,7 @@ function RegisterPage (){
               >
                 <Form.Item
                   label="Имя"
-                  name="name"
+                  name="username"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
                 >
@@ -61,7 +94,7 @@ function RegisterPage (){
 
                 <Form.Item
                   label="Дата Рождения"
-                  name="birthdate"
+                  name="birthday"
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
                 >
@@ -74,7 +107,10 @@ function RegisterPage (){
                   wrapperCol={{ span: 24 }}
                   rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
                 >
-                  <Input.Password />
+                  <Input.Password
+                    // tslint:disable-next-line: jsx-no-lambda
+                    onChange={validateConfirmPassword}
+                  />
                 </Form.Item>
 
                 <Form.Item
@@ -118,7 +154,12 @@ function RegisterPage (){
                   <Input className={"no-arrows"} addonBefore="+380" maxLength={9} type="number" />
                 </Form.Item>
 
-                  <Button type="primary" htmlType="submit" style={{marginLeft: '128px'}}>
+                  <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{marginLeft: '128px'}}
+                  disabled={isDisabledButton}
+                  >
                     Зарегистрироваться
                   </Button>
               </Form>

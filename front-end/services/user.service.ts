@@ -42,8 +42,6 @@ function testSecureAction() {
     }
     return fetch(`${config.apiUrl}/market/`, requestOptions)
         .then((responce) => {
-            debugger
-            console.log(responce)
             return responce.json()
         }).catch(e => {
             debugger
@@ -56,6 +54,7 @@ function logout() {
 }
 
 function registerUser(user: IUserRegister) {
+    user.birthday = new Date(user.birthday).toISOString().slice(0, 10)
     const requestOptions = {
         method: 'POST',
         headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
@@ -69,8 +68,6 @@ function registerUser(user: IUserRegister) {
     return fetch(`${config.apiUrl}/market/auth/register/`, requestOptions)
         // .then(handleResponse)
         .then((responce) => {
-            debugger
-            console.log(responce)
             return responce.json()
         }).catch(handleRequestError)
 }
