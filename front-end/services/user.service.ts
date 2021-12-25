@@ -1,4 +1,4 @@
-import { IUserRegister } from './../helpers/types/auth';
+import { IUserLogin, IUserRegister } from './../helpers/types/auth';
 import config from '../config'
 import { authHeader } from '../helpers/headers'
 import { LocalStorage } from '../helpers/storage/localStorage'
@@ -15,23 +15,6 @@ export const userService = {
     registerUser
 }
 
-function login(payload: {username, password}) {
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(payload)
-    // }
-
-    // return fetch(`${config.apiUrl}/market/auth-token`, requestOptions)
-    //     .then(handleResponse)
-    //     .then((responce: ILogin) => {
-    //         if (typeof window !== 'undefined') {
-    //             storage.authToken = responce.token
-    //         }
-    //         return responce.token
-    //     })
-    return testSecureAction()
-}
 function testSecureAction() {
     const user: IUserState = store.getState().user
     const requestOptions = {
@@ -66,7 +49,19 @@ function registerUser(user: IUserRegister) {
         })
     }
     return fetch(`${config.apiUrl}/market/auth/register/`, requestOptions)
-        // .then(handleResponse)
+        .then((responce) => {
+            return responce.json()
+        }).catch(handleRequestError)
+}
+function login(user: IUserLogin) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
+            ...user,
+        })
+    }
+    return fetch(`${config.apiUrl}/market/auth/login/`, requestOptions)
         .then((responce) => {
             return responce.json()
         }).catch(handleRequestError)

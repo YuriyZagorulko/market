@@ -1,5 +1,4 @@
 
-import { userConstants } from '../../helpers/constants'
 import { productConstants } from '../../helpers/constants/product.constants'
 import { IProduct } from '../../helpers/types/responces/products'
 

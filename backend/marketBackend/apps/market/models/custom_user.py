@@ -4,6 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import UserManager
 from datetime import date
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -22,6 +23,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name', 'second_name', 'last_name', 'date_joined', 'last_login']
 
+    objects = UserManager()
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')

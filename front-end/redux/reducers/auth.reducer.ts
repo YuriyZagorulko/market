@@ -1,27 +1,44 @@
+import { IUser } from './../../helpers/types/auth'
+import { LocalStorage } from './../../helpers/storage/localStorage'
 
-import { userConstants } from '../../helpers/constants'
+import { userConstants } from '../constants'
 
 export interface IAuthState {
     isLoggedIn
 }
 
-export function authRerucer(state: IAuthState = {isLoggedIn: false}, action) {
-  switch (action.type) {
-    case userConstants.LOGIN_REQUEST:
+const storage: LocalStorage = LocalStorage.Instance
+function initializeUser(): IUserState{
+    const user = storage.user
+    if (user) {
+        return user
+    }
+    return {
+        token: '',
+        refreshToken: '',
+        user: null
+    }
+}
+
+export interface IUserState {
+    token: string
+    refreshToken: string
+    user: IUser
+}
+export function authReducer(
+    state: IUserState = initializeUser(),
+    action
+) {
+    switch (action.type) {
+    case userConstants.LOGIN_SUCCESS:
         return {
-            loggingIn: true,
-            user: action.user
+            loading: true
         }
-        case userConstants.LOGIN_SUCCESS:
-            return {
-            loggedIn: true,
-            user: action.user
-            }
-        case userConstants.LOGIN_FAILURE:
-            return {}
-        case userConstants.LOGOUT:
-            return {}
-        default:
-            return state
-  }
+    case userConstants.LOGOUT:
+        return {
+            items: action.users
+        }
+    default:
+        return state
+    }
 }

@@ -4,13 +4,11 @@ import { reducers } from '../redux/reducers'
 import watchAll from './saga/saga'
 import createSagaMiddleware from 'redux-saga'
 import { IUserState } from './reducers/user.reducer'
-import { IAuthState } from './reducers/auth.reducer'
 import { IProductState } from './reducers/product.reducer'
 import { IControlsState } from './reducers/controls.reducer'
 import { ICartState } from './reducers/cart.reducer'
 export interface IState{
-    user: IUserState
-    auth: IAuthState
+    auth: IUserState
     product: IProductState
     cart: ICartState
     controls: IControlsState

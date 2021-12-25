@@ -22,6 +22,10 @@
     background-color: $color-blue-hight;
   }
 }
+.centered-block{
+  display: block;
+  margin: 0 auto;
+}
 .cart-modal{
   .ant-modal-title{
     font-weight: normal;

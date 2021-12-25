@@ -1,4 +1,3 @@
-import { userConstants } from '../../helpers/constants'
 import { productService } from '../../services/product.service'
 
 export const productActions = {
@@ -26,9 +25,4 @@ function mainPage() {
     //             }
     //         )
     // }
-}
-
-function logout() {
-    userService.logout()
-    return { type: userConstants.LOGOUT }
 }

@@ -1,9 +1,10 @@
-import style from '../../styles/pages/Registration.module.scss'
+import style from './Registration.module.scss'
 import React, { useState } from 'react'
 import { Form, Input, Button, Checkbox, notification, DatePicker, Row, Col, Space } from 'antd'
 import { connect } from 'react-redux'
-import { userService } from '../../services/user.service'
+import { userService } from '../../../services/user.service'
 import Router , {useRouter}  from 'next/router'
+import Link from 'next/link'
 
 function handleRegisterErrors(errors: { email: string[], phone: string[]}) {
   for (const err of errors.email) {
@@ -44,7 +45,7 @@ function RegisterPage () {
               if (val?.errors) {
                 handleRegisterErrors(val.errors)
               } else {
-                Router.push('auth/login')
+                Router.push('login')
               }
             })
         }
@@ -155,14 +156,19 @@ function RegisterPage () {
                 </Form.Item>
 
                   <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{marginLeft: '128px'}}
-                  disabled={isDisabledButton}
+                    type="primary"
+                    htmlType="submit"
+                    className={'centered-block'}
+                    disabled={isDisabledButton}
                   >
                     Зарегистрироваться
                   </Button>
               </Form>
+            </div>
+            <div style={{marginTop: '30px'}}>
+              <Link href="/auth/login">
+                  <a>Я уже зарегистрирован</a>
+              </Link>
             </div>
           </div>
         )
