@@ -1,0 +1,28 @@
+@import '../../../styles/constants.scss';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0 10px;
+}
+.product{
+    display: grid;
+}
+.title{
+    display: grid;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+}
+.content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    grid-template-rows: 1fr;
+    width: 100%;
+}

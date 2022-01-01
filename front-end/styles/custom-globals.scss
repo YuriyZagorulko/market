@@ -1,0 +1,130 @@
+@import './constants.scss';
+.global-width-limiter{
+  margin: 0 auto;
+  max-width: 1320px;
+  width: 100%;
+}
+
+.button-primary{
+  color: #fff;
+  background-color: $color-blue-boyzone;
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+
+  &:hover{
+    background-color: $color-blue-hight;
+  }
+}
+.centered-block{
+  display: block;
+  margin: 0 auto;
+}
+.cart-modal{
+  .ant-modal-title{
+    font-weight: normal;
+      font-size: 24px;
+  }
+  .ant-modal-body{
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+  .cart-btn{
+      font-size: 20px;
+      height: 34px;
+      box-sizing: content-box;
+      background-color: $color-blue-boyzone;
+  }
+}
+.box-gray{
+  margin-bottom: 8px;
+  padding: 16px;
+  background-color: $color-gray-2;
+  border-radius: 4px;
+  border: 1px solid $color-gray-1;
+}
+.row{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+}
+.column50{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 15px;
+
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.sectionTitle{
+  display: flex;
+  justify-content: flex-start;
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: 300;
+  text-align: left;
+  align-self: flex-start;
+}
+.red{
+  color: $color-red;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.ant-radio{
+  height: fit-content;
+}
+.hidden{
+  display: none !important;
+}
+.visible{
+  display: flex;
+}
+
+.link{
+
+  &-blue{
+    color: #3e77aa;
+  }
+}
+.wrapper{
+  display: flex;
+}
+.wrapper-horizontal{
+  display: flex;
+  flex-direction: column;
+}
+
+.text-title-xl{
+  display: flex;
+  font-weight: 500;
+  font-size: 22px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.no-arrows{
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type=number] {
+      -moz-appearance:textfield; /* Firefox */
+  }
+}

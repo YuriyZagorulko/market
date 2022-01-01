@@ -20,7 +20,6 @@ chrome-user-data
 *.sublime-workspace
 .idea
 *.iml
-.vscode
 *.swp
 *.swo
 
@@ -176,3 +175,8 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+#Custom
+backend/media
+/backend/media/images/
+/backend/marketBackend/secret.py

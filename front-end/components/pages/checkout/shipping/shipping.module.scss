@@ -1,0 +1,69 @@
+@import '/styles/constants.scss';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label{
+        display: flex;
+        flex-direction: row;
+    }
+}
+.officeSelect{
+    width: 600px;
+}
+.shippingContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+.selectedShipping{
+    border: 1px solid $color-blue-hight;
+    border-radius: 6px;
+
+    .optionContent{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.deliveryContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.deliveryRatio{
+    display: flex;
+    flex-direction: column;
+}
+.ratio{
+    padding: 20px;
+    margin: 0 0 15px 0;
+}
+.radioTitle{
+    display: flex;
+    font-size: 16px;
+    color: #000;
+    line-height: 16px;
+    margin-bottom: 15px;
+}
+.optionContent{
+    display: none;
+}
+.line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    .lineItem{
+        display: flex;
+        flex-direction: column;
+        margin-right: 15px;
+
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}

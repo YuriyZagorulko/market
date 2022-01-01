@@ -1,65 +1,69 @@
-import Head from 'next/head'
+import React from 'react'
+import { productConstants } from '../helpers/constants/product.constants'
 import styles from '../styles/pages/Home.module.scss'
+import { connect } from 'react-redux'
+import { store } from '../redux/store'
+import { IProduct } from '../helpers/types/responces/products'
+import HomeHeader from '../components/pages/home/homeHeader/homeHeader'
+import ProductLine from '../components/shared/productLine/productLine'
+import { productService } from '../services/product.service'
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+interface IProps {
+  login: any
+  dispatch: any
+}
+interface IState {
+  products: IProduct [],
+}
+class HomePage extends React.Component<IProps, IState> {
+  constructor(props){
+    super(props)
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+    // store.subscribe(() => {
+    //   // When state will be updated(in our case, when items will be fetched),
+    //   // we will update local component state and force component to rerender
+    //   // with new data.
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+    //   const temp  = store.getState()
+    //   if (store.getState().product){
+    //     this.setState({
+    //       products: store.getState().product.mainPage
+    //     })
+    //     console.log(store.getState().product.mainPage)
+    //   }
+    // })
+  }
+  componentDidMount() {
+    const { dispatch } = this.props
+    // dispatch({ type: productConstants.GETMAIN_REQUEST })
+    productService.mainPage().then((val) => {
+      this.setState({
+        products: val
+      })
+    })
+  }
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+  productLines(){
+    if (this.state && this.state.products){
+      return <ProductLine products={this.state.products} />
+      } else {
+        return <div>
+          no content
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      }
+  }
+  render () {
+    return (
+    <div className={styles.container}>
+      <div className={styles.head}>
+        <HomeHeader/>
+      </div>
+      <div className={styles.content + ' global-width-limiter'}>
+       {this.productLines()}
+      </div>
     </div>
   )
+  }
 }
+const connectedHomePage = connect(state => state)(HomePage)
+export  default connectedHomePage

@@ -1,10 +1,20 @@
 import { takeEvery, takeLatest, all } from 'redux-saga/effects'
-import { userConstants } from '../../helpers/constants/user.constants'
-import { userLogin } from './users.saga'
+import { productConstants } from '../../helpers/constants/product.constants'
+import { getMainPageData } from './products.saga'
+import { saveCart } from './cart.saga'
+import { cartConstants } from '../reducers/cart.reducer'
+import { authConstants } from '../constants'
+import { saveUser } from './auth.saga'
+
 function *watchAll() {
   yield all([
-    takeEvery(userConstants.LOGIN_REQUEST, userLogin),
-    // takeEvery("CREATE_USER_REQUESTED", createUser)
+    // save states
+    takeEvery(authConstants.LOGIN_SUCCESS, saveUser),
+    takeEvery(cartConstants.ADD_PRODUCT, saveCart),
+    takeEvery(cartConstants.CHANGE_QUANTITY, saveCart),
+    takeEvery(cartConstants.REMOVE_PRODUCT, saveCart)
+
+    // takeLatest("CREATE_USER_REQUESTED", createUser)
   ])
 }
 

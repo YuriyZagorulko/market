@@ -1,0 +1,1 @@
+export const defaultProductImg = '/images/icons/shared/product-default.svg'
