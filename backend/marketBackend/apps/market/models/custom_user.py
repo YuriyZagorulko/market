@@ -7,6 +7,30 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import UserManager
 from datetime import date
 
+
+class CustomUserManager(UserManager):
+    def create_user(self, email, password=None):
+
+        if email is None:
+            raise TypeError('Users must have an email address.')
+
+        user = self.model(email=self.normalize_email(email))
+        user.set_password(password)
+        user.save()
+
+        return user
+
+    def create_superuser(self, email, password):
+
+        if password is None:
+            raise TypeError('Superusers must have a password.')
+
+        user = self.create_user(email, password)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
+
+        return user
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'),  unique=True)
     username = models.CharField(_('username'), max_length=255)
@@ -19,15 +43,21 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     last_login = models.DateTimeField(_('date joined'), auto_now_add=True)
     avatar = models.ImageField(upload_to='images/', null=True, blank=True)
+    is_staff = models.BooleanField(_('staff status'),default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'second_name', 'last_name', 'date_joined', 'last_login']
+    REQUIRED_FIELDS = []
 
-    objects = UserManager()
+    objects = CustomUserManager()
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
 
+    @property
+    def name(self):
+        """I'm the 'x' property."""
+        return self.username
+        
     def get_full_name(self):
         '''
         Returns the first_name plus the last_name, with a space in between.

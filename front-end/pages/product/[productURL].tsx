@@ -21,7 +21,6 @@ const Post = () => {
             setProduct(data)
         })
     }
-
     const buyProduct = () => {
         dispatch({type: cartConstants.ADD_PRODUCT, product})
         dispatch({type: controlsConstants.OPEN_CART})

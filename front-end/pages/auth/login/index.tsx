@@ -1,21 +1,23 @@
 import style from './Login.module.scss'
 import React, { useState } from 'react'
 import { Form, Input, Button, Checkbox, notification } from 'antd'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'
+import { authConstants } from '../../../redux/constants'
 
 interface IProps {
     login: any
     dispatch: any
 }
 function LoginPage () {
+  const dispatch = useDispatch()
   const [{isDisabledButton}, setSate] = useState({
     isDisabledButton: false
   })
 
-  const loginSuccess = (val: { access: string, refresh: string}) => {
-    // save tokens
+  const loginSuccess = (value: { access: string, refresh: string}) => {
+    dispatch({ type: authConstants.LOGIN_SUCCESS, value })
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)

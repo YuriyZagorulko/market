@@ -1,3 +1,5 @@
+import config from "../../../config"
+
 export interface IMain{
     products: []
 }
@@ -21,12 +23,18 @@ export interface IProduct {
     imagesSet: IImage [],
 }
 export interface AddedProduct{
-    product: IProduct;
-    quantity: number;
+    product: IProduct
+    quantity: number
 }
 export function getFirstImg(product: IProduct): string{
     if (product && product.imagesSet && product.imagesSet.length > 0) {
         return product.imagesSet[0].image
     }
     return ''
+}
+export function getPreviewImgUrl(product: IProduct): string {
+    if (product?.imagesSet?.length > 0) {
+        return config.apiUrl + getFirstImg(product)
+    }
+    return '/images/icons/shared/product-default.svg'
 }

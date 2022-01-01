@@ -2,18 +2,25 @@ import React from 'react'
 import styles from "./productPrev.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
-import { IProduct, getFirstImg } from '../../../helpers/types/responces/products'
+import { IProduct, getFirstImg, getPreviewImgUrl } from '../../../helpers/types/responces/products'
 import config from '../../../config'
 type productProps = {
-  product: IProduct;
+  product: IProduct
 }
-// type headerState = {
-//   headerBanner?: string
-// }
-export default class ProductPrev extends React.Component<productProps> {
+type previewState = {
+  isImageError: boolean
+}
+export default class ProductPrev extends React.Component<productProps, previewState> {
     constructor(props){
       super(props)
-      this.state = {}
+      this.state = {
+        isImageError: false
+      }
+    }
+    imageErrorHandler = () => {
+      this.setState({
+        isImageError: true
+      })
     }
     render() {
       return (
@@ -24,9 +31,10 @@ export default class ProductPrev extends React.Component<productProps> {
           <div className={styles.content}>
             <div className={styles.image}>
               <Image
-                src={config.apiUrl + getFirstImg(this.props.product)}
+                src={ !this.state.isImageError ? getPreviewImgUrl(this.props.product) : '/images/icons/shared/product-default.svg'}
                 alt="Produt"
                 layout="fill"
+                onError={this.imageErrorHandler}
               />
             </div>
             <div className={styles.description}>

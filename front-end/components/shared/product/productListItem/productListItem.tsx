@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from "./productListItem.module.scss"
-import "./productListItem.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
-import { IProduct, getFirstImg, AddedProduct } from '../../../../helpers/types/responces/products'
+import { IProduct, getFirstImg, AddedProduct, getPreviewImgUrl } from '../../../../helpers/types/responces/products'
 import config from '../../../../config'
 type productProps = {
   product: AddedProduct;
@@ -35,7 +34,7 @@ export default class ProductListItem extends React.Component<productProps, produ
           <a>
             <div className={styles.image}>
               <Image
-                src={ !this.state.isImageError ? config.apiUrl + getFirstImg(this.props.product.product) : '/images/icons/shared/product-default.svg'}
+                src={ !this.state.isImageError ? getPreviewImgUrl(this.props.product.product) : '/images/icons/shared/product-default.svg'}
                 alt="Produt image"
                 layout="fill"
                 onError={this.imageErrorHandler}

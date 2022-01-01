@@ -15,9 +15,9 @@ class Product(models.Model):
     images = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE) #album
     shortDescription = models.TextField(max_length=2000, default='')
     # category = models.OneToOneField(ProductCategory, related_name='category', on_delete=models.CASCADE)
-    barcode = models.CharField(max_length=150, default='')
-    productCode = models.CharField(max_length=150, default='')
-    discountPrice = models.IntegerField(blank=True, default=None)
+    barcode = models.CharField(max_length=150, default='', unique=True, blank=True)
+    vinCode = models.CharField(max_length=150, default='', unique=True, blank=True)
+    discountPrice = models.IntegerField(blank=True, null=True)
     url = models.CharField(max_length=150, unique=True, default='', blank=True)
     minAmount = models.IntegerField(default=1)
     def save(self, *args, **kwargs): # set values before save
