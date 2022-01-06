@@ -38,7 +38,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
               />
             </div>
             <div className={styles.description}>
-              {this.props.product.description}
+              {this.props.product.title}
             </div>
             <div className={styles.price}>
               {this.props.product.price} ₴

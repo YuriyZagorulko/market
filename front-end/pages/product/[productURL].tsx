@@ -11,7 +11,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
 import { cartConstants } from '../../redux/reducers/cart.reducer'
 
-const Post = () => {
+const Product = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [product, setProduct] = useState(null)
@@ -71,5 +71,5 @@ const Post = () => {
     </div>)
 }
 
-const connectedProductPage = connect(state => state)(Post)
+const connectedProductPage = connect(state => state)(Product)
 export default connectedProductPage
