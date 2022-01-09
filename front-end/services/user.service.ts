@@ -61,7 +61,7 @@ function login(user: IUserLogin) {
             ...user,
         })
     }
-    return fetch(`${config.apiUrl}/market/auth/login/`, requestOptions)
+    return fetch(`${config.apiUrl}/auth/login/`, requestOptions)
         .then((responce) => {
             return responce.json()
         }).catch(handleRequestError)

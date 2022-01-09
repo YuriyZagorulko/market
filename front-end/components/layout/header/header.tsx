@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./header.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../../helpers/constants/controls'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
+import { useRouter } from 'next/router'
 
 type headerProps = {
   name?: string
@@ -13,21 +14,44 @@ type headerProps = {
 }
 type headerState = {
   headerBanner?: string
+  searchInput?: string
 }
-class Header extends React.Component<headerProps, headerState> {
-    constructor(props){
-      super(props)
-      this.state = {
-        headerBanner: ''
+
+function Header (){
+    const dispatch = useDispatch()
+    const [state, setSate] = useState({
+      headerBanner: '',
+      searchInput: ''
+    })
+    const router = useRouter()
+    const updateInputValue = (evt) => {
+      const val: string = evt.target.value
+      setSate({
+        ...state,
+        searchInput: val
+      })
+    }
+    const redirectToSearchPage = () => {
+      if (state.searchInput) {
+        router.push({
+          pathname: '/search',
+          query: { text: state.searchInput }
+      })
       }
     }
-    openModal = () => {
-      this.props.dispatch({type: controlsConstants.OPEN_CART})
+    const handleKeyDown = (ev) => {
+      if (state.searchInput) {
+        if (ev.key === 'Enter') {
+          redirectToSearchPage()
+        }
+      }
     }
-    render() {
-      return (
+    const openModal = () => {
+      dispatch({type: controlsConstants.OPEN_CART})
+    }
+    return (
       <div className={styles.header}>
-        { this.state.headerBanner ? <div className={styles.headerTop}>{this.state.headerBanner}</div> : ''}
+        { state.headerBanner ? <div className={styles.headerTop}>{state.headerBanner}</div> : ''}
         <div className={`${styles.headerContent} global-width-limiter`} >
           <div className={styles.headerNavigation}>
             <div className={styles.navigationLeft}>
@@ -43,8 +67,8 @@ class Header extends React.Component<headerProps, headerState> {
               <Link href="/auth/login">
                 <a>Войти</a>
               </Link>
-               или
-               <Link href="/auth/sign-up">
+              или
+              <Link href="/auth/sign-up">
                 <a>зарегистрироваться</a>
               </Link>
             </div>
@@ -63,18 +87,18 @@ class Header extends React.Component<headerProps, headerState> {
               </Link>
             </div>
             <div className={styles.itemsCenter}>
-              <input placeholder="Я ищу..."/>
-              <FontAwesomeIcon icon={faSearch} />
+              <input  onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я ищу..."/>
+              <FontAwesomeIcon icon={faSearch} onClick={redirectToSearchPage} />
             </div>
             <div className={styles.itemsRight}>
-              <div className={styles.headerIcon} onClick={this.openModal}>
+              <div className={styles.headerIcon} onClick={openModal}>
                 <FontAwesomeIcon icon={faShoppingCart} />
               </div>
             </div>
           </div>
         </div>
-      </div>)
-    }
+      </div>
+    )
   }
 
 const connectedConponent = connect(state => state)(Header)

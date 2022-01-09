@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from marketBackend.apps.market.models import Product, Image
 from .imageSerializer import ImageSerializer
-from marketBackend.apps.market.serializers.imageSerializer import ImageSerializer
+from marketBackend.apps.market.rest_framework.serializers.imageSerializer import ImageSerializer
 
 class ProductSerializer(serializers.ModelSerializer):
     imagesSet = serializers.SerializerMethodField() #images
