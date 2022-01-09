@@ -6,6 +6,7 @@ from . import settings
 
 urlpatterns = [
     path('market/', include('marketBackend.apps.market.urls')),
+    path('auth/', include('marketBackend.apps.auth.urls')),
     path('admin/', admin.site.urls),
 ]
 

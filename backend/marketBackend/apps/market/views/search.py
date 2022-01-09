@@ -19,7 +19,6 @@ class SearchViewSet(ModelViewSet):
         if text:
             q &= Q(title__icontains=text)
         products = Product.objects.filter(q).order_by('-created_at')
-
         page = self.paginate_queryset(products)
         if page is not None:
             serializer = ProductSerializer(page, many=True)
