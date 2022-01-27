@@ -34,9 +34,9 @@ function Header (){
     const redirectToSearchPage = () => {
       if (state.searchInput) {
         router.push({
-          pathname: '/search',
-          query: { text: state.searchInput }
-      })
+            pathname: '/search',
+            query: { text: state.searchInput }
+        })
       }
     }
     const handleKeyDown = (ev) => {

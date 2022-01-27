@@ -5,6 +5,7 @@ import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'
 import { authConstants } from '../../../redux/constants'
+import { useRouter } from 'next/router'
 
 interface IProps {
     login: any
@@ -12,12 +13,16 @@ interface IProps {
 }
 function LoginPage () {
   const dispatch = useDispatch()
+  const router = useRouter()
   const [{isDisabledButton}, setSate] = useState({
     isDisabledButton: false
   })
 
-  const loginSuccess = (value: { access: string, refresh: string}) => {
+  const loginSuccess = (value: { token: string }) => {
     dispatch({ type: authConstants.LOGIN_SUCCESS, value })
+    router.push({
+        pathname: '/cabinet/orders'
+    })
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
@@ -36,7 +41,7 @@ function LoginPage () {
             'Пользователя с такими имейлом и паролем не существует',
         })
       } else {
-        if (val.access && val.refresh) {
+        if (val.token) {
           loginSuccess(val)
         }
       }
@@ -58,7 +63,7 @@ function LoginPage () {
           <Form.Item
             label="Имейл"
             labelCol={{span: 6}}
-            name="email"
+            name="username"
             wrapperCol={{ span: 24 }}
             rules={[{
               required: true,
