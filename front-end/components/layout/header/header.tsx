@@ -58,7 +58,7 @@ function Header (){
               <Link href="/help">
                 <a>Помощь</a>
               </Link>
-              <Link href="/contacts">
+              <Link href="/contact-us">
                 <a>Контакты</a>
               </Link>
             </div>
