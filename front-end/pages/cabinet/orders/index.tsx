@@ -1,10 +1,11 @@
 import style from './Login.module.scss'
-import React, { useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'
 import { authConstants } from '../../../redux/constants'
 import { useRouter } from 'next/router'
+import { OrderService } from '../../../services/order/order.service'
 
 interface IProps {
     login: any
@@ -13,8 +14,13 @@ interface IProps {
 function OrdersPage () {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [{isDisabledButton}, setSate] = useState({
-    isDisabledButton: false
+  const [{orders}, setSate] = useState({
+    orders: []
+  })
+  const selector = useSelector(state => {
+    OrderService.getOrders().then((data) => {
+        console.log(data)
+    })
   })
 
   return (
