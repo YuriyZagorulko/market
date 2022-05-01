@@ -23,7 +23,7 @@ export default class Welcome extends React.Component<headerProps, headerState> {
               <Link href="/help">
                 <a>Помощь</a>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact-us">
                 <a>Контакты</a>
               </Link>
               </div>

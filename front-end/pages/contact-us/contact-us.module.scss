@@ -1,0 +1,32 @@
+.container{
+
+}
+.consSect{
+padding: 15px 25px;
+}
+.container{ 
+  margin-left: auto;
+
+}
+.contentContainer{
+  display: flex;
+  flex-direction:column;
+  margin-top:34px;
+}
+
+
+.blueText{
+  color:blue;
+}
+.maincontainer{
+  display:flex;
+  justify-content:space-between;
+  min-width:535px;
+  
+}
+.div_container{
+  display:flex;
+  align-items:flex-end;
+  margin-left: 80px;
+ 
+}
