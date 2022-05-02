@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
 import { cartConstants } from '../../redux/reducers/cart.reducer'
+import CustomImg from '../../components/shared/customImg/customImg'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -33,11 +34,7 @@ const Product = () => {
                     <div className={style.topLeft}>
                         <div className={style.images}>
                             <div className={style.img} >
-                                <Image
-                                    src={config.apiUrl + getFirstImg(product)}
-                                    alt="Produt"
-                                    layout="fill"
-                                />
+                                <CustomImg img={getFirstImg(product)} />
                             </div>
                         </div>
                     </div>

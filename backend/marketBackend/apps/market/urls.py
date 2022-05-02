@@ -10,7 +10,7 @@ from marketBackend.apps.market.views import SearchViewSet
 from rest_framework.authtoken.views import obtain_auth_token
 
 auth_urls = [
-    path('/orders', OrderView.as_view()),
+    path('orders', OrderView.as_view()),
 ]
 urlpatterns = [
     path('', IndexView.as_view()),

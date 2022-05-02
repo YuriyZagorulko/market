@@ -1,3 +1,5 @@
+from marketBackend.apps.market.models.order import Order
+from marketBackend.apps.market.rest_framework.serializers.orderSerializer import OrdersSerializer
 from marketBackend.apps.market.models import Product, Image
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -12,14 +14,15 @@ class OrderView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         
+        orders = Order.objects.filter(user=request.user.id)
+        serializer = OrdersSerializer(orders, many=True)
         content = {
-            'user': str(request.user),  # `django.contrib.auth.User` instance.
-            'auth': str(request.auth),  # None
+            'data': serializer.data
         }
         return Response(content)
+        # return Response({})
 
 class ConfirmOrderView(APIView):
-
     # add data validation
     def post(self, request, *args, **kwargs):
         data = request.data
