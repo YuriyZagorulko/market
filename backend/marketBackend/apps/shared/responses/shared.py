@@ -1,0 +1,3 @@
+succesResponce = {
+    'content': 'success'
+}

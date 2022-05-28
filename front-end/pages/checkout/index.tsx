@@ -1,24 +1,24 @@
 import React from 'react'
-import { productConstants } from '../helpers/constants/product.constants'
-import styles from '../styles/pages/Checkout.module.scss'
+import { productConstants } from '../../helpers/constants/product.constants'
+import styles from './Checkout.module.scss'
 import { connect } from 'react-redux'
-import { store } from '../redux/store'
-import { IProduct } from '../helpers/types/responces/products'
+import { store } from '../../redux/store'
+import { IProduct } from '../../helpers/types/responces/products'
 import { Unsubscribe } from 'redux-saga'
 import { AutoComplete, Button, FormInstance, Input, Radio, Select } from 'antd'
-import { getTotalPrice } from '../redux/reducers/cart.reducer'
+import { getTotalPrice } from '../../redux/reducers/cart.reducer'
 import classnames from 'classnames'
-import ProductListItem from '../components/shared/product/productListItem/productListItem'
+import ProductListItem from '../../components/shared/product/productListItem/productListItem'
 import Router from 'next/router'
-import { ICitiesResponce, NPapiService } from '../services/order/NPapi.service'
-import { deliveryTypes } from '../helpers/order/order.constants'
-import ContactInfo from '../components/pages/checkout/contactInfo/contactInfo'
-import Shipping from '../components/pages/checkout/shipping/shipping'
-import { INewPostData } from '../helpers/types/shipping'
-import { IOrderData, OrderService } from '../services/order/order.service'
+import { ICitiesResponce, NPapiService } from '../../services/order/NPapi.service'
+import { deliveryTypes } from '../../helpers/order/order.constants'
+import ContactInfo from '../../components/pages/checkout/contactInfo/contactInfo'
+import Shipping from '../../components/pages/checkout/shipping/shipping'
+import { INewPostData } from '../../helpers/types/shipping'
+import { IOrderData, OrderService } from '../../services/order/order.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { controlsConstants } from '../helpers/constants/controls'
+import { controlsConstants } from '../../helpers/constants/controls'
 
 interface IProps {
   dispatch: any
@@ -79,10 +79,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
     this.citySearch('д')
   }
   citySearch = (str: string) => {
-    console.log(str)
     NPapiService.getCities(str).then((data: ICitiesResponce) => {
-      console.log('cities recived: ')
-      console.log(data)
       const cities: { value: string, cityRef: string }[] = []
       if (data && data.Addresses) {
       for (const c of data.Addresses){
