@@ -9,32 +9,26 @@ import ProductPrev from '../productPrev/productPrev'
 
 type productLineProps = {
   products: IProduct []
+  title: string
 }
-// type headerState = {
-//   headerBanner?: string
-// }
-export default class ProductLine extends React.Component<productLineProps> {
-    constructor(props){
-      super(props)
-      this.state = {}
-    }
-    render() {
-      return (
-        <div className={styles.container}>
-          <div className={styles.head}>
-            <div className={styles.title}>Product line title</div>
-          </div>
-          <div className={styles.content}>
-            {this.props.products.map((product: IProduct, index) => {
-              if (index < 5) {
-                return <div className={styles.product} key={index}>
-                  <ProductPrev product={product}/>
-                </div>
-              }
-            })}
-          </div>
+function ProductLine (props: productLineProps) {
 
-        </div>
-      )
-    }
-  }
+  return (
+    <div className={styles.container}>
+      <div className={styles.head}>
+        <div className={styles.title}>{props.title}</div>
+      </div>
+      <div className={styles.content}>
+        {props.products.map((product: IProduct, index) => {
+          if (index < 6) {
+            return <div className={styles.product} key={index}>
+              <ProductPrev product={product}/>
+            </div>
+          }
+        })}
+      </div>
+
+    </div>
+  )
+}
+export default ProductLine

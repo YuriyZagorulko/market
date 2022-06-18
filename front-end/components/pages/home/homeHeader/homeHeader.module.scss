@@ -3,9 +3,10 @@
 .container{
     position: relative;
     display: flex;
-    background-image: url("../../../../public/images/pages/home/header.jpg");
+    background-image: url("../../../../public/images/pages/home/ukr_header.jpg");
+    background-position: center;
     background-size: cover;
-    width: 100%;
+    width: -webkit-fill-available;
     justify-content: center;
     align-items: center;
     color: #fff;

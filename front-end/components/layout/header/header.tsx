@@ -78,7 +78,7 @@ function Header (){
               <Link href="/">
                 <a>
                   <Image
-                      src="/images/vercel.svg"
+                      src="/images/main-logo.svg"
                       alt="Picture of the author"
                       width={283}
                       height={64}

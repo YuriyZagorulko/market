@@ -1,7 +1,7 @@
 @import './constants.scss';
 .global-width-limiter{
   margin: 0 auto;
-  max-width: 1320px;
+  max-width: $screen-size-med;
   width: 100%;
 }
 
@@ -129,5 +129,17 @@ body{
 
   input[type=number] {
       -moz-appearance:textfield; /* Firefox */
+  }
+}
+.iconContainer{
+  svg{
+    width: 30px;
+    vertical-align: middle;
+  }
+}
+.img-comtainer{
+  vertical-align: -webkit-baseline-middle;
+  img{
+    object-fit: contain;
   }
 }
