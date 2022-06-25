@@ -29,7 +29,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
         <Link href={{
               pathname: '/product/' + this.props.product.id,
             }}>
-          <div className={styles.content}>
+          <a className={styles.content}>
             <div className={styles.image}>
               <CustomImg img={getPreviewImgUrl(this.props.product)} />
             </div>
@@ -39,7 +39,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
             <div className={styles.price}>
               {this.props.product.price} ₴
             </div>
-          </div>
+          </a>
         </Link>
       </div>)
     }

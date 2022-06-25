@@ -35,7 +35,7 @@ function CustomImg (props: ImgProps){
       })
     }
   }, [props.img, props.previev, state.isImageError])
-  const imageErrorHandler = () => {
+  const imageErrorHandler = (err) => {
     setState({
       ...state,
       isImageError: true

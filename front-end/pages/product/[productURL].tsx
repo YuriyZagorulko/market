@@ -34,7 +34,7 @@ const Product = () => {
                     <div className={style.topLeft}>
                         <div className={style.images}>
                             <div className={style.img} >
-                                <CustomImg img={getFirstImg(product)} />
+                                <CustomImg img={config.apiUrl + getFirstImg(product)} />
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 from .product import Product
+from .product import ProductCategory
 from .image import ImageAlbum
 from .image import Image
 from .order import OrderDetails

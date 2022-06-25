@@ -13,8 +13,8 @@ class Product(models.Model):
     price = models.IntegerField()
     description = models.TextField(max_length=2000, help_text="This is the description of the product")
     images = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE) #album
-    shortDescription = models.TextField(max_length=2000, default='')
-    # category = models.OneToOneField(ProductCategory, related_name='category', on_delete=models.CASCADE)
+    shortDescription = models.TextField(max_length=300, default='')
+    category = models.OneToOneField(ProductCategory, related_name='category', blank=True, null=True, on_delete=models.DO_NOTHING)
     barcode = models.CharField(max_length=150, unique=True, blank=True, null=True)
     vinCode = models.CharField(max_length=150, unique=True, blank=True, null=True)
     discountPrice = models.IntegerField(blank=True, null=True)
