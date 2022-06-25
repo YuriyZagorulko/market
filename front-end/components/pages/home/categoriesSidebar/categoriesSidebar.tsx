@@ -201,17 +201,25 @@ const items = [
     )
 ]
 function CategoriesSidebar (props: { }) {
-  const [state, setSate] = useState({})
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const onClick = e => {
     console.log('click', e)
   }
 
-  return (
-    <div className={style.container + ' global'}>
-      <Card hoverable className={style.card}>
-        <Menu onClick={onClick} style={{ width: 256 }} mode="vertical" items={items} />
-      </Card>
-    </div>
-  )
+  if (mounted) {  // console warning fix
+    return (
+      <div className={style.container + ' global'}>
+        <Card hoverable className={style.card}>
+          <Menu onClick={onClick} style={{ width: 256 }} mode="vertical" items={items} />
+        </Card>
+      </div>
+    )
+  } else {
+    return <></>
+  }
 }
 export default CategoriesSidebar

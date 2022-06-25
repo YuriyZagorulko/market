@@ -58,7 +58,6 @@ const Product = () => {
                         </div>
                     </div>
                 </div>
-                <div>bottom</div>
             </div>
         :
             <div className={style.content + ' global-width-limiter'}>

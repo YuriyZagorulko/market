@@ -76,13 +76,14 @@ function Header (){
           <div className={styles.headerItems}>
             <div className={styles.itemsLeft}>
               <Link href="/">
-                <a>
+                <a className={styles.logoLink}>
                   <Image
                       src="/images/main-logo.svg"
                       alt="Picture of the author"
-                      width={283}
-                      height={64}
+                      width={60}
+                      height={60}
                     />
+                    AUTOSMITE
                 </a>
               </Link>
             </div>
