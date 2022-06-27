@@ -13,8 +13,8 @@ import CustomImg from '../../customImg/customImg'
 type IProps = {
   dispatch: any
   addedProduct: { product: IProduct, quantity: number }
-  onDelete: (product: IProduct) => {}
-  onQuantityChange: (product: IProduct, quantity: number) => {}
+  onDelete: (product: IProduct) => void
+  onQuantityChange: (product: IProduct, quantity: number) => void
 }
 type cartProductState = {
   unsubs: Unsubscribe []

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { userService } from '../../../services/user.service'
 import { authConstants } from '../../../redux/constants'
 import { useRouter } from 'next/router'
+import CustomBtn from '../../../components/shared/customBtn/customBtn'
 
 interface IProps {
     login: any
@@ -14,9 +15,6 @@ interface IProps {
 function LoginPage () {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [{isDisabledButton}, setSate] = useState({
-    isDisabledButton: false
-  })
 
   const loginSuccess = (value: { token: string }) => {
     dispatch({ type: authConstants.LOGIN_SUCCESS, value })
@@ -29,10 +27,6 @@ function LoginPage () {
   }
 
   const onFinish = (data: any) => {
-    setSate({isDisabledButton: true})
-    setTimeout(() => {
-      setSate({isDisabledButton: false})
-    }, 4000)
     userService.login(data).then((val) => {
       if (val.detail === 'No active account found with the given credentials') {
         notification.error({
@@ -57,7 +51,6 @@ function LoginPage () {
         <Form
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
@@ -85,9 +78,9 @@ function LoginPage () {
           </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>
-            <Button type="primary" className={'centered-block'} htmlType="submit" disabled={isDisabledButton}>
+            <CustomBtn type="primary" className={'centered-block'} htmlType="submit" onClick={onFinish}>
               Войти
-            </Button>
+            </CustomBtn>
           </Form.Item>
         </Form>
       </div>

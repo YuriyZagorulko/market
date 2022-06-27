@@ -19,9 +19,10 @@ import { IOrderData, OrderService } from '../../services/order/order.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
+import CustomBtn from '../../components/shared/customBtn/customBtn'
 
 interface IProps {
-  dispatch: any
+  dispatch: any,
 }
 interface IState {
   products: { product: IProduct, quantity: number } []
@@ -38,7 +39,7 @@ interface IState {
 class CheckoutPage extends React.Component<IProps, IState> {
   contactFormRef = React.createRef<FormInstance>()
   shippingNPFormRef = React.createRef<FormInstance>()
-  constructor(props){
+  constructor(props: any){
     super(props)
     this.state = {
       name: '',
@@ -50,7 +51,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
       cityOptions: [],
       selectedCity: { cityRef: '', value: '' },
       selectedOffice: { description: '', ref: '' },
-      officessOptions: []
+      officessOptions: [],
     }
   }
   componentWillUnmount(){
@@ -101,8 +102,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
         this.shippingNPFormRef.current!.validateFields().then((shippingVal: any) => {
 
           const productIds = []
-          for ( const pr of this.state.products){
-            productIds.push( { id: pr.product.id, quantity: pr.quantity})
+          for (const pr of this.state.products){
+            productIds.push({ id: pr.product.id, quantity: pr.quantity})
           }
           const orderData: IOrderData = {
             name: contactVal.name,
@@ -112,14 +113,18 @@ class CheckoutPage extends React.Component<IProps, IState> {
             productList: productIds,
             shipping: {
               type: deliveryTypes.newPost,
-              data:{
+              data: {
                 selectedCity: this.state.selectedCity,
                 selectedOffice: this.state.selectedOffice
               }
             }
           }
           OrderService.confirmOrder(orderData).then((val) => {
-
+            if (val.data === "success"){
+              Router.push("/checkout/success")
+            } else {
+              console.log(val)
+            }
           })
         })
         .catch((e) => {
@@ -152,12 +157,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
             <div className={styles.productList}>
             {this.state.products.map((item, i) => {
               return (
-                // <CartProduct
-                //   key={item.product.id}
-                //   addedProduct={item}
-                //   onDelete={this.removeProduct}
-                //   onQuantityChange={this.quantityChange}
-                // />
                 <ProductListItem
                   key={item.product.id}
                   product={ item}
@@ -199,14 +198,14 @@ class CheckoutPage extends React.Component<IProps, IState> {
             ₴ {this.state.totalPrice}
           </div>
         </div>
-        <Button
+        <CustomBtn
           key="submit"
           type="primary"
           className={styles.checkoutOrder}
           onClick={this.checkoutOrder}
         >
           Подтверждаю заказ
-        </Button>
+        </CustomBtn>
       </div>
     )
   }

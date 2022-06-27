@@ -1,3 +1,3 @@
 succesResponce = {
-    'content': 'success'
+    'data': 'success'
 }

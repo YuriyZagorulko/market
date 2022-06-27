@@ -25,9 +25,7 @@ function confirmOrder(data: IOrderData): Promise<IResponse> {
     return fetch(`${config.apiUrl}/market/shipping/confirm-order`, requestOptions)
         .then((responce) => {
             return responce.json().then(body => {
-                if (body.content.data && body.content.data[0]){
-                    return body.content.data[0]
-                }
+                return body
             })
         }).catch(e => {
             return e

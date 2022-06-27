@@ -46,6 +46,7 @@ function CustomImg (props: ImgProps){
       src={ state.displayImg }
       alt="Img"
       layout="fill"
+      objectFit='contain'
       { ...props.imgProps }
       onError={imageErrorHandler}
     />
