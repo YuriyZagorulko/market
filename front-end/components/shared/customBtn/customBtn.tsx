@@ -5,28 +5,27 @@ import { Button } from 'antd'
 
 function CustomBtn (props: any) {
   const [isDisabledButton, setDisabledState] = useState(false)
-  const [disabledId, setDisabledId] = useState(null)
   const disabledTime = 4000
 
   useEffect(() => {
+    const disabledId = setTimeout(() => {
+      setDisabledState(false)
+    }, disabledTime)
     return () => {
       if (disabledId) {
         clearTimeout(disabledId)
       }
     }
-  }, [])
+  }, [isDisabledButton])
   const clickHandler = (e) => {
     if (props.onClick && !isDisabledButton) {
       props.onClick(e)
     }
     setDisabledState(true)
-    setDisabledId(setTimeout(() => {
-      setDisabledState(false)
-    }, disabledTime))
   }
   return (
     <Button disabled={isDisabledButton} {...props} onClick={clickHandler}>
-      Войти
+      {props.children}
     </Button>
   )
 }

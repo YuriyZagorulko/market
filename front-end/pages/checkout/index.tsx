@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
 import CustomBtn from '../../components/shared/customBtn/customBtn'
+import { clearCart } from '../../redux/actions/cart'
 
 interface IProps {
   dispatch: any,
@@ -121,6 +122,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
           }
           OrderService.confirmOrder(orderData).then((val) => {
             if (val.data === "success"){
+              this.props.dispatch(clearCart())
               Router.push("/checkout/success")
             } else {
               console.log(val)
@@ -159,7 +161,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
               return (
                 <ProductListItem
                   key={item.product.id}
-                  product={ item}
+                  product={ item }
                 />
               )
             })}

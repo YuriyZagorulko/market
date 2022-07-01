@@ -83,7 +83,7 @@ function Header (){
                       width={60}
                       height={60}
                     />
-                    AUTOSMITE
+                    <span className='link-text'>V16</span>
                 </a>
               </Link>
             </div>
