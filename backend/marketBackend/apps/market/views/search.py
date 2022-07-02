@@ -4,9 +4,12 @@ from marketBackend.apps.market.rest_framework.serializers.productSerializer impo
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny
 from django.db.models import Q
 
 class SearchViewSet(ModelViewSet):
+    authentication_classes = []
+    permission_classes = [] 
     pagination_class = CustomPagination
 
     def get_object(self):
