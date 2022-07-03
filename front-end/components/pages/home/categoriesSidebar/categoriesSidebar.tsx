@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faOilCan, faCarBattery, faLightbulb, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { ProductCategories } from '../../../../helpers/constants/categories'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -86,7 +88,7 @@ const itemsOld: MenuItem[] = [
   ]),
 
   getItem('Автоэлектроника', 'sub5', <span className={'iconContainer'}><FontAwesomeIcon icon={faCarBattery} /></span>, [
-    getItem('Аккумуляторы', '1',
+    getItem('Аккумуляторы', ProductCategories.CarBatteries,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/battery.jpg' }
@@ -97,7 +99,7 @@ const itemsOld: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Аксессуары для АКБ', '2',
+    getItem('Аксессуары для АКБ', '1',
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/battery-acc.jpg' }
@@ -122,7 +124,7 @@ const itemsOld: MenuItem[] = [
   ]),
 ]
 const items = [
-  getItem('Аккумуляторы', '1',
+  getItem('Аккумуляторы', ProductCategories.CarBatteries,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/battery.jpg' }
@@ -133,7 +135,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Пусковой кабель', '2',
+    getItem('Пусковой кабель', ProductCategories.StartCable,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/battery-acc.jpg' }
@@ -144,7 +146,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Пускозарядные устройства', '3',
+    getItem('Пускозарядные устройства', ProductCategories.StarterChargers,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/battery-charge.jpg' }
@@ -155,7 +157,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Смазка для контактов', '4',
+    getItem('Смазка для контактов', ProductCategories.ContactGrease,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/electro-lubricant.jpg' }
@@ -166,7 +168,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Дистиллированная вода', '5',
+    getItem('Дистиллированная вода', ProductCategories.DistilledWater,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/voda-distillirovannaya.jpg' }
@@ -177,7 +179,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Клеммы аккумулятора', '6',
+    getItem('Клеммы аккумулятора', ProductCategories.ContactGrease,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/klemmi.jpg' }
@@ -188,7 +190,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Тестеры для АКБ', '7',
+    getItem('Тестеры для АКБ', ProductCategories.BatteryTesters,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/nagruzochnye-vilki.jpg' }
@@ -200,13 +202,23 @@ const items = [
       </span>
     )
 ]
+const redirectToCategory = (router, category) => {
+  if (category) {
+    router.push({
+        pathname: '/search',
+        query: {params: JSON.stringify({ category })}
+    })
+  }
+}
 function CategoriesSidebar (props: { }) {
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
     setMounted(true)
   }, [])
+  const router = useRouter()
 
   const onClick = e => {
+    redirectToCategory(router, e.key)
     console.log('click', e)
   }
 

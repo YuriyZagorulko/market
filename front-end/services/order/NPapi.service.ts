@@ -55,7 +55,7 @@ function getOfficess(cityRef: string): Promise<{ description: string, ref: strin
                 return []
             })
         }).catch(e => {
-            debugger
+            console.log(e)
             return e
         })
 }

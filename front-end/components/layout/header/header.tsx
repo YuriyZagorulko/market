@@ -35,7 +35,7 @@ function Header (){
       if (state.searchInput) {
         router.push({
             pathname: '/search',
-            query: { text: state.searchInput }
+            query: {params: JSON.stringify({ text: state.searchInput })}
         })
       }
     }
