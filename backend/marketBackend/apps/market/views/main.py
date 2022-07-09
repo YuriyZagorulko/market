@@ -5,7 +5,7 @@ from rest_framework.response import Response
 
 class MainView(APIView):
     def get(self, request):
-        products = Product.objects.all().order_by('-id')[:5]
+        products = Product.objects.all().order_by('id')[:10]
         serializer = ProductSerializer(products, many=True)
         return Response({
             'products': serializer.data

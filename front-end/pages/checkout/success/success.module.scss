@@ -1,0 +1,27 @@
+@import '../../../styles/constants.scss';
+.container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+
+    button{
+        display: flex;
+        width: fit-content;
+        align-self: center;
+        margin-top: 30px;
+    }
+    h1, h4{
+        text-align: center;
+    }
+}
+.topIcon{
+    font-size: 32px;
+    color: $color-green;
+
+    svg{
+        margin: 0 auto;
+        display: flex;
+        width: 60px;
+        height: 60px;
+    }
+}

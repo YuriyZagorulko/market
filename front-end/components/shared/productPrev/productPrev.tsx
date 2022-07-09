@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { IProduct, getFirstImg, getPreviewImgUrl } from '../../../helpers/types/responces/products'
 import config from '../../../config'
+import CustomImg from '../customImg/customImg'
 type productProps = {
   product: IProduct
 }
@@ -28,14 +29,9 @@ export default class ProductPrev extends React.Component<productProps, previewSt
         <Link href={{
               pathname: '/product/' + this.props.product.id,
             }}>
-          <div className={styles.content}>
+          <a className={styles.content}>
             <div className={styles.image}>
-              <Image
-                src={ !this.state.isImageError ? getPreviewImgUrl(this.props.product) : '/images/icons/shared/product-default.svg'}
-                alt="Produt"
-                layout="fill"
-                onError={this.imageErrorHandler}
-              />
+              <CustomImg img={getPreviewImgUrl(this.props.product)} />
             </div>
             <div className={styles.description}>
               {this.props.product.title}
@@ -43,7 +39,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
             <div className={styles.price}>
               {this.props.product.price} ₴
             </div>
-          </div>
+          </a>
         </Link>
       </div>)
     }

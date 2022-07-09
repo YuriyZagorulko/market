@@ -32,13 +32,12 @@ function getCities(seatchStr: string): Promise<ICitiesResponce> {
     return fetch(`${config.apiUrl}/market/shipping/np/cities?cityName=${seatchStr}`, requestOptions)
         .then((responce) => {
             return responce.json().then(body => {
-                console.log(body)
                 if (body.content.data && body.content.data[0]){
                     return body.content.data[0]
                 }
             })
         }).catch(e => {
-            debugger
+            console.log(e)
             return e
         })
 }
@@ -56,7 +55,7 @@ function getOfficess(cityRef: string): Promise<{ description: string, ref: strin
                 return []
             })
         }).catch(e => {
-            debugger
+            console.log(e)
             return e
         })
 }

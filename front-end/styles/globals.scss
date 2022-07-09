@@ -1,7 +1,12 @@
 @import 'antd/dist/antd.css';
 @import './constants.scss';
 @import './custom-globals.scss';
+@import './antd-redesign.scss';
 @import './shared/auth.scss';
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
 html,
 body {
   padding: 0;

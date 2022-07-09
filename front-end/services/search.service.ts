@@ -8,9 +8,9 @@ export const searchService = {
 export interface ISearchParams{
     text?: string
     priceRange?: { from: number, to: number }
-    category?: string
+    categories?: string []
 }
 
-function search(params) {
+function search(params: any) {
     return axios.get(`${config.apiUrl}/market/search`, { params })
 }

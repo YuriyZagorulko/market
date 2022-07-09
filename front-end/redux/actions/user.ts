@@ -8,7 +8,7 @@ export const userActions = {
 
 function login(username, password) {
     return (dispatch) => {
-        userService.login({ username, password }).then(
+        userService.login({ email: username, password }).then(
             (data) => {
                 console.log(data)
             }
@@ -29,10 +29,6 @@ function login(username, password) {
     //             }
     //         )
     // }
-
-    function request() { return { type: authConstants.LOGIN_REQUEST, payload: { username, password }} }
-    function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
 }
 
 function logout() {

@@ -8,12 +8,14 @@ import Image from 'next/image'
 import config from '../../../../config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons"
+import CustomImg from '../../customImg/customImg'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 type IProps = {
-  dispatch: any
+  dispatch?: any
   addedProduct: { product: IProduct, quantity: number }
-  onDelete: (product: IProduct) => {}
-  onQuantityChange: (product: IProduct, quantity: number) => {}
+  onDelete: (product: IProduct) => void
+  onQuantityChange: (product: IProduct, quantity: number) => void
 }
 type cartProductState = {
   unsubs: Unsubscribe []
@@ -41,18 +43,14 @@ class CartProduct extends React.Component<IProps, cartProductState> {
         <div className={styles.product}>
           <div className={styles.productContent}>
             <div className={styles.productImage}>
-              <Image
-                src={config.apiUrl + getFirstImg(product)}
-                alt="Produt"
-                layout="fill"
-              />
+              <CustomImg img={config.apiUrl + getFirstImg(product)} />
             </div>
             <div className={styles.productTitle}>
               {product.title}
             </div>
             <div className={styles.productControls}>
               <div className={styles.productIcon + ' delete'} data-mssg="Hello!" onClick={this.removeProduct}>
-                <FontAwesomeIcon icon={faTrashAlt} />
+                <FontAwesomeIcon icon={faTrashAlt as IconProp} />
               </div>
             </div>
           </div>
@@ -69,5 +67,5 @@ class CartProduct extends React.Component<IProps, cartProductState> {
     }
   }
 
-const connectedCartProduct = connect(state => state)(CartProduct)
+const connectedCartProduct = connect<cartProductState, {}, IProps>((state: cartProductState) => state)(CartProduct as any)
 export default connectedCartProduct

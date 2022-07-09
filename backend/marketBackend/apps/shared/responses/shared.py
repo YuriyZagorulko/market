@@ -1,0 +1,3 @@
+succesResponce = {
+    'data': 'success'
+}

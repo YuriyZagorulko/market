@@ -1,10 +1,13 @@
 @import './constants.scss';
 .global-width-limiter{
   margin: 0 auto;
-  max-width: 1320px;
+  max-width: $screen-size-med;
   width: 100%;
 }
 
+body{
+  background-image: url("../public/images/global/doodle-background.jpg");
+}
 .button-primary{
   color: #fff;
   background-color: $color-blue-boyzone;
@@ -126,5 +129,29 @@
 
   input[type=number] {
       -moz-appearance:textfield; /* Firefox */
+  }
+}
+.iconsContainer{
+
+  .icon-wrapper{
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: content-box;
+    display: flex;
+    &:hover{
+      background-color: $color-gray-transparent;
+    }
+  }
+}
+.iconContainer{
+  svg{
+    width: 30px;
+    vertical-align: middle;
+  }
+}
+.img-comtainer{
+  vertical-align: -webkit-baseline-middle;
+  img{
+    object-fit: contain;
   }
 }

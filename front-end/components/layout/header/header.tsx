@@ -7,6 +7,7 @@ import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../../helpers/constants/controls'
 import { connect, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 type headerProps = {
   name?: string
@@ -34,9 +35,9 @@ function Header (){
     const redirectToSearchPage = () => {
       if (state.searchInput) {
         router.push({
-          pathname: '/search',
-          query: { text: state.searchInput }
-      })
+            pathname: '/search',
+            query: {params: JSON.stringify({ text: state.searchInput })}
+        })
       }
     }
     const handleKeyDown = (ev) => {
@@ -58,12 +59,12 @@ function Header (){
               <Link href="/help">
                 <a>Помощь</a>
               </Link>
-              <Link href="/contacts">
+              <Link href="/contact-us">
                 <a>Контакты</a>
               </Link>
             </div>
             <div className={styles.navigationCenter}/>
-            <div className={styles.navigationRight}>
+            {/* <div className={styles.navigationRight}>
               <Link href="/auth/login">
                 <a>Войти</a>
               </Link>
@@ -71,28 +72,29 @@ function Header (){
               <Link href="/auth/sign-up">
                 <a>зарегистрироваться</a>
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className={styles.headerItems}>
             <div className={styles.itemsLeft}>
               <Link href="/">
-                <a>
+                <a className={styles.logoLink}>
                   <Image
-                      src="/images/vercel.svg"
+                      src="/images/main-logo.svg"
                       alt="Picture of the author"
-                      width={283}
-                      height={64}
+                      width={60}
+                      height={60}
                     />
+                    <span className='link-text'>V16</span>
                 </a>
               </Link>
             </div>
             <div className={styles.itemsCenter}>
               <input  onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я ищу..."/>
-              <FontAwesomeIcon icon={faSearch} onClick={redirectToSearchPage} />
+              <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
             </div>
-            <div className={styles.itemsRight}>
-              <div className={styles.headerIcon} onClick={openModal}>
-                <FontAwesomeIcon icon={faShoppingCart} />
+            <div className={styles.itemsRight + ' iconsContainer'}>
+              <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
+                <FontAwesomeIcon icon={faShoppingCart as IconProp} />
               </div>
             </div>
           </div>

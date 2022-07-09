@@ -12,8 +12,8 @@ function *watchAll() {
     takeEvery(authConstants.LOGIN_SUCCESS, saveUser),
     takeEvery(cartConstants.ADD_PRODUCT, saveCart),
     takeEvery(cartConstants.CHANGE_QUANTITY, saveCart),
-    takeEvery(cartConstants.REMOVE_PRODUCT, saveCart)
-
+    takeEvery(cartConstants.REMOVE_PRODUCT, saveCart),
+    takeEvery(cartConstants.CLEAR_CART, saveCart)
     // takeLatest("CREATE_USER_REQUESTED", createUser)
   ])
 }

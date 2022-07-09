@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 type headerProps = {
   name?: string
@@ -23,24 +24,24 @@ export default class Welcome extends React.Component<headerProps, headerState> {
               <Link href="/help">
                 <a>Помощь</a>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact-us">
                 <a>Контакты</a>
               </Link>
               </div>
               <div className={styles.footerSocial}>
                 <Link href="/">
                   <div>
-                    <FontAwesomeIcon icon={faFacebook} />
+                    <FontAwesomeIcon icon={faFacebook as IconProp} />
                   </div>
                 </Link>
                 <Link href="/">
                   <div>
-                    <FontAwesomeIcon icon={faYoutube} />
+                    <FontAwesomeIcon icon={faYoutube as IconProp} />
                   </div>
                 </Link>
                 <Link href="/">
                   <div>
-                    <FontAwesomeIcon icon={faInstagram} />
+                    <FontAwesomeIcon icon={faInstagram as IconProp} />
                   </div>
                 </Link>
               </div>

@@ -4,25 +4,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { IProduct, getFirstImg, AddedProduct, getPreviewImgUrl } from '../../../../helpers/types/responces/products'
 import config from '../../../../config'
+import CustomImg from '../../customImg/customImg'
 type productProps = {
   product: AddedProduct;
 }
-type productItemState = {
-  isImageError: boolean
-}
 
-
-export default class ProductListItem extends React.Component<productProps, productItemState > {
+export default class ProductListItem extends React.Component<productProps, {} > {
     constructor(props){
       super(props)
-      this.state = {
-        isImageError: false
-      }
-    }
-    imageErrorHandler = () => {
-      this.setState({
-        isImageError: true
-      })
+      this.state = {}
     }
     render() {
       return (
@@ -33,11 +23,10 @@ export default class ProductListItem extends React.Component<productProps, produ
           }}>
           <a>
             <div className={styles.image}>
-              <Image
-                src={ !this.state.isImageError ? getPreviewImgUrl(this.props.product.product) : '/images/icons/shared/product-default.svg'}
+              <CustomImg
+                img={getPreviewImgUrl(this.props.product.product)}
                 alt="Produt image"
                 layout="fill"
-                onError={this.imageErrorHandler}
               />
             </div>
             <div className={styles.content}>

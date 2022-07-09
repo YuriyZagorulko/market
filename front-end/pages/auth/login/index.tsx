@@ -5,6 +5,8 @@ import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'
 import { authConstants } from '../../../redux/constants'
+import { useRouter } from 'next/router'
+import CustomBtn from '../../../components/shared/customBtn/customBtn'
 
 interface IProps {
     login: any
@@ -12,22 +14,19 @@ interface IProps {
 }
 function LoginPage () {
   const dispatch = useDispatch()
-  const [{isDisabledButton}, setSate] = useState({
-    isDisabledButton: false
-  })
+  const router = useRouter()
 
-  const loginSuccess = (value: { access: string, refresh: string}) => {
+  const loginSuccess = (value: { token: string }) => {
     dispatch({ type: authConstants.LOGIN_SUCCESS, value })
+    router.push({
+        pathname: '/cabinet/orders'
+    })
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
   }
 
   const onFinish = (data: any) => {
-    setSate({isDisabledButton: true})
-    setTimeout(() => {
-      setSate({isDisabledButton: false})
-    }, 4000)
     userService.login(data).then((val) => {
       if (val.detail === 'No active account found with the given credentials') {
         notification.error({
@@ -36,7 +35,7 @@ function LoginPage () {
             'Пользователя с такими имейлом и паролем не существует',
         })
       } else {
-        if (val.access && val.refresh) {
+        if (val.token) {
           loginSuccess(val)
         }
       }
@@ -52,13 +51,12 @@ function LoginPage () {
         <Form
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
             label="Имейл"
             labelCol={{span: 6}}
-            name="email"
+            name="username"
             wrapperCol={{ span: 24 }}
             rules={[{
               required: true,
@@ -80,9 +78,9 @@ function LoginPage () {
           </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>
-            <Button type="primary" className={'centered-block'} htmlType="submit" disabled={isDisabledButton}>
+            <CustomBtn type="primary" className={'centered-block'} htmlType="submit" onClick={onFinish}>
               Войти
-            </Button>
+            </CustomBtn>
           </Form.Item>
         </Form>
       </div>

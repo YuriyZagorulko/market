@@ -7,6 +7,7 @@ import { IProduct } from '../helpers/types/responces/products'
 import HomeHeader from '../components/pages/home/homeHeader/homeHeader'
 import ProductLine from '../components/shared/productLine/productLine'
 import { productService } from '../services/product.service'
+import CategoriesSidebar from '../components/pages/home/categoriesSidebar/categoriesSidebar'
 
 interface IProps {
   login: any
@@ -45,7 +46,12 @@ class HomePage extends React.Component<IProps, IState> {
 
   productLines(){
     if (this.state && this.state.products){
-      return <ProductLine products={this.state.products} />
+      return (
+        <React.Fragment>
+          <ProductLine products={this.state.products} title={'Рекомендуемые товары'} />
+          <ProductLine products={this.state.products} title={'Популярное'} />
+        </React.Fragment>
+      )
       } else {
         return <div>
           no content
@@ -54,11 +60,12 @@ class HomePage extends React.Component<IProps, IState> {
   }
   render () {
     return (
-    <div className={styles.container}>
+    <div className={styles.container  + ' global-width-limiter'}>
       <div className={styles.head}>
+        <CategoriesSidebar/>
         <HomeHeader/>
       </div>
-      <div className={styles.content + ' global-width-limiter'}>
+      <div className={styles.content}>
        {this.productLines()}
       </div>
     </div>

@@ -3,8 +3,7 @@ import { LocalStorage, storageKeys } from './../../helpers/storage/localStorage'
 import { authConstants } from '../constants'
 
 export interface IUserState {
-    access: string
-    refresh: string
+    token: string
     user: IUser
 }
 
@@ -15,8 +14,7 @@ function initializeUser(): IUserState{
         return user
     }
     return {
-        access: '',
-        refresh: '',
+        token: '',
         user: null
     }
 }

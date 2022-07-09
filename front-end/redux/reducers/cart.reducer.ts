@@ -7,6 +7,7 @@ export const cartConstants = {
     ADD_PRODUCT: 'ADD_PRODUCT',
     CHANGE_QUANTITY: 'CHANGE_PRODUCT_QUANTITY',
     REMOVE_PRODUCT: 'REMOVE_PRODUCT',
+    CLEAR_CART: 'CLEAR_CART',
 }
 const storage: LocalStorage = LocalStorage.Instance
 export interface ICartState {
@@ -21,6 +22,11 @@ export function cartReducer(state: ICartState = storage.initCart(), action) {
         return removeProduct(state, action)
     case cartConstants.CHANGE_QUANTITY:
         return changeQuantity(state, action)
+    case cartConstants.CLEAR_CART:
+        return {
+            ...state,
+            addedProducts: []
+        }
     default:
         return state
   }

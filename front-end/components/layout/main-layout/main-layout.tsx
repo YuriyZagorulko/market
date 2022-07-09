@@ -5,6 +5,7 @@ import Footer from  '../footer/footer'
 import Head from 'next/head'
 import CartModal from '../../shared/cartModal/cartModal'
 type layoutProps = {
+  children?: any,
   name?: string
 }
 
@@ -21,7 +22,7 @@ export default class MainLayout extends React.Component<layoutProps> {
                 {this.props.children}
               </div>
               <Footer/>
-              <CartModal/>
+              <CartModal />
             </div>
           )
     }

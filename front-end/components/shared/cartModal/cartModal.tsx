@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSXElementConstructor, ReactNode } from 'react'
 import styles from "./cartModal.module.scss"
 import { IProduct, getFirstImg } from '../../../helpers/types/responces/products'
 import Modal from 'antd/lib/modal/Modal'
@@ -83,38 +83,39 @@ class CartModal extends React.Component<IProps, cartModalState> {
             </div>
           )
         } else {
-          return <div>Nothing In he cart yet</div>
+          return <div>Корзина пуста...</div>
         }
     }
     render() {
       return (
-      <div className={styles.container}>
-        <Modal
-          className={'cart-modal'}
-          title="Корзина"
-          visible={this.state.isVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          destroyOnClose
-          width={'800px'}
-          footer={[
-            <Link key="checkout" href="/checkout">
-              <Button
-                key="submit"
-                type="primary"
-                className={'cart-btn'}
-                onClick={this.handleOk}
-              >
-                Оформить Заказ
-              </Button>
-            </Link>
-          ]}
-        >
-          {this.productsList()}
-        </Modal>
-      </div>)
+        <div className={styles.container}>
+          <Modal
+            className={'cart-modal'}
+            title="Корзина"
+            visible={this.state.isVisible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            destroyOnClose
+            width={'800px'}
+            footer={[
+              <Link key="checkout" href="/checkout">
+                <Button
+                  key="submit"
+                  type="primary"
+                  className={'cart-btn'}
+                  onClick={this.handleOk}
+                >
+                  Оформить Заказ
+                </Button>
+              </Link>
+            ]}
+          >
+            {this.productsList()}
+          </Modal>
+        </div>
+      )
     }
   }
 
-const connectedCartModal = connect(state => state)(CartModal)
+const connectedCartModal = connect(state => state)(CartModal as any)
 export default connectedCartModal

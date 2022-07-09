@@ -18,8 +18,8 @@ export default class HomeHeader extends React.Component {
     }
     render() {
       return (<div className={styles.container}>
-        <div className={styles.title}>Renault</div>
-        <div className={styles.subtitle}>Автозапчасти</div>
+        <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
+        <div className={styles.subtitle}>Слава Україні!</div>
       </div>)
     }
   }

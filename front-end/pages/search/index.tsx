@@ -13,22 +13,26 @@ function SearchPage () {
   const [{requestData}, setSate] = useState({
     requestData: null
   })
+  let paramsObj = {}
   const router = useRouter()
-  const searchParams : ISearchParams = router.query
+  const query = router.query
 
   useEffect(() => {
-    if (Object.keys(searchParams)?.length > 0) {
-      searchService.search(searchParams).then((val) => {
+    if (Object.keys(query)?.length > 0) {
+      console.log(query)
+      paramsObj = JSON.parse(query.params  as string)
+
+      searchService.search(paramsObj).then((val) => {
         setSate({requestData: val})
       })
     }
-  }, [searchParams])
+  }, [query])
   return (
     <div className={'wrapper-horizontal' + ' global-width-limiter'}>
       {
-        searchParams.text &&
+        query.text &&
         <div className={style.searchTitle}>
-            Результаты поиска по запросу {`<< ${searchParams.text} >>`}
+            Результаты поиска по запросу {`<< ${query.text} >>`}
         </div>
       }
       {/* <div className={'search__order'}>

@@ -13,7 +13,6 @@ function mainPage() {
     return fetch(`${config.apiUrl}/market/main-page`, requestOptions)
         .then(handleResponse)
         .then((responce: IMain) => {
-            console.log(responce)
             return responce.products
         })
 }
@@ -26,7 +25,6 @@ function getProduct(id: string): Promise<IProduct> {
     return fetch(`${config.apiUrl}/market/product?productId=` + id, requestOptions)
         .then(handleResponse)
         .then((responce: {product: IProduct}) => {
-            console.log(responce)
             return responce.product
         })
     }

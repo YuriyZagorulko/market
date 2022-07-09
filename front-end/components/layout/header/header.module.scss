@@ -10,7 +10,7 @@
     width: fit-content;
     align-self: center;
     height: 100%;
-    display: grid;
+    display: flex;
     align-items: center;
 }
 .headerTop{
@@ -52,6 +52,9 @@
 .itemsLeft{
     display: grid;
     cursor: pointer;
+    img{
+        filter: brightness(0) invert(1);
+    }
 }
 .itemsCenter{
     display: grid;
@@ -92,4 +95,15 @@
 }
 .headerIcon{
     cursor: pointer;
+}
+.logoLink{
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-family: 'Luckiest Guy', sans-serif;
+    font-size: 42px;
+    gap: 10px;
+    &:hover{
+        text-decoration: none;
+    }
 }

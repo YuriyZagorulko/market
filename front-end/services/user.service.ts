@@ -4,9 +4,8 @@ import { authHeader } from '../helpers/headers'
 import { LocalStorage } from '../helpers/storage/localStorage'
 import { store } from '../redux/store'
 import { ILogin } from '../helpers/types/responces/auth'
-import { IUserState } from '../redux/reducers/user.reducer'
-import { urlencodedBody } from './service.helpers';
-import { handleRequestError } from '../helpers/interceptors';
+import { urlencodedBody } from './service.helpers'
+import { handleRequestError } from '../helpers/interceptors'
 
 const storage: LocalStorage = LocalStorage.Instance
 export const userService = {
@@ -15,22 +14,6 @@ export const userService = {
     registerUser
 }
 
-function testSecureAction() {
-    const user: IUserState = store.getState().user
-    const requestOptions = {
-        method: 'POST',
-        headers: {  'Content-Type': 'application/json',
-                    'Authorization': 'Token ' + user.token },
-        body: JSON.stringify({})
-    }
-    return fetch(`${config.apiUrl}/market/`, requestOptions)
-        .then((responce) => {
-            return responce.json()
-        }).catch(e => {
-            debugger
-            return e
-        })
-}
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user')
@@ -73,7 +56,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout()
-                location.reload(true)
+                location.reload()
             }
 
             const error = (data && data.message) || response.statusText

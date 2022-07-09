@@ -1,27 +1,30 @@
 import React from 'react'
-import { productConstants } from '../helpers/constants/product.constants'
-import styles from '../styles/pages/Checkout.module.scss'
+import { productConstants } from '../../helpers/constants/product.constants'
+import styles from './Checkout.module.scss'
 import { connect } from 'react-redux'
-import { store } from '../redux/store'
-import { IProduct } from '../helpers/types/responces/products'
+import { store } from '../../redux/store'
+import { IProduct } from '../../helpers/types/responces/products'
 import { Unsubscribe } from 'redux-saga'
 import { AutoComplete, Button, FormInstance, Input, Radio, Select } from 'antd'
-import { getTotalPrice } from '../redux/reducers/cart.reducer'
+import { getTotalPrice } from '../../redux/reducers/cart.reducer'
 import classnames from 'classnames'
-import ProductListItem from '../components/shared/product/productListItem/productListItem'
+import ProductListItem from '../../components/shared/product/productListItem/productListItem'
 import Router from 'next/router'
-import { ICitiesResponce, NPapiService } from '../services/order/NPapi.service'
-import { deliveryTypes } from '../helpers/order/order.constants'
-import ContactInfo from '../components/pages/checkout/contactInfo/contactInfo'
-import Shipping from '../components/pages/checkout/shipping/shipping'
-import { INewPostData } from '../helpers/types/shipping'
-import { IOrderData, OrderService } from '../services/order/order.service'
+import { ICitiesResponce, NPapiService } from '../../services/order/NPapi.service'
+import { deliveryTypes } from '../../helpers/order/order.constants'
+import ContactInfo from '../../components/pages/checkout/contactInfo/contactInfo'
+import Shipping from '../../components/pages/checkout/shipping/shipping'
+import { INewPostData } from '../../helpers/types/shipping'
+import { IOrderData, OrderService } from '../../services/order/order.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { controlsConstants } from '../helpers/constants/controls'
+import { controlsConstants } from '../../helpers/constants/controls'
+import CustomBtn from '../../components/shared/customBtn/customBtn'
+import { clearCart } from '../../redux/actions/cart'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 interface IProps {
-  dispatch: any
+  dispatch: any,
 }
 interface IState {
   products: { product: IProduct, quantity: number } []
@@ -38,7 +41,7 @@ interface IState {
 class CheckoutPage extends React.Component<IProps, IState> {
   contactFormRef = React.createRef<FormInstance>()
   shippingNPFormRef = React.createRef<FormInstance>()
-  constructor(props){
+  constructor(props: any){
     super(props)
     this.state = {
       name: '',
@@ -50,7 +53,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
       cityOptions: [],
       selectedCity: { cityRef: '', value: '' },
       selectedOffice: { description: '', ref: '' },
-      officessOptions: []
+      officessOptions: [],
     }
   }
   componentWillUnmount(){
@@ -79,10 +82,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
     this.citySearch('д')
   }
   citySearch = (str: string) => {
-    console.log(str)
     NPapiService.getCities(str).then((data: ICitiesResponce) => {
-      console.log('cities recived: ')
-      console.log(data)
       const cities: { value: string, cityRef: string }[] = []
       if (data && data.Addresses) {
       for (const c of data.Addresses){
@@ -104,8 +104,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
         this.shippingNPFormRef.current!.validateFields().then((shippingVal: any) => {
 
           const productIds = []
-          for ( const pr of this.state.products){
-            productIds.push( { id: pr.product.id, quantity: pr.quantity})
+          for (const pr of this.state.products){
+            productIds.push({ id: pr.product.id, quantity: pr.quantity})
           }
           const orderData: IOrderData = {
             name: contactVal.name,
@@ -115,14 +115,19 @@ class CheckoutPage extends React.Component<IProps, IState> {
             productList: productIds,
             shipping: {
               type: deliveryTypes.newPost,
-              data:{
+              data: {
                 selectedCity: this.state.selectedCity,
                 selectedOffice: this.state.selectedOffice
               }
             }
           }
           OrderService.confirmOrder(orderData).then((val) => {
-
+            if (val.data === "success"){
+              this.props.dispatch(clearCart())
+              Router.push("/checkout/success")
+            } else {
+              console.log(val)
+            }
           })
         })
         .catch((e) => {
@@ -147,7 +152,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
               </div>
               <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
                 <div>
-                  <FontAwesomeIcon height="12px" icon={faEdit} />
+                  <FontAwesomeIcon height="12px" icon={faEdit as IconProp} />
                 </div>
                 Редактировать
               </a>
@@ -155,15 +160,9 @@ class CheckoutPage extends React.Component<IProps, IState> {
             <div className={styles.productList}>
             {this.state.products.map((item, i) => {
               return (
-                // <CartProduct
-                //   key={item.product.id}
-                //   addedProduct={item}
-                //   onDelete={this.removeProduct}
-                //   onQuantityChange={this.quantityChange}
-                // />
                 <ProductListItem
                   key={item.product.id}
-                  product={ item}
+                  product={ item }
                 />
               )
             })}
@@ -202,14 +201,14 @@ class CheckoutPage extends React.Component<IProps, IState> {
             ₴ {this.state.totalPrice}
           </div>
         </div>
-        <Button
+        <CustomBtn
           key="submit"
           type="primary"
           className={styles.checkoutOrder}
           onClick={this.checkoutOrder}
         >
           Подтверждаю заказ
-        </Button>
+        </CustomBtn>
       </div>
     )
   }

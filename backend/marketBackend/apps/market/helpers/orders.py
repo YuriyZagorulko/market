@@ -27,14 +27,18 @@ def createOrder(data):
         )
         print(newOrder)
         newOrder.save()
-        # for product in productList:
-        #     details = OrderDetails(
-        #         quantity = product['quantity'], 
-        #         order = newOrder, 
-        #         product = int(product['id'])
-        #     )
-        #     details.save()
-        notifier.notify_by_email(data)
+        for product in productList:
+            try:
+                details = OrderDetails.objects.create(
+                    quantity = product['quantity'], 
+                    order = newOrder, 
+                    product_id = int(product['id'])
+                )
+                print(details)
+                details.save()
+            except Exception as e: 
+                print(e)
+        # notifier.notify_by_email(data)
     except Exception as e:
 	    print(e)
 
