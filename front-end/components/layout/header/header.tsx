@@ -7,6 +7,7 @@ import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../../helpers/constants/controls'
 import { connect, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 type headerProps = {
   name?: string
@@ -89,11 +90,11 @@ function Header (){
             </div>
             <div className={styles.itemsCenter}>
               <input  onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я ищу..."/>
-              <FontAwesomeIcon icon={faSearch} onClick={redirectToSearchPage} />
+              <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
             </div>
             <div className={styles.itemsRight}>
               <div className={styles.headerIcon} onClick={openModal}>
-                <FontAwesomeIcon icon={faShoppingCart} />
+                <FontAwesomeIcon icon={faShoppingCart as IconProp} />
               </div>
             </div>
           </div>

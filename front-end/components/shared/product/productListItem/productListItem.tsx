@@ -9,7 +9,7 @@ type productProps = {
   product: AddedProduct;
 }
 
-export default class ProductListItem extends React.Component<productProps, productItemState > {
+export default class ProductListItem extends React.Component<productProps, {} > {
     constructor(props){
       super(props)
       this.state = {}

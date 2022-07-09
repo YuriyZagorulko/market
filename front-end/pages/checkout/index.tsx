@@ -21,6 +21,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
 import CustomBtn from '../../components/shared/customBtn/customBtn'
 import { clearCart } from '../../redux/actions/cart'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 interface IProps {
   dispatch: any,
@@ -151,7 +152,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
               </div>
               <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
                 <div>
-                  <FontAwesomeIcon height="12px" icon={faEdit} />
+                  <FontAwesomeIcon height="12px" icon={faEdit as IconProp} />
                 </div>
                 Редактировать
               </a>

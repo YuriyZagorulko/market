@@ -1,6 +1,6 @@
 import style from './Registration.module.scss'
 import React, { useState } from 'react'
-import { Form, Input, Button, Checkbox, notification, DatePicker, Row, Col, Space } from 'antd'
+import { Form, Input, Button, Checkbox, notification, DatePicker } from 'antd'
 import { connect } from 'react-redux'
 import { userService } from '../../../services/user.service'
 import Router , {useRouter}  from 'next/router'

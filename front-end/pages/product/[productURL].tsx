@@ -11,6 +11,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
 import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -51,7 +52,7 @@ const Product = () => {
                             </div>
                             <div className={style.buy}>
                                 <button className={`button-primary`} onClick={buyProduct}>
-                                    <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart} />
+                                    <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
                                     Купить
                                 </button>
                             </div>

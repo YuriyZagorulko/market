@@ -12,7 +12,9 @@ import { defaultProductImg } from '../../../helpers/constants/urls'
 type ImgProps = {
   img: string
   previev?: string,
-  imgProps?: any
+  imgProps?: any,
+  alt?: string,
+  layout?: string
 }
 
 function CustomImg (props: ImgProps){

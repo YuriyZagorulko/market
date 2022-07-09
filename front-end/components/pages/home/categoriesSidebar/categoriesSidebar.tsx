@@ -18,7 +18,7 @@ function getItem(
   children?: MenuItem[] | any,
   type?: 'group',
   itemStyle = {height: '45px'}
-): MenuItem {
+): any {
   return {
     key,
     icon,
@@ -28,101 +28,101 @@ function getItem(
     style: itemStyle
   }
 }
-const itemsOld: MenuItem[] = [
-  getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
-    getItem('Моторные масла', null,
-    <span className='img-comtainer'>
-      <Image
-        src={ '/images/previews/main-menu/motor-oil.png' }
-        alt="Img"
-        layout="fixed"
-        width={'40px'}
-        height={'45px'}
-      />
-    </span>
-    ),
-    getItem('Автомобильные масла', null,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/wd.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Трансмиссионные масла', null,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/trans-oil.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Промывочные масла', null,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/washing-oil.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Промышленные индустриальные масла', null,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/industrial-oil.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-  ]),
+// const itemsOld: MenuItem[] = [
+//   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
+//     getItem('Моторные масла', null,
+//     <span className='img-comtainer'>
+//       <Image
+//         src={ '/images/previews/main-menu/motor-oil.png' }
+//         alt="Img"
+//         layout="fixed"
+//         width={'40px'}
+//         height={'45px'}
+//       />
+//     </span>
+//     ),
+//     getItem('Автомобильные масла', null,
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/wd.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//     getItem('Трансмиссионные масла', null,
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/trans-oil.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//     getItem('Промывочные масла', null,
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/washing-oil.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//     getItem('Промышленные индустриальные масла', null,
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/industrial-oil.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//   ]),
 
-  getItem('Автоэлектроника', 'sub5', <span className={'iconContainer'}><FontAwesomeIcon icon={faCarBattery} /></span>, [
-    getItem('Аккумуляторы', ProductCategories.CarBatteries,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/battery.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Аксессуары для АКБ', '1',
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/battery-acc.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-  ]),
+//   getItem('Автоэлектроника', 'sub5', <span className={'iconContainer'}><FontAwesomeIcon icon={faCarBattery} /></span>, [
+//     getItem('Аккумуляторы', ProductCategories.CarBatteries,
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/battery.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//     getItem('Аксессуары для АКБ', '1',
+//       <span className='img-comtainer'>
+//         <Image
+//           src={ '/images/previews/main-menu/battery-acc.jpg' }
+//           alt="Img"
+//           layout="fixed"
+//           width={'40px'}
+//           height={'45px'}
+//         />
+//       </span>
+//     ),
+//   ]),
 
-  getItem('Автосвет', 'sub6', <span className={'iconContainer'}><FontAwesomeIcon icon={faLightbulb} /></span>, [
-    getItem('Option 9', '9'),
-    getItem('Option 10', '10'),
-    getItem('Option 11', '11'),
-    getItem('Option 12', '12'),
-  ]),
+//   getItem('Автосвет', 'sub6', <span className={'iconContainer'}><FontAwesomeIcon icon={faLightbulb} /></span>, [
+//     getItem('Option 9', '9'),
+//     getItem('Option 10', '10'),
+//     getItem('Option 11', '11'),
+//     getItem('Option 12', '12'),
+//   ]),
 
-  getItem('Инструменты', 'sub7', <span className={'iconContainer'}><FontAwesomeIcon icon={faScrewdriverWrench} /></span>, [
-    getItem('Option 13', '13'),
-  ]),
-]
+//   getItem('Инструменты', 'sub7', <span className={'iconContainer'}><FontAwesomeIcon icon={faScrewdriverWrench} /></span>, [
+//     getItem('Option 13', '13'),
+//   ]),
+// ]
 const items = [
   getItem('Аккумуляторы', ProductCategories.CarBatteries,
       <span className='img-comtainer'>
