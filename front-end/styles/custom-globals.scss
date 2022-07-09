@@ -131,6 +131,18 @@ body{
       -moz-appearance:textfield; /* Firefox */
   }
 }
+.iconsContainer{
+
+  .icon-wrapper{
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: content-box;
+    display: flex;
+    &:hover{
+      background-color: $color-gray-transparent;
+    }
+  }
+}
 .iconContainer{
   svg{
     width: 30px;

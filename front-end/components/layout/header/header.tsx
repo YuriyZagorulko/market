@@ -64,7 +64,7 @@ function Header (){
               </Link>
             </div>
             <div className={styles.navigationCenter}/>
-            <div className={styles.navigationRight}>
+            {/* <div className={styles.navigationRight}>
               <Link href="/auth/login">
                 <a>Войти</a>
               </Link>
@@ -72,7 +72,7 @@ function Header (){
               <Link href="/auth/sign-up">
                 <a>зарегистрироваться</a>
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className={styles.headerItems}>
             <div className={styles.itemsLeft}>
@@ -92,8 +92,8 @@ function Header (){
               <input  onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я ищу..."/>
               <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
             </div>
-            <div className={styles.itemsRight}>
-              <div className={styles.headerIcon} onClick={openModal}>
+            <div className={styles.itemsRight + ' iconsContainer'}>
+              <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
                 <FontAwesomeIcon icon={faShoppingCart as IconProp} />
               </div>
             </div>
