@@ -1,93 +1,119 @@
-import styles from '../../styles/pages/Auth.module.scss'
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { userActions } from '../redux/actions/user'
-import { State } from '../redux/store'
 
-interface IProps {
-    login: any
-    dispatch: any
+const stylingObject = {
+    margin: '10px',
+    padding: '10px',
+    borderRadius: '5px',
+    transition: 'all 1s',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '42px',
+    overflow: 'hidden',
+    width: '200px;',
+    btn: {
+        color: '#fff',
+        borderColor: '#1890ff',
+        border: 'none',
+        background: '#1890ff',
+        textShadow: '0 -1px 0 rgb(0 0 0 / 12%)',
+        boxShadow: '0 2px #0000000b',
+        padding: '4px 15px',
+        outline: 'none',
+        borderRadius: '5px',
+        cursor: 'pointer',
+    },
 }
-interface IState {
-    username: string,
-    password: string,
-    submitted: boolean
+
+const openedContainer = {
+    backgroundColor: 'rgb(223 233 255)',
+    height: '155px',
 }
-class LoginPage extends React.Component<IProps, IState> {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            username: '',
-            password: '',
-            submitted: false
-        }
+const controlsContainer = {
+    paddingTop: '10px',
+}
+
+const controlsLine = {
+    paddingTop: '10px',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '10px',
+}
+
+const controlContainer = {
+    width: '50%'
+}
+
+const inputStyles = {
+    boxSizing: 'border-box',
+    margin: '0',
+    listStyle: 'none',
+    position: 'relative',
+    display: 'inline-block',
+    width: '100%',
+    minWidth: '0',
+    padding: '4px 11px',
+    color: '#000000d9',
+    backgroundColor: '#fff',
+    backgroundImage: 'none',
+    border: '1px solid #d9d9d9',
+    borderRadius: '5px',
+    transition: 'all .3s',
+    'focusVisible': {
+        borderColor: 'var(--ant-primary-color-hover)',
+        boxShadow: '0 0 0 2px var(--ant-primary-color-outline)',
+        borderRightWidth: '1px',
+        outline: '0'
     }
-    public static async getInitialProps({
-        store,
-        pathname,
-        query,
-        req
-      }: NextPageContext<State>) {
-        console.log("2. Page.getInitialProps uses the store to dispatch things", {
-          pathname,
-          query
-        })
-        if (req) {
-          // All async actions must be await'ed
-          await store.dispatch({ type: "PAGE", payload: "server" })
-          // Some custom thing for this particular page
-          return { pageProp: "server" }
-        }
-        // await is not needed if action is synchronous
-        store.dispatch({ type: "PAGE", payload: "client" })
-        // Some custom thing for this particular page
-        return { pageProp: "client" }
-      }
-    handleChange = (e) => {
-        const { name, value } = e.target
-        switch (name) {
-            case 'username':
-                this.setState({username: value})
-                break
-            case 'password':
-                this.setState({password: value})
-                break
-        }
+}
+const btnDanger = {
+    ...stylingObject.btn,
+    backgroundColor: '#ff4d4f'
+}
+
+function TestPage () {
+    const [isOpened, setOpened] = useState(false)
+    let containerStyle = { ...stylingObject }
+    const onToggleOpen = () => {
+        setOpened(!isOpened)
     }
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-
-        this.setState({ submitted: true })
-        const { username, password } = this.state
-        if (username && password) {
-            this.props.dispatch(login(username, password))
-        }
+    if (isOpened) {
+        containerStyle = {...stylingObject, ...openedContainer}
     }
-
-    render() {
-        return (
-            <div className="">
-                <h2>Login</h2>
-                <form name="form" onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control" name="username" onChange={this.handleChange} />
+    return (
+        // tslint:disable-next-line: align
+        <div style={containerStyle} >
+            <button onClick={onToggleOpen} style={stylingObject.btn}>Edit annotation</button>
+            <div style={controlsContainer}>
+                <div style={controlsLine}>
+                    <div style={controlContainer}>
+                        <input style={inputStyles} placeholder='X'/>
                     </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password" onChange={this.handleChange} />
+                    <div style={controlContainer}>
+                        <input style={inputStyles} placeholder='Y'/>
                     </div>
-                    <div className="form-group">
-                        <button className="btn btn-primary">Login</button>
+                </div>
+                <div style={controlsLine}>
+                    <div style={controlContainer}>
+                        <input style={inputStyles} placeholder='Height'/>
                     </div>
-                </form>
+                    <div style={controlContainer}>
+                        <input style={inputStyles} placeholder='Width'/>
+                    </div>
+                </div>
+                <div style={controlsLine}>
+                    <div style={controlContainer}>
+                        <button style={stylingObject.btn}>Save</button>
+                    </div>
+                    <div style={controlContainer}>
+                        <button style={btnDanger}>Cancel</button>
+                    </div>
+                </div>
             </div>
-        )
-    }
+        </div >
+    )
 }
 
-
-const connectedLoginPage = connect(state => state)(LoginPage)
+const connectedLoginPage = connect(state => state)(TestPage)
 export default connectedLoginPage
