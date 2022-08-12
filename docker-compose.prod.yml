@@ -3,6 +3,8 @@ version: '3.4'
 services:
   market:
     image: 038641204801.dkr.ecr.eu-west-2.amazonaws.com/market-prod:market-server
+    env_file:
+      - ./.env.prod
     build:
       context: .
       dockerfile: ./Dockerfile.prod
