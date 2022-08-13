@@ -1,6 +1,17 @@
 version: '3.4'
 
 services:
+  market-front:
+    image: 038641204801.dkr.ecr.eu-west-2.amazonaws.com/market-prod:market-front
+    env_file:
+      - ./.env.prod
+    build:
+      context: .
+      dockerfile: ./DockerfileFront.prod
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
   market:
     image: 038641204801.dkr.ecr.eu-west-2.amazonaws.com/market-prod:market-server
     env_file:

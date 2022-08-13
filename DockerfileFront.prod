@@ -1,0 +1,15 @@
+FROM node:16
+
+EXPOSE 3000
+
+RUN apt update
+RUN apt -y install yarn
+WORKDIR /app
+COPY ./front-end /app
+
+RUN rm package-lock.json && rm yarn.lock
+RUN yarn install
+
+RUN yarn build
+
+CMD [ "yarn", "start" ]
