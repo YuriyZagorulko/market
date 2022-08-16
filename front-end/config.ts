@@ -4,6 +4,7 @@ interface Config {
     NPapi: string
 }
 const prodDomain = 'https://ec2-35-176-196-9.eu-west-2.compute.amazonaws.com'
+
 const prod: Config = {
     domain: prodDomain,
     apiUrl: `${prodDomain}/api`,
