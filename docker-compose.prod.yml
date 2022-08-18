@@ -40,15 +40,15 @@ services:
       - ./certbot/www:/var/www/certbot
     depends_on:
       - market
-  # certbot:
-  #   image: certbot/certbot
-  #   container_name: certbot
-  #   volumes: 
-  #     - ./certbot/conf:/etc/letsencrypt
-  #     - ./certbot/www:/var/www/certbot
-  #   command: certonly --webroot -w /var/www/certbot --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
-  #   depends_on:
-  #     - nginx-proxy
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
+    depends_on:
+      - nginx-proxy
 volumes:
   static_volume:
   media_volume:
