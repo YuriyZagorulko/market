@@ -36,8 +36,6 @@ services:
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/mediafiles
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
@@ -48,10 +46,8 @@ services:
     volumes: 
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --dry-run --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
+    # command: certonly --webroot -w /var/www/certbot --dry-run --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
 volumes:
   static_volume:
   media_volume:
-  certs:
-  html:
     
