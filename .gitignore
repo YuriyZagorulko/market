@@ -181,3 +181,4 @@ backend/media
 /backend/media/images/
 /backend/marketBackend/secret.py
 /.env.prod
+certbot
