@@ -3,7 +3,8 @@ interface Config {
     apiUrl: string
     NPapi: string
 }
-const prodDomain = 'https://ec2-35-176-196-9.eu-west-2.compute.amazonaws.com'
+const prodDomain = 'https://v16.com.ua'
+
 
 const prod: Config = {
     domain: prodDomain,
@@ -12,7 +13,7 @@ const prod: Config = {
 }
 const dev: Config = {
     domain: 'http://localhost:3000',
-    apiUrl: 'http://0.0.0.0:8000',
+    apiUrl: 'http://0.0.0.0:8000/api',
     NPapi: 'https://api.novaposhta.ua/v2.0/json/'
 }
 let currentConfig = dev

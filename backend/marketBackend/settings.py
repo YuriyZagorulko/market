@@ -132,6 +132,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 AUTH_USER_MODEL = 'market.CustomUser'
 
 REST_FRAMEWORK = {

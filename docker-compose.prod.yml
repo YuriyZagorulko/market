@@ -26,6 +26,8 @@ services:
       - .:/app
   nginx-proxy:
     image: 038641204801.dkr.ecr.eu-west-2.amazonaws.com/market-prod:nginx-proxy
+    env_file:
+      - ./.env.prod
     build: nginx
     restart: always
     ports:
@@ -36,27 +38,19 @@ services:
       - media_volume:/home/app/web/mediafiles
       - certs:/etc/nginx/certs
       - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - market
-  nginx-proxy-ssl:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    env_file:
-      - ./.env.prod
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/etc/nginx/certs
-      - html:/usr/share/nginx/html
-      - vhost:/etc/nginx/vhost.d
-      - acme:/etc/acme.sh
-    depends_on:
-      - nginx-proxy
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes: 
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --dry-run --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
 volumes:
   static_volume:
   media_volume:
   certs:
   html:
-  vhost:
-  acme:
     
