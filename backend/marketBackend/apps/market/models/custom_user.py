@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import UserManager
 from datetime import date
-
+import string
+import random
 
 class CustomUserManager(UserManager):
     def create_user(self, email, password=None):
@@ -14,7 +15,11 @@ class CustomUserManager(UserManager):
         if email is None:
             raise TypeError('Users must have an email address.')
 
-        user = self.model(email=self.normalize_email(email))
+
+        def phone_generator(size=9, chars=string.digits):
+            return ''.join(random.choice(chars) for _ in range(size))
+        phone = '+' + phone_generator()
+        user = self.model(email=self.normalize_email(email), phone=phone)
         user.set_password(password)
         user.save()
 
