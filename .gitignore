@@ -178,6 +178,7 @@ cython_debug/
 
 #Custom
 backend/media
+backend/static
 /backend/media/images/
 /backend/marketBackend/secret.py
 /.env.prod

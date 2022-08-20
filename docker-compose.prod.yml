@@ -24,6 +24,8 @@ services:
       - 8000
     volumes:
       - .:/app
+      - ./backend/static:/home/app/web/staticfiles
+      - ./backend/media:/home/app/web/mediafiles
   nginx-proxy:
     image: 038641204801.dkr.ecr.eu-west-2.amazonaws.com/market-prod:nginx-proxy
     env_file:
@@ -34,8 +36,8 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - static_volume:/home/app/web/staticfiles
-      - media_volume:/home/app/web/mediafiles
+      - ./backend/static:/home/app/web/staticfiles
+      - ./backend/media:/home/app/web/mediafiles
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     depends_on:
@@ -49,7 +51,4 @@ services:
   #   command: certonly --webroot -w /var/www/certbot --force-renewal  --email yuriyzagorulko602@gmail.com -d v16.com.ua -d www.v16.com.ua --agree-tos # --dry-run (for test)
   #   depends_on:
   #     - nginx-proxy
-volumes:
-  static_volume:
-  media_volume:
     
