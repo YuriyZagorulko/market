@@ -12,27 +12,21 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: keep the secret key used in production secret!ROOT_URLCONF
+SECRET_KEY = os.getenv('SECRET_KEY', 's)t8qr+v1ij5h=##ha6na=_6)swydx#-!u&5o=#a4933z%9$ig')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!ROOT_URLCONF
-SECRET_KEY = '#f)x1z_qmzb+un!-2t1os5a%@40)$36*g5+i!5*ym1l@0e6e9w'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.getenv('DEBUG', 'True').lower() == 'true')
 
-ALLOWED_HOSTS = [
-    '0.0.0.0',
-    'localhost',
-    'localhost:3000',
-    'localhost:3001',
-    '127.0.0.1'
-]
+ALLOWED_HOSTS = json.loads(os.environ.get('ALLOWED_HOSTS', '["0.0.0.0","localhost","localhost:3000","localhost:3001","127.0.0.1"]'))
 
 
 # Application definition
@@ -89,11 +83,11 @@ WSGI_APPLICATION = 'marketBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '172.17.0.1',
-        'PORT': 5432,
+        'NAME': os.getenv('DATABASE_NAME', 'postgres'),
+        'USER': os.getenv('DATABASE_USERNAME', 'postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DATEBASE_EDPOINT', '172.17.0.1'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
 }
 
@@ -115,9 +109,10 @@ DATABASES = {
 #         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
 #     },
 # ]
-CORS_ALLOWED_ORIGINS = (
-    'http://localhost:3000',
-)
+
+CORS_ALLOWED_ORIGINS = json.loads( os.environ.get('CORS_ALLOWED_ORIGINS', '["http://localhost:3000"]'))
+CSRF_TRUSTED_ORIGINS = json.loads( os.environ.get('CORS_ALLOWED_ORIGINS', '["http://localhost:3000"]'))
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -136,8 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+if DEBUG is not True: 
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 AUTH_USER_MODEL = 'market.CustomUser'
 

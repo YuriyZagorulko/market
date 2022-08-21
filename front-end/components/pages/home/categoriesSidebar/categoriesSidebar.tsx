@@ -179,7 +179,7 @@ const items = [
         />
       </span>
     ),
-    getItem('Клеммы аккумулятора', ProductCategories.ContactGrease,
+    getItem('Клеммы аккумулятора', ProductCategories.BatteryTerminals,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/klemmi.jpg' }
