@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 's)t8qr+v1ij5h=##ha6na=_6)swydx#-!u&5o=#a49
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.getenv('DEBUG').lower() == 'true')
+DEBUG = (os.getenv('DEBUG', 'True').lower() == 'true')
 
 ALLOWED_HOSTS = json.loads(os.environ.get('ALLOWED_HOSTS', '["0.0.0.0","localhost","localhost:3000","localhost:3001","127.0.0.1"]'))
 
