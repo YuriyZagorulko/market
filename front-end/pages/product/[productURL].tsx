@@ -1,6 +1,6 @@
 import style from '../../styles/pages/Product.module.scss'
 import { connect, useDispatch } from 'react-redux'
-import { IProduct, getFirstImg } from '../../helpers/types/responces/products'
+import { IProduct, getFirstImg, getProductImg } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
@@ -35,7 +35,7 @@ const Product = () => {
                     <div className={style.topLeft}>
                         <div className={style.images}>
                             <div className={style.img} >
-                                <CustomImg img={config.apiUrl + getFirstImg(product)} />
+                                <CustomImg img={getProductImg(product)} />
                             </div>
                         </div>
                     </div>

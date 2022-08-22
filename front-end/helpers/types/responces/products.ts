@@ -32,9 +32,12 @@ export function getFirstImg(product: IProduct): string{
     }
     return ''
 }
+export function getProductImg(product: IProduct): string{
+    return config.mainDomain + getFirstImg(product)
+}
 export function getPreviewImgUrl(product: IProduct): string {
     if (product?.imagesSet?.length > 0) {
-        return config.apiUrl + getFirstImg(product)
+        return config.mainDomain + getFirstImg(product)
     }
     return '/images/icons/shared/product-default.svg'
 }

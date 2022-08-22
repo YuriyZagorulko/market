@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./cartProduct.module.scss"
-import { IProduct, getFirstImg } from '../../../../helpers/types/responces/products'
+import { IProduct, getFirstImg, getProductImg } from '../../../../helpers/types/responces/products'
 import { connect } from 'react-redux'
 import { Unsubscribe } from 'redux-saga'
 import { InputNumber } from 'antd'
@@ -43,7 +43,7 @@ class CartProduct extends React.Component<IProps, cartProductState> {
         <div className={styles.product}>
           <div className={styles.productContent}>
             <div className={styles.productImage}>
-              <CustomImg img={config.apiUrl + getFirstImg(product)} />
+              <CustomImg img={getProductImg(product)} />
             </div>
             <div className={styles.productTitle}>
               {product.title}
