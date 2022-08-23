@@ -19,20 +19,6 @@ interface IState {
 class HomePage extends React.Component<IProps, IState> {
   constructor(props){
     super(props)
-
-    // store.subscribe(() => {
-    //   // When state will be updated(in our case, when items will be fetched),
-    //   // we will update local component state and force component to rerender
-    //   // with new data.
-
-    //   const temp  = store.getState()
-    //   if (store.getState().product){
-    //     this.setState({
-    //       products: store.getState().product.mainPage
-    //     })
-    //     console.log(store.getState().product.mainPage)
-    //   }
-    // })
   }
   componentDidMount() {
     const { dispatch } = this.props
