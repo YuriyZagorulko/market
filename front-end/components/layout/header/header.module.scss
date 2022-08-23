@@ -20,7 +20,7 @@
 .headerContent{
     display: grid;
     height: 120px;
-    padding: 10px 0;
+    padding: 10px 20px;
     grid-template-columns: auto;
     grid-template-rows: 30px 70px;
 }
@@ -28,6 +28,10 @@
     display: grid;
     grid-template-columns: 200px auto 300px;
     grid-template-rows: auto;
+
+    @media only screen and (max-width: $screen-size-mob){
+        grid-template-columns: 150px auto 100px;    
+    }
 }
 .navigationLeft{
     display: grid;
@@ -45,15 +49,30 @@
 }
 .headerItems{
     display: grid;
-    grid-template-columns: 200px auto 300px;
+    grid-template-columns: 150px auto 300px;
     grid-template-rows: auto;
     column-gap: 30px;
+
+    @media only screen and (min-width: $screen-size-mob) and (max-width: $screen-size-lap) {
+        grid-template-columns: 150px auto 50px;
+    }
+    @media only screen and (max-width: $screen-size-mob){
+        grid-template-columns: 70px auto 50px;
+    }
 }
 .itemsLeft{
     display: grid;
     cursor: pointer;
+
     img{
         filter: brightness(0) invert(1);
+    }
+}
+.imgWrapper{
+    display: grid;
+
+    @media only screen and (max-width: $screen-size-mob){
+        display: none;
     }
 }
 .itemsCenter{
@@ -91,6 +110,10 @@
         width: 35px;
         color: $color-gray-dark;
         font-size: 35px;
+    }
+
+    @media only screen and (min-width: $screen-size-mob) and (max-width: $screen-size-lap) {
+        justify-items: right;
     }
 }
 .headerIcon{

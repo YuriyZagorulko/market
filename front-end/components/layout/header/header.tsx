@@ -78,12 +78,14 @@ function Header (){
             <div className={styles.itemsLeft}>
               <Link href="/">
                 <a className={styles.logoLink}>
-                  <Image
-                      src="/images/main-logo.svg"
-                      alt="Picture of the author"
-                      width={60}
-                      height={60}
-                    />
+                  <span className={styles.imgWrapper}>
+                    <Image
+                        src="/images/main-logo.svg"
+                        alt="Picture of the author"
+                        width={60}
+                        height={60}
+                      />
+                    </span>
                     <span className='link-text'>V16</span>
                 </a>
               </Link>
