@@ -12,7 +12,8 @@
     color: #fff;
     height: 480px;
     flex-direction: column;
-    // filter: grayscale(50%);
+    padding: 40px;
+    text-align: center;
 
     &::before{
         content: '';

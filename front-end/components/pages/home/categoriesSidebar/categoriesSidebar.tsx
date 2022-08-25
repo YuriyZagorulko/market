@@ -1,33 +1,11 @@
 import style from './categoriesSidebar.module.scss'
 import React, { useState, useEffect } from 'react'
 import { Card, Menu, MenuProps } from 'antd'
-import { connect } from 'react-redux'
-import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faOilCan, faCarBattery, faLightbulb, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { ProductCategories } from '../../../../helpers/constants/categories'
+import { items1, items2, items3, itemsSingleLine } from './cstegoriesItems'
 
-type MenuItem = Required<MenuProps>['items'][number]
-
-function getItem(
-  label: React.ReactNode,
-  key?: React.Key | null,
-  icon?: React.ReactNode,
-  children?: MenuItem[] | any,
-  type?: 'group',
-  itemStyle = {height: '45px'}
-): any {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-    style: itemStyle
-  }
-}
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
 //     getItem('Моторные масла', null,
@@ -123,85 +101,7 @@ function getItem(
 //     getItem('Option 13', '13'),
 //   ]),
 // ]
-const items = [
-  getItem('Аккумуляторы', ProductCategories.CarBatteries,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/battery.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Пусковой кабель', ProductCategories.StartCable,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/battery-acc.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Пускозарядные устройства', ProductCategories.StarterChargers,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/battery-charge.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Смазка для контактов', ProductCategories.ContactGrease,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/electro-lubricant.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Дистиллированная вода', ProductCategories.DistilledWater,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/voda-distillirovannaya.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Клеммы аккумулятора', ProductCategories.BatteryTerminals,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/klemmi.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Тестеры для АКБ', ProductCategories.BatteryTesters,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/nagruzochnye-vilki.jpg' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    )
-]
+
 const redirectToCategory = (router, category) => {
   if (category) {
     router.push({
@@ -226,7 +126,14 @@ function CategoriesSidebar (props: { }) {
     return (
       <div className={style.container + ' global'}>
         <Card hoverable className={style.card}>
-          <Menu onClick={onClick} style={{ width: 256 }} mode="vertical" items={items} />
+          <div className={style.menuFull}>
+            <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
+          </div>
+          <div className={style.menuSplit}>
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
+          </div>
         </Card>
       </div>
     )
