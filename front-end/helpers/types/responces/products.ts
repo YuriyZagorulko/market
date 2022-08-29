@@ -20,6 +20,7 @@ export interface IProduct {
     images: number,
     created_at: string,
     updated_at: string,
+    url?: string,
     imagesSet: IImage [],
 }
 export interface AddedProduct{

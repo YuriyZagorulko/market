@@ -27,7 +27,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
       return (
       <div className={styles.container}>
         <Link href={{
-              pathname: '/product/' + this.props.product.id,
+              pathname: '/product/' + (this.props.product.url ? this.props.product.url : this.props.product.id)
             }}>
           <a className={styles.content}>
             <div className={styles.image}>

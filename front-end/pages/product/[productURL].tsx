@@ -21,6 +21,8 @@ const Product = () => {
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
             setProduct(data)
+        }).catch(err => {
+            console.log(err)
         })
     }
     const buyProduct = () => {

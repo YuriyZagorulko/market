@@ -1,3 +1,5 @@
+import Router from "next/router"
+
 export function urlencodedBody(obj) {
     const formBody = []
     for (const property in obj) {
@@ -8,4 +10,11 @@ export function urlencodedBody(obj) {
         }
     }
     return formBody.join("&")
+}
+
+export function handleErrors(err) {
+    if (err === 'Not Found') {
+        Router.push("/404")
+      }
+    return err
 }

@@ -1,5 +1,6 @@
 import config from '../config'
 import { IMain, IProduct } from '../helpers/types/responces/products'
+import { handleErrors } from './service.helpers'
 export const productService = {
     mainPage,
     getProduct
@@ -16,19 +17,20 @@ function mainPage() {
             return responce.products
         })
 }
-function getProduct(id: string): Promise<IProduct> {
-    if (id) {
+function getProduct(url: string): Promise<IProduct> {
+    if (url) {
     const requestOptions = {
         method: 'GET',
     }
 
-    return fetch(`${config.apiUrl}/market/product?productId=` + id, requestOptions)
+    return fetch(`${config.apiUrl}/market/product?productUrl=` + url, requestOptions)
         .then(handleResponse)
         .then((responce: {product: IProduct}) => {
             return responce.product
-        })
+        }).catch(handleErrors)
     }
 }
+
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text)
