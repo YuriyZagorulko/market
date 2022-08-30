@@ -12,6 +12,7 @@ import { controlsConstants } from '../../helpers/constants/controls'
 import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import Characteristics from '../../components/pages/product/characteristics/characteristics'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -30,7 +31,8 @@ const Product = () => {
         dispatch({type: controlsConstants.OPEN_CART})
     }
 
-    return (<div className={style.wrapper}>
+    return (
+    <div className={style.wrapper}>
         {product ?
             <div className={style.content + ' global-width-limiter'}>
                 <div className={style.top}>
@@ -59,6 +61,11 @@ const Product = () => {
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className={style.bottom}>
+                    <div className={style.bottomLeft}>
+                        <Characteristics characteristics={product.characteristics} />
                     </div>
                 </div>
             </div>

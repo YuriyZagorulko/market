@@ -21,6 +21,7 @@ export interface IProduct {
     created_at: string,
     updated_at: string,
     url?: string,
+    characteristics?: any,
     imagesSet: IImage [],
 }
 export interface AddedProduct{

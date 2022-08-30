@@ -21,6 +21,10 @@ class Product(models.Model):
     discountPrice = models.IntegerField(blank=True, null=True)
     url = models.CharField(max_length=150, unique=True, blank=True, null=True)
     minAmount = models.IntegerField(default=1)
+    characteristics = models.JSONField(blank=True, null=True)
+    suppliers = models.TextField(max_length=2000, blank=True, null=True)
+    quantity = models.IntegerField(blank=True, null=True)
+
     def save(self, *args, **kwargs): # set values before save
         print(self.id)
         super().save(*args, **kwargs)
