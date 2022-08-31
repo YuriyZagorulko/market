@@ -14,7 +14,7 @@ function mainPage() {
     return fetch(`${config.apiUrl}/market/main-page`, requestOptions)
         .then(handleResponse)
         .then((responce: IMain) => {
-            return responce.products
+            return responce
         })
 }
 function getProduct(url: string): Promise<IProduct> {

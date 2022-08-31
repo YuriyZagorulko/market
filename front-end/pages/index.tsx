@@ -14,7 +14,8 @@ interface IProps {
   dispatch: any
 }
 interface IState {
-  products: IProduct [],
+  recomended: IProduct [],
+  popular: IProduct [],
 }
 class HomePage extends React.Component<IProps, IState> {
   constructor(props){
@@ -25,17 +26,18 @@ class HomePage extends React.Component<IProps, IState> {
     // dispatch({ type: productConstants.GETMAIN_REQUEST })
     productService.mainPage().then((val) => {
       this.setState({
-        products: val
+        recomended: val.recomended,
+        popular: val.popular
       })
     })
   }
 
   productLines(){
-    if (this.state && this.state.products){
+    if (this.state && this.state.recomended){
       return (
         <React.Fragment>
-          <ProductLine products={this.state.products} title={'Рекомендуемые товары'} />
-          <ProductLine products={this.state.products} title={'Популярное'} />
+          <ProductLine products={this.state.recomended} title={'Рекомендовані товары'} />
+          <ProductLine products={this.state.popular} title={'Популярні'} />
         </React.Fragment>
       )
       } else {

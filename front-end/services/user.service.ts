@@ -31,7 +31,7 @@ function registerUser(user: IUserRegister) {
             'last_name': user.lastName,
         })
     }
-    return fetch(`${config.apiUrl}/market/auth/register/`, requestOptions)
+    return fetch(`${config.apiUrl}/auth/register/`, requestOptions)
         .then((responce) => {
             return responce.json()
         }).catch(handleRequestError)

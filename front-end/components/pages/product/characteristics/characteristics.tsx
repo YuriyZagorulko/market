@@ -19,12 +19,15 @@ function Characteristics (props: { characteristics: any }) {
         return res
     }
 
-    console.log(props)
-    return (
-      <div className={style.characteristics}>
-        <h2>Характеристики:</h2>
-            {elems()}
-      </div>
-    )
+    if (props.characteristics) {
+        return (
+        <div className={style.characteristics}>
+            <h2>Характеристики:</h2>
+                {elems()}
+        </div>
+        )
+    } else {
+        return <></>
+    }
 }
 export default Characteristics

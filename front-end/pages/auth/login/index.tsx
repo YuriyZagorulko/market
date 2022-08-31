@@ -1,6 +1,6 @@
 import style from './Login.module.scss'
 import React, { useState } from 'react'
-import { Form, Input, Button, Checkbox, notification } from 'antd'
+import { Form, Input, Button, Checkbox, notification, FormInstance } from 'antd'
 import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'
@@ -15,6 +15,7 @@ interface IProps {
 function LoginPage () {
   const dispatch = useDispatch()
   const router = useRouter()
+  const formRef = React.createRef<FormInstance>()
 
   const loginSuccess = (value: { token: string }) => {
     dispatch({ type: authConstants.LOGIN_SUCCESS, value })
@@ -26,9 +27,11 @@ function LoginPage () {
     console.log('Failed:', errorInfo)
   }
 
-  const onFinish = (data: any) => {
+  const onFinish = () => {
+    const data = formRef.current.getFieldsValue()
     userService.login(data).then((val) => {
-      if (val.detail === 'No active account found with the given credentials') {
+      console.log(val?.non_field_errors)
+      if (val.error === 'No active account found with the given credentials') {
         notification.error({
           message: 'Ошибка',
           description:
@@ -52,6 +55,7 @@ function LoginPage () {
           name="basic"
           initialValues={{ remember: true }}
           onFinishFailed={onFinishFailed}
+          ref={formRef}
         >
           <Form.Item
             label="Имейл"

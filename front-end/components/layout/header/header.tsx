@@ -3,11 +3,12 @@ import styles from "./header.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../../helpers/constants/controls'
 import { connect, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { store } from '../../../redux/store'
 
 type headerProps = {
   name?: string
@@ -18,16 +19,43 @@ type headerState = {
   searchInput?: string
 }
 
+function authLinks (isAuth) {
+  if (isAuth) {
+    return (
+      <React.Fragment>
+        <Link href="/auth/login">
+          <a>Вхід</a>
+        </Link>
+        <Link href="/auth/sign-up">
+          <a>Реєстрація</a>
+        </Link>
+      </React.Fragment>
+    )
+  } else {
+    return (
+    <Link href="/cabinet/orders">
+      <a className={'icon-wrapper'}>Мої замовлення</a>
+    </Link>
+    )
+  }
+}
 function Header (){
     const dispatch = useDispatch()
-    const [state, setSate] = useState({
+    const [state, setState] = useState({
       headerBanner: '',
-      searchInput: ''
+      searchInput: '',
+      isAuth: false
+    })
+    store.subscribe(() => {
+      setState({
+        ...state,
+        isAuth: !!store.getState().auth.user
+      })
     })
     const router = useRouter()
     const updateInputValue = (evt) => {
       const val: string = evt.target.value
-      setSate({
+      setState({
         ...state,
         searchInput: val
       })
@@ -64,15 +92,9 @@ function Header (){
               </Link>
             </div>
             <div className={styles.navigationCenter}/>
-            {/* <div className={styles.navigationRight}>
-              <Link href="/auth/login">
-                <a>Войти</a>
-              </Link>
-              или
-              <Link href="/auth/sign-up">
-                <a>зарегистрироваться</a>
-              </Link>
-            </div> */}
+            <div className={styles.navigationRight}>
+              {authLinks(state.isAuth)}
+            </div>
           </div>
           <div className={styles.headerItems}>
             <div className={styles.itemsLeft}>
@@ -95,6 +117,11 @@ function Header (){
               <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
             </div>
             <div className={styles.itemsRight + ' iconsContainer'}>
+              { (!state.isAuth) &&
+                  <Link href="/cabinet/orders">
+                    <a className={'icon-wrapper'}><FontAwesomeIcon icon={faUser as IconProp} /></a>
+                  </Link>
+              }
               <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
                 <FontAwesomeIcon icon={faShoppingCart as IconProp} />
               </div>

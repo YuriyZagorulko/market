@@ -9,6 +9,9 @@
     display: flex;
     justify-content: space-between;
     dt {
+        background-color: white;
+        padding-right: 10px;
+        text-transform: capitalize;
         &:before{
             position: absolute;
             left: 0;
@@ -16,9 +19,12 @@
             width: 100%;
             border-bottom: 1px dotted #d2d2d2;
             content: "";
+            z-index: -1;
         }
     }
     dd{
+        background-color: white;
+        padding-left: 10px;
         margin-bottom: 0;
     }
 }

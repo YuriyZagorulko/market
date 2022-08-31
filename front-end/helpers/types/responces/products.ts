@@ -1,7 +1,8 @@
 import config from "../../../config"
 
 export interface IMain{
-    products: []
+    recomended: [],
+    popular: []
 }
 export interface IImage {
     id: number,
