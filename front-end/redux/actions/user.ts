@@ -31,7 +31,6 @@ function login(username, password) {
     // }
 }
 
-function logout() {
-    userService.logout()
+export function logout() {
     return { type: authConstants.LOGOUT }
 }

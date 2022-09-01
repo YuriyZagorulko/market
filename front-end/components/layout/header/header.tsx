@@ -9,6 +9,7 @@ import { connect, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { store } from '../../../redux/store'
+import { logout } from '../../../redux/actions/user'
 
 type headerProps = {
   name?: string
@@ -18,8 +19,10 @@ type headerState = {
   headerBanner?: string
   searchInput?: string
 }
-
-function authLinks (isAuth) {
+const logoutClick = (dispatch) => () => {
+  dispatch(logout())
+}
+function authLinks (isAuth, dispatch) {
   if (isAuth) {
     return (
       <React.Fragment>
@@ -33,12 +36,18 @@ function authLinks (isAuth) {
     )
   } else {
     return (
-    <Link href="/cabinet/orders">
-      <a className={'icon-wrapper'}>Мої замовлення</a>
-    </Link>
+      <React.Fragment>
+        <Link href="/cabinet/orders">
+          <a className={'icon-wrapper'}>Замовлення</a>
+        </Link>
+        <Link href="/">
+          <a onClick={logoutClick(dispatch)}>Вихід</a>
+        </Link>
+      </React.Fragment>
     )
   }
 }
+
 function Header (){
     const dispatch = useDispatch()
     const [state, setState] = useState({
@@ -49,10 +58,11 @@ function Header (){
     store.subscribe(() => {
       setState({
         ...state,
-        isAuth: !!store.getState().auth.user
+        isAuth: !store.getState().auth.user
       })
     })
     const router = useRouter()
+
     const updateInputValue = (evt) => {
       const val: string = evt.target.value
       setState({
@@ -85,15 +95,15 @@ function Header (){
           <div className={styles.headerNavigation}>
             <div className={styles.navigationLeft}>
               <Link href="/help">
-                <a>Помощь</a>
+                <a>Допомога</a>
               </Link>
               <Link href="/contact-us">
-                <a>Контакты</a>
+                <a>Контакти</a>
               </Link>
             </div>
             <div className={styles.navigationCenter}/>
             <div className={styles.navigationRight}>
-              {authLinks(state.isAuth)}
+              {authLinks(state.isAuth, dispatch)}
             </div>
           </div>
           <div className={styles.headerItems}>
@@ -117,11 +127,11 @@ function Header (){
               <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
             </div>
             <div className={styles.itemsRight + ' iconsContainer'}>
-              { (!state.isAuth) &&
+              {/* { (!state.isAuth) &&
                   <Link href="/cabinet/orders">
                     <a className={'icon-wrapper'}><FontAwesomeIcon icon={faUser as IconProp} /></a>
                   </Link>
-              }
+              } */}
               <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
                 <FontAwesomeIcon icon={faShoppingCart as IconProp} />
               </div>

@@ -26,12 +26,15 @@ export function authReducer(
     switch (action.type) {
     case authConstants.LOGIN_SUCCESS:
         return {
-            ...action.value,
-            user: { ...action.value.user }
+            ...state,
+            user: { ...action.value.user },
+            token: { ...action.value.token }
         }
     case authConstants.LOGOUT:
         return {
-            items: action.users
+            ...state,
+            user: null,
+            token: null
         }
     default:
         return state

@@ -31,7 +31,7 @@ function LoginPage () {
     const data = formRef.current.getFieldsValue()
     userService.login(data).then((val) => {
       console.log(val?.non_field_errors)
-      if (val.error === 'No active account found with the given credentials') {
+      if (val.error === 'Invalid Creds') {
         notification.error({
           message: 'Ошибка',
           description:

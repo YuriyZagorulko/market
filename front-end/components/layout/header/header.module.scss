@@ -26,11 +26,11 @@
 }
 .headerNavigation{
     display: grid;
-    grid-template-columns: 200px auto 150px;
+    grid-template-columns: 200px auto 200px;
     grid-template-rows: auto;
 
     @media only screen and (max-width: $screen-size-mob){
-        grid-template-columns: 150px auto 120px;    
+        grid-template-columns: 150px auto 150px;    
     }
 }
 .navigationLeft{
