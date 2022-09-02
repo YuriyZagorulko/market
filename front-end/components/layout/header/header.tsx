@@ -133,7 +133,12 @@ function Header (){
                   </Link>
               } */}
               <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
-                <FontAwesomeIcon icon={faShoppingCart as IconProp} />
+                <Image
+                  src="/images/icons/shopping-cart.svg"
+                  alt="Picture of the author"
+                  width={35}
+                  height={35}
+                />
               </div>
             </div>
           </div>
