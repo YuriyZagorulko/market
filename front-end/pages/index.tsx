@@ -36,7 +36,7 @@ class HomePage extends React.Component<IProps, IState> {
     if (this.state && this.state.recomended){
       return (
         <React.Fragment>
-          <ProductLine products={this.state.recomended} title={'Рекомендовані товары'} />
+          <ProductLine products={this.state.recomended} title={'Рекомендовані товари'} />
           <ProductLine products={this.state.popular} title={'Популярні'} />
         </React.Fragment>
       )
