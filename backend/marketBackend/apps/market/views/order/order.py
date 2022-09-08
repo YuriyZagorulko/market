@@ -22,7 +22,6 @@ class OrderView(APIView):
             'data': serializer.data
         }
         return Response(content)
-        # return Response({})
 
 class ConfirmOrderView(APIView):
     # add data validation

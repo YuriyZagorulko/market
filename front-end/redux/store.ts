@@ -4,27 +4,21 @@ import { reducers } from '../redux/reducers'
 import watchAll from './saga/saga'
 import createSagaMiddleware from 'redux-saga'
 import { IUserState } from './reducers/auth.reducer'
-import { IProductState } from './reducers/product.reducer'
 import { IControlsState } from './reducers/controls.reducer'
 import { ICartState } from './reducers/cart.reducer'
+import { configureStore } from '@reduxjs/toolkit'
 export interface IState{
     auth: IUserState
-    product: IProductState
     cart: ICartState
     controls: IControlsState
 }
-
 const sagaMiddleware = createSagaMiddleware()
-const bindMiddleware = (middleware) => {
-    const applyedMiddlewares = applyMiddleware(...middleware)
-    if (process.env.NODE_ENV !== 'production') {
-        // tslint:disable-next-line: no-implicit-dependencies
-        const { composeWithDevTools } = require('redux-devtools-extension')
-        return composeWithDevTools(applyMiddleware(...middleware))
-    }
-    return applyedMiddlewares
-}
-
-// export const store: Store<IState> =  createStore(reducers, bindMiddleware([thunk]))
-export const store: Store<IState> =  createStore(reducers, bindMiddleware([sagaMiddleware]))
+const middleware = [sagaMiddleware]
+export const store = configureStore({
+    reducer: reducers,
+    middleware: (getDefaultMiddleWare) => {
+      return getDefaultMiddleWare({ thunk: false }).concat(middleware)
+    },
+    devTools: true
+})
 sagaMiddleware.run(watchAll)
