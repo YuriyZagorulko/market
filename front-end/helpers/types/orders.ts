@@ -1,19 +1,18 @@
+import { IProduct } from "./responces/products"
+
 export type orderType = 'NEW_POST' | 'NEW_POST_CURRIER'
 
 export interface IOrder{
-    apartment: string
-    city: string
-    created_at: Date | string
-    house: string
-    id: number
-    officeDescription: string
-    officeRef: string
-    orderType: orderType
-    phoneNumber: string
+    orderType: string
     recipientName: string
     recipientSecondName: string
     recipientSurname: string
+    phoneNumber: string
     street: string
-    updated_at: string
-    user: number
+    city: string
+    house: string
+    officeRef: string
+    officeDescription: string
+    apartment: string
+    details: {quantity: number, product: IProduct} []
 }

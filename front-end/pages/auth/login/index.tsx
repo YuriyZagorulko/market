@@ -40,6 +40,8 @@ function LoginPage () {
       } else {
         if (val.token) {
           loginSuccess(val)
+        } else {
+          console.log(val)
         }
       }
     })

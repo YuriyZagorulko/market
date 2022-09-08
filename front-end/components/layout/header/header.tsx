@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./header.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart, faUser } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../../helpers/constants/controls'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { store } from '../../../redux/store'
+import { IState, store } from '../../../redux/store'
 import { logout } from '../../../redux/actions/user'
 
 type headerProps = {
@@ -23,7 +23,7 @@ const logoutClick = (dispatch) => () => {
   dispatch(logout())
 }
 function authLinks (isAuth, dispatch) {
-  if (isAuth) {
+  if (!isAuth) {
     return (
       <React.Fragment>
         <Link href="/auth/login">
@@ -53,12 +53,20 @@ function Header (){
     const [state, setState] = useState({
       headerBanner: '',
       searchInput: '',
-      isAuth: false
+      isAuth: false,
+      auth: null
     })
+    useEffect(() => {
+      setState({
+        ...state,
+        isAuth: !!(store.getState().auth?.user)
+      })
+    }, [state.auth])
+
     store.subscribe(() => {
       setState({
         ...state,
-        isAuth: !store.getState().auth.user
+        auth: store.getState().auth
       })
     })
     const router = useRouter()

@@ -1,3 +1,4 @@
+import { IOrder } from './../orders'
 import config from "../../../config"
 
 export interface IMain{
@@ -29,6 +30,7 @@ export interface AddedProduct{
     product: IProduct
     quantity: number
 }
+
 export function getFirstImg(product: IProduct): string{
     if (product && product.imagesSet && product.imagesSet.length > 0) {
         return product.imagesSet[0].image

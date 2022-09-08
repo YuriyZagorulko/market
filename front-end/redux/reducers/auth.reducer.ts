@@ -28,7 +28,7 @@ export function authReducer(
         return {
             ...state,
             user: { ...action.value.user },
-            token: { ...action.value.token }
+            token: action.value.token
         }
     case authConstants.LOGOUT:
         return {
