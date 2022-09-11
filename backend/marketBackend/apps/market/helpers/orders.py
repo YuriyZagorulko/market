@@ -3,12 +3,13 @@ from marketBackend.apps.market.helpers.notifications import email as notifier
 
 def createOrder(data):
     name = data.get('name', '')
-    city = data.get('city', '')
     phone = data.get('phone', '')
     surname = data.get('surname', '')
     secondName = data.get('secondName', '')
     productList = data.get('productList', [])
     shipping = data.get('shipping', '')
+    city = shipping.get('data').get('selectedCity').get('value')
+    userId = data.get('userId')
 
     try:
         newOrder = Order.objects.create(
@@ -20,9 +21,9 @@ def createOrder(data):
             house = '',
             officeRef = '',
             apartment = '',
-            user = None,
+            user = userId,
             orderType = shipping.get('type'),
-            city = shipping.get('data').get('selectedCity').get('value'),
+            city = city,
             officeDescription = shipping['data']['selectedOffice']['description'],
         )
         print(newOrder)

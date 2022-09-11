@@ -15,7 +15,6 @@ class OrderView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
-        
         orders = Order.objects.filter(user=request.user.id)
         serializer = OrdersSerializer(orders, many=True)
         content = {
@@ -26,6 +25,7 @@ class OrderView(APIView):
 class ConfirmOrderView(APIView):
     # add data validation
     def post(self, request, *args, **kwargs):
-        data = request.data
+        data = request.data.copy()
+        data['userId'] = request.user.id
         order = orderHelpers.createOrder(data)
         return Response(succesResponce)
