@@ -1,7 +1,9 @@
+import { IOrder } from './../orders'
 import config from "../../../config"
 
 export interface IMain{
-    products: []
+    recomended: [],
+    popular: []
 }
 export interface IImage {
     id: number,
@@ -20,21 +22,27 @@ export interface IProduct {
     images: number,
     created_at: string,
     updated_at: string,
+    url?: string,
+    characteristics?: any,
     imagesSet: IImage [],
 }
 export interface AddedProduct{
     product: IProduct
     quantity: number
 }
+
 export function getFirstImg(product: IProduct): string{
     if (product && product.imagesSet && product.imagesSet.length > 0) {
         return product.imagesSet[0].image
     }
     return ''
 }
+export function getProductImg(product: IProduct): string{
+    return config.mainDomain + getFirstImg(product)
+}
 export function getPreviewImgUrl(product: IProduct): string {
     if (product?.imagesSet?.length > 0) {
-        return config.apiUrl + getFirstImg(product)
+        return config.mainDomain + getFirstImg(product)
     }
     return '/images/icons/shared/product-default.svg'
 }

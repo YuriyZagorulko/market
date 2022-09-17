@@ -1,6 +1,6 @@
 import style from '../../styles/pages/Product.module.scss'
 import { connect, useDispatch } from 'react-redux'
-import { IProduct, getFirstImg } from '../../helpers/types/responces/products'
+import { IProduct, getFirstImg, getProductImg } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
@@ -12,6 +12,7 @@ import { controlsConstants } from '../../helpers/constants/controls'
 import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import Characteristics from '../../components/pages/product/characteristics/characteristics'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -21,6 +22,8 @@ const Product = () => {
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
             setProduct(data)
+        }).catch(err => {
+            console.log(err)
         })
     }
     const buyProduct = () => {
@@ -28,14 +31,15 @@ const Product = () => {
         dispatch({type: controlsConstants.OPEN_CART})
     }
 
-    return (<div className={style.wrapper}>
+    return (
+    <div className={style.wrapper}>
         {product ?
             <div className={style.content + ' global-width-limiter'}>
                 <div className={style.top}>
                     <div className={style.topLeft}>
                         <div className={style.images}>
                             <div className={style.img} >
-                                <CustomImg img={config.apiUrl + getFirstImg(product)} />
+                                <CustomImg img={getProductImg(product)} />
                             </div>
                         </div>
                     </div>
@@ -57,6 +61,11 @@ const Product = () => {
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className={style.bottom}>
+                    <div className={style.bottomLeft}>
+                        <Characteristics characteristics={product.characteristics} />
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ mainAxios.interceptors.request.use((config) => {
   }
   return config
 })
+
 mainAxios.interceptors.response.use((response) => {
     return response
   }, (error) => {

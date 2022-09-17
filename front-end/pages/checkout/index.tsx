@@ -121,7 +121,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
               }
             }
           }
-          OrderService.confirmOrder(orderData).then((val) => {
+          OrderService.confirmOrder(orderData).then((val: { data }) => {
+            debugger
             if (val.data === "success"){
               this.props.dispatch(clearCart())
               Router.push("/checkout/success")

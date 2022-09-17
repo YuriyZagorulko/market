@@ -9,20 +9,25 @@
         }
     }
 
-    .ant-menu > .ant-menu-item:hover,
-    .ant-menu > .ant-menu-submenu:hover,
-    .ant-menu > .ant-menu-item-active,
-    .ant-menu> .ant-menu-submenu-active,
-    .ant-menu > .ant-menu-item-open,
-    .ant-menu> .ant-menu-submenu-open,
-    .ant-menu > .ant-menu-item-selected,
-    .ant-menu > .ant-menu-submenu-selected {
-    color: red;
-    border-bottom: 2px solid red;
+    @media only screen and (max-width: $screen-size-sm) {
+        margin: 0 0 20px 0;
     }
 }
 .card{
     >div{
         padding: 10px;
     }
+}
+.menuFull{
+    @media only screen and (max-width: $screen-size-sm) {
+        display: none;
+    }
+}
+.menuSplit{
+    display: none;
+    @media only screen and (max-width: $screen-size-sm)   {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    justify-content: space-between;
 }

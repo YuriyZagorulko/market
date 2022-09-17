@@ -23,6 +23,7 @@ function OrdersPage () {
       setSate({
         orders: val.data
       })
+      console.log(orders)
   })
   }, [])
 

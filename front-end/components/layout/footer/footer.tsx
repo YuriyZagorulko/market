@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from "./footer.module.scss"
 import Link from 'next/link'
-import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 
 type headerProps = {
@@ -29,11 +28,6 @@ export default class Welcome extends React.Component<headerProps, headerState> {
               </Link>
               </div>
               <div className={styles.footerSocial}>
-                <Link href="/">
-                  <div>
-                    <FontAwesomeIcon icon={faFacebook as IconProp} />
-                  </div>
-                </Link>
                 <Link href="/">
                   <div>
                     <FontAwesomeIcon icon={faYoutube as IconProp} />

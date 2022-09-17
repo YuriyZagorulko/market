@@ -17,9 +17,11 @@ export default class HomeHeader extends React.Component {
       this.state = {}
     }
     render() {
-      return (<div className={styles.container}>
-        <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
-        <div className={styles.subtitle}>Слава Україні!</div>
-      </div>)
+      return (
+        <div className={styles.container}>
+          <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
+          <div className={styles.subtitle}>Слава Україні!</div>
+        </div>
+      )
     }
   }

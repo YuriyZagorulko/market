@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from "./productListItem.module.scss"
-import Link from 'next/link'
 import Image from 'next/image'
-import { IOrder } from '../../../helpers/types/orders'
-import { connect } from 'react-redux'
-import { Collapse, Select } from 'antd'
-import CollapsePanel from 'antd/lib/collapse/CollapsePanel'
-import { getPreviewImgUrl } from '../../../helpers/types/responces/products'
 import { defaultProductImg } from '../../../helpers/constants/urls'
 
 type ImgProps = {

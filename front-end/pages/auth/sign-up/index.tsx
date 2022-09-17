@@ -56,7 +56,7 @@ function RegisterPage () {
         return (
           <div className={"wrapper " + style.register}>
             <div className="text-title-xl">
-              Регистрация
+              Реєстрація
             </div>
             <div className={'form-wrapper'}>
               <Form

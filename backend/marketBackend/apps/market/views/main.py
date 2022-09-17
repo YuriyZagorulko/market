@@ -5,9 +5,12 @@ from rest_framework.response import Response
 
 class MainView(APIView):
     def get(self, request):
-        products = Product.objects.all().order_by('id')[:10]
-        serializer = ProductSerializer(products, many=True)
+        recomended = Product.objects.all().order_by('id')[:10]
+        popular = Product.objects.all().order_by('-id')[:10]
+        serializerRecomended = ProductSerializer(recomended, many=True)
+        serializerPopular = ProductSerializer(popular, many=True)
         return Response({
-            'products': serializer.data
+            'recomended': serializerRecomended.data,
+            'popular': serializerPopular.data
         }) #products.values()
 

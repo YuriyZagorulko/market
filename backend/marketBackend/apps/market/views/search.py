@@ -19,14 +19,14 @@ class SearchViewSet(ModelViewSet):
         qText = Q()
         qCategory = Q()
         text = request.query_params.get('text', '')
-        categoryWord = request.query_params.get('category', '')
+        # categoryWord = request.query_params.get('category', '')
 
-        searchedCategory = ProductCategory.objects.get(keyWord=categoryWord)
+        # searchedCategory = ProductCategory.objects.get(keyWord=categoryWord)
 
         if text:
             qText &= Q(title__icontains=text)
-        if searchedCategory:
-            qText &= Q(category=searchedCategory)
+        # if searchedCategory:
+        #     qText &= Q(category=searchedCategory)
         products = Product.objects.filter(qText).filter(qCategory).order_by('-created_at')
         page = self.paginate_queryset(products)
         if page is not None:

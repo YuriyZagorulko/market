@@ -3,8 +3,11 @@
 .container{
     display: grid;
     cursor: pointer;
-    margin: 0 10px;
+    height: 300px;
+    width: 240px;
     max-width: 300px;
+    position: relative;
+    margin-top: 15px;
 }
 .image{
     display: flex;
@@ -24,13 +27,30 @@
     font-size: 14px;
     max-height: 45px;
     overflow: hidden;
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
 }
 .price{
     font-size: 24px;
 }
 .content{
+    position: absolute;
+    top:0;
+    left: 0;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgb(0 0 0 / 0%);
+    transition: all 0.3s;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+
+    &:hover{
+        box-shadow: 0 0 8px rgb(0 0 0 / 60%);
+        transform: translateY(-10px);
+    }
 }

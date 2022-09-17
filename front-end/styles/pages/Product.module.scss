@@ -5,12 +5,22 @@
   width: 100%;
   padding: 60px 0 30px 0;
 }
-.top{
+.wrapper{
+  padding: 0 20px;
+}
+.top, .bottom{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media only screen and (max-width: $screen-size-sm)   {
+      flex-direction: column;
+  }
 }
-.topLeft{
+.bottom{
+  padding-top: 30px;
+}
+.topLeft, .bottomLeft{
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -19,15 +29,27 @@
   img{
     object-fit: contain;
   }
+
+  @media only screen and (max-width: $screen-size-sm)   {
+      width: 100%;
+  }
 }
-.topRight{
+.topRight, .bottomRight{
   display: flex;
   flex-direction: column;
   width: 50%;
   box-sizing: border-box;
+
+  @media only screen and (max-width: $screen-size-sm)   {
+      width: 100%;
+  }
 }
 .images{
   display: flex;
+
+  @media only screen and (max-width: $screen-size-sm)   {
+      justify-content: center;
+  }
 }
 .img{
   display: flex;
@@ -42,6 +64,7 @@
 .description{
   padding-top: 20px;
   font-size: 16px;
+  white-space: pre-wrap;
 }
 .trade{
   display: flex;
@@ -51,6 +74,10 @@
   border-radius: 8px;
   padding: 10px 20px;
   margin-top: 20px;
+
+  @media only screen and (max-width: $screen-size-sm)   {
+      justify-content: space-between;
+  }
 }
 .price{
   display: flex;
