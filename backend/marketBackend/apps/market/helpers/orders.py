@@ -21,12 +21,11 @@ def createOrder(data):
             house = '',
             officeRef = '',
             apartment = '',
-            user = userId,
+            user_id = userId,
             orderType = shipping.get('type'),
             city = city,
             officeDescription = shipping['data']['selectedOffice']['description'],
         )
-        print(newOrder)
         newOrder.save()
         for product in productList:
             try:
