@@ -7,6 +7,7 @@ import { authConstants } from '../../../redux/constants'
 import { useRouter } from 'next/router'
 import { OrderService } from '../../../services/order/order.service'
 import OrderLine from '../../../components/orders/order-line/order-line'
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 
 interface IProps {
     login: any
@@ -20,16 +21,16 @@ function OrdersPage () {
   })
   useEffect(() => {
     OrderService.getOrders().then((val) => {
+      console.log(val)
       setSate({
-        orders: val.data
+        orders: val.data.data
       })
-      console.log(orders)
   })
   }, [])
 
   return (
-      <div className={'global-width-limiter'}>
-        <OrderLine order={null}/>
+      <div style={{display:'flex',flexDirection:'column',gap:'10px',marginTop:'15px',marginBottom:'15px', padding:'0 15px'}} className={'global-width-limiter orders-wrapper'}>
+        {orders.map(el=><OrderLine order={el} key={el.id}/>)}
       </div>
   )
 }

@@ -126,7 +126,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
               this.props.dispatch(clearCart())
               Router.push("/checkout/success")
             } else {
-              console.log(val)
             }
           })
         })
