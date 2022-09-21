@@ -54,25 +54,13 @@ function authLinks(isAuth, dispatch) {
 }
 
 function Header(props: any) {
-
   const { cart }: { cart: ICartState } = store.getState()
-  // const [cartLength,setCartLength] = useState(0)
-
-
 
   const dispatch = useDispatch()
   const [state, setState] = useState({
     headerBanner: '',
     searchInput: '',
-    isAuth: false,
-    auth: null
   })
-  useEffect(() => {
-    setState({
-      ...state,
-      isAuth: !!(props.auth?.user)
-    })
-  }, [props.auth])
 
   useEffect(() => {
     OrderService.getOrders().then((val) => {
@@ -124,7 +112,7 @@ function Header(props: any) {
           </div>
           <div className={styles.navigationCenter} />
           <div className={styles.navigationRight}>
-            {authLinks(state.isAuth, dispatch)}
+            {authLinks(props.auth?.user, dispatch)}
           </div>
         </div>
         <div className={styles.headerItems}>
@@ -148,11 +136,6 @@ function Header(props: any) {
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
           <div style={{ position: 'relative' }} className={styles.itemsRight + ' iconsContainer'}>
-            {/* { (!state.isAuth) &&
-                  <Link href="/cabinet/orders">
-                    <a className={'icon-wrapper'}><FontAwesomeIcon icon={faUser as IconProp} /></a>
-                  </Link>
-              } */}
             <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
               <div className={styles.productCount}>{props.cartLength}</div>
               <Image

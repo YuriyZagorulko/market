@@ -83,7 +83,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
             </div>
           )
         } else {
-          return <div>Корзина пуста...</div>
+          return <div>Корзина порожня...</div>
         }
     }
     render() {
