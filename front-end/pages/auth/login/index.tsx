@@ -33,9 +33,9 @@ function LoginPage () {
       console.log(val?.non_field_errors)
       if (val.error === 'Invalid Creds') {
         notification.error({
-          message: 'Ошибка',
+          message: 'Помилка',
           description:
-            'Пользователя с такими имейлом и паролем не существует',
+            'Користувача з таким імейлом і паролем не існує',
         })
       } else {
         if (val.token) {
@@ -50,7 +50,7 @@ function LoginPage () {
   return (
     <div className={"wrapper " + style.login}>
       <div className="text-title-xl">
-        Вход
+        Вхiд
       </div>
       <div className="">
         <Form
@@ -60,13 +60,13 @@ function LoginPage () {
           ref={formRef}
         >
           <Form.Item
-            label="Имейл"
+            label="Iмейл"
             labelCol={{span: 6}}
             name="username"
             wrapperCol={{ span: 24 }}
             rules={[{
               required: true,
-              message: 'Пожалуйста введите свой имейл!',
+              message: 'Будь ласка, введіть свій імейл!',
               pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
             }]}
           >
@@ -78,21 +78,21 @@ function LoginPage () {
             labelCol={{span: 6}}
             name="password"
             wrapperCol={{ span: 24 }}
-            rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
+            rules={[{ required: true, message: 'Будь ласка, введіть свій пароль!' }]}
           >
             <Input.Password />
           </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>
             <CustomBtn type="primary" className={'centered-block'} htmlType="submit" onClick={onFinish}>
-              Войти
+            Увійти
             </CustomBtn>
           </Form.Item>
         </Form>
       </div>
       <div>
         <Link href="/auth/forget-password">
-            <a>Забыли пароль?</a>
+            <a>Забули пароль?</a>
         </Link>
       </div>
     </div>

@@ -1,7 +1,6 @@
 
 import { LocalStorage } from '../../helpers/storage/localStorage'
 import { AddedProduct, IProduct } from '../../helpers/types/responces/products'
-import { IProductState } from './product.reducer'
 
 export const cartConstants = {
     ADD_PRODUCT: 'ADD_PRODUCT',

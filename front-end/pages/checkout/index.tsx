@@ -27,21 +27,21 @@ interface IProps {
   dispatch: any,
 }
 interface IState {
-  products: { product: IProduct, quantity: number } []
+  products: { product: IProduct, quantity: number }[]
   storeUnsub: Unsubscribe
   totalPrice: number
   name: string
   surname: string
   selectedShipping: deliveryTypes
-  cityOptions: { value: string, cityRef: string } []
+  cityOptions: { value: string, cityRef: string }[]
   selectedCity: { value: string, cityRef: string }
-  officessOptions: { description: string, ref: string } []
+  officessOptions: { description: string, ref: string }[]
   selectedOffice: { description: string, ref: string }
 }
 class CheckoutPage extends React.Component<IProps, IState> {
   contactFormRef = React.createRef<FormInstance>()
   shippingNPFormRef = React.createRef<FormInstance>()
-  constructor(props: any){
+  constructor(props: any) {
     super(props)
     this.state = {
       name: '',
@@ -56,16 +56,16 @@ class CheckoutPage extends React.Component<IProps, IState> {
       officessOptions: [],
     }
   }
-  componentWillUnmount(){
-    if (this.state.storeUnsub){
+  componentWillUnmount() {
+    if (this.state.storeUnsub) {
       this.state.storeUnsub()
     }
   }
   componentDidMount() {
     const updateState = () => {
-      const cartState  = store.getState().cart
-      if (cartState && cartState.addedProducts){
-        if (cartState.addedProducts.length <= 0){
+      const cartState = store.getState().cart
+      if (cartState && cartState.addedProducts) {
+        if (cartState.addedProducts.length <= 0) {
           Router.push('/')
         }
         this.setState({
@@ -85,100 +85,100 @@ class CheckoutPage extends React.Component<IProps, IState> {
     NPapiService.getCities(str).then((data: ICitiesResponce) => {
       const cities: { value: string, cityRef: string }[] = []
       if (data && data.Addresses) {
-      for (const c of data.Addresses){
-        cities.push({
-          value: c.MainDescription,
-          cityRef: c.DeliveryCity,
-        })
-        this.setState({
-          cityOptions: cities
-        })
+        for (const c of data.Addresses) {
+          cities.push({
+            value: c.MainDescription,
+            cityRef: c.DeliveryCity,
+          })
+          this.setState({
+            cityOptions: cities
+          })
+        }
       }
-    }
     })
   }
   checkoutOrder = async () => {
-      this.contactFormRef.current!.submit()
-      this.shippingNPFormRef.current!.submit()
-      this.contactFormRef.current!.validateFields().then((contactVal: any) => {
-        this.shippingNPFormRef.current!.validateFields().then((shippingVal: any) => {
+    this.contactFormRef.current!.submit()
+    this.shippingNPFormRef.current!.submit()
+    this.contactFormRef.current!.validateFields().then((contactVal: any) => {
+      this.shippingNPFormRef.current!.validateFields().then((shippingVal: any) => {
 
-          const productIds = []
-          for (const pr of this.state.products){
-            productIds.push({ id: pr.product.id, quantity: pr.quantity})
-          }
-          const orderData: IOrderData = {
-            name: contactVal.name,
-            surname: contactVal.surname,
-            secondName: contactVal.secondName,
-            phone: contactVal.phone,
-            productList: productIds,
-            shipping: {
-              type: deliveryTypes.newPost,
-              data: {
-                selectedCity: this.state.selectedCity,
-                selectedOffice: this.state.selectedOffice
-              }
+        const productIds = []
+        for (const pr of this.state.products) {
+          productIds.push({ id: pr.product.id, quantity: pr.quantity })
+        }
+        const orderData: IOrderData = {
+          name: contactVal.name,
+          surname: contactVal.surname,
+          secondName: contactVal.secondName,
+          phone: contactVal.phone,
+          productList: productIds,
+          shipping: {
+            type: deliveryTypes.newPost,
+            data: {
+              selectedCity: this.state.selectedCity,
+              selectedOffice: this.state.selectedOffice
             }
           }
-          OrderService.confirmOrder(orderData).then((val: { data }) => {
-            if (val.data === "success"){
-              this.props.dispatch(clearCart())
-              Router.push("/checkout/success")
-            } else {
-            }
-          })
+        }
+        OrderService.confirmOrder(orderData).then((val: { data }) => {
+          if (val.data === "success") {
+            this.props.dispatch(clearCart())
+            Router.push("/checkout/success")
+          } else {
+          }
         })
+      })
         .catch((e) => {
           console.log(e)
         })
-      }).catch((e) => {
-        console.log(e)
-      })
-      console.log(this.shippingNPFormRef.current.getFieldsValue())
+    }).catch((e) => {
+      console.log(e)
+    })
+    console.log(this.shippingNPFormRef.current.getFieldsValue())
   }
 
   openModal = () => {
-    this.props.dispatch({type: controlsConstants.OPEN_CART})
+    this.props.dispatch({ type: controlsConstants.OPEN_CART })
   }
   productsList = () => {
     if (this.state.products.length > 0) {
-        return (
-          <div className={styles.productListWrapper}>
-            <div className={styles.listHead}>
-              <div className="sectionTitle">
-                Список товаров
-              </div>
-              <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
-                <div>
-                  <FontAwesomeIcon height="12px" icon={faEdit as IconProp} />
-                </div>
-                Редактировать
-              </a>
+      return (
+        <div className={styles.productListWrapper}>
+          <div className={styles.listHead}>
+            <div className="sectionTitle">
+              Список товарів
             </div>
-            <div className={styles.productList}>
+            <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
+              <div>
+                <FontAwesomeIcon height="12px" icon={faEdit as IconProp} />
+              </div>
+              Редагувати
+            </a>
+          </div>
+          <div className={styles.productList}>
             {this.state.products.map((item, i) => {
               return (
                 <ProductListItem
                   key={item.product.id}
-                  product={ item }
+                  product={item}
                 />
               )
             })}
           </div>
-          </div>
-        )
-      } else {
-        return <div>Nothing In he cart yet</div>
-      }
+        </div>
+      )
+    } else {
+      return <div>Nothing In he cart yet</div>
+    }
   }
   sidebar() {
     return (
       <div className={styles.sidebarTotal + ' box-gray'}>
-        <h1>Итого</h1>
+        <h1>Вартість</h1>
         <div className="row">
           <label>
-            {this.state.products.length} товаров на сумму
+            {this.state.products.length} товарів на суму
           </label>
           <div className={styles.sum}>
             ₴ {this.state.totalPrice}
@@ -186,15 +186,15 @@ class CheckoutPage extends React.Component<IProps, IState> {
         </div>
         <div className="row">
           <label>
-            Стоимость доставки
+            Вартість доставки
           </label>
           <div className={styles.alignRight}>
-            по тарифам перевозчика
+            за тарифами перевізника
           </div>
         </div>
         <div className={classnames('row', styles.withBorders)}>
           <label>
-            К оплате
+            До оплати
           </label>
           <div className={classnames(styles.alignRight, styles.totalPrice)}>
             ₴ {this.state.totalPrice}
@@ -206,19 +206,19 @@ class CheckoutPage extends React.Component<IProps, IState> {
           className={styles.checkoutOrder}
           onClick={this.checkoutOrder}
         >
-          Подтверждаю заказ
+          Підтверджую замовлення
         </CustomBtn>
       </div>
     )
   }
-  shippingSetup(){
+  shippingSetup() {
     const onShippingChange = e => {
       console.log(e)
-      this.setState({selectedShipping: e.target.value})
+      this.setState({ selectedShipping: e.target.value })
     }
     const citySelect = (e: number) => {
       const city = this.state.cityOptions[e]
-      if (city){
+      if (city) {
         this.setState({
           selectedCity: city
         })
@@ -232,14 +232,14 @@ class CheckoutPage extends React.Component<IProps, IState> {
     }
     const officeSelect = (e) => {
       const office = this.state.officessOptions[e]
-      if (office){
+      if (office) {
         this.setState({
           selectedOffice: office
         })
       }
       console.log(office)
     }
-    return(
+    return (
       <Shipping
         cityOptions={this.state.cityOptions}
         selectedCity={this.state.selectedCity}
@@ -254,12 +254,12 @@ class CheckoutPage extends React.Component<IProps, IState> {
       />
     )
   }
-  render () {
+  render() {
     return (
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.content}>
-          <h1>Оформление заказа</h1>
-          <ContactInfo formRef={this.contactFormRef}/>
+          <h1>Оформлення замовлення</h1>
+          <ContactInfo formRef={this.contactFormRef} />
           {this.productsList()}
           {this.shippingSetup()}
         </div>
@@ -271,4 +271,4 @@ class CheckoutPage extends React.Component<IProps, IState> {
   }
 }
 const connectedCheckoutPage = connect(state => state)(CheckoutPage)
-export  default connectedCheckoutPage
+export default connectedCheckoutPage

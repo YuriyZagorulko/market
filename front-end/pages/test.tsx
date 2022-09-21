@@ -86,7 +86,7 @@ function TestPage () {
         <div style={containerStyle} >
             <button onClick={onToggleOpen} style={stylingObject.btn}>Edit annotation</button>
             <div style={controlsContainer}>
-                <div style={controlsLine}>
+                <div style={{controlsLine}}>
                     <div style={controlContainer}>
                         <input style={inputStyles} placeholder='X'/>
                     </div>

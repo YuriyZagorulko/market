@@ -38,11 +38,16 @@ body{
     max-height: 500px;
     overflow-y: scroll;
   }
+  .ant-modal-footer{
+    display:flex;
+    justify-content:space-around;
+  }
   .cart-btn{
       font-size: 20px;
       height: 34px;
       box-sizing: content-box;
       background-color: $color-blue-boyzone;
+      
   }
 }
 .box-gray{

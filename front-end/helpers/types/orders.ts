@@ -5,7 +5,7 @@ export type orderType = 'NEW_POST' | 'NEW_POST_CURRIER'
 export interface IOrder{
     orderType: string
     recipientName: string
-    recipientSecondName: string | any
+    recipientSecondName: string
     recipientSurname: string
     phoneNumber: string
     street: string

@@ -21,10 +21,10 @@ export default class Welcome extends React.Component<headerProps, headerState> {
           <div className={`${styles.footerContent} global-width-limiter`}>
               <div className={styles.footerContact}>
               <Link href="/help">
-                <a>Помощь</a>
+                <a>Допомога</a>
               </Link>
               <Link href="/contact-us">
-                <a>Контакты</a>
+                <a>Контакти</a>
               </Link>
               </div>
               <div className={styles.footerSocial}>

@@ -57,7 +57,7 @@ const Product = () => {
                             <div className={style.buy}>
                                 <button className={`button-primary`} onClick={buyProduct}>
                                     <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                    Купить
+                                    Купити
                                 </button>
                             </div>
                         </div>

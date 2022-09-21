@@ -10,29 +10,28 @@ import OrderLine from '../../../components/orders/order-line/order-line'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 
 interface IProps {
-    login: any
-    dispatch: any
+  login: any
+  dispatch: any
 }
-function OrdersPage () {
+function OrdersPage() {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [{orders}, setSate] = useState({
+  const [{ orders }, setSate] = useState({
     orders: []
   })
   useEffect(() => {
     OrderService.getOrders().then((val) => {
-      console.log(val)
       setSate({
         orders: val.data.data
       })
-  })
+    })
   }, [])
 
   return (
-      <div style={{display:'flex',flexDirection:'column',gap:'10px',marginTop:'15px',marginBottom:'15px', padding:'0 15px'}} className={'global-width-limiter orders-wrapper'}>
-        {orders.map(el=><OrderLine order={el} key={el.id}/>)}
-      </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px', marginBottom: '15px', padding: '0 15px' }} className={'global-width-limiter orders-wrapper'}>
+      {orders.map(el => <OrderLine order={el} key={el.id} />)}
+    </div>
   )
 }
 const connectedOrdersPage = connect(state => state)(OrdersPage)
-export  default connectedOrdersPage
+export default connectedOrdersPage
