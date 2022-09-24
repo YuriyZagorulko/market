@@ -55,12 +55,21 @@ function authLinks(isAuth, dispatch) {
 
 function Header(props: any) {
   const { cart }: { cart: ICartState } = store.getState()
-
   const dispatch = useDispatch()
   const [state, setState] = useState({
     headerBanner: '',
     searchInput: '',
   })
+  
+  const [renderRegistration, setRenderRegistration] = useState(true)
+  const [showCartLength,setShowCartLength] = useState(false)
+
+  useEffect(() => {
+    setRenderRegistration(!!props.user)
+  }, [props.user])
+  useEffect(() => {
+    setShowCartLength(!!props.cartL)
+  }, [props.cartL])
 
   useEffect(() => {
     OrderService.getOrders().then((val) => {
@@ -112,7 +121,7 @@ function Header(props: any) {
           </div>
           <div className={styles.navigationCenter} />
           <div className={styles.navigationRight}>
-            {authLinks(props.auth?.user, dispatch)}
+            {authLinks(renderRegistration, dispatch)}
           </div>
         </div>
         <div className={styles.headerItems}>
@@ -137,7 +146,7 @@ function Header(props: any) {
           </div>
           <div style={{ position: 'relative' }} className={styles.itemsRight + ' iconsContainer'}>
             <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
-              <div className={styles.productCount}>{props.cartLength}</div>
+              {showCartLength && <div className={styles.productCount}>{props.cartL}</div> }
               <Image
                 src="/images/icons/shopping-cart.svg"
                 alt="Picture of the author"
@@ -154,16 +163,17 @@ function Header(props: any) {
 
 
 
-const mapStateToProps = (state: any) => {
-  const cartL = state.cart?.addedProducts.reduce((acc, el) => {
+const mapStateToProps = (state: IState) => {
+  let cartL = 0
+  cartL = state?.cart?.addedProducts.reduce((acc :number, el : {quantity : number}) => {
     const res = acc += el.quantity
     return res
   }, 0)
-  
+
   return {
-    cartLength: cartL,
+    cartL: cartL,
     cart:state.cart,
-    auth:state.auth
+    user:state.auth.user
   };
 };
 const connectedConponent = connect(mapStateToProps)(Header)
