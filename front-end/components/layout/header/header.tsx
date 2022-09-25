@@ -61,24 +61,16 @@ function Header(props: any) {
     searchInput: '',
   })
   
-  const [renderRegistration, setRenderRegistration] = useState(true)
-  const [showCartLength,setShowCartLength] = useState(false)
+  const [isRenderAuthLinks, setIsRenderAuthLinks] = useState(true)
+  const [isShowCartLength,setIsShowCartLength] = useState(false)
 
   useEffect(() => {
-    setRenderRegistration(!!props.user)
+    setIsRenderAuthLinks(!!props.user)
   }, [props.user])
   useEffect(() => {
-    setShowCartLength(!!props.cartL)
+    setIsShowCartLength(!!props.cartL)
   }, [props.cartL])
 
-  useEffect(() => {
-    OrderService.getOrders().then((val) => {
-      console.log(val)
-      // setState({
-      //   orders: val.data.data
-      // })
-    })
-  }, [])
   const router = useRouter()
 
   const updateInputValue = (evt) => {
@@ -121,7 +113,7 @@ function Header(props: any) {
           </div>
           <div className={styles.navigationCenter} />
           <div className={styles.navigationRight}>
-            {authLinks(renderRegistration, dispatch)}
+            {authLinks(isRenderAuthLinks, dispatch)}
           </div>
         </div>
         <div className={styles.headerItems}>
@@ -146,7 +138,7 @@ function Header(props: any) {
           </div>
           <div style={{ position: 'relative' }} className={styles.itemsRight + ' iconsContainer'}>
             <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
-              {showCartLength && <div className={styles.productCount}>{props.cartL}</div> }
+              {isShowCartLength && <div className={styles.productCount}>{props.cartL}</div> }
               <Image
                 src="/images/icons/shopping-cart.svg"
                 alt="Picture of the author"
