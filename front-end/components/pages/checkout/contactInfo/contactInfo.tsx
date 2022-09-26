@@ -48,7 +48,7 @@ export class ContactInfo extends React.Component<Props> {
                 initialValue={`${this.props.auth.user?.username}`}
 
               >
-                <Input style={{ width: 300 }} />
+                <Input className={styles.personalDataInput}/>
               </Form.Item>
             </div>
             <div className="column50">
@@ -59,7 +59,7 @@ export class ContactInfo extends React.Component<Props> {
                 initialValue={`${this.props.auth.user?.lastName}`}
 
               >
-                <Input style={{ width: 300 }} />
+                <Input className={styles.personalDataInput} />
               </Form.Item>
             </div>
           </div>
@@ -71,7 +71,7 @@ export class ContactInfo extends React.Component<Props> {
                 rules={[{ required: true, message: 'Будь ласка, введіть ваше по-батькові!' }]}
                 initialValue={`${this.props.auth.user?.secondName}`}
               >
-                <Input style={{ width: 300 }} />
+                <Input className={styles.personalDataInput} />
               </Form.Item>
             </div>
             <div className="column50">
@@ -83,7 +83,7 @@ export class ContactInfo extends React.Component<Props> {
 
 
               >
-                <Input prefix="+380" type="number" style={{ width: 300 }} />
+                <Input prefix="+380" type="number" className={styles.personalDataInput} />
 
               </Form.Item>
             </div>
