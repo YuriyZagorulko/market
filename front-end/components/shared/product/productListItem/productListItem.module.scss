@@ -39,6 +39,9 @@
 }
 .price{
     font-size: 22px;
+    @media(max-width:$screen-size-sm){
+        font-size:16px;
+    }
 }
 .content{
     display: flex;
@@ -55,11 +58,20 @@
         }
         &__title{
             color: $color-gray-main;
+            margin:0 auto;
+            @media(max-width:$screen-size-sm){
+                font-size:13px;
+                margin:0 auto;
+            }
+            
         }
         &__text{
             display: flex;
             font-size: 22px;
             justify-content: center;
+            @media(max-width:$screen-size-sm){
+                font-size:16px;
+            }
         }
 
     }

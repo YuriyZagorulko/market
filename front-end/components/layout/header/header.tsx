@@ -9,7 +9,6 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
-import { logout } from '../../../redux/actions/user'
 import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
 import { accessSync } from 'fs'
@@ -22,11 +21,12 @@ type headerState = {
   headerBanner?: string
   searchInput?: string
 }
-const logoutClick = (dispatch) => () => {
-  dispatch(logout())
-}
+
 
 function authLinks(isAuth, dispatch) {
+  const openExitDialogWindow = () => {
+    dispatch({ type: controlsConstants.OPEN_EXIT_DIALOG })
+  }
 
   if (!isAuth) {
     return (
@@ -45,9 +45,7 @@ function authLinks(isAuth, dispatch) {
         <Link href="/cabinet/orders">
           <a className={'icon-wrapper'}>Замовлення</a>
         </Link>
-        <Link href="/">
-          <a onClick={logoutClick(dispatch)}>Вихід</a>
-        </Link>
+          <a onClick={openExitDialogWindow}>Вихід</a>
       </React.Fragment>
     )
   }
@@ -98,6 +96,7 @@ function Header(props: any) {
   const openModal = () => {
     dispatch({ type: controlsConstants.OPEN_CART })
   }
+
   return (
     <div className={styles.header}>
       {state.headerBanner ? <div className={styles.headerTop}>{state.headerBanner}</div> : ''}
