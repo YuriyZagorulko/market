@@ -51,8 +51,10 @@ function changeQuantity(state: ICartState, action): ICartState{
     const newQuantity: number = action.quantity
     const productIndex = getProductIndex(state, product.id)
     if (productIndex > -1){
-        state.addedProducts[productIndex].quantity = newQuantity
-        return state
+        const updatedProduct = { ...state.addedProducts[productIndex],quantity:newQuantity }
+         let newAddedProducts = [...state.addedProducts]
+         newAddedProducts[productIndex] = updatedProduct
+        return {...state,addedProducts:newAddedProducts}
     } else{
         // tslint:disable-next-line: no-console
         console.error('changing quantity of unexisting product')
@@ -78,8 +80,9 @@ function removeProduct(state: ICartState, action): ICartState {
     const product: IProduct = action.product
     const productIndex = getProductIndex(state, product.id)
     if (productIndex > -1){
-        state.addedProducts.splice(productIndex, 1)
-        return state
+        let updatedAddedProducts = [...state.addedProducts]
+        updatedAddedProducts.splice(productIndex,1)
+        return {...state,addedProducts:updatedAddedProducts}
     } else{
         // tslint:disable-next-line: no-console
         console.error('deleting unexisting product')

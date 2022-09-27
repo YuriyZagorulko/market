@@ -101,5 +101,5 @@ class exitDialogWindow extends React.Component<IProps, exitDialogState> {
   }
 
 
-const connectedCartModal = connect(state => state)(exitDialogWindow as any)
-export default connectedCartModal
+const connectedExitDialogWindow = connect(state => state)(exitDialogWindow as any)
+export default connectedExitDialogWindow
