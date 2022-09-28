@@ -39,20 +39,20 @@ export default class Shipping extends React.Component<Props> {
         >
           <div className={styles.deliveryType}>
             <div className="sectionTitle">
-                Доставка Новой Почтой
+              Доставка Новою Поштою
             </div>
             <div className={styles.deliveryContainer}>
               <label>
-              <i className="red">*</i>Выберите ваш город
+              <i className="red">*</i>Виберіть ваше місто
               </label>
               <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Пожалуйста выберите город' }]}
+                rules={[{ required: true, message: 'Будь ласка, виберіть ваше місто' }]}
               >
                 <Select
                   showSearch
-                  style={{ width: 300 }}
-                  placeholder="Выберите город"
+                  className={styles.citySelect}
+                  placeholder="Виберіть місто"
                   optionFilterProp="children"
                   onChange={this.props.onCityChange}
                   onSearch={this.props.onCitySearch}
@@ -73,22 +73,22 @@ export default class Shipping extends React.Component<Props> {
             <div className={classNames(styles.ratio, this.props.selectedShipping === deliveryTypes.newPost ? styles.selectedShipping : '')}>
               <Radio value={deliveryTypes.newPost}>
                 <div className={styles.radioTitle}>
-                  Самовывоз из Новой Почты
+                  Самовивіз із Нової Пошти
                 </div>
               </Radio>
                 <div className={styles.optionContent}>
                   <div className={styles.deliveryContainer}>
                     <label>
-                      <i className="red">*</i>Выберите отделение
+                      <i className="red">*</i>Виберіть відділення
                     </label>
                     <Form.Item
                       name="office"
-                      rules={[{ required: this.props.selectedShipping === deliveryTypes.newPost, message: 'Пожалуйста выберите отделение' }]}
+                      rules={[{ required: this.props.selectedShipping === deliveryTypes.newPost, message: 'Будь ласка, виберіть відділення' }]}
                     >
                       <Select
                         showSearch
                         className={styles.officeSelect}
-                        placeholder="Выберите Отделение"
+                        placeholder="Виберіть відділення"
                         optionFilterProp="children"
                         onChange={this.props.onOfficeChange}
                         filterOption={filterOptions}
@@ -117,9 +117,9 @@ export default class Shipping extends React.Component<Props> {
                       </label>
                       <Form.Item
                         name="street"
-                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Пожалуйста укажите улицу' }]}
+                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Будь ласка, вкажіть вулицю' }]}
                       >
-                        <Input placeholder="Улица" type={'text'} />
+                        <Input placeholder="Вулиця" type={'text'} />
                       </Form.Item>
                     </div>
                     <div className={styles.lineItem}>
@@ -128,9 +128,9 @@ export default class Shipping extends React.Component<Props> {
                       </label>
                       <Form.Item
                         name="house"
-                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Пожалуйста укажите дом' }]}
+                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Будь ласка, вкажіть будинок' }]}
                       >
-                        <Input placeholder="Дом" type={'text'} />
+                        <Input placeholder="Будинок" type={'text'} />
                       </Form.Item>
                     </div>
                     <div className={styles.lineItem}>

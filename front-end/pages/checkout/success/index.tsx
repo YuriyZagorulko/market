@@ -24,11 +24,11 @@ function ContactUsPage () {
       <div className={style.topIcon}>
         <FontAwesomeIcon icon={faCheckCircle as IconProp} />
       </div>
-      <h1>Спасибо за вашу покупку</h1>
-      <h4>Мы свяжемся с вами в ближайшее время</h4>
+      <h1>Дякую за вашу покупку</h1>
+      <h4>Ми зв'яжемося з вами найближчим часом</h4>
       <Link href="/">
         <Button type="primary">
-          На главную страницу
+          На головну сторінку
         </Button>
       </Link>
     </div>

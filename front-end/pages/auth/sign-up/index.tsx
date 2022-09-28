@@ -10,18 +10,18 @@ function handleRegisterErrors(errors: { email: string[], phone: string[]}) {
   for (const err of errors.email) {
     if (err.includes('This field must be unique.')) {
       notification.error({
-        message: 'Ошибка',
+        message: 'Помилка',
         description:
-          'Пользователь с таким имейлом уже существует',
+          'Користувач із таким імейлом вже існує',
       })
     }
   }
   for (const err of errors.phone) {
     if (err.includes('user with this phone already exists.')) {
       notification.error({
-        message: 'Ошибка',
+        message: 'Помилка',
         description:
-          'Пользователь с таким телефоном уже существует',
+          'Користувач із таким телефоном вже існує',
       })
     }
   }
@@ -67,37 +67,37 @@ function RegisterPage () {
                 onFinishFailed={onFinishFailed}
               >
                 <Form.Item
-                  label="Имя"
+                  label="Ім'я"
                   name="username"
                   wrapperCol={{ span: 24 }}
-                  rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
+                  rules={[{ required: true, message: 'Будь ласка, введіть своє ім\'я!' }]}
                 >
                   <Input />
                 </Form.Item>
 
                 <Form.Item
-                  label="Фамилия"
+                  label="Прізвище"
                   name="secondName"
                   wrapperCol={{ span: 24 }}
-                  rules={[{ required: true, message: 'Пожалуйста введите свою Фамилию!' }]}
+                  rules={[{ required: true, message: 'Будь ласка, введіть своє прізвище!' }]}
                 >
                   <Input />
                 </Form.Item>
 
                 <Form.Item
-                  label="Отчество"
+                  label="По батьковi"
                   name="lastName"
                   wrapperCol={{ span: 24 }}
-                  rules={[{ required: true, message: 'Пожалуйста введите свое отчество!' }]}
+                  rules={[{ required: true, message: 'Будь ласка, введіть своє по батькові!' }]}
                 >
                   <Input />
                 </Form.Item>
 
                 <Form.Item
-                  label="Дата Рождения"
+                  label="Дата народження"
                   name="birthday"
                   wrapperCol={{ span: 24 }}
-                  rules={[{ required: true, message: 'Пожалуйста введите свое имя!' }]}
+                  rules={[{ required: true, message: 'Будь ласка, введіть своє ім\'я!' }]}
                 >
                   <DatePicker />
                 </Form.Item>
@@ -106,7 +106,7 @@ function RegisterPage () {
                   label="Пароль"
                   name="password"
                   wrapperCol={{ span: 24 }}
-                  rules={[{ required: true, message: 'Пожалуйста введите свой пароль!' }]}
+                  rules={[{ required: true, message: 'Будь ласка, введіть свій пароль!' }]}
                 >
                   <Input.Password
                     // tslint:disable-next-line: jsx-no-lambda
@@ -115,15 +115,15 @@ function RegisterPage () {
                 </Form.Item>
 
                 <Form.Item
-                  label="Повтоите пароль"
+                  label="Повторіть пароль"
                   name="confirmPassword"
                   wrapperCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: 'Пожалуйста введите пароль повторно!' },
+                    { required: true, message: 'Будь ласка, введіть пароль повторно!' },
                     ({ getFieldValue }) => ({
                       validator(_, value) {
                         if (!value || getFieldValue('password') === value) return Promise.resolve()
-                        return Promise.reject(new Error('Пароли не совпадают!'))
+                        return Promise.reject(new Error('Паролі не співпадають!'))
                       },
                     }),
                   ]}
@@ -132,12 +132,12 @@ function RegisterPage () {
                 </Form.Item>
 
                 <Form.Item
-                  label="Имейл"
+                  label="Iмейл"
                   name="email"
                   wrapperCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: 'Пожалуйста введите ваш имейл!' },
-                    { pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, message: 'Пожалуйста введите ваш имейл!' }
+                    { required: true, message: 'Будь ласка, введіть ваш імейл!' },
+                    { pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, message: 'Будь ласка, введіть ваш імейл!' }
                   ]}
                 >
                   <Input />
@@ -148,8 +148,8 @@ function RegisterPage () {
                   name="phone"
                   wrapperCol={{ span: 24 }}
                   rules={[
-                    { required: true, message: 'Пожалуйста введите ваш  телефон!' },
-                    { pattern: /^[0-9]{9,9}$/, message: 'введенное значение не является телефоном!' }
+                    { required: true, message: 'Будь ласка, введіть ваш  телефон!' },
+                    { pattern: /^[0-9]{9,9}$/, message: 'введене значення не є телефоном!' }
                   ]}
                 >
                   <Input className={"no-arrows"} addonBefore="+380" maxLength={9} type="number" />
@@ -161,13 +161,13 @@ function RegisterPage () {
                     className={'centered-block'}
                     disabled={isDisabledButton}
                   >
-                    Зарегистрироваться
+                    Зареєструватись
                   </Button>
               </Form>
             </div>
             <div style={{marginTop: '30px'}}>
               <Link href="/auth/login">
-                  <a>Я уже зарегистрирован</a>
+                  <a>Я вже зареєстрований</a>
               </Link>
             </div>
           </div>

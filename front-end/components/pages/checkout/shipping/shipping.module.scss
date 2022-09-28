@@ -19,6 +19,9 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 30px;
+    @media(max-width:$screen-size-sm){
+        width:100%;
+      }
 }
 .selectedShipping{
     border: 1px solid $color-blue-hight;
@@ -27,6 +30,12 @@
     .optionContent{
         display: flex;
         flex-direction: column;
+    }
+}
+.citySelect{
+    max-width:300px;
+    @media(max-width:$screen-size-sm){
+        max-width:none;
     }
 }
 .deliveryContainer{

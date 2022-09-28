@@ -5,6 +5,7 @@ import Footer from  '../footer/footer'
 import Head from 'next/head'
 import CartModal from '../../shared/cartModal/cartModal'
 import Script from 'next/script'
+import ExitDialogWindow from '../../shared/exitDialogWindow/ExitDialogWindow'
 type layoutProps = {
   children?: any,
   name?: string
@@ -20,6 +21,7 @@ export default class MainLayout extends React.Component<layoutProps> {
               </div>
               <Footer/>
               <CartModal />
+              <ExitDialogWindow/>
             </div>
           )
     }

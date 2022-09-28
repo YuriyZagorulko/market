@@ -83,7 +83,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
             </div>
           )
         } else {
-          return <div>Корзина пуста...</div>
+          return <div>Корзина порожня...</div>
         }
     }
     render() {
@@ -98,6 +98,15 @@ class CartModal extends React.Component<IProps, cartModalState> {
             destroyOnClose
             width={'800px'}
             footer={[
+              <>
+                <Button
+               key="backToShop"
+               type="primary"
+               className={'cart-btn'}
+               onClick={this.handleOk}
+             >
+               Продовжити покупки
+             </Button>
               <Link key="checkout" href="/checkout">
                 <Button
                   key="submit"
@@ -105,10 +114,13 @@ class CartModal extends React.Component<IProps, cartModalState> {
                   className={'cart-btn'}
                   onClick={this.handleOk}
                 >
-                  Оформить Заказ
+                  Оформити замволення
                 </Button>
               </Link>
+             
+             </>
             ]}
+
           >
             {this.productsList()}
           </Modal>
@@ -116,6 +128,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
       )
     }
   }
+
 
 const connectedCartModal = connect(state => state)(CartModal as any)
 export default connectedCartModal

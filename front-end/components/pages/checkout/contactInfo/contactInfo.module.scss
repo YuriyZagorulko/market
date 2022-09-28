@@ -5,3 +5,10 @@
     flex-direction: column;
     width: 100%;
 }
+.personalDataInput{
+    max-width:300px;
+    @media(max-width:$screen-size-sm){
+        max-width:none;
+    }
+
+}

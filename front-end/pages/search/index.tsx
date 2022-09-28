@@ -32,13 +32,13 @@ function SearchPage () {
       {
         query.text &&
         <div className={style.searchTitle}>
-            Результаты поиска по запросу {`<< ${query.text} >>`}
+            Результаты пошуку за запитом {`<< ${query.text} >>`}
         </div>
       }
       {/* <div className={'search__order'}>
           sort order
         </div> */}
-      { (requestData !== null && !requestData?.data?.count) ? <div className={style.nothingFound}>К сожалению, по вашему запросу ничего не найдено...</div> :
+      { (requestData !== null && !requestData?.data?.count) ? <div className={style.nothingFound}>На жаль, за вашим запитом нічого не знайдено...</div> :
         (
           <div className={'search'}>
             {/* <div className={'search__filters'}>

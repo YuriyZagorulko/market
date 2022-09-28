@@ -37,7 +37,7 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                  Цена
+                Ціна
                 </div>
                 <div className={styles.price}>
                   {this.props.product.product.price} ₴
@@ -45,7 +45,7 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                  Количество
+                Кількість
                 </div>
                 <div className={styles.content__row__text}>
                   {this.props.product.quantity}
@@ -53,10 +53,10 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                  Сумма
+                  Сума
                 </div>
                 <div className={styles.content__row__text}>
-                    {this.props.product.quantity * this.props.product.product.price}
+                    {this.props.product.quantity * this.props.product.product.price}₴
                 </div>
               </div>
 

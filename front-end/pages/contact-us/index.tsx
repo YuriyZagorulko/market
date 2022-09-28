@@ -23,14 +23,14 @@ function ContactUsPage () {
           <div className={style.div_container}>
             <div className={style.contentContainer}>
               <h3>Графік роботи</h3>
-              <div>В будні</div>
+              <div>У будні</div>
               <div>Субота</div>
               <div>Неділя</div>
             </div>
             <div className={style.contentContainer}>
-              <div>с 08:00 до 21:00</div>
-              <div>с 09:00 до 20:00</div>
-              <div>с 10:00 до 19:00</div>
+              <div>з 08:00 до 21:00</div>
+              <div>з 09:00 до 20:00</div>
+              <div>з 10:00 до 19:00</div>
             </div>
             </div>
           </div>
