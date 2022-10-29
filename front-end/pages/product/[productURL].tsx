@@ -13,11 +13,13 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
+import { Loader } from '../../components/shared/Loader/Loader'
 
 const Product = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [product, setProduct] = useState(null)
+    const [isLoaderShown, setIsLoaderShow] = useState(true)
     const { productURL } = router.query
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
@@ -27,54 +29,60 @@ const Product = () => {
         })
     }
     const buyProduct = () => {
-        dispatch({type: cartConstants.ADD_PRODUCT, product})
-        dispatch({type: controlsConstants.OPEN_CART})
+        dispatch({ type: cartConstants.ADD_PRODUCT, product })
+        dispatch({ type: controlsConstants.OPEN_CART })
     }
+    useEffect(()=>{
+        setIsLoaderShow(false)
+    },[])
 
     return (
-    <div className={style.wrapper}>
-        {product ?
-            <div className={style.content + ' global-width-limiter'}>
-                <div className={style.top}>
-                    <div className={style.topLeft}>
-                        <div className={style.images}>
-                            <div className={style.img} >
-                                <CustomImg img={getProductImg(product)} />
+        <>
+        {isLoaderShown && <Loader />}
+            <div className={style.wrapper}>
+                {product ?
+                    <div className={style.content + ' global-width-limiter'}>
+                        <div className={style.top}>
+                            <div className={style.topLeft}>
+                                <div className={style.images}>
+                                    <div className={style.img} >
+                                        <CustomImg img={getProductImg(product)} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.topRight}>
+                                <div className={style.title}>
+                                    {product.title}
+                                </div>
+                                <div className={style.description}>
+                                    {product.description}
+                                </div>
+                                <div className={style.trade}>
+                                    <div className={style.price}>
+                                        {product.price} ₴
+                                    </div>
+                                    <div className={style.buy}>
+                                        <button className={`button-primary`} onClick={buyProduct}>
+                                            <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
+                                            Купити
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={style.bottom}>
+                            <div className={style.bottomLeft}>
+                                <Characteristics characteristics={product.characteristics} />
                             </div>
                         </div>
                     </div>
-                    <div className={style.topRight}>
-                        <div className={style.title}>
-                            {product.title}
-                        </div>
-                        <div className={style.description}>
-                            {product.description}
-                        </div>
-                        <div className={style.trade}>
-                            <div className={style.price}>
-                                {product.price} ₴
-                            </div>
-                            <div className={style.buy}>
-                                <button className={`button-primary`} onClick={buyProduct}>
-                                    <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                    Купити
-                                </button>
-                            </div>
-                        </div>
+                    :
+                    <div className={style.content + ' global-width-limiter'}>
+                        no content loaded...
                     </div>
-                </div>
-                <div className={style.bottom}>
-                    <div className={style.bottomLeft}>
-                        <Characteristics characteristics={product.characteristics} />
-                    </div>
-                </div>
+                }
             </div>
-        :
-            <div className={style.content + ' global-width-limiter'}>
-                no content loaded...
-            </div>
-        }
-    </div>)
+        </>)
 }
 
 const connectedProductPage = connect(state => state)(Product)
