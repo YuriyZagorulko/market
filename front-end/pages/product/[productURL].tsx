@@ -1,11 +1,11 @@
 import style from '../../styles/pages/Product.module.scss'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IProduct, getFirstImg, getProductImg } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
@@ -19,26 +19,30 @@ const Product = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [product, setProduct] = useState(null)
-    const [isLoaderShown, setIsLoaderShow] = useState(true)
     const { productURL } = router.query
+
+    useEffect(() => {
+        if (productURL && !product) {
+            dispatch({ type: controlsConstants.SHOW_LOADER })
+        }
+    }, [])
+
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
             setProduct(data)
         }).catch(err => {
             console.log(err)
-        })
+        }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
     }
+
     const buyProduct = () => {
         dispatch({ type: cartConstants.ADD_PRODUCT, product })
         dispatch({ type: controlsConstants.OPEN_CART })
     }
-    useEffect(()=>{
-        setIsLoaderShow(false)
-    },[])
+
 
     return (
         <>
-        {isLoaderShown && <Loader />}
             <div className={style.wrapper}>
                 {product ?
                     <div className={style.content + ' global-width-limiter'}>

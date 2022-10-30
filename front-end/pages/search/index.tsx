@@ -32,7 +32,7 @@ function SearchPage () {
       {
         query.text &&
         <div className={style.searchTitle}>
-            Результаты пошуку за запитом {`<< ${query.text} >>`}
+            Результати пошуку за запитом {`<< ${query.text} >>`}
         </div>
       }
       {/* <div className={'search__order'}>
