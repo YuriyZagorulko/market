@@ -5,7 +5,7 @@ import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
@@ -13,19 +13,18 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
-import { Loader } from '../../components/shared/Loader/Loader'
-
-const Product = () => {
+import Loader from '../../components/shared/Loader/Loader'
+import { IControlsState } from '../../redux/reducers/controls.reducer'
+interface IProps {
+    dispatch: any
+    controls: IControlsState
+  }
+  
+const Product = (props:IProps) => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [product, setProduct] = useState(null)
     const { productURL } = router.query
-
-    useEffect(() => {
-        if (productURL && !product) {
-            dispatch({ type: controlsConstants.SHOW_LOADER })
-        }
-    }, [])
 
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
@@ -43,6 +42,7 @@ const Product = () => {
 
     return (
         <>
+           {props.controls.isLoaderShown ?  <Loader/> :
             <div className={style.wrapper}>
                 {product ?
                     <div className={style.content + ' global-width-limiter'}>
@@ -82,10 +82,10 @@ const Product = () => {
                     </div>
                     :
                     <div className={style.content + ' global-width-limiter'}>
-                        no content loaded...
+                        'no content loaded...'
                     </div>
                 }
-            </div>
+            </div>}
         </>)
 }
 

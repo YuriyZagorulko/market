@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { productConstants } from '../helpers/constants/product.constants'
 import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
@@ -9,64 +9,71 @@ import ProductLine from '../components/shared/productLine/productLine'
 import { productService } from '../services/product.service'
 import CategoriesSidebar from '../components/pages/home/categoriesSidebar/categoriesSidebar'
 import { controlsConstants } from '../helpers/constants/controls'
-import { Loader } from '../components/shared/Loader/Loader'
+import Loader from '../components/shared/Loader/Loader'
+import { IControlsState } from '../redux/reducers/controls.reducer'
 
 
 interface IProps {
   login: any
   dispatch: any
+  controls: IControlsState
 }
-interface IState {
+interface IProductsState {
   recomended: IProduct[],
   popular: IProduct[],
-}
-class HomePage extends React.Component<IProps, IState> {
-  constructor(props) {
-    super(props)
 
+}
+
+function productLines(localProducts: IProductsState) {
+  if (localProducts && localProducts.recomended) {
+    return (
+      <React.Fragment>
+        <ProductLine products={localProducts.recomended} title={'Рекомендовані товари'} />
+        <ProductLine products={localProducts.popular} title={'Популярні'} />
+      </React.Fragment>
+    )
+  } else {
+    return <div>
+      На жаль, ми не знайшли товарів які можемо вам порекомендувати.
+    </div>
   }
-  componentDidMount() {
-    const { dispatch } = this.props
-    // dispatch({ type: productConstants.GETMAIN_REQUEST })
-    dispatch({ type: controlsConstants.SHOW_LOADER })
+}
+
+function HomePage(props: IProps) {
+  const [localProducts, setLocalProducts] = useState<IProductsState>({
+    recomended: [],
+    popular: [],
+  })
+
+  const dispatch = props.dispatch
+
+
+  useEffect(() => {
+    dispatch({type:controlsConstants.SHOW_LOADER})
     productService.mainPage().then((val) => {
-      this.setState({
+      setLocalProducts({
         recomended: val.recomended,
         popular: val.popular,
       })
-    }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
-  }
-  
-  productLines() {
-    if (this.state && this.state.recomended) {
-      return (
-        <React.Fragment>
-          <ProductLine products={this.state.recomended} title={'Рекомендовані товари'} />
-          <ProductLine products={this.state.popular} title={'Популярні'} />
-        </React.Fragment>
-      )
-    } else {
-      return <div>
-        На жаль, ми не знайшли товарів які можемо вам порекомендувати.
-      </div>
-    }
-  }
-  render() {
-    return (
-      <>
-        <Loader />
-        <div className={styles.container + ' global-width-limiter'}>
-          <div className={styles.head}>
-            <CategoriesSidebar />
-            <HomeHeader />
-          </div>
-          <div className={styles.content}>
-            {this.productLines()}
-          </div>
+    }).finally(()=>dispatch({type:controlsConstants.HIDE_LOADER}))
+  }, [])
+
+  return (
+    <>
+    {props.controls.isLoaderShown ?  <Loader/> :
+      <div className={styles.container + ' global-width-limiter'}>
+        <div className={styles.head}>
+          <CategoriesSidebar />
+          <HomeHeader />
         </div>
-      </>
-    )
-  }
+        <div className={styles.content}>
+          {productLines(localProducts)}
+        </div>
+      </div>}
+    </>
+  )
+
 }
+
 const connectedHomePage = connect(state => state)(HomePage)
 export default connectedHomePage

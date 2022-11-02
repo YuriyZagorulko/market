@@ -6,7 +6,7 @@ export interface IControlsState {
     isExitDialogOpened: boolean
     isLoaderShown: boolean
 }
-const defaultState = { isCartOpened: false, isExitDialogOpened: false, isLoaderShown: false }
+const defaultState = { isCartOpened: false, isExitDialogOpened: false, isLoaderShown: true }
 export function controlsReducer(state: IControlsState = defaultState, action) {
     switch (action.type) {
         case controlsConstants.OPEN_CART:

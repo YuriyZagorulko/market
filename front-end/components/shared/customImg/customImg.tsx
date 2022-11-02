@@ -1,29 +1,37 @@
-import React, { useEffect, useState } from 'react'
+import React, { createRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { defaultProductImg } from '../../../helpers/constants/urls'
 import imgPreview from '../../../public/images/whileImgLoadPREVIEW.jpeg'
+import style from './customImg.module.scss'
 
 
 type ImgProps = {
-  img: string
+  img: any
   previev?: string,
   imgProps?: any,
   alt?: string,
   layout?: string,
 }
 
-function CustomImg (props: ImgProps){
+function CustomImg(props: ImgProps) {
   const [state, setState] = useState({
     isImageError: false,
     isShowPreview: true,
     displayImg: defaultProductImg,
   })
+
+  const imageErrorHandler = (err) => {
+    setState({
+      ...state,
+      isImageError: true
+    })
+  }
   useEffect(() => {
     if (!state.isImageError) {
       if (props.img) {
         setState({
           ...state,
-          displayImg: state.isShowPreview ? imgPreview.src : props.img 
+          displayImg: props.img
         })
       }
     } else {
@@ -32,29 +40,36 @@ function CustomImg (props: ImgProps){
         displayImg: props.previev ? props.previev : defaultProductImg
       })
     }
-  }, [props.img, props.previev, state.isImageError,state.isShowPreview])
-  const imageErrorHandler = (err) => {
+  }, [props.img, props.previev, state.isImageError, state.isShowPreview])
+
+  const productImgLoadHandler = () => {
     setState({
       ...state,
-      isImageError: true
+      isShowPreview: false
     })
   }
-  const productImgLoadHandler = ()=>{
-    setState({
-      ...state,
-      isShowPreview:false
-    })
-  }
+
   return (
-    <Image
-      src={ state.displayImg }
-      alt="Img"
-      layout="fill"
-      objectFit='contain'
-      { ...props.imgProps }
-      onError={imageErrorHandler}
-      onLoad={productImgLoadHandler}
-    />
+    <React.Fragment>
+      <Image src={imgPreview}
+        className={state.isShowPreview ? style.visible : style.invisible}
+        layout="fill"
+        objectFit='contain'
+        {...props.imgProps}
+      />
+      <Image
+        className={state.isShowPreview ? style.invisible : style.visible}
+        src={state.displayImg}
+        alt='Img'
+        layout="fill"
+        objectFit='contain'
+        {...props.imgProps}
+        onError={imageErrorHandler}
+        onLoadingComplete={productImgLoadHandler}
+      />
+    </React.Fragment>
+
   )
+
 }
 export default CustomImg
