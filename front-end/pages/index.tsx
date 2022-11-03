@@ -49,7 +49,6 @@ function HomePage(props: IProps) {
 
 
   useEffect(() => {
-    dispatch({type:controlsConstants.SHOW_LOADER})
     productService.mainPage().then((val) => {
       setLocalProducts({
         recomended: val.recomended,

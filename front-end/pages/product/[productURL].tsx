@@ -82,7 +82,7 @@ const Product = (props:IProps) => {
                     </div>
                     :
                     <div className={style.content + ' global-width-limiter'}>
-                        'no content loaded...'
+                        {!!product && 'no content loaded...'}
                     </div>
                 }
             </div>}

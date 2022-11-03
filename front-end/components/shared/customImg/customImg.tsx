@@ -1,4 +1,4 @@
-import React, { createRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { defaultProductImg } from '../../../helpers/constants/urls'
 import imgPreview from '../../../public/images/whileImgLoadPREVIEW.jpeg'
@@ -6,7 +6,7 @@ import style from './customImg.module.scss'
 
 
 type ImgProps = {
-  img: any
+  img: string
   previev?: string,
   imgProps?: any,
   alt?: string,
