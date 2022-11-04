@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 import { useState } from 'react'
 import { is } from 'immer/dist/internal'
 import OrderItem from '../order-item/OrderItem'
-import downArrowImg from '../../../public/images/icons/downArrow.svg'
 import { getProductImg } from '../../../helpers/types/responces/products'
 import CustomImg from '../../../components/shared/customImg/customImg'
 

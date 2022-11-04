@@ -1,0 +1,60 @@
+@import '../../../../styles/constants.scss';
+.sortMenuWrapper{
+    display:flex;
+    justify-content:space-between;
+    border-right: 1px solid $color-gray-main;
+    border-bottom: 1px solid $color-gray-main;
+    padding-bottom:12px;
+    padding-right:15px;
+    padding-left:15px;
+
+}
+.selectWrapper > *{
+    width:100%;
+}
+.select{
+    align-items: center;
+    background-image: url("/images/icons/downArrow.svg");
+    background-position: right 12px center;
+    background-repeat: no-repeat,repeat;
+    background-size: 14px 12px;
+    border: 1px solid #d2d2d2;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #221f1f;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 14px;
+    height: 32px;
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding-right: 40px;
+    text-align: left;
+    width: 100%;
+}
+
+.mobileSortBtn{
+    background-color: $color-blue-main;
+    color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    white-space: nowrap;
+    font-size: 14px;
+    height: 32px;
+    outline: none;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: center;
+    transition-duration: .2s;
+    transition-property: color,background-color,border-color;
+    transition-timing-function: ease-in-out;
+    @media(min-width:$screen-size-sm){
+        display:none;
+    }
+}
