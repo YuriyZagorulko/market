@@ -6,7 +6,7 @@ import style from './asideCollapse.module.scss'
 
 interface IProps{
     header:string
-    categoriesQuantity?: number
+    categoriesQuantity: number
     categories:any[]
 
 }
@@ -14,7 +14,6 @@ interface IProps{
 function AsideCollapse(props:IProps){
     const [isCollapseActive,setIsCollapseActive] = useState<boolean>(true)
     const handleCollapseClick = ()=>{
-        console.log('click')
         setIsCollapseActive(!isCollapseActive)
     }
     return(
@@ -26,7 +25,7 @@ function AsideCollapse(props:IProps){
                 </span>
             </button>
             <div className={isCollapseActive ? style.collapseBody : style.displayNone}>
-                {props.categories.map((el)=><CategoryCheckbox categoryName={el}/>)}
+                {props.categories.map((el)=><CategoryCheckbox categoryName={el} key={el}/>)}
 
             </div>
             

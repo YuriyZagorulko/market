@@ -8,6 +8,7 @@ interface IProps{
     sortOptions:string[],
     defaultSelectValue:string
     products:IProduct[]
+    onFilterBtnClick: ()=>void
 }
 function ProductsSortMenu(props:IProps){
     
@@ -23,11 +24,13 @@ for (let i = 0; i < props.sortOptions.length; i++) {
     label: props.sortOptions[i],
   });
 }
+
+
     return(
         <div className={'global-width-limiter'}>
             <div className={style.sortMenuWrapper}>
                 <React.Fragment>
-                    <button className={style.mobileSortBtn}>Фільтри</button>
+                    <button onClick={props.onFilterBtnClick} className={style.mobileSortBtn}>Фільтри</button>
                     <span>Всього товарів: {props.products?.length}</span>
                 </React.Fragment>
                

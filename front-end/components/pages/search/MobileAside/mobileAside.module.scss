@@ -1,0 +1,120 @@
+@import '../../../../styles/constants.scss';
+
+.disabled  {
+  width:0;
+}
+.disabled > *{
+  display:none!important;
+}
+.sidenavWrapper {
+    height: 100%;
+    display:block;
+    width:280px;
+    position: fixed; 
+    z-index: 1;
+    top: 0; 
+    left: 0;
+    background-color: #fff; 
+    overflow-x: hidden;
+    padding: 20px 0; 
+    transition: 0.5s; 
+  
+  }
+  .sideNavList{
+    margin:0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+  }
+
+  .sidenavHeader{
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 8px;
+    padding-right: 16px;
+    border-bottom: 2px solid $color-gray-light;
+    background-color: #fff;
+    
+  }
+  
+  .sidenavBtn  {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: $color-gray-main;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenavBtn :hover {
+    color: #f1f1f1;
+  }
+  
+  .closebtn {
+    cursor:pointer;
+    position: relative;
+    height: 56px;    
+    padding: 0;
+    margin-left:15px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-size: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    &:before{
+      content:'';
+      mask: url(/images/icons/downArrow.svg) no-repeat 50% 50%;
+      -webkit-mask:  url(/images/icons/downArrow.svg) no-repeat 50% 50%;
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      display:inline-block;
+      position:absolute;
+      background-color:#2d98da;
+      width:14px;
+      height:14px;
+      top: 40%;  
+      right: 100%; 
+      transform: rotate(90deg);
+    }
+    &:hover{
+      color:$color-accent-red;
+    }
+    &:hover:before {
+      background-color:$color-accent-red;
+
+    }
+  }
+  .sidenavFooter{
+    padding:10px;
+
+  }
+  .sidenavFooterClose{
+    font-weight:500;
+    font-size:15px;
+    height:40px;
+    width:100%;
+    border:none;
+    color:$color-blue-hight;
+    background-color:$color-gray-2;
+    cursor:pointer;
+
+    &:hover{
+      color:$color-blue-boyzone;
+    }
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  // #main {
+  //   transition: margin-left .5s;
+  //   padding: 20px;
+  // }
+  
+  // /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  // @media screen and (max-height: 450px) {
+  //   .sidenav {padding-top: 15px;}
+  //   .sidenav a {font-size: 18px;}
+  // } 

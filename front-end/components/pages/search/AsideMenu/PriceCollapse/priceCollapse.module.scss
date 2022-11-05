@@ -32,11 +32,15 @@
     transition-timing-function: ease-in-out;
     height:32px;
     border:1px solid $color-gray-main;
+    cursor:pointer;
+
     &:hover{
-        cursor:pointer;
         color: $color-blue-main;
         text-shadow: 0.5px 0px 0px  $color-blue-main;
-
+    }
+    &:active{
+        color: $color-blue-boyzone;
+        text-shadow:none;
     }
   
 }

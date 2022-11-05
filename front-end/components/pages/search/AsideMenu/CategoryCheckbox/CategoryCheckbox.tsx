@@ -1,5 +1,6 @@
 import { Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import style from './categoryCheckbox.module.scss'
 
 const onChange = (e: CheckboxChangeEvent) => {
     console.log(`checked = ${e.target.checked}`);
@@ -11,7 +12,7 @@ const onChange = (e: CheckboxChangeEvent) => {
 
 function CategoryCheckbox(props:IProps){
     return(
-        <Checkbox onChange={onChange}>{props.categoryName}</Checkbox>
+        <Checkbox className={style.categoryCheckbox} onChange={onChange}>{props.categoryName}</Checkbox>
 
     )
 }

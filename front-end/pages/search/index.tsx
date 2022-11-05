@@ -8,10 +8,18 @@ import { ISearchParams, searchService } from '../../services/search.service'
 import SearchItems from './components/search_items'
 import AsideMenu from '../../components/pages/search/AsideMenu/AsideMenu'
 import ProductsSortMenu from '../../components/pages/search/ProductsSortMenu/ProductsSortMenu'
+import { controlsConstants } from '../../helpers/constants/controls'
+import Loader from '../../components/shared/Loader/Loader'
+import { IControlsState } from '../../redux/reducers/controls.reducer'
+import MobileAside from '../../components/pages/search/MobileAside/MobileAside'
 
+interface IProps{
+  controls:IControlsState
+}
 
-function SearchPage() {
+function SearchPage(props: IProps) {
   const dispatch = useDispatch()
+  const [isMobileMenuActive,setIsMobileMenuActive] = useState<boolean>(false)
   const [{ requestData }, setSate] = useState({
     requestData: null
   })
@@ -26,12 +34,21 @@ function SearchPage() {
 
       searchService.search(paramsObj).then((val) => {
         setSate({ requestData: val })
-      })
+      }).finally(()=>dispatch({type:controlsConstants.HIDE_LOADER}))
     }
   }, [query])
+
+  function onToggleMobileAsideMenu(){
+    setIsMobileMenuActive(!isMobileMenuActive)
+    
+  }
   return (
     <>
-      <ProductsSortMenu products={requestData?.data.data}defaultSelectValue={'За рейтингом'} sortOptions={['За рейтингом', 'Від дорогих к дешевим', 'Від дешевих к дорогим']}/>
+    <MobileAside onCloseClick={onToggleMobileAsideMenu} isActive={isMobileMenuActive} products={requestData?.data.data}/>
+        {props.controls.isLoaderShown && <Loader/>}
+
+      <ProductsSortMenu products={requestData?.data.data} onFilterBtnClick={onToggleMobileAsideMenu}
+      defaultSelectValue={'За рейтингом'} sortOptions={['За рейтингом', 'Від дорогих к дешевим', 'Від дешевих к дорогим']}/>
 
       <div style={{ flexDirection: 'row' }} className={'wrapper-horizontal' + ' global-width-limiter'}>
         <AsideMenu products={requestData?.data.data} />

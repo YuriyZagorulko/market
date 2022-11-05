@@ -24,9 +24,9 @@ function AsideMenu(props: IProps) {
     return (
         <aside className={style.sidebar}>
             <div className={style.sideBarContainer}>
-            {!!minMaxPrices.min &&
+            {!!minMaxPrices.max &&
             <PriceSlider header={'Ціна'} minValue={minMaxPrices.min} maxValue={minMaxPrices.max}/>}
-            <AsideCollapse categories={['One','Two','Three']} header={'Бренд'}  />
+            <AsideCollapse categoriesQuantity={3} categories={['One','Two','Three']} header={'Бренд'}  />
             
             </div>
         </aside>
