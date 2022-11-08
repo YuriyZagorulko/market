@@ -13,13 +13,16 @@ import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import MobileAside from '../../components/pages/search/MobileAside/MobileAside'
 
-interface IProps{
-  controls:IControlsState
+interface IProps {
+  controls: IControlsState
 }
 
 function SearchPage(props: IProps) {
   const dispatch = useDispatch()
-  const [isMobileMenuActive,setIsMobileMenuActive] = useState<boolean>(false)
+  const [isMobileMenuActive, setIsMobileMenuActive] = useState({
+    main: false,
+    chosenCategory: false
+  })
   const [{ requestData }, setSate] = useState({
     requestData: null
   })
@@ -29,29 +32,40 @@ function SearchPage(props: IProps) {
 
   useEffect(() => {
     if (Object.keys(query)?.length > 0) {
-      console.log(query)
       paramsObj = JSON.parse(query.params as string)
 
       searchService.search(paramsObj).then((val) => {
         setSate({ requestData: val })
-      }).finally(()=>dispatch({type:controlsConstants.HIDE_LOADER}))
+      }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
     }
   }, [query])
 
-  function onToggleMobileAsideMenu(){
-    setIsMobileMenuActive(!isMobileMenuActive)
-    
+  function onToggleMobileAside() {
+    setIsMobileMenuActive({
+      ...isMobileMenuActive,
+      main: !isMobileMenuActive.main
+    })
   }
+  function onExitFromCategoryAside() {
+    setIsMobileMenuActive({ main: false, chosenCategory: false })
+  }
+  function onToggleCategoryAside() {
+    setIsMobileMenuActive({ ...isMobileMenuActive, chosenCategory: !isMobileMenuActive.chosenCategory })
+  }
+
   return (
     <>
-    <MobileAside onCloseClick={onToggleMobileAsideMenu} isActive={isMobileMenuActive} products={requestData?.data.data}/>
-        {props.controls.isLoaderShown && <Loader/>}
+      <MobileAside onToggleMainClick={onToggleMobileAside}
+        onToggleCategory={onToggleCategoryAside}
+        onChosenCategoryExitClick={onExitFromCategoryAside}
+        isActive={isMobileMenuActive} products={requestData?.data.data} />
+      {props.controls.isLoaderShown && <Loader />}
 
-      <ProductsSortMenu products={requestData?.data.data} onFilterBtnClick={onToggleMobileAsideMenu}
-      defaultSelectValue={'За рейтингом'} sortOptions={['За рейтингом', 'Від дорогих к дешевим', 'Від дешевих к дорогим']}/>
+      <ProductsSortMenu products={requestData?.data.data} onFilterBtnClick={onToggleMobileAside}
+        defaultSelectValue={'За рейтингом'} sortOptions={['За рейтингом', 'Від дорогих к дешевим', 'Від дешевих к дорогим']} />
 
       <div style={{ flexDirection: 'row' }} className={'wrapper-horizontal' + ' global-width-limiter'}>
-        <AsideMenu products={requestData?.data.data} />
+        <AsideMenu products={requestData?.data?.data} />
         {
           query.text &&
           <div className={style.searchTitle}>

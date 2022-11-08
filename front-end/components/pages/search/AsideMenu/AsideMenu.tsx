@@ -1,8 +1,9 @@
 import style from './asideMenu.module.scss'
 import AsideCollapse from './AsideCollapse/AsideCollapse'
-import PriceSlider from './PriceCollapse/PriceCollapse'
+import PriceCollapse from './PriceCollapse/PriceCollapse'
 import { IProduct } from '../../../../helpers/types/responces/products'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import React from 'react'
 
 interface IProps {
     products: IProduct[]
@@ -24,10 +25,9 @@ function AsideMenu(props: IProps) {
     return (
         <aside className={style.sidebar}>
             <div className={style.sideBarContainer}>
-            {!!minMaxPrices.max &&
-            <PriceSlider header={'Ціна'} minValue={minMaxPrices.min} maxValue={minMaxPrices.max}/>}
-            <AsideCollapse categoriesQuantity={3} categories={['One','Two','Three']} header={'Бренд'}  />
-            
+                {!!minMaxPrices.max && <PriceCollapse header={'Ціна'} minValue={minMaxPrices.min} maxValue={minMaxPrices.max} />}
+                <AsideCollapse categoriesQuantity={3} categories={['One', 'Two', 'Three']} header={'Бренд'} />
+
             </div>
         </aside>
     )
@@ -35,4 +35,4 @@ function AsideMenu(props: IProps) {
 
 }
 
-export default AsideMenu
+export default React.memo(AsideMenu)

@@ -5,6 +5,7 @@
     border-right: 1px solid $color-gray-main;
     border-bottom: 1px solid $color-gray-main;
     padding:12px 15px;
+    gap:12px;
 
 }
 .selectWrapper > *{
@@ -29,6 +30,9 @@
     overflow: hidden;
     padding-right: 40px;
     text-align: left;
+    @media(max-width:$screen-size-mob){
+        min-width:auto;
+    }
 }
 
 .mobileSortBtn {
@@ -85,6 +89,19 @@
     }
       
       
+  }
+  .productsCount{
+    font-size:14px;
+    display:inline-block;
+    align-self:center;
+    @media(max-width:$screen-size-mob){
+        display:none;
+    }
+  }
+  .leftSideItemsWrapper{
+    display:flex;
+    gap:15px;
+    text-align:center;
   }
   
   .mobileSortBtn:before {
