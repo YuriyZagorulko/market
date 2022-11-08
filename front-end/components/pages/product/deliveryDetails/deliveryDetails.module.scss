@@ -1,0 +1,94 @@
+@import '../../../../styles/constants.scss';
+
+.delivery{
+    margin-top:30px;
+}
+.deliveryWrapper{
+    display:flex;
+    justify-content: space-between;
+}
+.categoryBlock{
+    display:flex;
+    flex-direction:column;
+    justify-items: flex-start;
+    gap:20px;
+}
+.headerWrapper{
+    background-color: $color-gray-1;
+    max-width:120px;
+    padding:4px 6px;
+    border-radius: 0.5rem;
+    display:flex;
+    gap:5px;
+    align-items:center;
+    justify-content: center;
+}
+.header{
+    font-size:16px;
+    text-transform: capitalize;
+    font-weight: 400;
+    margin:0;
+    padding:0;
+}
+.headerIcon{
+    width:20px;
+    height:20px;
+}
+.categoryBody{
+    display:flex;
+    flex-direction: column;
+    gap:12px;
+}
+
+.bodyItem{
+    display:flex;
+    justify-content: space-between;
+    gap:25px;
+
+}
+.bodyItemDetails{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+.bodyItemHeader{
+    font-weight:600;
+    font-size:16px;
+}
+.bodyItemDescription{
+    color:$color-blue-main;
+    font-size:12px;
+}
+.bodyItemPrice{
+    font-size:14px;
+    font-weight:500;
+    align-self:center;
+}
+.bodyPromotionItem{
+    display:flex;
+    gap:10px;
+    align-items: center;
+}
+.bodyPromotionImg{
+    height:40px;
+    width:40px;
+}
+.bodyPromotionDescription{
+    letter-spacing: 1px;
+    color:$color-green;
+    font-size:14px;
+}
+.bodyPromotionTextWrapper{
+    display:flex;
+    flex-direction:column;
+
+}
+.bodyPromotionHeader{
+    letter-spacing: 2px;
+    font-weight:600;
+    text-transform: uppercase;
+    font-size:18px;
+    color:$color-green;
+
+}
+

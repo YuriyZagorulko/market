@@ -13,6 +13,7 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
+import DeliveryDetails from '../../components/pages/product/deliveryDetails/DeliveryDetails'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -61,6 +62,7 @@ const Product = () => {
                                 </button>
                             </div>
                         </div>
+                        <DeliveryDetails/>
                     </div>
                 </div>
                 <div className={style.bottom}>
