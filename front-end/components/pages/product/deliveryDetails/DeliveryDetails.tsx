@@ -21,7 +21,7 @@ function DeliveryDetails() {
                         <div className={style.bodyItem}>
                             <div className={style.bodyItemDetails}>
                                 <strong className={style.bodyItemHeader}>Кур'єром за адресою </strong>
-                                <span className={style.bodyItemDescription}>Курьером Нова Пошта</span>
+                                <span className={style.bodyItemDescription}>Кур'єром Нова Пошта</span>
                             </div>
                             <div className={style.bodyItemPrice}>від 49 ₴</div>
                         </div>
