@@ -5,7 +5,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>V16</title>
+        <title>Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой.</title>
         <link rel="icon" href="/favicon.ico" />
         <Script id="google-tag-manager" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -14,6 +14,14 @@ export default function Document() {
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-KWBH2RX');
           `}}/>
+          <meta name='description' content='Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!'></meta>
+          <meta name="robots" content="index, follow"></meta>
+          <meta name="keywords" content="аккумулятор,купить моторное масло,акб,купить аккумулятор,гелевый аккумулятор,купити акумулятор,акумулятор,varta аккумулятор,автозапчасти,запчасти,V16,магазин автозапчастей,автомасла,акб тестеры,клеммы аккумулятора"></meta>
+          <meta property="og:title"content="Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой." />
+          <meta property="og:site_name" content="v16.com.ua"></meta>
+          <meta property="og:type" content="website"></meta>
+          <meta property="og:url" content="https://v16.com.ua/"/>
+          <meta property="og:description"content="Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!" />
       </Head>
       <body>
         <noscript

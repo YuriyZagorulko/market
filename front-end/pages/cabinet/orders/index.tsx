@@ -1,4 +1,4 @@
-import style from './order-line.module.scss'
+import style from './Orders.module.scss'
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
@@ -28,8 +28,13 @@ function OrdersPage() {
   }, [])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px', marginBottom: '15px', padding: '0 15px' }} className={'global-width-limiter orders-wrapper'}>
-      {orders.map(el => <OrderLine order={el} key={el.id} />)}
+    <div className={'global-width-limiter' + ' ' + 'orders-wrapper' } >
+      <div className={style.headerWrapper}>
+        <h1 className={style.orderHeader}>Мої замовлення</h1>
+      </div>
+      <ul className={style.orderListWrapper}>
+        {orders.map(el => <OrderLine order={el} key={el.id} />)}
+      </ul>
     </div>
   )
 }
