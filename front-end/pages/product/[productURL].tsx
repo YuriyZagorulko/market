@@ -1,6 +1,6 @@
 import style from '../../styles/pages/Product.module.scss'
 import { connect, useDispatch } from 'react-redux'
-import { IProduct, getFirstImg, getProductImg } from '../../helpers/types/responces/products'
+import { IProduct, getFirstImg, getProductImg, getAllProductImages } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
@@ -13,6 +13,7 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
+import { Carousel } from '../../components/pages/product/Carousel/Carousel'
 
 const Product = () => {
     const dispatch = useDispatch()
@@ -37,11 +38,12 @@ const Product = () => {
             <div className={style.content + ' global-width-limiter'}>
                 <div className={style.top}>
                     <div className={style.topLeft}>
-                        <div className={style.images}>
+                        {product.imagesSet.length <=1 ? <div className={style.images}>
                             <div className={style.img} >
                                 <CustomImg img={getProductImg(product)} />
                             </div>
-                        </div>
+                        </div> :
+                        <Carousel images={getAllProductImages(product)}/>}
                     </div>
                     <div className={style.topRight}>
                         <div className={style.title}>

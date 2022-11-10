@@ -46,3 +46,11 @@ export function getPreviewImgUrl(product: IProduct): string {
     }
     return '/images/icons/shared/product-default.svg'
 }
+export function getAllProductImages(product:IProduct):string[]{
+    let links:string[] = []
+    for(let el of product.imagesSet){
+        links.push(config.mainDomain+el.image)
+    }
+    return links
+  
+}
