@@ -129,10 +129,10 @@ function CategoriesSidebar (props: { }) {
           <div className={style.menuFull}>
             <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
           </div>
-          <div onClick={onClick} className={style.menuSplit}>
-            <Menu style={{ width: 270 }} mode="vertical" items={items1} />
-            <Menu style={{ width: 270 }} mode="vertical" items={items2} />
-            <Menu style={{ width: 270 }} mode="vertical" items={items3} />
+          <div  className={style.menuSplit}>
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
           </div>
         </Card>
       </div>

@@ -29,14 +29,16 @@ function SearchPage(props: IProps) {
   let paramsObj = {}
   const router = useRouter()
   const query = router.query
-
+  
+  
   useEffect(() => {
     if (Object.keys(query)?.length > 0) {
       paramsObj = JSON.parse(query.params as string)
-
       searchService.search(paramsObj).then((val) => {
         setSate({ requestData: val })
       }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
+      return  ()=>{dispatch({type:controlsConstants.SHOW_LOADER})}
+
     }
   }, [query])
 

@@ -24,12 +24,14 @@ function OrdersPage(props: IProps) {
     orders: []
 
   })
+
   useEffect(() => {
     OrderService.getOrders().then((val) => {
       setSate({
         orders: val.data.data
       })
     }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
+    return ()=>{dispatch({type:controlsConstants.SHOW_LOADER})}
   }, [])
 
   return (

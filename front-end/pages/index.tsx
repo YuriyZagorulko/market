@@ -55,6 +55,7 @@ function HomePage(props: IProps) {
         popular: val.popular,
       })
     }).finally(()=>dispatch({type:controlsConstants.HIDE_LOADER}))
+    return (()=>dispatch({type:controlsConstants.SHOW_LOADER}))
   }, [])
 
   return (
