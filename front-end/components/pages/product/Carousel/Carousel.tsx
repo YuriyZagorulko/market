@@ -21,8 +21,8 @@ export const Carousel = (props: IProps) => {
     return (
         <article>
             <div className={style.sliderWrapper}>
-                <Swiper loop={true} modules={[Navigation, Thumbs]} grabCursor={true} className='product-images-slider' thumbs={{ swiper: thumbsSwiper }} >
-                    {props.images.map((el) => <SwiperSlide className={style.mainSlide}><img className={style.sliderImg}
+                <Swiper loop={true} navigation={true} modules={[Navigation, Thumbs]} grabCursor={true} className='product-images-slider' thumbs={{ swiper: thumbsSwiper }} >
+                    {props.images.map((el,i) => <SwiperSlide key={i} className={style.mainSlide}><img className={style.sliderImg}
                         src={el} alt="slide" /></SwiperSlide>)}
                 </Swiper>
             </div>
@@ -34,7 +34,7 @@ export const Carousel = (props: IProps) => {
                     watchSlidesProgress
                     slidesPerView={5}
                     onSwiper={setThumbsSwiper}>
-                    {props.images.map((el) => <SwiperSlide key={el} className={style.sliderThumb}>
+                    {props.images.map((el,i) => <SwiperSlide key={i} className={style.sliderThumb}>
                         <button className='product-images-slider-thumbs-wrapper'>
                             <img className={style.sliderThumb} src={el} alt="slide" />
                         </button></SwiperSlide>)}

@@ -249,3 +249,20 @@ body{
     }
   }
 }
+.swiper-button-next{
+  text-shadow: rgb(255, 255, 255) 0px 0px 2px;
+
+  
+  color:$color-blue-boyzone;
+  &:hover{
+    color:$color-red;
+  }
+}
+.swiper-button-prev{
+  text-shadow: rgb(255, 255, 255) 0px 0px 1px;
+  color:$color-blue-boyzone;
+  &:hover{
+    color:$color-red;
+  }
+
+}
