@@ -21,6 +21,7 @@ export default function Document() {
           <meta property="og:site_name" content="v16.com.ua"></meta>
           <meta property="og:type" content="website"></meta>
           <meta property="og:url" content="https://v16.com.ua/"/>
+          <meta property="og:image" content="https://v16.com.ua/images/main-logo.svg"/>
           <meta property="og:description"content="Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!" />
       </Head>
       <body>
