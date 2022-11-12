@@ -12,23 +12,28 @@ interface IProps {
 
 export const Carousel = (props: IProps) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [isFullScreenOpen,setIsFullScreenOpen] = useState(false)
     useEffect(() => {
         if (props.images.length) {
             setThumbsSwiper(props.images)
         }
     }, [props.images])
 
+    function handleSliderImgClick(){
+        setIsFullScreenOpen(!isFullScreenOpen)
+    }
+
     return (
         <article>
-            <div className={style.sliderWrapper}>
-                <Swiper loop={true} navigation={true} modules={[Navigation, Thumbs]} grabCursor={true} className='product-images-slider' thumbs={{ swiper: thumbsSwiper }} >
-                    {props.images.map((el,i) => <SwiperSlide key={i} className={style.mainSlide}><img className={style.sliderImg}
+            <div className={isFullScreenOpen? style.sliderWrapperFS : style.sliderWrapper}>
+                <Swiper onClick={handleSliderImgClick} loop={true} navigation={true} modules={[Navigation, Thumbs]} grabCursor={true} className='product-images-slider' thumbs={{ swiper: thumbsSwiper }} >
+                    {props.images.map((el,i) => <SwiperSlide key={i} className={isFullScreenOpen ? style.mainSlideFS : style.mainSlide}><img className={isFullScreenOpen ? style.sliderImgFS: style.sliderImg }
                         src={el} alt="slide" /></SwiperSlide>)}
                 </Swiper>
             </div>
 
-
-            <div className={style.thumbsWrapper}>
+            
+            <div className={isFullScreenOpen ? style.disabled : style.thumbsWrapper}>
                 <Swiper className='product-images-slider-thumbs'
                     modules={[Thumbs]}
                     watchSlidesProgress
