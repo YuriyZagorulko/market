@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import Head from 'next/head'
 
 interface IProps {
     login: any
@@ -20,7 +21,15 @@ function ContactUsPage () {
   })
 
   return (
-    <div className={style.container}>
+    <>
+    <Head>
+      <title>V16 — Заказ подтверждён | Интернет-магазин автотоваров V16</title>
+      <meta name="robots" content="noindex,nofollow"></meta>
+        <meta name='description' content='Заказ принят. Ожидайте прибытие товара.'></meta>
+        <meta name="keywords" content=''></meta>
+    </Head>
+
+<div className={style.container}>
       <div className={style.topIcon}>
         <FontAwesomeIcon icon={faCheckCircle as IconProp} />
       </div>
@@ -32,6 +41,8 @@ function ContactUsPage () {
         </Button>
       </Link>
     </div>
+    </>
+  
   )
 }
 const connectedContactUsPage = connect(state => state)(ContactUsPage)

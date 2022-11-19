@@ -6,6 +6,7 @@ import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { ISearchParams, searchService } from '../../services/search.service'
 import SearchItems from './components/search_items'
+import Head from 'next/head'
 
 
 function SearchPage () {
@@ -19,7 +20,6 @@ function SearchPage () {
 
   useEffect(() => {
     if (Object.keys(query)?.length > 0) {
-      console.log(query)
       paramsObj = JSON.parse(query.params  as string)
 
       searchService.search(paramsObj).then((val) => {
@@ -27,12 +27,21 @@ function SearchPage () {
       })
     }
   }, [query])
+ 
+
   return (
+    <>
+      <Head>
+       <title>Результаты поиска по запросу | V16</title>
+      <meta name="robots" content="noindex,nofollow"></meta>
+        <meta name='description' content={ `V16 - Результаты поиска по запросу: ${requestData?.config?.params?.text}`}></meta>
+        <meta name="keywords" content=''></meta>
+    </Head>
     <div className={'wrapper-horizontal' + ' global-width-limiter'}>
       {
         query.text &&
         <div className={style.searchTitle}>
-            Результаты пошуку за запитом {`<< ${query.text} >>`}
+            Результати пошуку за запитом {`<< ${query.text} >>`}
         </div>
       }
       {/* <div className={'search__order'}>
@@ -51,6 +60,8 @@ function SearchPage () {
         )
       }
     </div>
+    </>
+  
   )
 }
 const connectedSearchPage = connect(state => state)(SearchPage)
