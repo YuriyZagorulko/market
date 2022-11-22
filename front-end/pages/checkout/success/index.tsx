@@ -10,40 +10,40 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Head from 'next/head'
 
 interface IProps {
-    login: any
-    dispatch: any
+  login: any
+  dispatch: any
 }
-function ContactUsPage () {
+function ContactUsPage() {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [{isDisabledButton}, setSate] = useState({
+  const [{ isDisabledButton }, setSate] = useState({
     isDisabledButton: false
   })
 
   return (
     <>
-    <Head>
-      <title>V16 — Заказ подтверждён | Интернет-магазин автотоваров V16</title>
-      <meta name="robots" content="noindex,nofollow"></meta>
+      <Head>
+        <title>V16 — Заказ подтверждён | Интернет-магазин автотоваров V16</title>
+        <meta name="robots" content="noindex,nofollow"></meta>
         <meta name='description' content='Заказ принят. Ожидайте прибытие товара.'></meta>
         <meta name="keywords" content=''></meta>
-    </Head>
+      </Head>
 
-<div className={style.container}>
-      <div className={style.topIcon}>
-        <FontAwesomeIcon icon={faCheckCircle as IconProp} />
+      <div className={style.container}>
+        <div className={style.topIcon}>
+          <FontAwesomeIcon icon={faCheckCircle as IconProp} />
+        </div>
+        <h1>Дякую за вашу покупку</h1>
+        <h4>Ми зв'яжемося з вами найближчим часом</h4>
+        <Link href="/">
+          <Button type="primary">
+            На головну сторінку
+          </Button>
+        </Link>
       </div>
-      <h1>Дякую за вашу покупку</h1>
-      <h4>Ми зв'яжемося з вами найближчим часом</h4>
-      <Link href="/">
-        <Button type="primary">
-          На головну сторінку
-        </Button>
-      </Link>
-    </div>
     </>
-  
+
   )
 }
 const connectedContactUsPage = connect(state => state)(ContactUsPage)
-export  default connectedContactUsPage
+export default connectedContactUsPage
