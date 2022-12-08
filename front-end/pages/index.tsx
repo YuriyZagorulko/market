@@ -8,17 +8,18 @@ import HomeHeader from '../components/pages/home/homeHeader/homeHeader'
 import ProductLine from '../components/shared/productLine/productLine'
 import { productService } from '../services/product.service'
 import CategoriesSidebar from '../components/pages/home/categoriesSidebar/categoriesSidebar'
+import Head from 'next/head';
 
 interface IProps {
   login: any
   dispatch: any
 }
 interface IState {
-  recomended: IProduct [],
-  popular: IProduct [],
+  recomended: IProduct[],
+  popular: IProduct[],
 }
 class HomePage extends React.Component<IProps, IState> {
-  constructor(props){
+  constructor(props) {
     super(props)
   }
   componentDidMount() {
@@ -32,33 +33,49 @@ class HomePage extends React.Component<IProps, IState> {
     })
   }
 
-  productLines(){
-    if (this.state && this.state.recomended){
+  productLines() {
+    if (this.state && this.state.recomended) {
       return (
         <React.Fragment>
           <ProductLine products={this.state.recomended} title={'Рекомендовані товари'} />
           <ProductLine products={this.state.popular} title={'Популярні'} />
         </React.Fragment>
       )
-      } else {
-        return <div>
-          no content
-        </div>
-      }
+    } else {
+      return <div>
+        no content
+      </div>
+    }
   }
-  render () {
+  render() {
     return (
-    <div className={styles.container  + ' global-width-limiter'}>
-      <div className={styles.head}>
-        <CategoriesSidebar/>
-        <HomeHeader/>
-      </div>
-      <div className={styles.content}>
-       {this.productLines()}
-      </div>
-    </div>
-  )
+      <>
+      <Head>
+        <title>Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой.</title>
+          <meta name='description' content='Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!'></meta>
+            <meta name="robots" content="index, follow"></meta>
+              <meta name="keywords" content="аккумулятор,купить моторное масло,акб,купить аккумулятор,гелевый аккумулятор,купити акумулятор,акумулятор,varta аккумулятор,автозапчасти,запчасти,V16,магазин автозапчастей,автомасла,акб тестеры,клеммы аккумулятора"></meta>
+                <meta property="og:title"content="Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой." />
+                <meta property="og:type" content="website"></meta> 
+              <meta property="og:url" content="https://v16.com.ua/"/>
+            <meta property="og:image" content="https://v16.com.ua/images/main-logo.svg"/> 
+          <meta property="og:description"content="Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!" />
+      </Head>
+        <div className={styles.container + ' global-width-limiter'}>
+          <div className={styles.head}>
+            <CategoriesSidebar />
+            <HomeHeader />
+          </div>
+          <div className={styles.content}>
+            {this.productLines()}
+          </div>
+        </div>
+      </>
+
+
+
+    )
   }
 }
 const connectedHomePage = connect(state => state)(HomePage)
-export  default connectedHomePage
+export default connectedHomePage

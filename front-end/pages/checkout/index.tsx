@@ -22,6 +22,7 @@ import { controlsConstants } from '../../helpers/constants/controls'
 import CustomBtn from '../../components/shared/customBtn/customBtn'
 import { clearCart } from '../../redux/actions/cart'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import Head from 'next/head'
 
 interface IProps {
   dispatch: any,
@@ -256,6 +257,13 @@ class CheckoutPage extends React.Component<IProps, IState> {
   }
   render() {
     return (
+      <>
+      <Head>
+        <title>V16 — Оформление заказа | Интернет-магазин автотоваров V16</title>
+        <meta name="robots" content="noindex,nofollow"></meta>
+        <meta name='description' content='V-16 Подтверждение заказа'></meta>
+        <meta name="keywords" content=''></meta>
+      </Head>
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.content}>
           <h1>Оформлення замовлення</h1>
@@ -267,6 +275,8 @@ class CheckoutPage extends React.Component<IProps, IState> {
           {this.sidebar()}
         </div>
       </div>
+      </>
+ 
     )
   }
 }
