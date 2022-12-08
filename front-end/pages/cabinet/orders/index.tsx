@@ -13,6 +13,8 @@ import { controlsConstants } from '../../../helpers/constants/controls'
 import { IControlsState } from '../../../redux/reducers/controls.reducer'
 import Head from 'next/head'
 
+
+
 interface IProps {
   login: any
   dispatch: any
@@ -42,7 +44,6 @@ function OrdersPage(props: IProps) {
         <meta name='description' content=''></meta>
         <meta name="keywords" content=''></meta>
       </Head>
-
       {props.controls.isLoaderShown ? <Loader /> :
         <div className={'global-width-limiter' + ' ' + 'orders-wrapper'} >
           <div className={style.headerWrapper}>

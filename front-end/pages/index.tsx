@@ -13,8 +13,6 @@ import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
 import Head from 'next/head';
 
-
-
 interface IProps {
   login: any
   dispatch: any
@@ -38,6 +36,7 @@ function productLines(localProducts: IProductsState) {
     return <div>
       На жаль, ми не знайшли товарів які можемо вам порекомендувати.
     </div>
+
   }
 }
 
@@ -63,6 +62,7 @@ function HomePage(props: IProps) {
   return (
     <>
     <Head>
+
         <title>Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой.</title>
           <meta name='description' content='Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!'></meta>
             <meta name="robots" content="index, follow"></meta>
@@ -85,8 +85,7 @@ function HomePage(props: IProps) {
       </div>}
     </>
   )
-
 }
 
 const connectedHomePage = connect(state => state)(HomePage)
-export  default connectedHomePage
+export default connectedHomePage

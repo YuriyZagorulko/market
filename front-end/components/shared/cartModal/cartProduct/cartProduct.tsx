@@ -73,6 +73,7 @@ class CartProduct extends React.Component<IProps, cartProductState> {
         </div>
       </li>
     )
+
   }
 }
 

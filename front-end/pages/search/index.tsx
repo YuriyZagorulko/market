@@ -14,6 +14,7 @@ import { IControlsState } from "../../redux/reducers/controls.reducer";
 import MobileAside from "../../components/pages/search/MobileAside/MobileAside";
 import Head from "next/head";
 
+
 interface IProps {
   controls: IControlsState;
 }
@@ -125,3 +126,4 @@ function SearchPage(props: IProps) {
 }
 const connectedSearchPage = connect((state) => state)(SearchPage);
 export default connectedSearchPage;
+

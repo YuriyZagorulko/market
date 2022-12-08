@@ -13,6 +13,7 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
+
 import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
@@ -40,7 +41,7 @@ const Product = (props: IProps) => {
         dispatch({ type: cartConstants.ADD_PRODUCT, product })
         dispatch({ type: controlsConstants.OPEN_CART })
     }
-    
+
     return (
         <>
             <Head>
