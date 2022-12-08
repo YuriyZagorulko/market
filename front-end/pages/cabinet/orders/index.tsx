@@ -1,4 +1,4 @@
-import style from './order-line.module.scss'
+import style from './Orders.module.scss'
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import Link from 'next/link'
@@ -11,6 +11,7 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import Loader from '../../../components/shared/Loader/Loader'
 import { controlsConstants } from '../../../helpers/constants/controls'
 import { IControlsState } from '../../../redux/reducers/controls.reducer'
+import Head from 'next/head'
 
 interface IProps {
   login: any
@@ -31,17 +32,28 @@ function OrdersPage(props: IProps) {
         orders: val.data.data
       })
     }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
-    return ()=>{dispatch({type:controlsConstants.SHOW_LOADER})}
+    return () => { dispatch({ type: controlsConstants.SHOW_LOADER }) }
   }, [])
-
   return (
     <>
+      <Head>
+        <title>V16 — Мои заказы | Личный кабинет</title>
+        <meta name="robots" content="noindex,nofollow"></meta>
+        <meta name='description' content=''></meta>
+        <meta name="keywords" content=''></meta>
+      </Head>
 
       {props.controls.isLoaderShown ? <Loader /> :
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px', marginBottom: '15px', padding: '0 15px' }} className={'global-width-limiter orders-wrapper'}>
-          {orders.map(el => <OrderLine order={el} key={el.id} />)}
+        <div className={'global-width-limiter' + ' ' + 'orders-wrapper'} >
+          <div className={style.headerWrapper}>
+            <h1 className={style.orderHeader}>Мої замовлення</h1>
+          </div>
+          <ul className={style.orderListWrapper}>
+            {orders.map(el => <OrderLine order={el} key={el.id} />)}
+          </ul>
         </div>}
     </>
+
   )
 }
 const connectedOrdersPage = connect(state => state)(OrdersPage)

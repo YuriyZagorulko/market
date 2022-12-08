@@ -1,5 +1,7 @@
 .container{
   display: flex;
+  flex-direction:column;
+  padding: 0 15px; 
 }
 .login{
   padding-top: 30px;
@@ -7,4 +9,19 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+.orderListWrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  margin-top: 15px; 
+  margin-bottom: 15px;
+
+}
+.headerWrapper{
+  padding-left:40px;
+
+}
+.header{
+
 }

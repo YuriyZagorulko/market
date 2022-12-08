@@ -11,6 +11,8 @@ import CategoriesSidebar from '../components/pages/home/categoriesSidebar/catego
 import { controlsConstants } from '../helpers/constants/controls'
 import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
+import Head from 'next/head';
+
 
 
 interface IProps {
@@ -60,6 +62,17 @@ function HomePage(props: IProps) {
 
   return (
     <>
+    <Head>
+        <title>Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой.</title>
+          <meta name='description' content='Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!'></meta>
+            <meta name="robots" content="index, follow"></meta>
+              <meta name="keywords" content="аккумулятор,купить моторное масло,акб,купить аккумулятор,гелевый аккумулятор,купити акумулятор,акумулятор,varta аккумулятор,автозапчасти,запчасти,V16,магазин автозапчастей,автомасла,акб тестеры,клеммы аккумулятора"></meta>
+                <meta property="og:title"content="Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой." />
+                <meta property="og:type" content="website"></meta> 
+              <meta property="og:url" content="https://v16.com.ua/"/>
+            <meta property="og:image" content="https://v16.com.ua/images/main-logo.svg"/> 
+          <meta property="og:description"content="Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!" />
+      </Head>
     {props.controls.isLoaderShown ?  <Loader/> :
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.head}>
@@ -76,4 +89,4 @@ function HomePage(props: IProps) {
 }
 
 const connectedHomePage = connect(state => state)(HomePage)
-export default connectedHomePage
+export  default connectedHomePage
