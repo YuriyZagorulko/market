@@ -111,10 +111,10 @@ const redirectToCategory = (router, category) => {
   }
 }
 function CategoriesSidebar (props: { }) {
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  // const [mounted, setMounted] = useState(false)
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
   const router = useRouter()
 
   const onClick = e => {
@@ -122,14 +122,14 @@ function CategoriesSidebar (props: { }) {
     console.log('click', e)
   }
 
-  if (mounted) {  // console warning fix
+  // if (mounted) {  // console warning fix
     return (
       <div className={style.container + ' global'}>
         <Card hoverable className={style.card}>
           <div className={style.menuFull}>
             <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
           </div>
-          <div className={style.menuSplit}>
+          <div  className={style.menuSplit}>
             <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
             <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
             <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
@@ -137,8 +137,8 @@ function CategoriesSidebar (props: { }) {
         </Card>
       </div>
     )
-  } else {
-    return <></>
-  }
+  // } else {
+  //   return <></>
+  // }
 }
 export default CategoriesSidebar

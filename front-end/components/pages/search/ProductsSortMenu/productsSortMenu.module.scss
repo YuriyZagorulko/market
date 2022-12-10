@@ -1,0 +1,111 @@
+@import '../../../../styles/constants.scss';
+.sortMenuWrapper{
+    display:flex;
+    justify-content:space-between;
+    border-right: 1px solid $color-gray-main;
+    border-bottom: 1px solid $color-gray-main;
+    padding:12px 15px;
+    gap:12px;
+
+}
+.selectWrapper > *{
+    width:100%;
+}
+.select{
+    align-items: center;
+    background-image: url("/images/icons/downArrow.svg");
+    background-position: right 12px center;
+    background-repeat: no-repeat,repeat;
+    background-size: 14px 12px;
+    border: 1px solid $color-gray-main;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: $color-black;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 14px;
+    height: 32px;
+    margin: 0;
+    min-width: 225px;
+    overflow: hidden;
+    padding-right: 40px;
+    text-align: left;
+    @media(max-width:$screen-size-mob){
+        min-width:auto;
+    }
+}
+
+.mobileSortBtn {
+    border: none;
+    font-family: 'Lato';
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 4px 26px 4px 40px;
+    display: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    background: $color-blue-hight;
+    color: #fff;
+    @media(max-width:$screen-size-sm){
+        display:inline-block;
+    }
+    &:before {
+        text-transform: none;
+        position: relative;
+        -webkit-font-smoothing: antialiased;
+        background: rgba(0,0,0,0.15);
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 1.5;
+        font-size: 140%;
+        width: 30px;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+      
+    &:hover {
+        background: $color-blue-boyzone;
+    }
+    &:active {
+        background: $color-blue-boyzone;
+        top: 2px;
+    }
+      
+      
+  }
+  .productsCount{
+    font-size:14px;
+    display:inline-block;
+    align-self:center;
+    @media(max-width:$screen-size-mob){
+        display:none;
+    }
+  }
+  .leftSideItemsWrapper{
+    display:flex;
+    gap:15px;
+    text-align:center;
+  }
+  
+  .mobileSortBtn:before {
+    content: url(../../../../public/images/icons/funnel.svg);
+    
+  }
+  

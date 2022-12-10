@@ -127,6 +127,8 @@
 }
 .headerIcon{
     cursor: pointer;
+    padding:0!important;
+
 
     img{
         filter: brightness(0) invert(1);
@@ -152,13 +154,23 @@
     width:100%;
     max-width:20px;
     top:15px;
-    left:35px;
+    left:27px;
     border-radius:50%;
     z-index:1;
     color:#fff;
     text-align:center;
     font-size:12px;
     font-weight:500;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    @media(max-width:$screen-size-lap){
+        left:18px;
+        top:18px;
+        max-height:16px;
+        max-width:16px;
+        font-weight:normal;
+    }
 
 
 }
