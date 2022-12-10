@@ -1,0 +1,7 @@
+@import '../../../../../styles/constants.scss';
+.categoryCheckbox{
+    padding:3px 4px;
+    &:hover{
+        background-color:$color-gray-transparent;
+    }
+}

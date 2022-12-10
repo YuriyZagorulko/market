@@ -92,7 +92,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
           <Modal
             className={'cart-modal'}
             title="Корзина"
-            visible={this.state.isVisible}
+            open={this.state.isVisible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             destroyOnClose

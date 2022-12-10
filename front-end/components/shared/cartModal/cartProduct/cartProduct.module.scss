@@ -28,7 +28,7 @@
         .productTitle{
             display: flex;
             font-size: 15px;
-            padding-top: 10px;
+            align-self:center;
             &:hover{
                 cursor: pointer;
                 text-decoration: underline;

@@ -1,6 +1,8 @@
 @import '/styles/constants.scss';
 
 .container{
+    min-width:283px;
+
     margin: 0 20px 0 0;
     ul{
         border: none;
@@ -14,6 +16,7 @@
     }
 }
 .card{
+    min-width:283px;
     >div{
         padding: 10px;
     }

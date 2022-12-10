@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { defaultProductImg } from '../../../helpers/constants/urls'
+import imgPreview from '../../../public/images/whileImgLoadPREVIEW.jpeg'
+import style from './customImg.module.scss'
+
 
 type ImgProps = {
   img: string
   previev?: string,
   imgProps?: any,
   alt?: string,
-  layout?: string
+  layout?: string,
 }
 
-function CustomImg (props: ImgProps){
+function CustomImg(props: ImgProps) {
   const [state, setState] = useState({
     isImageError: false,
-    displayImg: defaultProductImg
+    isShowPreview: true,
+    displayImg: defaultProductImg,
   })
+
+  const imageErrorHandler = (err) => {
+    setState({
+      ...state,
+      isImageError: true
+    })
+  }
   useEffect(() => {
     if (!state.isImageError) {
       if (props.img) {
@@ -29,22 +40,36 @@ function CustomImg (props: ImgProps){
         displayImg: props.previev ? props.previev : defaultProductImg
       })
     }
-  }, [props.img, props.previev, state.isImageError])
-  const imageErrorHandler = (err) => {
+  }, [props.img, props.previev, state.isImageError, state.isShowPreview])
+
+  const productImgLoadHandler = () => {
     setState({
       ...state,
-      isImageError: true
+      isShowPreview: false
     })
   }
+
   return (
-    <Image
-      src={ state.displayImg }
-      alt="Img"
-      layout="fill"
-      objectFit='contain'
-      { ...props.imgProps }
-      onError={imageErrorHandler}
-    />
+    <React.Fragment>
+      <Image src={imgPreview}
+        className={state.isShowPreview ? style.visible : style.invisible}
+        layout="fill"
+        objectFit='contain'
+        {...props.imgProps}
+      />
+      <Image
+        className={state.isShowPreview ? style.invisible : style.visible}
+        src={state.displayImg}
+        alt='Img'
+        layout="fill"
+        objectFit='contain'
+        {...props.imgProps}
+        onError={imageErrorHandler}
+        onLoadingComplete={productImgLoadHandler}
+      />
+    </React.Fragment>
+
   )
+
 }
 export default CustomImg

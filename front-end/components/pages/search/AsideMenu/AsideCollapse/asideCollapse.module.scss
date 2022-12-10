@@ -1,0 +1,71 @@
+@import '../../../../../styles/constants.scss';
+.collapseWrapper{
+    padding-left: 8px;
+    padding-right: 8px;
+    border-right: 1px solid $color-gray-main;
+    border-bottom: 1px solid $color-gray-main;
+    width:100%;
+}
+.collapseButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 8px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: $color-blue-boyzone;
+    position:relative;
+    cursor: pointer;
+    &:hover{
+        color:$color-blue-main;
+        text-shadow: 0.1px 0.1px 0.1px $color-blue-main;
+    }
+}
+.collapseHeader{
+    margin-right: 16px;
+    
+}
+.collapseQuantity{
+    margin-left: 4px;
+    font-size: 14px;
+    color: $color-black;
+}
+.collapseBody{
+    display:flex;
+    flex-direction:column;
+    padding-bottom:8px;
+
+}
+.collapseBody > label{
+    margin-left:8px;
+}
+.displayNone{
+    display:none;
+}
+.collapseChevron{
+    position:absolute;
+    right:12px;
+    top:40%;
+    max-height:18px;
+    max-width:15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .5s ease;
+
+
+    &Active{
+        position:absolute;
+        right:12px;
+        top:40%;
+        max-height:18px;
+        max-width:15px;
+        transition: all .5s ease;
+        transform: rotate(-180deg);
+        font-size: 14px;
+        cursor: pointer;
+    }
+    
+}

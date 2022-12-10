@@ -1,11 +1,11 @@
 import style from '../../styles/pages/Product.module.scss'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { IProduct, getFirstImg, getProductImg, getPreviewImgUrl } from '../../helpers/types/responces/products'
 import Image from 'next/image'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { controlsConstants } from '../../helpers/constants/controls'
@@ -13,27 +13,34 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
+
+import Loader from '../../components/shared/Loader/Loader'
+import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
 import { storeContacts } from '../../helpers/constants/storeDataConstants/storeContacts'
+interface IProps {
+    dispatch: any
+    controls: IControlsState
+}
 
-const Product = () => {
+const Product = (props: IProps) => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [product, setProduct] = useState(null)
     const { productURL } = router.query
+
     if (productURL && !product) {
         productService.getProduct(productURL.toString()).then((data) => {
             setProduct(data)
         }).catch(err => {
             console.log(err)
-        })
+        }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
     }
+
     const buyProduct = () => {
         dispatch({ type: cartConstants.ADD_PRODUCT, product })
         dispatch({ type: controlsConstants.OPEN_CART })
     }
-    console.log(product)
-    console.log(router)
 
     return (
         <>
@@ -48,49 +55,50 @@ const Product = () => {
                 <meta property="og:image" content={getPreviewImgUrl(product)} />
                 <meta property="og:description" content={`Купить ${product?.title} (${storeContacts.MOBILE_NUMBER}) с гарантией. Отзывы. Характеристики. Фото. Доставка в Киев, Харьков, Днепр, Одессу и другие города Украины.`} />
             </Head>
-            <div className={style.wrapper}>
-                {product ?
-                    <div className={style.content + ' global-width-limiter'}>
-                        <div className={style.top}>
-                            <div className={style.topLeft}>
-                                <div className={style.images}>
-                                    <div className={style.img} >
-                                        <CustomImg img={getProductImg(product)} />
+            {props.controls.isLoaderShown ? <Loader /> :
+                <div className={style.wrapper}>
+                    {product ?
+                        <div className={style.content + ' global-width-limiter'}>
+                            <div className={style.top}>
+                                <div className={style.topLeft}>
+                                    <div className={style.images}>
+                                        <div className={style.img} >
+                                            <CustomImg img={getProductImg(product)} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={style.topRight}>
+                                    <div className={style.title}>
+                                        {product.title}
+                                    </div>
+                                    <div className={style.description}>
+                                        {product.description}
+                                    </div>
+                                    <div className={style.trade}>
+                                        <div className={style.price}>
+                                            {product.price} ₴
+                                        </div>
+                                        <div className={style.buy}>
+                                            <button className={`button-primary`} onClick={buyProduct}>
+                                                <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
+                                                Купити
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className={style.topRight}>
-                                <div className={style.title}>
-                                    {product.title}
-                                </div>
-                                <div className={style.description}>
-                                    {product.description}
-                                </div>
-                                <div className={style.trade}>
-                                    <div className={style.price}>
-                                        {product.price} ₴
-                                    </div>
-                                    <div className={style.buy}>
-                                        <button className={`button-primary`} onClick={buyProduct}>
-                                            <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                            Купити
-                                        </button>
-                                    </div>
+                            <div className={style.bottom}>
+                                <div className={style.bottomLeft}>
+                                    <Characteristics characteristics={product.characteristics} />
                                 </div>
                             </div>
                         </div>
-                        <div className={style.bottom}>
-                            <div className={style.bottomLeft}>
-                                <Characteristics characteristics={product.characteristics} />
-                            </div>
+                        :
+                        <div className={style.content + ' global-width-limiter'}>
+                            {!!product && 'no content loaded...'}
                         </div>
-                    </div>
-                    :
-                    <div className={style.content + ' global-width-limiter'}>
-                        no content loaded...
-                    </div>
-                }
-            </div>
+                    }
+                </div>}
         </>)
 }
 

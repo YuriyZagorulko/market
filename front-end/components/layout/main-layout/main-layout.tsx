@@ -14,7 +14,7 @@ type layoutProps = {
 export default class MainLayout extends React.Component<layoutProps> {
     render() {
         return (
-            <div>
+            <React.Fragment>
               <Header/>
               <main className={styles.content}>
                 {this.props.children}
@@ -22,7 +22,7 @@ export default class MainLayout extends React.Component<layoutProps> {
               <Footer/>
               <CartModal />
               <ExitDialogWindow/>
-            </div>
+            </React.Fragment>
           )
     }
   }
