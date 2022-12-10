@@ -17,7 +17,7 @@ export default class Welcome extends React.Component<headerProps, headerState> {
     }
     render() {
       return (
-        <div className={styles.footer}>
+        <footer className={styles.footer}>
           <div className={`${styles.footerContent} global-width-limiter`}>
               <div className={styles.footerContact}>
               <Link href="/help">
@@ -40,7 +40,7 @@ export default class Welcome extends React.Component<headerProps, headerState> {
                 </Link>
               </div>
           </div>
-        </div>
+        </footer>
       )
     }
   }

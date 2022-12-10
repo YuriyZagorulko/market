@@ -69,7 +69,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
     productsList = () => {
       if (this.state.cartProducts.length > 0) {
           return (
-            <div className={styles.productList}>
+            <ul className={styles.productList}>
               {this.state.cartProducts.map((item, i) => {
                 return (
                   <CartProduct
@@ -80,7 +80,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
                   />
                 )
               })}
-            </div>
+            </ul>
           )
         } else {
           return <div>Корзина порожня...</div>
@@ -92,7 +92,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
           <Modal
             className={'cart-modal'}
             title="Корзина"
-            visible={this.state.isVisible}
+            open={this.state.isVisible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
             destroyOnClose

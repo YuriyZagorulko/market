@@ -63,7 +63,7 @@ class exitDialogWindow extends React.Component<IProps, exitDialogState> {
           <Modal
             className={'cart-modal'}
             title="Ви впевнені що хочете залишити сайт?"
-            visible={this.state.isVisible}
+            open={this.state.isVisible}
             destroyOnClose
             onCancel={this.handleCancel}
             width={'600px'}

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import style from './deliveryDetails.module.scss'
 
 function DeliveryDetails() {
@@ -6,7 +7,9 @@ function DeliveryDetails() {
             <div className={style.deliveryWrapper}>
                 <div className={style.categoryBlock}>
                     <div className={style.headerWrapper}>
-                        <img className={style.headerIcon} src="/images/icons/delivery-truck-icon.svg" alt="delivery" />
+                        <div className={style.headerIcon}>
+                            <Image layout='fill' src="/images/icons/delivery-truck-icon.svg" alt="delivery" />
+                        </div>
                         <h4 className={style.header}>Доставка</h4>
                     </div>
                     <div className={style.categoryBody}>
@@ -26,17 +29,21 @@ function DeliveryDetails() {
                             <div className={style.bodyItemPrice}>від 49 ₴</div>
                         </div>
                         <div className={style.bodyPromotionItem}>
-                                    <img className={style.bodyPromotionImg} src="/images/icons/delivery-truck-icon.svg" alt="delivery"/>
-                                    <div className={style.bodyPromotionTextWrapper}>
-                                        <span className={style.bodyPromotionDescription}>Закази від 3000грн</span>
-                                        <strong className={style.bodyPromotionHeader}>Доставка безкоштовно</strong>
-                                    </div>
+                            <div className={style.bodyPromotionImg}>
+                                <Image layout='fill' src="/images/icons/delivery-truck-icon.svg" alt="delivery" />
+                            </div>
+                            <div className={style.bodyPromotionTextWrapper}>
+                                <span className={style.bodyPromotionDescription}>Закази від 3000грн</span>
+                                <strong className={style.bodyPromotionHeader}>Доставка безкоштовно</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className={style.categoryBlock}>
                     <div className={style.headerWrapper}>
-                        <img className={style.headerIcon} src="/images/icons/credit-card-icon.svg" alt="delivery" />
+                        <div className={style.headerIcon} >
+                            <Image layout='fill' src="/images/icons/credit-card-icon.svg" alt="delivery" />
+                        </div>
                         <h4 className={style.header}>Оплата</h4>
                         <div className={style.categoryBody}>
                         </div>

@@ -14,15 +14,15 @@ type layoutProps = {
 export default class MainLayout extends React.Component<layoutProps> {
     render() {
         return (
-            <div>
+            <React.Fragment>
               <Header/>
-              <div className={styles.content}>
+              <main className={styles.content}>
                 {this.props.children}
-              </div>
+              </main>
               <Footer/>
               <CartModal />
               <ExitDialogWindow/>
-            </div>
+            </React.Fragment>
           )
     }
   }

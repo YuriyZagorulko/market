@@ -98,7 +98,7 @@ function Header(props: any) {
   }
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       {state.headerBanner ? <div className={styles.headerTop}>{state.headerBanner}</div> : ''}
       <div className={`${styles.headerContent} global-width-limiter`} >
         <div className={styles.headerNavigation}>
@@ -148,7 +148,7 @@ function Header(props: any) {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 

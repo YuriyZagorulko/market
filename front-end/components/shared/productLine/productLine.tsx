@@ -16,17 +16,17 @@ function ProductLine (props: productLineProps) {
   return (
     <div className={styles.container}>
       <div className={styles.head}>
-        <div className={styles.title}>{props.title}</div>
+        <h2 className={styles.title}>{props.title}</h2>
       </div>
-      <div className={styles.content}>
+      <ul className={styles.content}>
         {props.products.map((product: IProduct, index) => {
           if (index < 6) {
-            return <div className={styles.product} key={index}>
+            return <li className={styles.product} key={index}>
               <ProductPrev product={product}/>
-            </div>
+            </li>
           }
         })}
-      </div>
+      </ul>
 
     </div>
   )

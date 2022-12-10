@@ -105,7 +105,7 @@ export default class Shipping extends React.Component<Props> {
               <Radio value={deliveryTypes.newPostCourier}>
                 <div className={styles.deliveryContainer}>
                   <div className={styles.radioTitle}>
-                    Курьер Новая почта
+                    Кур'єр Нова Пошта 
                   </div>
                 </div>
               </Radio>
@@ -113,7 +113,7 @@ export default class Shipping extends React.Component<Props> {
                 <div className={styles.line}>
                     <div className={styles.lineItem}>
                       <label>
-                        Улица
+                        Вулиця
                       </label>
                       <Form.Item
                         name="street"
@@ -124,7 +124,7 @@ export default class Shipping extends React.Component<Props> {
                     </div>
                     <div className={styles.lineItem}>
                       <label>
-                        Дом
+                        Будинок
                       </label>
                       <Form.Item
                         name="house"
