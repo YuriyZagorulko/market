@@ -1,10 +1,8 @@
 import style from "./search.module.scss";
 import React, { useState, useEffect } from "react";
-import { Form, Input, Button, Checkbox, notification } from "antd";
 import { useRouter } from "next/router";
 import { connect, useDispatch } from "react-redux";
-import Link from "next/link";
-import { ISearchParams, searchService } from "../../services/search.service";
+import { searchService } from "../../services/search.service";
 import SearchItems from "./components/search_items";
 import AsideMenu from "../../components/pages/search/AsideMenu/AsideMenu";
 import ProductsSortMenu from "../../components/pages/search/ProductsSortMenu/ProductsSortMenu";

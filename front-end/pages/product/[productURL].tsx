@@ -1,7 +1,7 @@
 import style from '../../styles/pages/Product.module.scss'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { IProduct, getFirstImg, getProductImg, getPreviewImgUrl } from '../../helpers/types/responces/products'
+import { connect, useDispatch } from 'react-redux'
 import Image from 'next/image'
+import { IProduct, getFirstImg, getProductImg, getAllProductImages, getPreviewImgUrl } from '../../helpers/types/responces/products'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
@@ -13,7 +13,8 @@ import { cartConstants } from '../../redux/reducers/cart.reducer'
 import CustomImg from '../../components/shared/customImg/customImg'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Characteristics from '../../components/pages/product/characteristics/characteristics'
-
+import { Carousel } from '../../components/pages/product/Carousel/Carousel'
+import DeliveryDetails from '../../components/pages/product/deliveryDetails/DeliveryDetails'
 import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
@@ -61,11 +62,12 @@ const Product = (props: IProps) => {
                         <div className={style.content + ' global-width-limiter'}>
                             <div className={style.top}>
                                 <div className={style.topLeft}>
-                                    <div className={style.images}>
+                                    {product.imagesSet.length <= 1 ? <div className={style.images}>
                                         <div className={style.img} >
                                             <CustomImg img={getProductImg(product)} />
                                         </div>
-                                    </div>
+                                    </div> :
+                                        <Carousel images={getAllProductImages(product)} />}
                                 </div>
                                 <div className={style.topRight}>
                                     <div className={style.title}>
@@ -85,6 +87,7 @@ const Product = (props: IProps) => {
                                             </button>
                                         </div>
                                     </div>
+                                    <DeliveryDetails />
                                 </div>
                             </div>
                             <div className={style.bottom}>
