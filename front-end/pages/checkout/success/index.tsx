@@ -24,16 +24,16 @@ function ContactUsPage() {
     <>
       <Head>
         <title>V16 — Заказ подтверждён | Интернет-магазин автотоваров V16</title>
-        <meta name="robots" content="noindex,nofollow"></meta>
-        <meta name='description' content='Заказ принят. Ожидайте прибытие товара.'></meta>
-        <meta name="keywords" content=''></meta>
+        <meta name="robots" content="noindex,nofollow"/>
+        <meta name='description' content='Заказ принят. Ожидайте прибытие товара.'/>
+        <meta name="keywords" content=''/>
       </Head>
 
       <div className={style.container}>
         <div className={style.topIcon}>
           <FontAwesomeIcon icon={faCheckCircle as IconProp} />
         </div>
-        <h1>Дякую за вашу покупку</h1>
+        <h1>Дякуємо за ваше замовлення</h1>
         <h4>Ми зв'яжемося з вами найближчим часом</h4>
         <Link href="/">
           <Button type="primary">

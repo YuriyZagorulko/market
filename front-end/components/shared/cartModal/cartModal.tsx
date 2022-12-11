@@ -60,7 +60,6 @@ class CartModal extends React.Component<IProps, cartModalState> {
       this.props.dispatch({type: controlsConstants.CLOSE_CART})
     }
     quantityChange = (product: IProduct, quantity) => {
-      console.log('changed', quantity)
       this.props.dispatch({type: cartConstants.CHANGE_QUANTITY, product, quantity})
     }
     removeProduct = (product: IProduct) => {
@@ -70,14 +69,16 @@ class CartModal extends React.Component<IProps, cartModalState> {
       if (this.state.cartProducts.length > 0) {
           return (
             <ul className={styles.productList}>
-              {this.state.cartProducts.map((item, i) => {
+              {this.state.cartProducts.map((item) => {
                 return (
-                  <CartProduct
-                    key={item.product.id}
-                    addedProduct={item}
-                    onDelete={this.removeProduct}
-                    onQuantityChange={this.quantityChange}
-                  />
+                  <li key={item.product.id}>
+                    <CartProduct
+                      addedProduct={item}
+                      onDelete={this.removeProduct}
+                      onQuantityChange={this.quantityChange}
+                    />
+                  </li>
+
                 )
               })}
             </ul>
@@ -98,27 +99,27 @@ class CartModal extends React.Component<IProps, cartModalState> {
             destroyOnClose
             width={'800px'}
             footer={[
-              <>
+              <div className={styles.buttonsWrapper} key={1}>
                 <Button
-               key="backToShop"
-               type="primary"
-               className={'cart-btn'}
-               onClick={this.handleOk}
-             >
-               Продовжити покупки
-             </Button>
-              <Link key="checkout" href="/checkout">
-                <Button
-                  key="submit"
                   type="primary"
                   className={'cart-btn'}
                   onClick={this.handleOk}
                 >
-                  Оформити замволення
+                  Продовжити покупки
                 </Button>
-              </Link>
-             
-             </>
+                { (this.state.cartProducts.length > 0) && (
+                  <Link href="/checkout">
+                    <Button
+                      type="primary"
+                      className={'cart-btn'}
+                      onClick={this.handleOk}
+                    >
+                      Оформити замволення
+                    </Button>
+                  </Link>
+                )}
+
+              </div>
             ]}
 
           >

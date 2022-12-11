@@ -127,6 +127,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
             this.props.dispatch(clearCart())
             Router.push("/checkout/success")
           } else {
+            console.log(val)
           }
         })
       })
@@ -136,7 +137,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
     }).catch((e) => {
       console.log(e)
     })
-    console.log(this.shippingNPFormRef.current.getFieldsValue())
   }
 
   openModal = () => {
@@ -214,7 +214,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
   }
   shippingSetup() {
     const onShippingChange = e => {
-      console.log(e)
       this.setState({ selectedShipping: e.target.value })
     }
     const citySelect = (e: number) => {
@@ -229,7 +228,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
           })
         })
       }
-      console.log(city)
     }
     const officeSelect = (e) => {
       const office = this.state.officessOptions[e]
@@ -238,7 +236,6 @@ class CheckoutPage extends React.Component<IProps, IState> {
           selectedOffice: office
         })
       }
-      console.log(office)
     }
     return (
       <Shipping
@@ -260,9 +257,9 @@ class CheckoutPage extends React.Component<IProps, IState> {
       <>
       <Head>
         <title>V16 — Оформление заказа | Интернет-магазин автотоваров V16</title>
-        <meta name="robots" content="noindex,nofollow"></meta>
-        <meta name='description' content='V-16 Подтверждение заказа'></meta>
-        <meta name="keywords" content=''></meta>
+        <meta name="robots" content="noindex,nofollow"/>
+        <meta name='description' content='V-16 Подтверждение заказа'/>
+        <meta name="keywords" content=''/>
       </Head>
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.content}>

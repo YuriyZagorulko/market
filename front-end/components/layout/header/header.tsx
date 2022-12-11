@@ -135,7 +135,7 @@ function Header(props: any) {
             <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
-          <div style={{ position: 'relative' }} className={styles.itemsRight + ' iconsContainer'}>
+          <div style={{ position: 'relative' ,padding: '10px' }} className={styles.itemsRight + ' iconsContainer'}>
             <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
               {isShowCartLength && <div className={styles.productCount}>{props.cartL}</div> }
               <Image

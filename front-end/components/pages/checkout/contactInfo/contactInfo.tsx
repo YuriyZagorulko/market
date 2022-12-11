@@ -45,7 +45,7 @@ export class ContactInfo extends React.Component<Props> {
               <Form.Item
                 name="name"
                 rules={[{ required: true, message: 'Будь ласка, введіть ваше ім\'я!' }]}
-                initialValue={`${this.props.auth.user?.username}`}
+                initialValue={`${this.props.auth.user?.username ? this.props.auth.user?.username : ''}`}
 
               >
                 <Input className={styles.personalDataInput}/>
@@ -56,7 +56,7 @@ export class ContactInfo extends React.Component<Props> {
               <Form.Item
                 name="surname"
                 rules={[{ required: true, message: 'Будь ласка, введіть ваше прізвище!' }]}
-                initialValue={`${this.props.auth.user?.lastName}`}
+                initialValue={`${this.props.auth.user?.lastName ? this.props.auth.user?.lastName : ''}`}
 
               >
                 <Input className={styles.personalDataInput} />
@@ -69,7 +69,7 @@ export class ContactInfo extends React.Component<Props> {
               <Form.Item
                 name="secondName"
                 rules={[{ required: true, message: 'Будь ласка, введіть ваше по-батькові!' }]}
-                initialValue={`${this.props.auth.user?.secondName}`}
+                initialValue={`${this.props.auth.user?.secondName ? this.props.auth.user?.secondName : ''}`}
               >
                 <Input className={styles.personalDataInput} />
               </Form.Item>
@@ -79,7 +79,7 @@ export class ContactInfo extends React.Component<Props> {
               <Form.Item
                 name="phone"
                 rules={[{ required: true, message: 'Будь ласка, введіть номер телефону!' }]}
-                initialValue={`${this.props.auth.user?.phone}`}
+                initialValue={`${this.props.auth.user?.phone ? this.props.auth.user?.phone : ''}`}
 
 
               >

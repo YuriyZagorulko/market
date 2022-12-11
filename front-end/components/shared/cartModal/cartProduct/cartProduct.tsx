@@ -45,7 +45,7 @@ class CartProduct extends React.Component<IProps, cartProductState> {
     const product = this.props.addedProduct.product
     const quantity = this.state.quantity
     return (
-      <li className={styles.product}>
+      <div className={styles.product}>
         <div className={styles.productContent}>
           <div className={styles.productImage}>
             <CustomImg img={getProductImg(product)} />
@@ -71,7 +71,7 @@ class CartProduct extends React.Component<IProps, cartProductState> {
             ₴{quantity * product.price}
           </div>
         </div>
-      </li>
+      </div>
     )
 
   }
