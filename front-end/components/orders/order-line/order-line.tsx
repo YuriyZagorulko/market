@@ -5,6 +5,7 @@ import { IOrder } from '../../../helpers/types/orders'
 import { useState } from 'react'
 import OrderItem from '../order-item/OrderItem'
 import { getProductImg } from '../../../helpers/types/responces/products'
+import Image from 'next/image'
 import CustomImg from '../../../components/shared/customImg/customImg'
 
 
