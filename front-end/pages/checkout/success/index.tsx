@@ -1,24 +1,14 @@
 import style from './success.module.scss'
 import React, { useState } from 'react'
 import { Button } from 'antd'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Head from 'next/head'
 
-interface IProps {
-  login: any
-  dispatch: any
-}
 function ContactUsPage() {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const [{ isDisabledButton }, setSate] = useState({
-    isDisabledButton: false
-  })
 
   return (
     <>

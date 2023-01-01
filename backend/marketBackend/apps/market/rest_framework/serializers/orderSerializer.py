@@ -15,7 +15,7 @@ class OrdersSerializer(serializers.ModelSerializer):
         model = Order
         fields = (
             'id', 'orderType', 'recipientName', 'recipientSecondName', 'recipientSurname', 'phoneNumber', 'street',
-            'city', 'house', 'officeRef', 'officeDescription', 'apartment', 'created_at', 'updated_at', 'details'
+            'city', 'house', 'officeRef', 'officeDescription', 'apartment', 'created_at', 'updated_at', 'details', 'orderStatus'
         )
     def to_representation(self, obj):
         res = super(OrdersSerializer, self).to_representation(obj)

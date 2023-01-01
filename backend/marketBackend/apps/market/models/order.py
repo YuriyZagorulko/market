@@ -7,7 +7,7 @@ class Order(models.Model):
         Justin = 'JUSTIN'
         NewPost = 'NEW_POST'
         NewPostCourier = 'NEW_POST_COURIER'
-    class OrderType(models.TextChoices):
+    class OrderStatus(models.TextChoices):
         Completed = 'COMPLETED'
         Canceled = 'CANCELED'
         OnHold = 'ON_HOLD'
@@ -17,7 +17,7 @@ class Order(models.Model):
     
     internalNotes = models.CharField( max_length=1000, blank=True, default='')    
     orderType = models.CharField(max_length=100, choices=OrderType.choices)
-    orderStatus = models.CharField(max_length=50, choices=OrderType.choices, default=OrderType.Processing)
+    orderStatus = models.CharField(max_length=50, choices=OrderStatus.choices, default=OrderStatus.Processing)
     recipientName = models.CharField(max_length=100)
     recipientSecondName = models.CharField(max_length=100)
     recipientSurname = models.CharField(max_length=100)

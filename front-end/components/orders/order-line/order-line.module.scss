@@ -156,3 +156,15 @@
         gap:12px;
     }
 }
+
+.orderStatus{
+    display: flex;
+    div{
+        display: inline-block;
+    }
+}
+.statusLine{
+    width: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+}

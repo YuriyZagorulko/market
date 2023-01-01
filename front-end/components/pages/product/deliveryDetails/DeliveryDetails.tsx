@@ -45,8 +45,7 @@ function DeliveryDetails() {
                             <Image layout='fill' src="/images/icons/credit-card-icon.svg" alt="delivery" />
                         </div>
                         <h4 className={style.header}>Оплата</h4>
-                        <div className={style.categoryBody}>
-                        </div>
+                        <div className={style.categoryBody}/>
                     </div>
                     <div className={style.categoryBody}>
                         <div className={style.bodyItem}>
@@ -61,12 +60,12 @@ function DeliveryDetails() {
                                 <span className={style.bodyItemDescription}>Оплата карткою будь-якого банку </span>
                             </div>
                         </div>
-                        <div className={style.bodyItem}>
+                        {/* <div className={style.bodyItem}>
                             <div className={style.bodyItemDetails}>
                                 <strong className={style.bodyItemHeader}>За реквізитами</strong>
                                 <span className={style.bodyItemDescription}>Для терміналів самообслуговування та карт</span>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
