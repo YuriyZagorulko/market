@@ -11,7 +11,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
 import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
-import { accessSync } from 'fs'
+
 
 type headerProps = {
   name?: string
@@ -96,7 +96,7 @@ function Header(props: any) {
   const openModal = () => {
     dispatch({ type: controlsConstants.OPEN_CART })
   }
-
+console.log(router.locale)
   return (
     <header className={styles.header}>
       {state.headerBanner ? <div className={styles.headerTop}>{state.headerBanner}</div> : ''}
@@ -135,7 +135,16 @@ function Header(props: any) {
             <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
-          <div style={{ position: 'relative' ,padding: '10px' }} className={styles.itemsRight + ' iconsContainer'}>
+          <div className={styles.itemsRight + ' iconsContainer'}>
+          <div className={styles.languagesWrapper}>
+
+            {router.locale === 'ua' ? <span className={styles.chosenLanguage}>UA</span> :
+             <Link href={router.asPath} locale={'ua'}>ua</Link>}
+              <span>|</span>
+            {router.locale === 'ru' ? <span className={styles.chosenLanguage}>RU</span> :
+              <Link href={router.asPath} locale={'ru'}>ru</Link>}            
+
+          </div>
             <div className={styles.headerIcon + ' icon-wrapper'} onClick={openModal}>
               {isShowCartLength && <div className={styles.productCount}>{props.cartL}</div> }
               <Image

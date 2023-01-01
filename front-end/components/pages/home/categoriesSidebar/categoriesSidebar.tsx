@@ -4,7 +4,8 @@ import { Card, Menu, MenuProps } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { ProductCategories } from '../../../../helpers/constants/categories'
-import { items1, items2, items3, itemsSingleLine } from './cstegoriesItems'
+import { items1, items2, items3, itemsSingleLine } from './categoriesItems'
+import { useTranslation } from 'react-i18next'
 
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
@@ -110,29 +111,31 @@ const redirectToCategory = (router, category) => {
     })
   }
 }
+const translateMenuItems = (t,items)=>{
+    return items.map((el)=>({...el,label:t(el.label)}))
+}
+
 function CategoriesSidebar (props: { }) {
   // const [mounted, setMounted] = useState(false)
-  // useEffect(() => {
-  //   setMounted(true)
-  // }, [])
-  const router = useRouter()
 
+  const router = useRouter()
+  const { t } = useTranslation('home')
+  
   const onClick = e => {
     redirectToCategory(router, e.key)
     console.log('click', e)
   }
-
   // if (mounted) {  // console warning fix
     return (
       <div className={style.container + ' global'}>
         <Card hoverable className={style.card}>
           <div className={style.menuFull}>
-            <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
+            <Menu onClick={onClick} mode="vertical" items={translateMenuItems(t,itemsSingleLine)} />
           </div>
           <div  className={style.menuSplit}>
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items1)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items2)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items3)} />
           </div>
         </Card>
       </div>

@@ -170,7 +170,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
         </div>
       )
     } else {
-      return <div>Nothing In he cart yet</div>
+      return <div>У корзині поки що нічого немає</div>
     }
   }
   sidebar() {

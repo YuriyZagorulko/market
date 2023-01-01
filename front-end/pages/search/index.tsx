@@ -11,6 +11,8 @@ import Loader from "../../components/shared/Loader/Loader";
 import { IControlsState } from "../../redux/reducers/controls.reducer";
 import MobileAside from "../../components/pages/search/MobileAside/MobileAside";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "react-i18next";
 
 
 interface IProps {
@@ -19,6 +21,7 @@ interface IProps {
 
 function SearchPage(props: IProps) {
   const dispatch = useDispatch();
+  const { t } = useTranslation('search')
   const [isMobileMenuActive, setIsMobileMenuActive] = useState({
     main: false,
     chosenCategory: false,
@@ -60,6 +63,7 @@ function SearchPage(props: IProps) {
       chosenCategory: !isMobileMenuActive.chosenCategory,
     });
   }
+
   return (
     <>
       <Head>
@@ -98,7 +102,7 @@ function SearchPage(props: IProps) {
         <AsideMenu products={requestData?.data?.data} />
         {query.text && (
           <div className={style.searchTitle}>
-            Результати пошуку за запитом {`<< ${query.text} >>`}
+            {t('Результати пошуку за запитом')} {`<< ${query.text} >>`}
           </div>
         )}
         {/* <div className={'search__order'}>
@@ -106,7 +110,7 @@ function SearchPage(props: IProps) {
         </div> */}
         {requestData !== null && !requestData?.data?.count ? (
           <div className={style.nothingFound}>
-            На жаль, за вашим запитом нічого не знайдено...
+            {t('На жаль, за вашим запитом нічого не знайдено')}...
           </div>
         ) : (
           <div className={"search"}>
@@ -121,6 +125,11 @@ function SearchPage(props: IProps) {
       </div>
     </>
   );
+}
+export async function getServerSideProps({ locale }: any) {
+  return {
+  props: await serverSideTranslations(locale, ['search']),
+  }
 }
 const connectedSearchPage = connect((state) => state)(SearchPage);
 export default connectedSearchPage;

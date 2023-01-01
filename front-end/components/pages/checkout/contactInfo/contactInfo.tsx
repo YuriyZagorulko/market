@@ -80,8 +80,6 @@ export class ContactInfo extends React.Component<Props> {
                 name="phone"
                 rules={[{ required: true, message: 'Будь ласка, введіть номер телефону!' }]}
                 initialValue={`${this.props.auth.user?.phone ? this.props.auth.user?.phone : ''}`}
-
-
               >
                 <Input prefix="+380" type="number" className={styles.personalDataInput} />
 

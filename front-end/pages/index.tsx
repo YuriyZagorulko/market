@@ -12,6 +12,8 @@ import { controlsConstants } from '../helpers/constants/controls'
 import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
 import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { i18n } from 'next-i18next'
 
 interface IProps {
   login: any
@@ -24,23 +26,23 @@ interface IProductsState {
 
 }
 
-function productLines(localProducts: IProductsState) {
+function productLines(localProducts: IProductsState) {  
   if (localProducts && localProducts.recomended) {
     return (
       <React.Fragment>
-        <ProductLine products={localProducts.recomended} title={'Рекомендовані товари'} />
-        <ProductLine products={localProducts.popular} title={'Популярні'} />
+        <ProductLine products={localProducts.recomended} title={i18n.t(`Рекомендовані товари`,{ ns: 'home' })} />
+        <ProductLine products={localProducts.popular} title={i18n.t('Популярні',{ ns: 'home' })} />
       </React.Fragment>
     )
   } else {
     return <div>
-      На жаль, ми не знайшли товарів які можемо вам порекомендувати.
+      {i18n.t(`На жаль, ми не знайшли товарів які можемо вам порекомендувати.`, {ns: 'home'})}
     </div>
 
   }
 }
 
-function HomePage(props: IProps) {
+function HomePage(props: IProps) {  
   const [localProducts, setLocalProducts] = useState<IProductsState>({
     recomended: [],
     popular: [],
@@ -85,6 +87,12 @@ function HomePage(props: IProps) {
       </div>}
     </>
   )
+}
+
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['home']),
+  }
 }
 
 const connectedHomePage = connect(state => state)(HomePage)
