@@ -6,7 +6,7 @@ import { userService } from '../../../services/user.service'
 import { authConstants } from '../../../redux/constants'
 import { useRouter } from 'next/router'
 import { OrderService } from '../../../services/order/order.service'
-import OrderLine from '../../../components/orders/order-line/order-line'
+import OrderLine from '../../../components/pages/orders/order-line/order-line'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import Loader from '../../../components/shared/Loader/Loader'
 import { controlsConstants } from '../../../helpers/constants/controls'
@@ -62,7 +62,7 @@ function OrdersPage(props: IProps) {
 }
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['orders']),
+  props: await serverSideTranslations(locale, ['orders','layout']),
   }
 }
 

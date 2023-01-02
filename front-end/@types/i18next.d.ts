@@ -23,7 +23,7 @@ interface I18nNamespaces {
 
 declare module 'i18next' {
   interface CustomTypeOptions {
-    defaultNS: 'common'
+    defaultNS: 'layout'
     resources: I18nNamespaces
   }
 }

@@ -1,12 +1,12 @@
 import React from "react";
 // import styles from "./productListItem.module.scss"
 import style from "../order-line/order-line.module.scss";
-import { IOrder } from "../../../helpers/types/orders";
+import { IOrder } from "../../../../helpers/types/orders";
 import { useState } from "react";
 import OrderItem from "../order-item/OrderItem";
-import { getProductImg } from "../../../helpers/types/responces/products";
+import { getProductImg } from "../../../../helpers/types/responces/products";
 import Image from "next/image";
-import CustomImg from "../../../components/shared/customImg/customImg";
+import CustomImg from "../../../shared/customImg/customImg";
 import { useTranslation } from "react-i18next";
 
 type OrderProps = {
@@ -108,9 +108,9 @@ function OrderLine(props: OrderProps) {
                   street: props.order.street,
                   house: props.order.house,
                 })}{" "}
-                {!!props.order.apartament &&
+                {!!props.order.apartment &&
                   trans("orderLine.userApartament", {
-                    apartament: props.order.apartament,
+                    apartament: props.order.apartment,
                   })}
               </div>
             )}

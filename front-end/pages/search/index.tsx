@@ -21,7 +21,7 @@ interface IProps {
 
 function SearchPage(props: IProps) {
   const dispatch = useDispatch();
-  const { t } = useTranslation('search')
+  const { t : trans } = useTranslation('search')
   const [isMobileMenuActive, setIsMobileMenuActive] = useState({
     main: false,
     chosenCategory: false,
@@ -102,7 +102,7 @@ function SearchPage(props: IProps) {
         <AsideMenu products={requestData?.data?.data} />
         {query.text && (
           <div className={style.searchTitle}>
-            {t('Результати пошуку за запитом')} {`<< ${query.text} >>`}
+            {trans('Результати пошуку за запитом')} {`<< ${query.text} >>`}
           </div>
         )}
         {/* <div className={'search__order'}>
@@ -110,7 +110,7 @@ function SearchPage(props: IProps) {
         </div> */}
         {requestData !== null && !requestData?.data?.count ? (
           <div className={style.nothingFound}>
-            {t('На жаль, за вашим запитом нічого не знайдено')}...
+            {trans('На жаль, за вашим запитом нічого не знайдено')}...
           </div>
         ) : (
           <div className={"search"}>
@@ -128,7 +128,7 @@ function SearchPage(props: IProps) {
 }
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['search']),
+  props: await serverSideTranslations(locale, ['search','layout']),
   }
 }
 const connectedSearchPage = connect((state) => state)(SearchPage);

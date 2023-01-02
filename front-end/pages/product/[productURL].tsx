@@ -19,6 +19,10 @@ import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
 import { storeContacts } from '../../helpers/constants/storeDataConstants/storeContacts'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+
 interface IProps {
     dispatch: any
     controls: IControlsState
@@ -27,6 +31,7 @@ interface IProps {
 const Product = (props: IProps) => {
     const dispatch = useDispatch()
     const router = useRouter()
+    const { t : trans } = useTranslation('product')
     const [product, setProduct] = useState(null)
     const { productURL } = router.query
 
@@ -83,7 +88,7 @@ const Product = (props: IProps) => {
                                         <div className={style.buy}>
                                             <button className={`button-primary`} onClick={buyProduct}>
                                                 <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                               'buy'
+                                               {trans('buy')}
                                             </button>
                                         </div>
                                     </div>
@@ -105,6 +110,12 @@ const Product = (props: IProps) => {
         </>)
 }
 
+export async function getServerSideProps({ locale }) {
+    return {
+    props: await serverSideTranslations(locale, ['product','layout']),
+    }
+  }
+  
 
 
 const connectedProductPage = connect(state => state)(Product)

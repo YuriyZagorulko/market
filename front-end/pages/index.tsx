@@ -91,7 +91,7 @@ function HomePage(props: IProps) {
 
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['home']),
+  props: await serverSideTranslations(locale, ['home','layout',]),
   }
 }
 

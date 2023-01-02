@@ -30,6 +30,7 @@ export default class Shipping extends React.Component<Props> {
     const filterOptions = (input, option) => {
       return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
     }
+    console.log(this.props.officessOptions)
     return (
       <div className={styles.container}>
         <Form

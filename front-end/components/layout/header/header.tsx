@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import styles from "./header.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
@@ -11,6 +11,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
 import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
+import { useTranslation } from 'next-i18next'
+import { i18n } from 'next-i18next'
 
 
 type headerProps = {
@@ -32,10 +34,10 @@ function authLinks(isAuth, dispatch) {
     return (
       <React.Fragment>
         <Link href="/auth/login">
-          <a>Вхід</a>
+          <a>{i18n.t(`signIn`,{ ns: 'layout' })}</a>
         </Link>
         <Link href="/auth/sign-up">
-          <a>Реєстрація</a>
+          <a>{i18n.t(`registration`,{ ns: 'layout' })}</a>
         </Link>
       </React.Fragment>
     )
@@ -43,9 +45,9 @@ function authLinks(isAuth, dispatch) {
     return (
       <React.Fragment>
         <Link href="/cabinet/orders">
-          <a className={'icon-wrapper'}>Замовлення</a>
+          <a className={'icon-wrapper'}>{i18n.t('orders', {ns:'layout'})}</a>
         </Link>
-          <a onClick={openExitDialogWindow}>Вихід</a>
+          <a onClick={openExitDialogWindow}>{i18n.t('logOut', {ns:'layout'})}</a>
       </React.Fragment>
     )
   }
@@ -54,6 +56,7 @@ function authLinks(isAuth, dispatch) {
 function Header(props: any) {
   const { cart }: { cart: ICartState } = store.getState()
   const dispatch = useDispatch()
+  const {t : trans} = useTranslation('layout')
   const [state, setState] = useState({
     headerBanner: '',
     searchInput: '',
@@ -103,10 +106,10 @@ function Header(props: any) {
         <div className={styles.headerNavigation}>
           <div className={styles.navigationLeft}>
             <Link href="/help">
-              <a>Допомога</a>
+              <a>{trans('help')}</a>
             </Link>
             <Link href="/contact-us">
-              <a>Контакти</a>
+              <a>{trans('contacts')}</a>
             </Link>
           </div>
           <div className={styles.navigationCenter} />
@@ -131,7 +134,7 @@ function Header(props: any) {
             </Link>
           </div>
           <div className={styles.itemsCenter}>
-            <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
+            <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder={trans('imLookingFor')} />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
           <div className={styles.itemsRight + ' iconsContainer'}>
@@ -175,5 +178,6 @@ const mapStateToProps = (state: IState) => {
     user:state.auth.user
   };
 };
+
 const connectedConponent = connect(mapStateToProps)(Header)
 export default connectedConponent

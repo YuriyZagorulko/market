@@ -8,6 +8,8 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 interface IProps {
   login: any
@@ -16,6 +18,7 @@ interface IProps {
 function ContactUsPage() {
   const dispatch = useDispatch()
   const router = useRouter()
+  const { t : trans } = useTranslation('checkout')
   const [{ isDisabledButton }, setSate] = useState({
     isDisabledButton: false
   })
@@ -33,11 +36,11 @@ function ContactUsPage() {
         <div className={style.topIcon}>
           <FontAwesomeIcon icon={faCheckCircle as IconProp} />
         </div>
-        <h1>Дякуємо за ваше замовлення</h1>
-        <h4>Ми зв'яжемося з вами найближчим часом</h4>
+        <h1>{trans("shipping.succes.thanksForOrder")}</h1>
+        <h4>{trans("shipping.succes.weWillContactYou")}</h4>
         <Link href="/">
           <Button type="primary">
-            На головну сторінку
+          {trans("shipping.succes.goToMainPage")}
           </Button>
         </Link>
       </div>
@@ -45,5 +48,13 @@ function ContactUsPage() {
 
   )
 }
+
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['checkout','layout']),
+  }
+}
+
+
 const connectedContactUsPage = connect(state => state)(ContactUsPage)
 export default connectedContactUsPage

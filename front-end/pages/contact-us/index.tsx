@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { storeContacts } from '../../helpers/constants/storeDataConstants/storeContacts'
 import Head from 'next/head'
 import config from '../../config'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 
 interface IProps {
@@ -15,6 +17,7 @@ interface IProps {
 }
 function ContactUsPage () {
   const router = useRouter()
+  const { t : trans} = useTranslation('contact-us')
   return (
     <>
      <Head>
@@ -31,7 +34,7 @@ function ContactUsPage () {
       <div className={"wrapper"}>
       <section className={style.consSect}>
         <div className={style.container}>
-            <h1>Консультації та замовлення за телефонами</h1>
+            <h1>{trans('header')}</h1>
             <div className={style.maincontainer}>
           <div className={style.contentContainer}>
               <h3>V16</h3>
@@ -39,15 +42,15 @@ function ContactUsPage () {
           </div>
           <div className={style.div_container}>
             <div className={style.contentContainer}>
-              <h3>Графік роботи</h3>
-              <div>У будні</div>
-              <div>Субота</div>
-              <div>Неділя</div>
+              <h3>{trans('schedule')}</h3>
+              <div>{trans('weekdays')}</div>
+              <div>{trans('saturday')}</div>
+              <div>{trans('sunday')}</div>
             </div>
             <div className={style.contentContainer}>
-              <div>з 08:00 до 21:00</div>
-              <div>з 09:00 до 20:00</div>
-              <div>з 10:00 до 19:00</div>
+              <div>{trans('from')} 08:00 {trans('until')} 21:00</div>
+              <div>{trans('from')} 09:00 {trans('until')} 20:00</div>
+              <div>{trans('from')} 10:00 {trans('until')} 19:00</div>
             </div>
             </div>
           </div>
@@ -59,6 +62,12 @@ function ContactUsPage () {
    
   )
 }
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['contact-us','layout']),
+  }
+}
+
 const connectedContactUsPage = connect(state => state)(ContactUsPage)
 export  default connectedContactUsPage
 
