@@ -1,9 +1,13 @@
 const path = require('path')
 module.exports = {
+    debug: process.env.NODE_ENV === 'development',
     i18n: {
       defaultLocale: "ua",
       locales: ["ua", "ru"],
     },
-    react: { useSuspense: true },//this line,
-    localePath:	'public/locales',     //  Problem persist if i comment this line and use ./static/locales
+    react: { useSuspense: false },//this line,
+    localePath:
+    typeof window === 'undefined'
+      ? require('path').resolve('./public/locales')
+      : '/locales',
   };

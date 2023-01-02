@@ -126,7 +126,7 @@ function SearchPage(props: IProps) {
     </>
   );
 }
-export async function getServerSideProps({ locale }: any) {
+export async function getServerSideProps({ locale }) {
   return {
   props: await serverSideTranslations(locale, ['search']),
   }

@@ -52,7 +52,7 @@ export default class Shipping extends React.Component<Props> {
                 <Select
                   showSearch
                   className={styles.citySelect}
-                  placeholder="Виберіть місто"
+                  placeholder="Виберіть ваше місто"
                   optionFilterProp="children"
                   onChange={this.props.onCityChange}
                   onSearch={this.props.onCitySearch}

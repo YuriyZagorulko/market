@@ -96,7 +96,6 @@ function Header(props: any) {
   const openModal = () => {
     dispatch({ type: controlsConstants.OPEN_CART })
   }
-console.log(router.locale)
   return (
     <header className={styles.header}>
       {state.headerBanner ? <div className={styles.headerTop}>{state.headerBanner}</div> : ''}

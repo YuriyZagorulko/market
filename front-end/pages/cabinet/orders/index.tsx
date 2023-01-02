@@ -12,6 +12,8 @@ import Loader from '../../../components/shared/Loader/Loader'
 import { controlsConstants } from '../../../helpers/constants/controls'
 import { IControlsState } from '../../../redux/reducers/controls.reducer'
 import Head from 'next/head'
+import { useTranslation } from 'react-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 
@@ -23,6 +25,7 @@ interface IProps {
 function OrdersPage(props: IProps) {
   const dispatch = useDispatch()
   const router = useRouter()
+  const {t: trans} = useTranslation('orders')
   const [{ orders }, setSate] = useState({
     orders: []
 
@@ -47,7 +50,7 @@ function OrdersPage(props: IProps) {
       {props.controls.isLoaderShown ? <Loader /> :
         <div className={'global-width-limiter' + ' ' + 'orders-wrapper'} >
           <div className={style.headerWrapper}>
-            <h1 className={style.orderHeader}>Мої замовлення</h1>
+            <h1 className={style.orderHeader}>{trans('header')}</h1>
           </div>
           <ul className={style.orderListWrapper}>
             {orders.map(el => <OrderLine order={el} key={el.id} />)}
@@ -57,5 +60,11 @@ function OrdersPage(props: IProps) {
 
   )
 }
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['orders']),
+  }
+}
+
 const connectedOrdersPage = connect(state => state)(OrdersPage)
 export default connectedOrdersPage

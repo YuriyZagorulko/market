@@ -1,20 +1,19 @@
 {
-    "Доставка":"Доставка",
-    "Нова Пошта":"Нова Пошта",
-    "Від 1 до 5 днів":"Від 1 до 5 днів",
-    "Кур'єром за адресою":"Кур'єром за адресою",
-    "Кур'єром Нова Пошта" : "Кур'єром Нова Пошта",
-    "Закази від 3000грн" : "Закази від 3000грн",
-    "ДОСТАВКА БЕЗКОШТОВНО" : "ДОСТАВКА БЕЗКОШТОВНО",
-    "Оплата":"Оплата",
-    "При отриманні":"При отриманні",
-    "Нова Пошта. Післяплата":"Нова Пошта. Післяплата",
-    "Картою Visa, MasterCard":"Картою Visa, MasterCard",
-    "Оплата карткою будь-якого банку":"Оплата карткою будь-якого банку",
-    "За реквізитами": "За реквізитами",
-    "Для терміналів самообслуговування та карт":"Для терміналів самообслуговування та карт",
-    "Купити":"Купити",
-    "Характеристики":"Характеристики"
-
-
+    "buy":"Купити",
+    
+    "deliveryDetails.delivery":"Доставка",
+    "deliveryDetails.novaPoshta":"Нова Пошта",
+    "deliveryDetails.from1To5Days":"Від 1 до 5 днів",
+    "deliveryDetails.byCourierToAddress":"Кур'єром за адресою",
+    "deliveryDetails.novaPoshtaCourier" : "Кур'єром Нова Пошта",
+    "deliveryDetails.ordersFrom" : "Закази від 3000грн",
+    "deliveryDetails.freeDelivery" : "ДОСТАВКА БЕЗКОШТОВНО",
+    "deliveryDetails.payment":"Оплата",
+    "deliveryDetails.uponReceipt":"При отриманні",
+    "deliveryDetails.novaPoshtaAfterPayment":"Нова Пошта. Післяплата",
+    "deliveryDetails.paymentByVisaMasterCard":"Картою Visa, MasterCard",
+    "deliveryDetails.paymentByAnyCard":"Оплата карткою будь-якого банку",
+    "deliveryDetails.accordingToDetails": "За реквізитами",
+    "deliveryDetails.selfServiceTerminalsCards":"Для терміналів самообслуговування та карт",
+    "deliveryDetails.characteristics":"Характеристики"
 }

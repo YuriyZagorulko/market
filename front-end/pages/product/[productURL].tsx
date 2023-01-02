@@ -46,7 +46,7 @@ const Product = (props: IProps) => {
     return (
         <>
             <Head>
-                <title>{product?.title} ({storeContacts.MOBILE_NUMBER}). Купить Киев, Днепр, с доставкой по Украине за {product?.price} грн: цена, характеристики, отзывы. V16 | Україна.</title>
+                <title>{`${product?.title} (${storeContacts.MOBILE_NUMBER}). Купить Киев, Днепр, с доставкой по Украине за ${product?.price} грн: цена, характеристики, отзывы. V16 | Україна.`}</title>
                 <meta name='description' content={`Купить ${product?.title} (${storeContacts.MOBILE_NUMBER}) с гарантией. Отзывы. Характеристики. Фото. Доставка в Киев, Харьков, Днепр, Одессу и другие города Украины.`}></meta>
                 <meta name="robots" content="index, follow"></meta>
                 <meta name="keywords" content={`${product?.title} (${storeContacts.MOBILE_NUMBER}) купить, цена, отзывы, характеристики, описание, фото, интернет-магазин, автопринадлежности, автотовары, Киев, Україна, v16`}></meta>
@@ -83,7 +83,7 @@ const Product = (props: IProps) => {
                                         <div className={style.buy}>
                                             <button className={`button-primary`} onClick={buyProduct}>
                                                 <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                                Купити
+                                               'buy'
                                             </button>
                                         </div>
                                     </div>
@@ -104,6 +104,8 @@ const Product = (props: IProps) => {
                 </div>}
         </>)
 }
+
+
 
 const connectedProductPage = connect(state => state)(Product)
 export default connectedProductPage

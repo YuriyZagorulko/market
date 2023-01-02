@@ -32,7 +32,7 @@ function sliceIntoChunks(arr, chunkSize) {
 }
 
 export const itemsSingleLine = [
-    getItem('Акумулятори', ProductCategories.CarBatteries,
+    getItem('sidebar.accumulators', ProductCategories.CarBatteries,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery.jpg' }
@@ -43,7 +43,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Пусковий кабель', ProductCategories.StartCable,
+    getItem('sidebar.startingCable', ProductCategories.StartCable,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery-acc.jpg' }
@@ -54,7 +54,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Пускозарядні пристрої', ProductCategories.StarterChargers,
+    getItem('sidebar.startChargers', ProductCategories.StarterChargers,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery-charge.jpg' }
@@ -65,7 +65,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Мастило для контактів', ProductCategories.ContactGrease,
+    getItem('sidebar.contactsLubricant', ProductCategories.ContactGrease,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/electro-lubricant.jpg' }
@@ -76,7 +76,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Дистильована вода', ProductCategories.DistilledWater,
+    getItem('sidebar.distilledWater', ProductCategories.DistilledWater,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/voda-distillirovannaya.jpg' }
@@ -87,7 +87,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Клеми акумулятора', ProductCategories.BatteryTerminals,
+    getItem('sidebar.batteryTerminals', ProductCategories.BatteryTerminals,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/klemmi.jpg' }
@@ -98,7 +98,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Тестери для АКБ', ProductCategories.BatteryTesters,
+    getItem('sidebar.batteryTesters', ProductCategories.BatteryTesters,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/nagruzochnye-vilki.jpg' }

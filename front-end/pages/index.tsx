@@ -30,13 +30,13 @@ function productLines(localProducts: IProductsState) {
   if (localProducts && localProducts.recomended) {
     return (
       <React.Fragment>
-        <ProductLine products={localProducts.recomended} title={i18n.t(`Рекомендовані товари`,{ ns: 'home' })} />
-        <ProductLine products={localProducts.popular} title={i18n.t('Популярні',{ ns: 'home' })} />
+        <ProductLine products={localProducts.recomended} title={i18n.t(`productLine.recommended`,{ ns: 'home' })} />
+        <ProductLine products={localProducts.popular} title={i18n.t('productLine.popular',{ ns: 'home' })} />
       </React.Fragment>
     )
   } else {
     return <div>
-      {i18n.t(`На жаль, ми не знайшли товарів які можемо вам порекомендувати.`, {ns: 'home'})}
+      {i18n.t(`productLine.noProductsRecommend`, {ns: 'home'})}
     </div>
 
   }

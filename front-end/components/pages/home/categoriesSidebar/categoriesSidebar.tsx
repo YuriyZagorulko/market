@@ -111,15 +111,15 @@ const redirectToCategory = (router, category) => {
     })
   }
 }
-const translateMenuItems = (t,items)=>{
-    return items.map((el)=>({...el,label:t(el.label)}))
+const translateMenuItems = (trans,items)=>{
+    return items.map((el)=>({...el,label:trans(el.label)}))
 }
 
 function CategoriesSidebar (props: { }) {
   // const [mounted, setMounted] = useState(false)
 
   const router = useRouter()
-  const { t } = useTranslation('home')
+  const { t: trans } = useTranslation('home')
   
   const onClick = e => {
     redirectToCategory(router, e.key)
@@ -130,12 +130,12 @@ function CategoriesSidebar (props: { }) {
       <div className={style.container + ' global'}>
         <Card hoverable className={style.card}>
           <div className={style.menuFull}>
-            <Menu onClick={onClick} mode="vertical" items={translateMenuItems(t,itemsSingleLine)} />
+            <Menu onClick={onClick} mode="vertical" items={translateMenuItems(trans,itemsSingleLine)} />
           </div>
           <div  className={style.menuSplit}>
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items1)} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items2)} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(t,items3)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items1)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items2)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items3)} />
           </div>
         </Card>
       </div>

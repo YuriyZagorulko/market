@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 
 
 export default function HomeHeader(){
-    const { t } = useTranslation('home')
+    const { t: trans } = useTranslation('home')
   
       return (
 
         <div className={styles.container}>
-          <div className={styles.subtitle}>{t('Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ')}</div>
-          <div className={styles.subtitle}>{t('Слава Україні!')}</div>
+          <div className={styles.subtitle}>{trans('homeheader.top')}</div>
+          <div className={styles.subtitle}>{trans('homeheader.bottom')}</div>
         </div>
       )
     
