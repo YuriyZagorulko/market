@@ -1,28 +1,23 @@
-import { Select } from "antd";
-import style from './productsSortMenu.module.scss';
-import type { SelectProps } from 'antd';
-import { IProduct } from "../../../../helpers/types/responces/products";
-import React from "react";
+import { Select, SelectProps } from "antd"
+import style from './productsSortMenu.module.scss'
+import { IProduct } from "../../../../helpers/types/responces/products"
+import React from "react"
 
 interface IProps {
     sortOptions: string[],
     defaultSelectValue: string
     products: IProduct[]
     onFilterBtnClick: () => void
+    onChange: (e: any) => void
 }
 function ProductsSortMenu(props: IProps) {
 
-    const handleChange = (value: string | string[]) => {
-        console.log(`Selected: ${value}`);
-    };
-
-
-    const options: SelectProps['options'] = [];
+    const options: SelectProps['options'] = []
     for (let i = 0; i < props.sortOptions.length; i++) {
         options.push({
             value: props.sortOptions[i],
             label: props.sortOptions[i],
-        });
+        })
     }
 
 
@@ -35,15 +30,15 @@ function ProductsSortMenu(props: IProps) {
                 </div>
 
                 <div className={style.selectWrapper}>
-                    <Select
+                    {/* <Select
                         bordered={false}
                         showArrow={false}
                         className={style.select}
                         size={'middle'}
                         defaultValue={props.defaultSelectValue}
-                        onChange={handleChange}
+                        onChange={props.onChange}
                         options={options}
-                    />
+                    /> */}
                 </div>
             </div>
 

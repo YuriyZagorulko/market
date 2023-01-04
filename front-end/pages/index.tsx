@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { productConstants } from '../helpers/constants/product.constants'
 import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
 import { store } from '../redux/store'
@@ -11,7 +10,7 @@ import CategoriesSidebar from '../components/pages/home/categoriesSidebar/catego
 import { controlsConstants } from '../helpers/constants/controls'
 import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
-import Head from 'next/head';
+import Head from 'next/head'
 
 interface IProps {
   login: any

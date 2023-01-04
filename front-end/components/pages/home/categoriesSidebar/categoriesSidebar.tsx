@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { Card, Menu, MenuProps } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { ProductCategories } from '../../../../helpers/constants/categories'
 import { items1, items2, items3, itemsSingleLine } from './cstegoriesItems'
 
 // const itemsOld: MenuItem[] = [
@@ -111,34 +110,24 @@ const redirectToCategory = (router, category) => {
   }
 }
 function CategoriesSidebar (props: { }) {
-  // const [mounted, setMounted] = useState(false)
-  // useEffect(() => {
-  //   setMounted(true)
-  // }, [])
   const router = useRouter()
 
   const onClick = e => {
     redirectToCategory(router, e.key)
-    console.log('click', e)
   }
-
-  // if (mounted) {  // console warning fix
-    return (
-      <div className={style.container + ' global'}>
-        <Card hoverable className={style.card}>
-          <div className={style.menuFull}>
-            <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
-          </div>
-          <div  className={style.menuSplit}>
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
-            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
-          </div>
-        </Card>
-      </div>
-    )
-  // } else {
-  //   return <></>
-  // }
+  return (
+    <div className={style.container + ' global'}>
+      <Card hoverable className={style.card}>
+        <div className={style.menuFull}>
+          <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
+        </div>
+        <div  className={style.menuSplit}>
+          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
+          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
+          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
+        </div>
+      </Card>
+    </div>
+  )
 }
 export default CategoriesSidebar
