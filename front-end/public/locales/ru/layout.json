@@ -1,0 +1,12 @@
+{
+    "help":"Помощь",
+    "contacts":"Контакты",
+    "сart":"Корзина",
+    "cartIsEmpty":"Корзина пустая",
+    "continueShopping":"Продолжить покупки",
+    "orders":"Заказы",
+    "logOut": "Выход",
+    "signIn": "Вход",
+    "registration": "Регистрация",
+    "imLookingFor": "Я ищу..."
+}

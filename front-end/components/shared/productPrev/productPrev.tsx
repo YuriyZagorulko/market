@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./productPrev.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
-import { IProduct, getFirstImg, getPreviewImgUrl } from '../../../helpers/types/responces/products'
+import { IProduct, getPreviewImgUrl } from '../../../helpers/types/responces/products'
 import config from '../../../config'
 import CustomImg from '../customImg/customImg'
 type productProps = {

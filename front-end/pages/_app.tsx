@@ -2,13 +2,12 @@ import React, {FC} from 'react'
 import { connect, Provider } from 'react-redux'
 import { store } from '../redux/store'
 import MainLayout from '../components/layout/main-layout/main-layout'
-import '../styles/globals.scss'
-import 'swiper/scss'
-import 'swiper/scss/navigation'
-import 'swiper/scss/pagination'
+import '../styles/globals.scss';
+import 'swiper/scss';
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }) {
 
+function App({ Component, pageProps }) {
     return (
       <Provider store={store}>
         <MainLayout>
@@ -17,3 +16,5 @@ export default function App({ Component, pageProps }) {
       </Provider>
     )
   }
+  
+export default appWithTranslation(App)

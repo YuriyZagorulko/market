@@ -1,0 +1,20 @@
+{
+    "buy":"Купить",
+
+    "deliveryDetails.delivery":"Доставка",
+    "deliveryDetails.novaPoshta":"Новая Почта",
+    "deliveryDetails.from1To5Days":"От 1 до 5 дней",
+    "deliveryDetails.from":"от",
+    "deliveryDetails.byCourierToAddress":"Курьером по адресу",
+    "deliveryDetails.novaPoshtaCourier" : "Курьером Новая Почта",
+    "deliveryDetails.ordersFrom" : "Заказы от",
+    "deliveryDetails.freeDelivery" : "ДОСТАВКА БЕСПЛАТНО",
+    "deliveryDetails.payment":"Оплата",
+    "deliveryDetails.uponReceipt":"При получении",
+    "deliveryDetails.novaPoshtaAfterPayment":"Новая Почта. Оплата после получения",
+    "deliveryDetails.paymentByVisaMasterCard":"Картой Visa, MasterCard",
+    "deliveryDetails.paymentByAnyCard":"Оплата картой любого банка",
+    "deliveryDetails.accordingToDetails": "По реквизитам",
+    "deliveryDetails.selfServiceTerminalsCards":"Для терминалов самообслуживания и карт",
+    "deliveryDetails.characteristics":"Характеристики"
+}

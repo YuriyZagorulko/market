@@ -1,6 +1,6 @@
 import { MenuProps } from "antd"
 import Image from "next/image"
-import { ProductCategories } from "../../../../helpers/constants/search"
+import { ProductCategories } from "../../../../helpers/constants/categories"
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -23,16 +23,16 @@ function getItem(
 }
 
 function sliceIntoChunks(arr, chunkSize) {
-    const res = []
+    const res = [];
     for (let i = 0; i < arr.length; i += chunkSize) {
-        const chunk = arr.slice(i, i + chunkSize)
-        res.push(chunk)
+        const chunk = arr.slice(i, i + chunkSize);
+        res.push(chunk);
     }
-    return res
+    return res;
 }
 
 export const itemsSingleLine = [
-    getItem('Аккумуляторы', ProductCategories.CarBatteries,
+    getItem('sidebar.accumulators', ProductCategories.CarBatteries,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery.jpg' }
@@ -43,7 +43,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Пусковой кабель', ProductCategories.StartCable,
+    getItem('sidebar.startingCable', ProductCategories.StartCable,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery-acc.jpg' }
@@ -54,7 +54,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Пускозарядные устройства', ProductCategories.StarterChargers,
+    getItem('sidebar.startChargers', ProductCategories.StarterChargers,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/battery-charge.jpg' }
@@ -65,7 +65,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Смазка для контактов', ProductCategories.ContactGrease,
+    getItem('sidebar.contactsLubricant', ProductCategories.ContactGrease,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/electro-lubricant.jpg' }
@@ -76,7 +76,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Дистиллированная вода', ProductCategories.DistilledWater,
+    getItem('sidebar.distilledWater', ProductCategories.DistilledWater,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/voda-distillirovannaya.jpg' }
@@ -87,7 +87,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Клеммы аккумулятора', ProductCategories.BatteryTerminals,
+    getItem('sidebar.batteryTerminals', ProductCategories.BatteryTerminals,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/klemmi.jpg' }
@@ -98,7 +98,7 @@ export const itemsSingleLine = [
             />
         </span>
     ),
-    getItem('Тестеры для АКБ', ProductCategories.BatteryTesters,
+    getItem('sidebar.batteryTesters', ProductCategories.BatteryTesters,
         <span className='img-comtainer'>
             <Image
             src={ '/images/previews/main-menu/nagruzochnye-vilki.jpg' }

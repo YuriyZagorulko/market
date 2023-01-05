@@ -3,9 +3,8 @@ import Script from 'next/script'
 
 export default function Document() {
   return (
-    <Html lang='uk'>
+    <Html>
       <Head>
-        <title>V16 - Интернет-магазин автотоваров</title>
         <link rel="icon" href="/favicon.ico" />
         <Script id="google-tag-manager" strategy="afterInteractive" dangerouslySetInnerHTML={{
           __html: `

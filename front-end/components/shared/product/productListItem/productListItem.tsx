@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { IProduct, getFirstImg, AddedProduct, getPreviewImgUrl } from '../../../../helpers/types/responces/products'
 import config from '../../../../config'
 import CustomImg from '../../customImg/customImg'
+import { withTranslation } from 'next-i18next'
 type productProps = {
   product: AddedProduct;
+  t:any
 }
 
-export default class ProductListItem extends React.Component<productProps, {} > {
+class ProductListItem extends React.Component<productProps, {} > {
     constructor(props){
       super(props)
       this.state = {}
@@ -37,7 +39,7 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                Ціна
+                {this.props.t('productListItem.price')}
                 </div>
                 <div className={styles.price}>
                   {this.props.product.product.price} ₴
@@ -45,7 +47,7 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                Кількість
+                {this.props.t('productListItem.amount')}
                 </div>
                 <div className={styles.content__row__text}>
                   {this.props.product.quantity}
@@ -53,7 +55,7 @@ export default class ProductListItem extends React.Component<productProps, {} > 
               </div>
               <div className={styles.content__row}>
                 <div className={styles.content__row__title}>
-                  Сума
+                  {this.props.t('productListItem.sum')}
                 </div>
                 <div className={styles.content__row__text}>
                     {this.props.product.quantity * this.props.product.product.price}₴
@@ -66,3 +68,5 @@ export default class ProductListItem extends React.Component<productProps, {} > 
       </div>)
     }
   }
+
+  export default withTranslation('sharedUI')(ProductListItem)

@@ -19,6 +19,10 @@ import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
 import { storeContacts } from '../../helpers/constants/storeDataConstants/storeContacts'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+
 interface IProps {
     dispatch: any
     controls: IControlsState
@@ -27,6 +31,7 @@ interface IProps {
 const Product = (props: IProps) => {
     const dispatch = useDispatch()
     const router = useRouter()
+    const { t : trans } = useTranslation('product')
     const [product, setProduct] = useState(null)
     const { productURL } = router.query
 
@@ -46,7 +51,7 @@ const Product = (props: IProps) => {
     return (
         <>
             <Head>
-                <title>{product?.title} ({storeContacts.MOBILE_NUMBER}). Купить Киев, Днепр, с доставкой по Украине за {product?.price} грн: цена, характеристики, отзывы. V16 | Україна.</title>
+                <title>{`${product?.title} (${storeContacts.MOBILE_NUMBER}). Купить Киев, Днепр, с доставкой по Украине за ${product?.price} грн: цена, характеристики, отзывы. V16 | Україна.`}</title>
                 <meta name='description' content={`Купить ${product?.title} (${storeContacts.MOBILE_NUMBER}) с гарантией. Отзывы. Характеристики. Фото. Доставка в Киев, Харьков, Днепр, Одессу и другие города Украины.`}></meta>
                 <meta name="robots" content="index, follow"></meta>
                 <meta name="keywords" content={`${product?.title} (${storeContacts.MOBILE_NUMBER}) купить, цена, отзывы, характеристики, описание, фото, интернет-магазин, автопринадлежности, автотовары, Киев, Україна, v16`}></meta>
@@ -83,7 +88,7 @@ const Product = (props: IProps) => {
                                         <div className={style.buy}>
                                             <button className={`button-primary`} onClick={buyProduct}>
                                                 <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                                Купити
+                                               {trans('buy')}
                                             </button>
                                         </div>
                                     </div>
@@ -104,6 +109,14 @@ const Product = (props: IProps) => {
                 </div>}
         </>)
 }
+
+export async function getServerSideProps({ locale }) {
+    return {
+    props: await serverSideTranslations(locale, ['product','layout','sharedUI']),
+    }
+  }
+  
+
 
 const connectedProductPage = connect(state => state)(Product)
 export default connectedProductPage

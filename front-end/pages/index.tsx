@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { productConstants } from '../helpers/constants/product.constants'
 import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
 import { store } from '../redux/store'
@@ -10,7 +11,10 @@ import CategoriesSidebar from '../components/pages/home/categoriesSidebar/catego
 import { controlsConstants } from '../helpers/constants/controls'
 import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
-import Head from 'next/head'
+import Head from 'next/head';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { i18n } from 'next-i18next'
+import { t } from 'i18next'
 
 interface IProps {
   login: any
@@ -23,23 +27,23 @@ interface IProductsState {
 
 }
 
-function productLines(localProducts: IProductsState) {
+function productLines(localProducts: IProductsState) {  
   if (localProducts && localProducts.recomended) {
     return (
       <React.Fragment>
-        <ProductLine products={localProducts.recomended} title={'Рекомендовані товари'} />
-        <ProductLine products={localProducts.popular} title={'Популярні'} />
+        <ProductLine products={localProducts.recomended} title={i18n.t(`productLine.recommended`,{ ns: 'home' })} />
+        <ProductLine products={localProducts.popular} title={i18n.t('productLine.popular',{ ns: 'home' })} />
       </React.Fragment>
     )
   } else {
     return <div>
-      На жаль, ми не знайшли товарів які можемо вам порекомендувати.
+      {i18n.t(`productLine.noProductsRecommend`, {ns: 'home'})}
     </div>
 
   }
 }
 
-function HomePage(props: IProps) {
+function HomePage(props: IProps) {  
   const [localProducts, setLocalProducts] = useState<IProductsState>({
     recomended: [],
     popular: [],
@@ -84,6 +88,12 @@ function HomePage(props: IProps) {
       </div>}
     </>
   )
+}
+
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['home','layout','sharedUI']),
+  }
 }
 
 const connectedHomePage = connect(state => state)(HomePage)

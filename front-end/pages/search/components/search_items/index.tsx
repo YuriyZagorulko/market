@@ -25,7 +25,7 @@ function SearchItems (props: { paginatedData :  IPaginatedData}) {
   }
 
   return (
-    <div style={{width: '100%'}}>
+    <div className={'wrapper'}>
       <div className={style.gridItems + ' wrapper'}>
         {state.rowsArr}
       </div>

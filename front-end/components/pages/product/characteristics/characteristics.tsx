@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import style from './characteristics.module.scss'
+import { useTranslation } from 'next-i18next'
+
 function Characteristics (props: { characteristics: any }) {
+    const { t : trans } = useTranslation('product')
     const elems = () => {
         const res = []
         let i = 0
@@ -22,7 +25,7 @@ function Characteristics (props: { characteristics: any }) {
     if (props.characteristics) {
         return (
         <div className={style.characteristics}>
-            <h2>Характеристики:</h2>
+            <h2>{trans('deliveryDetails.characteristics')}:</h2>
                 {elems()}
         </div>
         )

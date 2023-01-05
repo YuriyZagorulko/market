@@ -1,0 +1,20 @@
+{
+    "buy":"Купити",
+    
+    "deliveryDetails.delivery":"Доставка",
+    "deliveryDetails.novaPoshta":"Нова Пошта",
+    "deliveryDetails.from1To5Days":"Від 1 до 5 днів",
+    "deliveryDetails.from":"від",
+    "deliveryDetails.byCourierToAddress":"Кур'єром за адресою",
+    "deliveryDetails.novaPoshtaCourier" : "Кур'єром Нова Пошта",
+    "deliveryDetails.ordersFrom" : "Закази від",
+    "deliveryDetails.freeDelivery" : "ДОСТАВКА БЕЗКОШТОВНО",
+    "deliveryDetails.payment":"Оплата",
+    "deliveryDetails.uponReceipt":"При отриманні",
+    "deliveryDetails.novaPoshtaAfterPayment":"Нова Пошта. Післяплата",
+    "deliveryDetails.paymentByVisaMasterCard":"Картою Visa, MasterCard",
+    "deliveryDetails.paymentByAnyCard":"Оплата карткою будь-якого банку",
+    "deliveryDetails.accordingToDetails": "За реквізитами",
+    "deliveryDetails.selfServiceTerminalsCards":"Для терміналів самообслуговування та карт",
+    "deliveryDetails.characteristics":"Характеристики"
+}

@@ -4,14 +4,16 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faYoutube, faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { withTranslation } from 'next-i18next';
 
 type headerProps = {
   name?: string
+  t:any
 }
 type headerState = {
   headerBanner?: string
 }
-export default class Welcome extends React.Component<headerProps, headerState> {
+class Welcome extends React.Component<headerProps, headerState> {
     constructor(props){
       super(props)
     }
@@ -21,10 +23,10 @@ export default class Welcome extends React.Component<headerProps, headerState> {
           <div className={`${styles.footerContent} global-width-limiter`}>
               <div className={styles.footerContact}>
               <Link href="/help">
-                <a>Допомога</a>
+                <a>{this.props.t('help')}</a>
               </Link>
               <Link href="/contact-us">
-                <a>Контакти</a>
+                <a>{this.props.t('contacts')}</a>
               </Link>
               </div>
               <div className={styles.footerSocial}>
@@ -44,3 +46,5 @@ export default class Welcome extends React.Component<headerProps, headerState> {
       )
     }
   }
+
+  export default withTranslation('layout')(Welcome)

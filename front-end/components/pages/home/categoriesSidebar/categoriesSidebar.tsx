@@ -1,9 +1,9 @@
 import style from './categoriesSidebar.module.scss'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Card, Menu, MenuProps } from 'antd'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { items1, items2, items3, itemsSingleLine } from './cstegoriesItems'
+import { items1, items2, items3, itemsSingleLine } from './categoriesItems'
+import { useTranslation } from 'next-i18next'
 
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
@@ -109,25 +109,37 @@ const redirectToCategory = (router, category) => {
     })
   }
 }
-function CategoriesSidebar (props: { }) {
-  const router = useRouter()
+const translateMenuItems = (trans,items)=>{
+    return items.map((el)=>({...el,label:trans(el.label)}))
+}
 
+function CategoriesSidebar (props: { }) {
+  // const [mounted, setMounted] = useState(false)
+
+  const router = useRouter()
+  const { t: trans } = useTranslation('home')
+  
   const onClick = e => {
     redirectToCategory(router, e.key)
+    console.log('click', e)
   }
-  return (
-    <div className={style.container + ' global'}>
-      <Card hoverable className={style.card}>
-        <div className={style.menuFull}>
-          <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
-        </div>
-        <div  className={style.menuSplit}>
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
-        </div>
-      </Card>
-    </div>
-  )
+  // if (mounted) {  // console warning fix
+    return (
+      <div className={style.container + ' global'}>
+        <Card hoverable className={style.card}>
+          <div className={style.menuFull}>
+            <Menu onClick={onClick} mode="vertical" items={translateMenuItems(trans,itemsSingleLine)} />
+          </div>
+          <div  className={style.menuSplit}>
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items1)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items2)} />
+            <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={translateMenuItems(trans,items3)} />
+          </div>
+        </Card>
+      </div>
+    )
+  // } else {
+  //   return <></>
+  // }
 }
 export default CategoriesSidebar

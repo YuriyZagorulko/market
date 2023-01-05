@@ -23,6 +23,8 @@ import CustomBtn from '../../components/shared/customBtn/customBtn'
 import { clearCart } from '../../redux/actions/cart'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import Head from 'next/head'
+import { i18n, withTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 interface IProps {
   dispatch: any,
@@ -148,13 +150,13 @@ class CheckoutPage extends React.Component<IProps, IState> {
         <div className={styles.productListWrapper}>
           <div className={styles.listHead}>
             <div className="sectionTitle">
-              Список товарів
+            {i18n.t('productList',{ns:'checkout'})}
             </div>
             <a href="#" className={styles.editList + ' link-blue'} onClick={this.openModal}>
               <div>
                 <FontAwesomeIcon height="12px" icon={faEdit as IconProp} />
               </div>
-              Редагувати
+              {i18n.t('edit',{ns:'checkout'})}
             </a>
           </div>
           <div className={styles.productList}>
@@ -170,16 +172,16 @@ class CheckoutPage extends React.Component<IProps, IState> {
         </div>
       )
     } else {
-      return <div>Nothing In he cart yet</div>
+      return <div>{i18n.t('cartIsEmpty',{ns:'checkout'})}</div>
     }
   }
   sidebar() {
     return (
       <div className={styles.sidebarTotal + ' box-gray'}>
-        <h1>Вартість</h1>
+        <h1>{i18n.t('price',{ns:'checkout'})}</h1>
         <div className="row">
           <label>
-            {this.state.products.length} товарів на суму
+            {this.state.products.length} {i18n.t('productWorth',{ns:'checkout'})}
           </label>
           <div className={styles.sum}>
             ₴ {this.state.totalPrice}
@@ -187,15 +189,15 @@ class CheckoutPage extends React.Component<IProps, IState> {
         </div>
         <div className="row">
           <label>
-            Вартість доставки
+          {i18n.t('deliveryValue',{ns:'checkout'})}
           </label>
           <div className={styles.alignRight}>
-            за тарифами перевізника
+          {i18n.t('accordingToCarriersTariffs',{ns:'checkout'})}
           </div>
         </div>
         <div className={classnames('row', styles.withBorders)}>
           <label>
-            До оплати
+          {i18n.t('toPay',{ns:'checkout'})}
           </label>
           <div className={classnames(styles.alignRight, styles.totalPrice)}>
             ₴ {this.state.totalPrice}
@@ -207,7 +209,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
           className={styles.checkoutOrder}
           onClick={this.checkoutOrder}
         >
-          Підтверджую замовлення
+          {i18n.t('confirmOrder',{ns:'checkout'})}
         </CustomBtn>
       </div>
     )
@@ -263,7 +265,7 @@ class CheckoutPage extends React.Component<IProps, IState> {
       </Head>
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.content}>
-          <h1>Оформлення замовлення</h1>
+          <h1>{i18n.t('orderPlacing',{ns:'checkout'})}</h1>
           <ContactInfo formRef={this.contactFormRef} />
           {this.productsList()}
           {this.shippingSetup()}
@@ -277,5 +279,13 @@ class CheckoutPage extends React.Component<IProps, IState> {
     )
   }
 }
+
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['checkout','layout','sharedUI']),
+  }
+}
+
+
 const connectedCheckoutPage = connect(state => state)(CheckoutPage)
-export default connectedCheckoutPage
+export default withTranslation('checkout')(connectedCheckoutPage)

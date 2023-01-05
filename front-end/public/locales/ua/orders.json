@@ -1,0 +1,17 @@
+{
+    "header":"Мої замовлення",
+
+    "orderItem.product":"Товар",
+    "orderItem.price":"Ціна",
+    "orderItem.amount":"Кількість",
+    "orderItem.sum":"Сума",
+
+    "orderLine.type":"Тип заказу",
+    "orderLine.price":"Вартість заказу",
+    "orderLine.info":"Інформація про замовлення",
+    "orderLine.city":"Місто доставки",
+    "orderLine.adress":"Адреса доставки",
+    "orderLine.recipient":"Отримувач",
+    "orderLine.userStreetAndHouse":"Вулиця {{street}}, будинок № {{house}}",
+    "orderLine.userApartament":", квартира № {{apartament}}"
+}
