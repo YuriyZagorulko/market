@@ -6,23 +6,25 @@ import { userService } from '../../../services/user.service'
 import Router from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { i18n, useTranslation } from 'next-i18next'
 
 function handleRegisterErrors(errors: { email: string[], phone: string[] }) {
   for (const err of errors.email) {
     if (err.includes('This field must be unique.')) {
       notification.error({
-        message: 'Помилка',
+        message: i18n.t('error',{ ns : 'auth'}),
         description:
-          'Користувач із таким імейлом вже існує',
+        i18n.t('err.emailAlreadyTaken',{ ns : 'auth'}),
       })
     }
   }
   for (const err of errors.phone) {
     if (err.includes('user with this phone already exists.')) {
       notification.error({
-        message: 'Помилка',
+        message: i18n.t('error',{ ns : 'auth'}),
         description:
-          'Користувач із таким телефоном вже існує',
+          i18n.t('err.phoneAlreadyTaken',{ ns : 'auth'}),
       })
     }
   }
@@ -32,6 +34,8 @@ function RegisterPage() {
     isDisabledButton: false
   })
   const [form] = Form.useForm()
+  const { t : trans } = useTranslation('auth')
+
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
@@ -64,7 +68,7 @@ function RegisterPage() {
       </Head>
       <div className={"wrapper " + style.register}>
         <div className="text-title-xl">
-          Реєстрація
+          {trans("registration")}
         </div>
         <div className={'form-wrapper'}>
           <Form
@@ -75,46 +79,46 @@ function RegisterPage() {
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label="Ім'я"
+              label={trans("name")}
               name="username"
               wrapperCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Будь ласка, введіть своє ім\'я!' }]}
+              rules={[{ required: true, message: trans("warn.enterName") }]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
-              label="Прізвище"
+              label={trans("lastName")}
               name="secondName"
               wrapperCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Будь ласка, введіть своє прізвище!' }]}
+              rules={[{ required: true, message: trans("warn.enterLastName") }]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
-              label="По батьковi"
+              label={trans("patronymic")}
               name="lastName"
               wrapperCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Будь ласка, введіть своє по батькові!' }]}
+              rules={[{ required: true, message: trans("warn.enterPatronymic") }]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
-              label="Дата народження"
+              label={trans("birthDate")}
               name="birthday"
               wrapperCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Будь ласка, введіть своє ім\'я!' }]}
+              rules={[{ required: true, message: trans("warn.enterBirthDate") }]}
             >
               <DatePicker />
             </Form.Item>
 
             <Form.Item
-              label="Пароль"
+              label={trans("password")}
               name="password"
               wrapperCol={{ span: 24 }}
-              rules={[{ required: true, message: 'Будь ласка, введіть свій пароль!' }]}
+              rules={[{ required: true, message: trans("warn.enterPassword") }]}
             >
               <Input.Password
                 // tslint:disable-next-line: jsx-no-lambda
@@ -123,15 +127,15 @@ function RegisterPage() {
             </Form.Item>
 
             <Form.Item
-              label="Повторіть пароль"
+              label={trans("repeatPassword")}
               name="confirmPassword"
               wrapperCol={{ span: 24 }}
               rules={[
-                { required: true, message: 'Будь ласка, введіть пароль повторно!' },
+                { required: true, message: trans("warn.reenterPassword") },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || getFieldValue('password') === value) return Promise.resolve()
-                    return Promise.reject(new Error('Паролі не співпадають!'))
+                    return Promise.reject(new Error(trans("err.passwordsDoesNotMatch")))
                   },
                 }),
               ]}
@@ -140,24 +144,24 @@ function RegisterPage() {
             </Form.Item>
 
             <Form.Item
-              label="Iмейл"
+              label={trans("email")}
               name="email"
               wrapperCol={{ span: 24 }}
               rules={[
-                { required: true, message: 'Будь ласка, введіть ваш імейл!' },
-                { pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, message: 'Будь ласка, введіть ваш імейл!' }
+                { required: true, message: trans("warn.enterEmail") },
+                { pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/, message: trans('warn.enterEmail') }
               ]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
-              label="Телефон"
+              label={trans("phone")}
               name="phone"
               wrapperCol={{ span: 24 }}
               rules={[
-                { required: true, message: 'Будь ласка, введіть ваш  телефон!' },
-                { pattern: /^[0-9]{9,9}$/, message: 'введене значення не є телефоном!' }
+                { required: true, message: trans("warn.enterPhone") },
+                { pattern: /^[0-9]{9,9}$/, message: trans("err.numberEnteredIncorrectly") }
               ]}
             >
               <Input className={"no-arrows"} addonBefore="+380" maxLength={9} type="number" />
@@ -169,18 +173,25 @@ function RegisterPage() {
               className={'centered-block'}
               disabled={isDisabledButton}
             >
-              Зареєструватись
+              {trans("register")}
             </Button>
           </Form>
         </div>
         <div style={{ marginTop: '30px' }}>
           <Link href="/auth/login">
-            <a>Я вже зареєстрований</a>
+            <a>{trans("alreadyRegistered")}</a>
           </Link>
         </div>
       </div>
     </>
   )
 }
+
+export async function getServerSideProps({ locale }) {
+  return {
+  props: await serverSideTranslations(locale, ['auth','layout','sharedUI']),
+  }
+}
+
 const connectedRegisterPage = connect(state => state)(RegisterPage)
 export default connectedRegisterPage

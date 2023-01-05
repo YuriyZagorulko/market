@@ -14,6 +14,7 @@ import { IControlsState } from '../redux/reducers/controls.reducer'
 import Head from 'next/head';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { i18n } from 'next-i18next'
+import { t } from 'i18next'
 
 interface IProps {
   login: any
@@ -91,7 +92,7 @@ function HomePage(props: IProps) {
 
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['home','layout',]),
+  props: await serverSideTranslations(locale, ['home','layout','sharedUI']),
   }
 }
 

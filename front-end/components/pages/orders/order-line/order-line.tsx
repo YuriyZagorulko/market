@@ -7,7 +7,7 @@ import OrderItem from "../order-item/OrderItem";
 import { getProductImg } from "../../../../helpers/types/responces/products";
 import Image from "next/image";
 import CustomImg from "../../../shared/customImg/customImg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 type OrderProps = {
   order: IOrder;

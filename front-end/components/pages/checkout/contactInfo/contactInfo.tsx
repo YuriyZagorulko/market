@@ -1,13 +1,15 @@
 import React, { RefObject } from 'react'
 import styles from './contactInfo.module.scss'
 import { Input, Form, FormInstance, Row, Col } from 'antd'
-import { store } from '../../../../redux/store'
 import { connect } from 'react-redux'
 import { IUserState } from '../../../../redux/reducers/auth.reducer'
+import { withTranslation } from 'next-i18next'
+
 
 type Props = {
   formRef?: RefObject<FormInstance>
   auth: IUserState
+  t:any
 }
 type State = {
   headerBanner?: string
@@ -30,7 +32,7 @@ export class ContactInfo extends React.Component<Props> {
     return (
       <div className={styles.contactInfo}>
         <div className="sectionTitle">
-          Контактні дані одержувача замовлення
+          {this.props.t("contactInfo.header")}
         </div>
         <Form
           name="basic"
@@ -41,10 +43,10 @@ export class ContactInfo extends React.Component<Props> {
         >
           <div className="row">
             <div className="column50">
-              <label><i className="red">*</i>Iм'я</label>
+              <label><i className="red">*</i>{this.props.t("contactInfo.name")}</label>
               <Form.Item
                 name="name"
-                rules={[{ required: true, message: 'Будь ласка, введіть ваше ім\'я!' }]}
+                rules={[{ required: true, message: this.props.t("contactInfo.warn.enterName")}]}
                 initialValue={`${this.props.auth.user?.username ? this.props.auth.user?.username : ''}`}
 
               >
@@ -52,10 +54,10 @@ export class ContactInfo extends React.Component<Props> {
               </Form.Item>
             </div>
             <div className="column50">
-              <label><i className="red">*</i>Прізвище</label>
+              <label><i className="red">*</i>{this.props.t("contactInfo.lastName")}</label>
               <Form.Item
                 name="surname"
-                rules={[{ required: true, message: 'Будь ласка, введіть ваше прізвище!' }]}
+                rules={[{ required: true, message: this.props.t("contactInfo.warn.enterLastName") }]}
                 initialValue={`${this.props.auth.user?.lastName ? this.props.auth.user?.lastName : ''}`}
 
               >
@@ -65,20 +67,20 @@ export class ContactInfo extends React.Component<Props> {
           </div>
           <div className="row">
             <div className="column50">
-              <label><i className="red">*</i>По-батькові</label>
+              <label><i className="red">*</i>{this.props.t("contactInfo.patronymic")}</label>
               <Form.Item
                 name="secondName"
-                rules={[{ required: true, message: 'Будь ласка, введіть ваше по-батькові!' }]}
+                rules={[{ required: true, message: this.props.t("contactInfo.warn.enterPatronymic") }]}
                 initialValue={`${this.props.auth.user?.secondName ? this.props.auth.user?.secondName : ''}`}
               >
                 <Input className={styles.personalDataInput} />
               </Form.Item>
             </div>
             <div className="column50">
-              <label><i className="red">*</i>Номер телефону</label>
+              <label><i className="red">*</i>{this.props.t("contactInfo.phoneNumber")}</label>
               <Form.Item
                 name="phone"
-                rules={[{ required: true, message: 'Будь ласка, введіть номер телефону!' }]}
+                rules={[{ required: true, message: this.props.t("contactInfo.warn.enterPhoneNumber") }]}
                 initialValue={`${this.props.auth.user?.phone ? this.props.auth.user?.phone : ''}`}
               >
                 <Input prefix="+380" type="number" className={styles.personalDataInput} />
@@ -96,5 +98,7 @@ export class ContactInfo extends React.Component<Props> {
 const mapStateToProps = (state: any) => {
   return { auth: state.auth };
 };
-export default connect(mapStateToProps)(ContactInfo);
+const connectedContactInfo =  connect(mapStateToProps)(ContactInfo);
+
+export default withTranslation('checkout')(connectedContactInfo)
 

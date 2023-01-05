@@ -1,11 +1,9 @@
 import style from './categoriesSidebar.module.scss'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Card, Menu, MenuProps } from 'antd'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { ProductCategories } from '../../../../helpers/constants/categories'
 import { items1, items2, items3, itemsSingleLine } from './categoriesItems'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [

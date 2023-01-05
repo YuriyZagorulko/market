@@ -112,7 +112,7 @@ const Product = (props: IProps) => {
 
 export async function getServerSideProps({ locale }) {
     return {
-    props: await serverSideTranslations(locale, ['product','layout']),
+    props: await serverSideTranslations(locale, ['product','layout','sharedUI']),
     }
   }
   

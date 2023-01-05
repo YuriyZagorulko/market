@@ -62,7 +62,7 @@ function OrdersPage(props: IProps) {
 }
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['orders','layout']),
+  props: await serverSideTranslations(locale, ['orders','layout','sharedUI']),
   }
 }
 

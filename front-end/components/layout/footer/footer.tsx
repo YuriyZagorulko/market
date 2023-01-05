@@ -8,6 +8,7 @@ import { withTranslation } from 'next-i18next';
 
 type headerProps = {
   name?: string
+  t:any
 }
 type headerState = {
   headerBanner?: string

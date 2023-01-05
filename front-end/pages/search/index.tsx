@@ -87,7 +87,7 @@ function SearchPage(props: IProps) {
       <ProductsSortMenu
         products={requestData?.data.data}
         onFilterBtnClick={onToggleMobileAside}
-        defaultSelectValue={"За рейтингом"}
+        defaultSelectValue={trans('byRating')}
         sortOptions={[
           "За рейтингом",
           "Від дорогих к дешевим",
@@ -102,7 +102,7 @@ function SearchPage(props: IProps) {
         <AsideMenu products={requestData?.data?.data} />
         {query.text && (
           <div className={style.searchTitle}>
-            {trans('Результати пошуку за запитом')} {`<< ${query.text} >>`}
+            {trans('searchResults')} {`<< ${query.text} >>`}
           </div>
         )}
         {/* <div className={'search__order'}>
@@ -110,7 +110,7 @@ function SearchPage(props: IProps) {
         </div> */}
         {requestData !== null && !requestData?.data?.count ? (
           <div className={style.nothingFound}>
-            {trans('На жаль, за вашим запитом нічого не знайдено')}...
+            {trans('nothingWasFound')}...
           </div>
         ) : (
           <div className={"search"}>
@@ -128,7 +128,7 @@ function SearchPage(props: IProps) {
 }
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['search','layout']),
+  props: await serverSideTranslations(locale, ['search','layout','sharedUI']),
   }
 }
 const connectedSearchPage = connect((state) => state)(SearchPage);

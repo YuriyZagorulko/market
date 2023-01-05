@@ -5,7 +5,7 @@ module.exports = {
       defaultLocale: "ua",
       locales: ["ua", "ru"],
     },
-    defaultNS:'layout',
+    defaultNS:'common',
     react: { useSuspense: false },//this line,
     localePath:
     typeof window === 'undefined'

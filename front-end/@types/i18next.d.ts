@@ -7,7 +7,9 @@ import type checkout from '../public/locales/ua/checkout.json'
 import type contactUs from '../public/locales/ua/contact-us.json'
 import type product from '../public/locales/ua/product.json'
 import type layout from '../public/locales/ua/layout.json'
+import type search from '../public/locales/ua/search.json'
 import type orders from '../public/locales/ua/orders.json'
+import type sharedUI from '../public/locales/ua/sharedUI.json'
 
 
 interface I18nNamespaces {
@@ -19,11 +21,14 @@ interface I18nNamespaces {
   layout: typeof layout
   product: typeof product
   orders: typeof orders
+  sharedUI: typeof sharedUI
+  search: typeof search
+
 }
 
 declare module 'i18next' {
   interface CustomTypeOptions {
-    defaultNS: 'layout'
+    defaultNS: 'common'
     resources: I18nNamespaces
   }
 }

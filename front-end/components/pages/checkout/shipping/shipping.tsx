@@ -3,6 +3,7 @@ import styles from './shipping.module.scss'
 import { Input, Form, FormInstance, Row, Col, Radio, Select, } from 'antd'
 import { deliveryTypes } from '../../../../helpers/order/order.constants'
 import classNames from 'classnames'
+import { withTranslation } from 'next-i18next'
 
 const { Option } = Select
 type Props = {
@@ -16,12 +17,13 @@ type Props = {
   onCityChange: (num: number) => void
   onCitySearch: (str: string) => void
   onOfficeChange: (e) => void
+  t: (string:string)=>string
 
 }
 type State = {
   headerBanner?: string
 }
-export default class Shipping extends React.Component<Props> {
+class Shipping extends React.Component<Props> {
   constructor(props){
     super(props)
     this.state = {}
@@ -40,20 +42,20 @@ export default class Shipping extends React.Component<Props> {
         >
           <div className={styles.deliveryType}>
             <div className="sectionTitle">
-              Доставка Новою Поштою
+              {this.props.t('shipping.postDelivery')}
             </div>
             <div className={styles.deliveryContainer}>
               <label>
-              <i className="red">*</i>Виберіть ваше місто
+              <i className="red">*</i>{this.props.t('shipping.chooseCity')}
               </label>
               <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Будь ласка, виберіть ваше місто' }]}
+                rules={[{ required: true, message: this.props.t('shipping.warn.chooseCity') }]}
               >
                 <Select
                   showSearch
                   className={styles.citySelect}
-                  placeholder="Виберіть ваше місто"
+                  placeholder={this.props.t('shipping.chooseCity')}
                   optionFilterProp="children"
                   onChange={this.props.onCityChange}
                   onSearch={this.props.onCitySearch}
@@ -74,22 +76,22 @@ export default class Shipping extends React.Component<Props> {
             <div className={classNames(styles.ratio, this.props.selectedShipping === deliveryTypes.newPost ? styles.selectedShipping : '')}>
               <Radio value={deliveryTypes.newPost}>
                 <div className={styles.radioTitle}>
-                  Самовивіз із Нової Пошти
+                  {this.props.t('shipping.pickupFromPostOffice')}
                 </div>
               </Radio>
                 <div className={styles.optionContent}>
                   <div className={styles.deliveryContainer}>
                     <label>
-                      <i className="red">*</i>Виберіть відділення
+                      <i className="red">*</i>{this.props.t('shipping.warn.chooseDepartament')}
                     </label>
                     <Form.Item
                       name="office"
-                      rules={[{ required: this.props.selectedShipping === deliveryTypes.newPost, message: 'Будь ласка, виберіть відділення' }]}
+                      rules={[{ required: this.props.selectedShipping === deliveryTypes.newPost, message: this.props.t('shipping.warn.chooseDepartament') }]}
                     >
                       <Select
                         showSearch
                         className={styles.officeSelect}
-                        placeholder="Виберіть відділення"
+                        placeholder={this.props.t('shipping.warn.chooseDepartament')}
                         optionFilterProp="children"
                         onChange={this.props.onOfficeChange}
                         filterOption={filterOptions}
@@ -106,7 +108,7 @@ export default class Shipping extends React.Component<Props> {
               <Radio value={deliveryTypes.newPostCourier}>
                 <div className={styles.deliveryContainer}>
                   <div className={styles.radioTitle}>
-                    Кур'єр Нова Пошта 
+                   {this.props.t('shipping.courierDelivery')} 
                   </div>
                 </div>
               </Radio>
@@ -114,32 +116,32 @@ export default class Shipping extends React.Component<Props> {
                 <div className={styles.line}>
                     <div className={styles.lineItem}>
                       <label>
-                        Вулиця
+                        {this.props.t('shipping.street')}
                       </label>
                       <Form.Item
                         name="street"
-                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Будь ласка, вкажіть вулицю' }]}
+                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: this.props.t('shipping.warn.enterStreet') }]}
                       >
-                        <Input placeholder="Вулиця" type={'text'} />
+                        <Input placeholder={this.props.t('shipping.street')} type={'text'} />
                       </Form.Item>
                     </div>
                     <div className={styles.lineItem}>
                       <label>
-                        Будинок
+                        {this.props.t("shipping.house")}
                       </label>
                       <Form.Item
                         name="house"
-                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message: 'Будь ласка, вкажіть будинок' }]}
+                        rules={[{ required: this.props.selectedShipping === deliveryTypes.newPostCourier, message:  this.props.t("shipping.warn.enterHouse") }]}
                       >
-                        <Input placeholder="Будинок" type={'text'} />
+                        <Input placeholder={this.props.t("shipping.house")} type={'text'} />
                       </Form.Item>
                     </div>
                     <div className={styles.lineItem}>
                       <label>
-                        Квартира
+                      {this.props.t("shipping.apartament")}
                       </label>
                       <Form.Item name="apartment">
-                        <Input placeholder="Квартира" type={'text'} />
+                        <Input placeholder={this.props.t("shipping.apartament")} type={'text'} />
                       </Form.Item>
                     </div>
                 </div>
@@ -151,3 +153,5 @@ export default class Shipping extends React.Component<Props> {
     )
   }
 }
+
+export default withTranslation('checkout')(Shipping)

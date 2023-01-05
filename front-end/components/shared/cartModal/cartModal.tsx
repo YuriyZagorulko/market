@@ -11,9 +11,12 @@ import { Unsubscribe } from 'redux-saga'
 import { cartConstants, ICartState } from '../../../redux/reducers/cart.reducer'
 import CartProduct from './cartProduct/cartProduct'
 import Link from 'next/link'
+import { withTranslation } from 'next-i18next'
+import { t } from 'i18next'
 
 type IProps = {
   dispatch: any
+  t:any
 }
 type cartModalState = {
   isVisible: boolean
@@ -84,7 +87,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
             </ul>
           )
         } else {
-          return <div>Корзина порожня...</div>
+          return <div>{this.props.t('cartModal.cartIsEmpty')}...</div>
         }
     }
     render() {
@@ -92,7 +95,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
         <div className={styles.container}>
           <Modal
             className={'cart-modal'}
-            title="Корзина"
+            title={this.props.t('cartModal.title')}
             open={this.state.isVisible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
@@ -105,7 +108,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
                   className={'cart-btn'}
                   onClick={this.handleOk}
                 >
-                  Продовжити покупки
+                  {this.props.t("cartModal.continueShopping")}
                 </Button>
                 { (this.state.cartProducts.length > 0) && (
                   <Link href="/checkout">
@@ -114,7 +117,7 @@ class CartModal extends React.Component<IProps, cartModalState> {
                       className={'cart-btn'}
                       onClick={this.handleOk}
                     >
-                      Оформити замволення
+                      {this.props.t('cartModal.checkout')}
                     </Button>
                   </Link>
                 )}
@@ -132,4 +135,4 @@ class CartModal extends React.Component<IProps, cartModalState> {
 
 
 const connectedCartModal = connect(state => state)(CartModal as any)
-export default connectedCartModal
+export default withTranslation('sharedUI')(connectedCartModal)

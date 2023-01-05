@@ -1,8 +1,5 @@
 import style from './search_items.module.scss'
 import React, { useState, useEffect } from 'react'
-import { Form, Input, Button, Checkbox, notification } from 'antd'
-import { connect } from 'react-redux'
-import Link from 'next/link'
 import { IPaginatedData } from '../../../../helpers/types'
 import ProductPrev from '../../../../components/shared/productPrev/productPrev'
 

@@ -1,0 +1,14 @@
+{
+    "cartModal.title":"Корзина",
+    "cartModal.cartIsEmpty":"Корзина пустая",
+    "cartModal.continueShopping":"Продолжить покупки",
+    "cartModal.checkout":"Оформить заказ",
+
+    "exitDialog.header":"Вы уверены что хотите покинуть сайт?",
+    "exitDialog.yes":"Да",
+    "exitDialog.no":"Нет",
+
+    "productListItem.price":"Цена",
+    "productListItem.amount":"Колличество",
+    "productListItem.sum":"Сумма"
+}

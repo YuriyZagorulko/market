@@ -13,10 +13,10 @@
     "contactInfo.header":"Контактні дані одержувача замовлення",
     "contactInfo.name":"Iм'я",
     "contactInfo.lastName":"Прізвище",
-    "contactInfo.enterLastName":"Будь ласка, введіть ваше прізвище!",
     "contactInfo.patronymic":"По-батькові",
     "contactInfo.phoneNumber":"Номер телефону",
     "contactInfo.warn.enterName":"Будь ласка, введіть ваше ім'я!",
+    "contactInfo.warn.enterLastName":"Будь ласка, введіть ваше прізвище!",
     "contactInfo.warn.enterPatronymic":"Будь ласка, введіть ваше по-батькові!",
     "contactInfo.warn.enterPhoneNumber":"Будь ласка, введіть номер телефону!",
     
@@ -29,6 +29,7 @@
     "shipping.house":"Будинок",
     "shipping.apartament":"Квартира",
     "shipping.warn.enterStreet":"Будь ласка, вкажіть вулицю",
+    "shipping.warn.enterHouse":"Будь ласка, вкажіть будинок",
     "shipping.warn.chooseCity":"Будь ласка, виберіть ваше місто",
     "shipping.warn.chooseDepartament":"Будь ласка, виберіть відділення",
     

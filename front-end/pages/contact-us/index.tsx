@@ -64,7 +64,7 @@ function ContactUsPage () {
 }
 export async function getServerSideProps({ locale }) {
   return {
-  props: await serverSideTranslations(locale, ['contact-us','layout']),
+  props: await serverSideTranslations(locale, ['contact-us','layout','sharedUI']),
   }
 }
 
