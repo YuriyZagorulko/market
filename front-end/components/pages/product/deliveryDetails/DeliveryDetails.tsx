@@ -64,12 +64,12 @@ function DeliveryDetails() {
                                 <span className={style.bodyItemDescription}>{trans('deliveryDetails.paymentByAnyCard')}</span>
                             </div>
                         </div>
-                        {/* <div className={style.bodyItem}>
+                        <div className={style.bodyItem}>
                             <div className={style.bodyItemDetails}>
                                 <strong className={style.bodyItemHeader}>{trans('deliveryDetails.accordingToDetails')}</strong>
                                 <span className={style.bodyItemDescription}>{trans('deliveryDetails.selfServiceTerminalsCards')}</span>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div>

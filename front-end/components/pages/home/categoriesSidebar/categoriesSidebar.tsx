@@ -114,12 +114,16 @@ const translateMenuItems = (trans,items)=>{
 }
 
 function CategoriesSidebar (props: { }) {
+  // const [mounted, setMounted] = useState(false)
+
   const router = useRouter()
   const { t: trans } = useTranslation('home')
   
   const onClick = e => {
     redirectToCategory(router, e.key)
+    console.log('click', e)
   }
+  // if (mounted) {  // console warning fix
     return (
       <div className={style.container + ' global'}>
         <Card hoverable className={style.card}>
@@ -134,6 +138,8 @@ function CategoriesSidebar (props: { }) {
         </Card>
       </div>
     )
-
+  // } else {
+  //   return <></>
+  // }
 }
 export default CategoriesSidebar
