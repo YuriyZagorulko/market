@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { productConstants } from '../helpers/constants/product.constants'
 import styles from '../styles/pages/Home.module.scss'
 import { connect } from 'react-redux'
 import { store } from '../redux/store'

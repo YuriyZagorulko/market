@@ -1,6 +1,6 @@
 import { MenuProps } from "antd"
 import Image from "next/image"
-import { ProductCategories } from "../../../../helpers/constants/categories"
+import { ProductCategories } from "../../../../helpers/constants/search"
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -23,12 +23,12 @@ function getItem(
 }
 
 function sliceIntoChunks(arr, chunkSize) {
-    const res = [];
+    const res = []
     for (let i = 0; i < arr.length; i += chunkSize) {
-        const chunk = arr.slice(i, i + chunkSize);
-        res.push(chunk);
+        const chunk = arr.slice(i, i + chunkSize)
+        res.push(chunk)
     }
-    return res;
+    return res
 }
 
 export const itemsSingleLine = [

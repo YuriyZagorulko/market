@@ -9,6 +9,7 @@ export interface IOrder{
     recipientSurname: string
     phoneNumber: string
     street: string
+    orderStatus: string
     city: string
     house: string
     officeRef: string
