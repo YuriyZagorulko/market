@@ -11,7 +11,9 @@ const storage: LocalStorage = LocalStorage.Instance
 export const userService = {
     login,
     logout,
-    registerUser
+    registerUser,
+    getRestorePasswordToken,
+    changePassword
 }
 
 function logout() {
@@ -48,4 +50,28 @@ function login(user: IUserLogin) {
         .then((responce) => {
             return responce.json()
         }).catch(handleRequestError)
+}
+function getRestorePasswordToken(identifier: string) {
+    return fetch(`${config.apiUrl}/auth/restore-password?email=${identifier}`)
+      .then((responce) => {
+        return responce.json();
+      })
+      .catch(handleRequestError);
+  }
+
+  
+//change function below it's not working correct
+//change function below it's not working correct
+//change function below it's not working correct
+//change function below it's not working correct
+
+  function changePassword(newPass: string) {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
+            password:newPass,
+            confirmPassword:newPass
+        })
+  }
 }

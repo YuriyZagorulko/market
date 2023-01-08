@@ -5,6 +5,7 @@ import { authConstants } from '../constants'
 export interface IUserState {
     token: string
     user: IUser
+    restorePasswordToken:string
 }
 
 const storage: LocalStorage = LocalStorage.Instance
@@ -15,7 +16,8 @@ function initializeUser(): IUserState{
     }
     return {
         token: '',
-        user: null
+        user: null,
+        restorePasswordToken:'12312'
     }
 }
 
@@ -35,6 +37,11 @@ export function authReducer(
             ...state,
             user: null,
             token: null
+        }
+    case authConstants.GET_RESTORE_PASSWORD_TOKEN_SUCCES:
+        return {
+            ...state,
+            restorePasswordToken:action.value.token
         }
     default:
         return state

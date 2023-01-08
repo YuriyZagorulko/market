@@ -46,6 +46,7 @@ function RegisterPage() {
     setTimeout(() => {
       setSate({ isDisabledButton: false })
     }, 4000)
+    console.log(data)
     userService.registerUser(data).then((val) => {
       if (val?.errors) {
         handleRegisterErrors(val.errors)
