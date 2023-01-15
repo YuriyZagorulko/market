@@ -60,6 +60,9 @@ function SearchPage(props: IProps) {
       chosenCategory: !isMobileMenuActive.chosenCategory,
     })
   }
+  const handleSortChange = () => {
+    return  null
+  }
   return (
     <>
       <Head>
@@ -84,6 +87,7 @@ function SearchPage(props: IProps) {
         products={requestData?.data?.data}
         onFilterBtnClick={onToggleMobileAside}
         defaultSelectValue={"За рейтингом"}
+        onChange={handleSortChange}
         sortOptions={[
           "За рейтингом",
           "Від дорогих к дешевим",

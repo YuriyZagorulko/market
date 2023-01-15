@@ -1,8 +1,7 @@
 from marketBackend.apps.market.models import Order
-from marketBackend.apps.market.models import Product
 import yagmail
-
 from marketBackend.secret import GMAIL_EMAIL, GMAIL_PASSWORD
+
 def notify_by_email(data):
     yag = yagmail.SMTP(GMAIL_EMAIL, GMAIL_PASSWORD)
     name = data.get('name', '')
