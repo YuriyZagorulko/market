@@ -12,17 +12,17 @@ type layoutProps = {
 }
 
 export default class MainLayout extends React.Component<layoutProps> {
-    render() {
-        return (
-            <React.Fragment>
-              <Header/>
-              <main className={styles.content}>
-                {this.props.children}
-              </main>
-              <Footer/>
-              <CartModal />
-              <ExitDialogWindow/>
-            </React.Fragment>
-          )
-    }
+  render() {
+      return (
+          <React.Fragment>
+            <Header/>
+            <main className={styles.content}>
+              {this.props.children}
+            </main>
+            <Footer/>
+            <CartModal />
+            <ExitDialogWindow/>
+          </React.Fragment>
+        )
   }
+}

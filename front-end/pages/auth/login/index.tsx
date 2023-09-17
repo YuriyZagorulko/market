@@ -9,10 +9,6 @@ import { useRouter } from 'next/router'
 import CustomBtn from '../../../components/shared/customBtn/customBtn'
 import Head from 'next/head'
 
-interface IProps {
-  login: any
-  dispatch: any
-}
 function LoginPage() {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -99,7 +95,7 @@ function LoginPage() {
           </Form>
         </div>
         <div>
-          <Link href="/auth/forget-password">
+          <Link href="/auth/forgot-password">
             <a>Забули пароль?</a>
           </Link>
         </div>

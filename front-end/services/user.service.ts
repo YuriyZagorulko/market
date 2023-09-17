@@ -1,9 +1,6 @@
 import { IUserLogin, IUserRegister } from './../helpers/types/auth';
 import config from '../config'
-import { authHeader } from '../helpers/headers'
 import { LocalStorage } from '../helpers/storage/localStorage'
-import { store } from '../redux/store'
-import { ILogin } from '../helpers/types/responces/auth'
 import { urlencodedBody } from './service.helpers'
 import { handleRequestError } from '../helpers/interceptors'
 
@@ -11,7 +8,9 @@ const storage: LocalStorage = LocalStorage.Instance
 export const userService = {
     login,
     logout,
-    registerUser
+    registerUser,
+    sendRestorePasswordEmail,
+    checkRestorePasswordToken,
 }
 
 function logout() {
@@ -36,6 +35,35 @@ function registerUser(user: IUserRegister) {
             return responce.json()
         }).catch(handleRequestError)
 }
+
+function sendRestorePasswordEmail(email: string) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
+            email,
+        })
+    }
+    return fetch(`${config.apiUrl}/auth/request-restore-password`, requestOptions)
+        .then((responce) => {
+            return responce.json()
+        }).catch(handleRequestError)
+}
+
+function checkRestorePasswordToken(token: string) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
+            token,
+        })
+    }
+    return fetch(`${config.apiUrl}/auth/check-restore-password-token`, requestOptions)
+        .then((responce) => {
+            return responce.json()
+        }).catch(handleRequestError)
+}
+
 function login(user: IUserLogin) {
     const requestOptions = {
         method: 'POST',

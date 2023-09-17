@@ -1,7 +1,7 @@
 import style from '../../styles/pages/Product.module.scss'
 import { connect, useDispatch } from 'react-redux'
 import Image from 'next/image'
-import { IProduct, getFirstImg, getProductImg, getAllProductImages, getPreviewImgUrl } from '../../helpers/types/responces/products'
+import { getProductImg, getAllProductImages, getPreviewImgUrl } from '../../helpers/types/responces/products'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
