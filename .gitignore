@@ -183,4 +183,3 @@ backend/static
 /backend/marketBackend/secret.py
 /.env.prod
 certbot
-/.env.dev
