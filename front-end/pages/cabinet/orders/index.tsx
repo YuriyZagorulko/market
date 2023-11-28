@@ -22,14 +22,15 @@ function OrdersPage(props: IProps) {
   const router = useRouter()
   const [{ orders }, setSate] = useState({
     orders: []
-
   })
 
   useEffect(() => {
     OrderService.getOrders().then((val) => {
-      setSate({
-        orders: val.data.data
-      })
+      if(val.data) {
+        setSate({
+          orders: val.data.data
+        })
+      }
     }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
     return () => { dispatch({ type: controlsConstants.SHOW_LOADER }) }
   }, [])

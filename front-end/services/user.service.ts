@@ -11,6 +11,7 @@ export const userService = {
     registerUser,
     sendRestorePasswordEmail,
     checkRestorePasswordToken,
+    changePassword,
 }
 
 function logout() {
@@ -59,6 +60,21 @@ function checkRestorePasswordToken(token: string) {
         })
     }
     return fetch(`${config.apiUrl}/auth/check-restore-password-token`, requestOptions)
+        .then((responce) => {
+            return responce.json()
+        }).catch(handleRequestError)
+}
+
+function changePassword(newPassword: string, token: string) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {  'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlencodedBody({
+            password: newPassword,
+            token
+        })
+    }
+    return fetch(`${config.apiUrl}/auth/restore-password-change`, requestOptions)
         .then((responce) => {
             return responce.json()
         }).catch(handleRequestError)

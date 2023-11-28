@@ -11,6 +11,7 @@ import { Unsubscribe } from 'redux-saga'
 import { cartConstants, ICartState } from '../../../redux/reducers/cart.reducer'
 import Link from 'next/link'
 import { logout } from '../../../redux/actions/user'
+import { withRouter } from 'next/router'
 
 type IProps = {
   dispatch: any
@@ -18,6 +19,7 @@ type IProps = {
 type exitDialogState = {
   isVisible: boolean
   unsubs: Unsubscribe []
+  router: any
 }
 enum subsriptions{
   store = 'STORE'
@@ -28,7 +30,8 @@ class exitDialogWindow extends React.Component<IProps, exitDialogState> {
       super(props)
       this.state = {
         isVisible: false,
-        unsubs: []
+        unsubs: [],
+        router: props.router,
       }
       this.state.unsubs[subsriptions.store] =  store.subscribe(() => {
         const state = store.getState()
@@ -56,6 +59,7 @@ class exitDialogWindow extends React.Component<IProps, exitDialogState> {
     logoutClick = (dispatch) => () => {
       dispatch(logout())
       this.props.dispatch({type: controlsConstants.CLOSE_EXIT_DIALOG})
+      this.state.router.push('/')
     }
     render() {
       return (
@@ -101,5 +105,5 @@ class exitDialogWindow extends React.Component<IProps, exitDialogState> {
   }
 
 
-const connectedExitDialogWindow = connect(state => state)(exitDialogWindow as any)
+const connectedExitDialogWindow = connect(state => state)( withRouter(exitDialogWindow) as any)
 export default connectedExitDialogWindow

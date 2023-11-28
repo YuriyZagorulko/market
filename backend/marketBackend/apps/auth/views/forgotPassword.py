@@ -7,7 +7,7 @@ import base64
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 from django.template import loader
 import os
@@ -33,7 +33,7 @@ class ForgotPasswordView(APIView):
             )
             key = base64.urlsafe_b64encode(kdf.derive(password))
             f = Fernet(key)
-            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+            now = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S.%f")
             userData = json.dumps({ "id": user.id, "exparationDate": now})
             token = f.encrypt(bytes(userData, 'UTF-8')).decode("utf-8")
 
@@ -83,13 +83,54 @@ class CheckRestorePasswordToken(APIView):
             try: 
                 data = json.loads(f.decrypt(token))
                 if 'id' in data:
-                    return Response({
-                        'message': 'valid' 
-                    }) 
+                    if 'exparationDate' in data:
+                        exparation_date = data['exparationDate']
+                        exparation_date = datetime.strptime(data['exparationDate'], "%Y-%m-%d %H:%M:%S.%f")  
+                        if exparation_date > datetime.now():
+                            return Response({
+                                'message': 'valid' 
+                            }) 
             except:
                 return Response({
                     'error': 'token is invalid'
                 }) 
         return Response({
                     'error': 'token is invalid'
+                }) 
+
+class ChangePassword(APIView):
+    def post(self, request):
+        token = request.data['token']
+        new_password = request.data['password']
+        if(token and new_password):
+            SECRET_KEY = settings.SECRET_KEY
+            password = bytes(SECRET_KEY,'UTF-8')
+            salt = bytes('salt','UTF-8')
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA256(),
+                length=32,
+                salt=salt,
+                iterations=390000,
+            )
+            key = base64.urlsafe_b64encode(kdf.derive(password))
+            f = Fernet(key)
+            try: 
+                data = json.loads(f.decrypt(token))
+                if 'id' in data:
+                    if 'exparationDate' in data:
+                        exparation_date = data['exparationDate']
+                        exparation_date = datetime.strptime(data['exparationDate'], "%Y-%m-%d %H:%M:%S.%f")  
+                        if exparation_date > datetime.now():
+                            user = CustomUser.objects.get(id=data['id'])
+                            user.set_password(new_password)
+                            user.save()
+                            return Response({
+                                'message': 'password changed' 
+                            }) 
+            except:
+                return Response({
+                    'error': 'something went wrong'
+                }) 
+        return Response({
+                    'error': 'something went wrong'
                 }) 

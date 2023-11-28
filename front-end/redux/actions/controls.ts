@@ -1,8 +1,11 @@
 import { alertConstants } from '../../helpers/constants'
+import { controlsConstants } from '../../helpers/constants/controls'
 
-export const alertActions = {
+export const controlActions = {
     openCart,
-    closeCart
+    closeCart,
+    stopLoader,
+    startLoader,
 }
 
 function openCart() {
@@ -11,4 +14,12 @@ function openCart() {
 
 function closeCart() {
     return { type: alertConstants.ERROR}
+}
+
+function startLoader() {
+    return { type: controlsConstants.SHOW_LOADER }
+}
+
+function stopLoader() {
+    return { type: controlsConstants.HIDE_LOADER }
 }

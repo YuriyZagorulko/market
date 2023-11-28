@@ -11,16 +11,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
 import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
-import { accessSync } from 'fs'
-
-type headerProps = {
-  name?: string
-  dispatch: any
-}
-type headerState = {
-  headerBanner?: string
-  searchInput?: string
-}
 
 
 function authLinks(isAuth, dispatch) {
@@ -59,6 +49,7 @@ function Header(props: any) {
     searchInput: '',
   })
   
+  const router = useRouter()
   const [isRenderAuthLinks, setIsRenderAuthLinks] = useState(true)
   const [isShowCartLength,setIsShowCartLength] = useState(false)
 
@@ -69,7 +60,6 @@ function Header(props: any) {
     setIsShowCartLength(!!props.cartL)
   }, [props.cartL])
 
-  const router = useRouter()
 
   const updateInputValue = (evt) => {
     const val: string = evt.target.value

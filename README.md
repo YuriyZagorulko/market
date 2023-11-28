@@ -12,6 +12,9 @@ Now you should be able to connect to local DB from docker container.
 Install this extensions to run project from VS code:
 `ms-python.python`
 `ms-azuretools.vscode-docker`
+
+Add .env.dev file to your project root folder
+
 # market
 Things to mention:
 - project is using Cron to update update_post_officess.py

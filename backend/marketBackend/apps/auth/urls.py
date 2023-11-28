@@ -1,5 +1,5 @@
 from django.urls import path
-from marketBackend.apps.auth.views import MyObtainTokenPairView, RegisterView, ForgotPasswordView, CheckRestorePasswordToken
+from marketBackend.apps.auth.views import MyObtainTokenPairView, RegisterView, ForgotPasswordView, CheckRestorePasswordToken, ChangePassword
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='auth_register'),
     path('request-restore-password', ForgotPasswordView.as_view(), name='auth_request_restore_password'),
     path('check-restore-password-token', CheckRestorePasswordToken.as_view(), name='auth_request_check_password'),
+    path('restore-password-change', ChangePassword.as_view(), name='auth_request_change_password'),
 ]
