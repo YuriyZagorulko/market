@@ -123,7 +123,7 @@ function RestorePassword() {
       </div>
     </>
     ) : (
-      <div className="text-title-xl">
+      <div className="text-title-xl" style={{paddingTop: '30px'}}>
         Це посилання не є вірним.
       </div>
     )}

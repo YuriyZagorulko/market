@@ -66,7 +66,7 @@ function SearchPage(props: IProps) {
   return (
     <>
       <Head>
-        <title>Результаты поиска по запросу | V16</title>
+        <title>Результати за пошуком | V16</title>
         <meta name="robots" content="noindex,nofollow" />
         <meta
           name="description"
@@ -83,7 +83,7 @@ function SearchPage(props: IProps) {
       /> */}
       {props.controls.isLoaderShown && <Loader />}
 
-      <ProductsSortMenu
+      {/* <ProductsSortMenu
         products={requestData?.data?.data}
         onFilterBtnClick={onToggleMobileAside}
         defaultSelectValue={"За рейтингом"}
@@ -93,7 +93,7 @@ function SearchPage(props: IProps) {
           "Від дорогих к дешевим",
           "Від дешевих к дорогим",
         ]}
-      />
+      /> */}
 
       <div
         style={{ flexDirection: "row" }}

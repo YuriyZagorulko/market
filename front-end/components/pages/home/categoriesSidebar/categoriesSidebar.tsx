@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, Menu, MenuProps } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { items1, items2, items3, itemsSingleLine } from './cstegoriesItems'
+import { itemsOils } from './cstegoriesItems'
 
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
@@ -119,12 +119,12 @@ function CategoriesSidebar (props: { }) {
     <div className={style.container + ' global'}>
       <Card hoverable className={style.card}>
         <div className={style.menuFull}>
-          <Menu onClick={onClick} mode="vertical" items={itemsSingleLine} />
+          <Menu onClick={onClick} mode="vertical" items={itemsOils} />
         </div>
         <div  className={style.menuSplit}>
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} />
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} />
-          <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} />
+          {/* <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items1} /> */}
+          {/* <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items2} /> */}
+          {/* <Menu onClick={onClick} style={{ width: 270 }} mode="vertical" items={items3} /> */}
         </div>
       </Card>
     </div>

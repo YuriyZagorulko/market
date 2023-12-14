@@ -2,6 +2,10 @@ from django.db import connections, models
 from .image import ImageAlbum
 
 class ProductCategory(models.Model):
+    
+    def __str__(self):
+        return self.name
+        
     name = models.CharField(max_length=300, editable=True,  default='')
     parentCategory = models.ForeignKey('self', on_delete=models.DO_NOTHING, blank=True, null=True,)
     keyWord = models.CharField(max_length=300, unique=True, editable=True, default='')
