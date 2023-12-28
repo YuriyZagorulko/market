@@ -28,6 +28,7 @@ class Product(models.Model):
     characteristics = models.JSONField(blank=True, null=True)
     suppliers = models.TextField(max_length=2000, blank=True, null=True)
     quantity = models.IntegerField(blank=True, null=True)
+    vendorCodeAVDTrade = models.CharField(max_length=150, unique=True, blank=True, null=True)
 
     def save(self, *args, **kwargs): # set values before save
         print(self.id)
