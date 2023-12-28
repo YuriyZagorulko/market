@@ -1,28 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./main-layout.module.scss"
 import Header from  '../header/header'
 import Footer from  '../footer/footer'
-import Head from 'next/head'
 import CartModal from '../../shared/cartModal/cartModal'
-import Script from 'next/script'
 import ExitDialogWindow from '../../shared/exitDialogWindow/ExitDialogWindow'
+import { store } from '../../../redux/store'
+import Loader from '../../shared/Loader/Loader'
 type layoutProps = {
   children?: any,
   name?: string
 }
 
-export default class MainLayout extends React.Component<layoutProps> {
-    render() {
-        return (
-            <React.Fragment>
-              <Header/>
-              <main className={styles.content}>
-                {this.props.children}
-              </main>
-              <Footer/>
-              <CartModal />
-              <ExitDialogWindow/>
-            </React.Fragment>
-          )
-    }
-  }
+export default function MainLayout (props) {
+  const [state, setSate] = useState(store.getState())
+  const unsub = store.subscribe(() => {
+    setSate(store.getState())
+  })
+  useEffect(() => {
+    return () => unsub()
+  })
+  return (
+      <React.Fragment>
+        { state.controls.isLoaderShown &&  <Loader/> }
+        <Header/>
+        <main className={styles.content}>
+          {props.children}
+        </main>
+        <Footer/>
+        <CartModal />
+        <ExitDialogWindow/>
+      </React.Fragment>
+    )
+}

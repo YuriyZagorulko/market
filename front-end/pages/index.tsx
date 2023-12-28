@@ -8,7 +8,6 @@ import ProductLine from '../components/shared/productLine/productLine'
 import { productService } from '../services/product.service'
 import CategoriesSidebar from '../components/pages/home/categoriesSidebar/categoriesSidebar'
 import { controlsConstants } from '../helpers/constants/controls'
-import Loader from '../components/shared/Loader/Loader'
 import { IControlsState } from '../redux/reducers/controls.reducer'
 import Head from 'next/head'
 
@@ -49,19 +48,18 @@ function HomePage(props: IProps) {
 
 
   useEffect(() => {
+    dispatch({type:controlsConstants.SHOW_LOADER})
     productService.mainPage().then((val) => {
       setLocalProducts({
         recomended: val.recomended,
         popular: val.popular,
       })
-    }).finally(()=>dispatch({type:controlsConstants.HIDE_LOADER}))
-    return (()=>dispatch({type:controlsConstants.SHOW_LOADER}))
+    }).finally(()=> dispatch({type:controlsConstants.HIDE_LOADER}))
   }, [])
 
   return (
     <>
     <Head>
-
         <title>Автомагазин V16. Автотовары, автозапчасти и всё для вашего авто по низким ценам и с доставкой.</title>
           <meta name='description' content='Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!'></meta>
             <meta name="robots" content="index, follow"></meta>
@@ -72,7 +70,7 @@ function HomePage(props: IProps) {
             <meta property="og:image" content="https://v16.com.ua/images/main-logo.svg"/> 
           <meta property="og:description"content="Интернет-магазин автотоваров V16: купить аккумулятор, пускозарядные устройства, кабеля, автомасла и аккумуляторы по низким ценам и с доставкой по Украине!" />
       </Head>
-    {props.controls.isLoaderShown ?  <Loader/> :
+    
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.head}>
           <CategoriesSidebar />
@@ -81,7 +79,7 @@ function HomePage(props: IProps) {
         <div className={styles.content}>
           {productLines(localProducts)}
         </div>
-      </div>}
+      </div>
     </>
   )
 }

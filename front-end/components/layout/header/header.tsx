@@ -11,16 +11,6 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
 import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
-import { accessSync } from 'fs'
-
-type headerProps = {
-  name?: string
-  dispatch: any
-}
-type headerState = {
-  headerBanner?: string
-  searchInput?: string
-}
 
 
 function authLinks(isAuth, dispatch) {
@@ -59,6 +49,7 @@ function Header(props: any) {
     searchInput: '',
   })
   
+  const router = useRouter()
   const [isRenderAuthLinks, setIsRenderAuthLinks] = useState(true)
   const [isShowCartLength,setIsShowCartLength] = useState(false)
 
@@ -69,7 +60,6 @@ function Header(props: any) {
     setIsShowCartLength(!!props.cartL)
   }, [props.cartL])
 
-  const router = useRouter()
 
   const updateInputValue = (evt) => {
     const val: string = evt.target.value
@@ -116,21 +106,21 @@ function Header(props: any) {
           </div>
         </div>
         <div className={styles.headerItems}>
+        <Link href="/">
           <div className={styles.itemsLeft}>
-            <Link href="/">
-              <a className={styles.logoLink}>
-                <span className={styles.imgWrapper}>
-                  <Image
-                    src="/images/main-logo.svg"
-                    alt="Picture of the author"
-                    width={60}
-                    height={60}
-                  />
-                </span>
-                <span className='link-text'>V16</span>
-              </a>
-            </Link>
-          </div>
+                <a className={styles.logoLink}>
+                  <span className={styles.imgWrapper}>
+                    <Image
+                      src="/images/main-logo.svg"
+                      alt="Picture of the author"
+                      width={60}
+                      height={60}
+                    />
+                  </span>
+                  <span className='link-text'>V16</span>
+                </a>
+            </div>
+          </Link>
           <div className={styles.itemsCenter}>
             <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
