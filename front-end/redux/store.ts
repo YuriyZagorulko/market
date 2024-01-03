@@ -1,4 +1,3 @@
-import {createStore, applyMiddleware, Store} from 'redux'
 // import {MakeStore, createWrapper, Context, HYDRATE} from 'next-redux-wrapper'
 import { reducers } from '../redux/reducers'
 import watchAll from './saga/saga'
@@ -7,12 +6,12 @@ import { IUserState } from './reducers/auth.reducer'
 import { IControlsState } from './reducers/controls.reducer'
 import { ICartState } from './reducers/cart.reducer'
 import { configureStore } from '@reduxjs/toolkit'
-import { GlobalSearchState } from './slices/search.slice'
-export interface IState{
+import { IGlobalSearchState } from './slices/search.slice'
+export interface IState {
     auth: IUserState
     cart: ICartState
     controls: IControlsState
-    globalSearch: GlobalSearchState
+    globalSearch: IGlobalSearchState
 }
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]

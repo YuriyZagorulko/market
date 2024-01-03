@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-export interface GlobalSearchState {
+export interface IGlobalSearchState {
   text: string
   priceFrom: number
   priceTo: number
 }
 
-const initialState: GlobalSearchState = {
+const initialState: IGlobalSearchState = {
   text: '',
   priceFrom: 0,
   priceTo: 100000,
@@ -17,7 +17,7 @@ export const searchSlice = createSlice({
     name: 'globalSearch',
     initialState,
     reducers: {
-        changeSearchData: (state, action: PayloadAction<Partial<GlobalSearchState>>) => {
+        changeSearchData: (state, action: PayloadAction<Partial<IGlobalSearchState>>) => {
             return {
                 ...state,
                 ...action.payload,
@@ -34,7 +34,7 @@ export const searchSlice = createSlice({
                 ...initialState
             }
         },
-        clearAllAndchangeSearchData: (state, action: PayloadAction<Partial<GlobalSearchState>>) => {
+        clearAllAndchangeSearchData: (state, action: PayloadAction<Partial<IGlobalSearchState>>) => {
             return {
                 ...initialState,
                 ...action.payload,

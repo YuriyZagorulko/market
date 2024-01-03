@@ -11,11 +11,13 @@ import Loader from "../../components/shared/Loader/Loader"
 import { IControlsState } from "../../redux/reducers/controls.reducer"
 import MobileAside from "../../components/pages/search/MobileAside/MobileAside"
 import Head from "next/head"
-import { changeSearchData } from "../../redux/slices/search.slice"
+import { IGlobalSearchState, changeSearchData, clearAll } from "../../redux/slices/search.slice"
+import { IState } from "../../redux/store"
 
 
 interface IProps {
   controls: IControlsState
+  searchState: IGlobalSearchState
 }
 
 function SearchPage(props: IProps) {
@@ -44,10 +46,15 @@ function SearchPage(props: IProps) {
         .finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
       return () => {
         dispatch({ type: controlsConstants.HIDE_LOADER })
+        dispatch(clearAll())
       }
     }
   }, [query])
 
+  useEffect(() => {
+
+  }, [props.searchState])
+  
   function onToggleMobileAside() {
     setIsMobileMenuActive({
       ...isMobileMenuActive,
@@ -63,9 +70,7 @@ function SearchPage(props: IProps) {
       chosenCategory: !isMobileMenuActive.chosenCategory,
     })
   }
-  const handleSortChange = () => {
-    return  null
-  }
+
   return (
     <>
       <Head>
@@ -127,6 +132,13 @@ function SearchPage(props: IProps) {
     </>
   )
 }
-const connectedSearchPage = connect((state) => state)(SearchPage)
+
+const mapStateToProps = (state: IState) => {
+  const searchState = state.globalSearch
+  return {
+    searchState
+  };
+};
+const connectedSearchPage = connect(mapStateToProps)(SearchPage)
 export default connectedSearchPage
 

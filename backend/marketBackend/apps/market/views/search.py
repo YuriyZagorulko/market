@@ -17,9 +17,11 @@ class SearchViewSet(ModelViewSet):
 
     def get_queryset(self, request, *args, **kwargs):
         qText = Q()
+        qPrice = Q()
         qCategory = Q()
         text = request.query_params.get('text', '')
-        priceRange = request.query_params.get('priceRange', '')
+        priceFrom = request.query_params.get('priceFrom', '')
+        priceTo = request.query_params.get('priceTo', '')
         # categoryWord = request.query_params.get('category', '')
         orderBy = request.query_params.get('orderBy', '')
 
@@ -31,8 +33,10 @@ class SearchViewSet(ModelViewSet):
         #     qText &= Q(category=searchedCategory)
         if not orderBy:
             orderBy = '-created_at'
+        if priceFrom and priceTo:
+            qPrice &= Q(price__gte=priceFrom, price__lte=priceTo)
 
-        products = Product.objects.filter(qText).filter(qCategory).order_by(orderBy)
+        products = Product.objects.filter(qText).filter(qCategory).filter(qPrice).order_by(orderBy)
         page = self.paginate_queryset(products)
         if page is not None:
             serializer = ProductSerializer(page, many=True)

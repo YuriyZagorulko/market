@@ -74,7 +74,7 @@ function Header(props: any) {
     if (props.searchText) {
       router.push({
         pathname: '/search',
-        query: { search_params: JSON.stringify({ text: state.searchInput }) }
+        query: { search_params: JSON.stringify({ text: props.searchText }) }
       })
     }
   }
