@@ -1,7 +1,7 @@
 import style from './search_items.module.scss'
 import React, { useState, useEffect } from 'react'
 import { IPaginatedData } from '../../../../helpers/types'
-import ProductPrev from '../../../../components/shared/productPrev/productPrev'
+import ProductPrev from '../../../shared/productPrev/productPrev'
 
 function SearchItems (props: { paginatedData :  IPaginatedData}) {
   const [state, setSate] = useState({

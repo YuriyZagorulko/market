@@ -7,10 +7,12 @@ import { IUserState } from './reducers/auth.reducer'
 import { IControlsState } from './reducers/controls.reducer'
 import { ICartState } from './reducers/cart.reducer'
 import { configureStore } from '@reduxjs/toolkit'
+import { GlobalSearchState } from './slices/search.slice'
 export interface IState{
     auth: IUserState
     cart: ICartState
     controls: IControlsState
+    globalSearch: GlobalSearchState
 }
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]

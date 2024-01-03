@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import { connect, useDispatch } from "react-redux"
 import { searchService } from "../../services/search.service"
-import SearchItems from "./components/search_items"
+import SearchItems from "../../components/pages/search/search_items"
 import AsideMenu from "../../components/pages/search/AsideMenu/AsideMenu"
 import ProductsSortMenu from "../../components/pages/search/ProductsSortMenu/ProductsSortMenu"
 import { controlsConstants } from "../../helpers/constants/controls"
@@ -11,6 +11,7 @@ import Loader from "../../components/shared/Loader/Loader"
 import { IControlsState } from "../../redux/reducers/controls.reducer"
 import MobileAside from "../../components/pages/search/MobileAside/MobileAside"
 import Head from "next/head"
+import { changeSearchData } from "../../redux/slices/search.slice"
 
 
 interface IProps {
@@ -31,8 +32,10 @@ function SearchPage(props: IProps) {
   const query = router.query
 
   useEffect(() => {
+    dispatch({type:controlsConstants.SHOW_LOADER})
     if (Object.keys(query)?.length > 0) {
-      paramsObj = JSON.parse(query.params as string)
+      paramsObj = JSON.parse(query.search_params as string)
+      dispatch(changeSearchData(paramsObj))
       searchService
         .search(paramsObj)
         .then((val) => {
@@ -40,7 +43,7 @@ function SearchPage(props: IProps) {
         })
         .finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
       return () => {
-        dispatch({ type: controlsConstants.SHOW_LOADER })
+        dispatch({ type: controlsConstants.HIDE_LOADER })
       }
     }
   }, [query])
@@ -81,7 +84,6 @@ function SearchPage(props: IProps) {
         isActive={isMobileMenuActive}
         products={requestData?.data?.data}
       /> */}
-      {props.controls.isLoaderShown && <Loader />}
 
       {/* <ProductsSortMenu
         products={requestData?.data?.data}
@@ -99,7 +101,6 @@ function SearchPage(props: IProps) {
         style={{ flexDirection: "row" }}
         className={"wrapper-horizontal" + " global-width-limiter"}
       >
-        {/* <AsideMenu products={requestData?.data?.data} /> */}
         {query.text && (
           <div className={style.searchTitle}>
             Результати пошуку за запитом {`<< ${query.text} >>`}
@@ -114,9 +115,9 @@ function SearchPage(props: IProps) {
           </div>
         ) : (
           <div className={style.search}>
-            {/* <div className={'search__filters'}>
-              filters
-            </div> */}
+            <div className={style.searchFiltersContainer}>
+              <AsideMenu />
+            </div>
             <div className={style.searchContent}>
               <SearchItems paginatedData={requestData?.data} />
             </div>

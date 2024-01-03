@@ -7,7 +7,7 @@ class ProductCategory(models.Model):
         return self.name
         
     name = models.CharField(max_length=300, editable=True,  default='')
-    parentCategory = models.ForeignKey('self', on_delete=models.DO_NOTHING, blank=True, null=True,)
+    parentCategory = models.ForeignKey('self', on_delete=models.DO_NOTHING, blank=True, null=True)
     keyWord = models.CharField(max_length=300, unique=True, editable=True, default='')
 
     created_at = models.DateTimeField(auto_now_add=True)

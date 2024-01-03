@@ -105,7 +105,7 @@ const redirectToCategory = (router, category) => {
   if (category) {
     router.push({
         pathname: '/search',
-        query: {params: JSON.stringify({ category })}
+        query: {search_params: JSON.stringify({ category })}
     })
   }
 }

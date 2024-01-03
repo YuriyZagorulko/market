@@ -28,7 +28,6 @@ function ProductsSortMenu(props: IProps) {
                     <button onClick={props.onFilterBtnClick} className={style.mobileSortBtn}>Фільтри</button>
                     <span className={style.productsCount}>Всього товарів: {props.products?.length}</span>
                 </div>
-
                 <div className={style.selectWrapper}>
                     {/* <Select
                         bordered={false}
@@ -41,10 +40,7 @@ function ProductsSortMenu(props: IProps) {
                     /> */}
                 </div>
             </div>
-
         </div>
-
-
     )
 
 }

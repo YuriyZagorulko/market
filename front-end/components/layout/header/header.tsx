@@ -9,8 +9,8 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
-import { OrderService } from '../../../services/order/order.service'
 import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
+import { changeSearchData } from '../../../redux/slices/search.slice'
 
 
 function authLinks(isAuth, dispatch) {
@@ -46,7 +46,6 @@ function Header(props: any) {
   const dispatch = useDispatch()
   const [state, setState] = useState({
     headerBanner: '',
-    searchInput: '',
   })
   
   const router = useRouter()
@@ -63,21 +62,24 @@ function Header(props: any) {
 
   const updateInputValue = (evt) => {
     const val: string = evt.target.value
-    setState({
-      ...state,
-      searchInput: val
-    })
+    // setState({
+    //   ...state,
+    //   searchInput: val
+    // })
+    dispatch(changeSearchData({
+      text: val
+    }))
   }
   const redirectToSearchPage = () => {
-    if (state.searchInput) {
+    if (props.searchText) {
       router.push({
         pathname: '/search',
-        query: { params: JSON.stringify({ text: state.searchInput }) }
+        query: { search_params: JSON.stringify({ text: state.searchInput }) }
       })
     }
   }
   const handleKeyDown = (ev) => {
-    if (state.searchInput) {
+    if (props.searchText) {
       if (ev.key === 'Enter') {
         redirectToSearchPage()
       }
@@ -122,7 +124,7 @@ function Header(props: any) {
             </div>
           </Link>
           <div className={styles.itemsCenter}>
-            <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
+            <input onChange={updateInputValue} onKeyDown={handleKeyDown} value={props.searchText} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
           <div style={{ position: 'relative' ,padding: '10px' }} className={styles.itemsRight + ' iconsContainer'}>
@@ -150,11 +152,12 @@ const mapStateToProps = (state: IState) => {
     const res = acc += el.quantity
     return res
   }, 0)
-
+  const searchText = state.globalSearch.text 
   return {
     cartL: cartL,
     cart:state.cart,
-    user:state.auth.user
+    user:state.auth.user,
+    searchText
   };
 };
 const connectedConponent = connect(mapStateToProps)(Header)
