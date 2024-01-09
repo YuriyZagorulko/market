@@ -1,0 +1,62 @@
+@import '../../../styles/constants.scss';
+
+.wrapper{
+    
+}
+
+.categoryItem{
+    
+}
+
+.categoryName{
+ display: flex;
+ text-align: center;
+ justify-content: center;
+ padding-top: 12px;
+}
+
+.categoryImage{
+    display: flex;
+    height: 150px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0 10px;
+}
+.product{
+    display: grid;
+    border-right: 1px solid $color-gray-1;
+}
+.title{
+    display: grid;
+    font-size: 20px;
+    font-weight: 400;
+}
+.head{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+}
+.content{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
+    grid-template-rows: 1fr;
+    width: 100%;
+    margin:0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+
+    li{
+        &:last-child{
+            border: none;
+        }
+    }
+}

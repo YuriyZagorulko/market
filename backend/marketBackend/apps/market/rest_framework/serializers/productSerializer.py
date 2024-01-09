@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from marketBackend.apps.market.models import Product, Image
+from marketBackend.apps.market.models import Product, Image, ProductCategory
 from .imageSerializer import ImageSerializer
 from marketBackend.apps.market.rest_framework.serializers.imageSerializer import ImageSerializer
 
@@ -13,3 +13,9 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'price', 'description', 'images', 'created_at', 'updated_at', 'imagesSet', 'url', 'characteristics']
+        
+class ProductCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        fields = ['id', 'name', 'name_UA', 'parentCategory', 'keyWord', 'isRootCategory', 'image']
+        

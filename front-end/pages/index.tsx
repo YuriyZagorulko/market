@@ -10,6 +10,8 @@ import CategoriesSidebar from '../components/pages/home/categoriesSidebar/catego
 import { controlsConstants } from '../helpers/constants/controls'
 import { IControlsState } from '../redux/reducers/controls.reducer'
 import Head from 'next/head'
+import categoriesGroup from '../components/shared/categoriesGroup/categoriesGroup'
+import { IProductCategory } from '../helpers/types'
 
 interface IProps {
   login: any
@@ -43,6 +45,7 @@ function HomePage(props: IProps) {
     recomended: [],
     popular: [],
   })
+  const [popularCategories, setPopularCategories] = useState<IProductCategory []>([])
 
   const dispatch = props.dispatch
 
@@ -54,6 +57,7 @@ function HomePage(props: IProps) {
         recomended: val.recomended,
         popular: val.popular,
       })
+      setPopularCategories(val.popularCategories)
     }).finally(()=> dispatch({type:controlsConstants.HIDE_LOADER}))
   }, [])
 
@@ -77,6 +81,9 @@ function HomePage(props: IProps) {
           <HomeHeader />
         </div>
         <div className={styles.content}>
+          <>{
+            categoriesGroup({ categories: popularCategories, title: 'Популярні категорії' })
+          }</>
           {productLines(localProducts)}
         </div>
       </div>

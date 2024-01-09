@@ -7,8 +7,11 @@ class ProductCategory(models.Model):
         return self.name
         
     name = models.CharField(max_length=300, editable=True,  default='')
+    name_UA = models.CharField(max_length=300, editable=True,  default='')
     parentCategory = models.ForeignKey('self', on_delete=models.DO_NOTHING, blank=True, null=True)
     keyWord = models.CharField(max_length=300, unique=True, editable=True, default='')
+    isRootCategory = models.BooleanField(blank=True, null=True)
+    image = models.ImageField(upload_to='images/', default='default-image.jpeg')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -19,7 +22,8 @@ class Product(models.Model):
     description = models.TextField(max_length=2000, help_text="This is the description of the product")
     images = models.OneToOneField(ImageAlbum, related_name='model', blank=True, on_delete=models.CASCADE) #album
     shortDescription = models.TextField(max_length=300, default='')
-    category = models.ForeignKey(ProductCategory, related_name='category', blank=True, null=True, on_delete=models.DO_NOTHING)
+    categories = models.ManyToManyField(ProductCategory, related_name='categories', blank=True, null=True)
+    
     barcode = models.CharField(max_length=150, unique=True, blank=True, null=True)
     vinCode = models.CharField(max_length=150, unique=True, blank=True, null=True)
     discountPrice = models.IntegerField(blank=True, null=True)
