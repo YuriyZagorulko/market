@@ -9,4 +9,5 @@ export interface IProductCategory{
     keyWord: string
     isRootCategory?: boolean
     image: string
+    parentCategoryData?: IProductCategory
 }

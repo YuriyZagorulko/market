@@ -4,20 +4,11 @@ import { IProductCategory } from '../../../helpers/types'
 import { NextRouter, useRouter } from 'next/router'
 import { getStringPreviewImgUrl } from '../../../helpers/types/responces/products'
 import CustomImg from '../customImg/customImg'
+import { redirectToCategory } from '../../../helpers/other'
 
 type productLineProps = {
   categories: IProductCategory []
   title?: string
-
-}
-
-const redirectToCategory = (category: IProductCategory, router: NextRouter) => () => {
-  if (category) {
-    router.push({
-        pathname: '/search',
-        query: {search_params: JSON.stringify({ category: category.keyWord })}
-    })
-  }
 }
 
 const categoryItem = (category: IProductCategory, router: NextRouter)  => {

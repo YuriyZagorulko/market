@@ -109,6 +109,7 @@ const redirectToCategory = (router, category) => {
     })
   }
 }
+
 function CategoriesSidebar (props: { }) {
   const router = useRouter()
 

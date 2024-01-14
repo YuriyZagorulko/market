@@ -1,5 +1,6 @@
 import { IOrder } from './../orders'
 import config from "../../../config"
+import { IProductCategory } from '..'
 
 export interface IMain{
     recomended: []
@@ -16,16 +17,17 @@ export interface IImage {
     album: number
 }
 export interface IProduct {
-    id: number,
-    title: string,
-    price: number,
-    description: string,
-    images: number,
-    created_at: string,
-    updated_at: string,
-    url?: string,
-    characteristics?: any,
-    imagesSet: IImage [],
+    id: number
+    title: string
+    price: number
+    description: string
+    images: number
+    created_at: string
+    updated_at: string
+    url?: string
+    characteristics?: any
+    imagesSet: IImage []
+    categoryData?: IProductCategory
 }
 export interface AddedProduct{
     product: IProduct

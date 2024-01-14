@@ -1,7 +1,7 @@
 import style from '../../styles/pages/Product.module.scss'
 import { connect, useDispatch } from 'react-redux'
 import Image from 'next/image'
-import { getProductImg, getAllProductImages, getPreviewImgUrl } from '../../helpers/types/responces/products'
+import { getProductImg, getAllProductImages, getPreviewImgUrl, IProduct } from '../../helpers/types/responces/products'
 import config from '../../config'
 import { productService } from '../../services/product.service'
 import { useRouter } from 'next/router'
@@ -19,6 +19,7 @@ import Loader from '../../components/shared/Loader/Loader'
 import { IControlsState } from '../../redux/reducers/controls.reducer'
 import Head from 'next/head'
 import { storeContacts } from '../../helpers/constants/storeDataConstants/storeContacts'
+import Breadcrumbs from '../../components/shared/breadcrumbs/breadcrumbs'
 interface IProps {
     dispatch: any
     controls: IControlsState
@@ -27,7 +28,7 @@ interface IProps {
 const Product = (props: IProps) => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState<IProduct>(null)
     const { productURL } = router.query
 
     if (productURL && !product) {
@@ -60,6 +61,9 @@ const Product = (props: IProps) => {
                 <div className={style.wrapper}>
                     {product ?
                         <div className={style.content + ' global-width-limiter'}>
+                            <div className={style.header}>
+                                <Breadcrumbs inputCategory={product.categoryData}/>
+                            </div>
                             <div className={style.top}>
                                 <div className={style.topLeft}>
                                     {product.imagesSet.length <= 1 ? <div className={style.images}>

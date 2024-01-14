@@ -1,6 +1,16 @@
 from django.db import connections, models
 from .image import ImageAlbum
 
+class ProductBrand(models.Model):
+    
+    def __str__(self):
+        return self.name
+        
+    name = models.CharField(max_length=300, editable=True, unique=True, default='')
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class ProductCategory(models.Model):
     
     def __str__(self):
@@ -23,6 +33,7 @@ class Product(models.Model):
     images = models.OneToOneField(ImageAlbum, related_name='model', blank=True, on_delete=models.CASCADE) #album
     shortDescription = models.TextField(max_length=300, default='')
     categories = models.ManyToManyField(ProductCategory, related_name='categories', blank=True, null=True)
+    brand = models.OneToOneField(ProductBrand, null=True, default=None, blank=True, on_delete=models.DO_NOTHING) #album
     
     barcode = models.CharField(max_length=150, unique=True, blank=True, null=True)
     vinCode = models.CharField(max_length=150, unique=True, blank=True, null=True)
