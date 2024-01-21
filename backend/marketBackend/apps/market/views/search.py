@@ -1,17 +1,39 @@
 from marketBackend.apps.market.rest_framework.pagination.custom_pagination import CustomPagination
 from marketBackend.apps.market.models import Product, ProductCategory
 from marketBackend.apps.market.rest_framework.serializers.productSerializer import ProductSerializer
-from rest_framework.response import Response
+from itertools import chain
 from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
 
+
+        
+  
 class SearchViewSet(ModelViewSet):
     authentication_classes = []
     permission_classes = [] 
     pagination_class = CustomPagination
-
+    
+    def findAllSubcategoriesByKeyword(self, keyword):
+        try:
+            searchedCategory = ProductCategory.objects.get(keyWord=keyword)
+        except:
+            searchedCategory = None
+        allCategoryIds = []
+        def findAllSubcategoriesById(id, allCategoryIds):
+            allChildrenIds = []
+            allCategoryIds.append(id)
+            allChildrenIds = list(ProductCategory.objects.filter(parentCategory_id__exact=id).values_list('id'))
+            allCategoryIds = list(chain(allChildrenIds, allCategoryIds))
+            
+            for id in allChildrenIds:
+                findAllSubcategoriesById(id, all)
+        
+        if searchedCategory:
+            findAllSubcategoriesById(searchedCategory.id, allCategoryIds)
+        return allCategoryIds
+    
     def get_object(self):
         return get_object_or_404(Product, id=self.request.query_params.get("id"))
 
@@ -22,15 +44,16 @@ class SearchViewSet(ModelViewSet):
         text = request.query_params.get('text', '')
         priceFrom = request.query_params.get('priceFrom', '')
         priceTo = request.query_params.get('priceTo', '')
-        # categoryWord = request.query_params.get('category', '')
+        categoryKeyWord = request.query_params.get('category', '')
         orderBy = request.query_params.get('orderBy', '')
-
-        # searchedCategory = ProductCategory.objects.get(keyWord__iexact=categoryWord)
 
         if text:
             qText &= Q(title__icontains=text)
-        # if categoryWord:
-        #     qText &= Q(category=searchedCategory)
+        if categoryKeyWord:
+            allSearchCategories = self.findAllSubcategoriesByKeyword(categoryKeyWord)
+            
+            if allSearchCategories:
+                qCategory &= Q(categories__in=allSearchCategories)
         if not orderBy:
             orderBy = '-created_at'
         if priceFrom and priceTo:
