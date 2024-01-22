@@ -14,25 +14,29 @@ class SearchViewSet(ModelViewSet):
     authentication_classes = []
     permission_classes = [] 
     pagination_class = CustomPagination
+    allCategoryIds = []
     
     def findAllSubcategoriesByKeyword(self, keyword):
         try:
             searchedCategory = ProductCategory.objects.get(keyWord=keyword)
         except:
             searchedCategory = None
-        allCategoryIds = []
-        def findAllSubcategoriesById(id, allCategoryIds):
+        self.allCategoryIds = []
+        def findAllSubcategoriesById(id):
+            self.allCategoryIds.append(id)
             allChildrenIds = []
-            allCategoryIds.append(id)
-            allChildrenIds = list(ProductCategory.objects.filter(parentCategory_id__exact=id).values_list('id'))
-            allCategoryIds = list(chain(allChildrenIds, allCategoryIds))
-            
+            # allCategoryIds.append(id)
+            # temp = ProductCategory.objects.filter(parentCategory_id__exact=id).values_list('id')            
+            allChildrenIds = list(ProductCategory.objects.filter(parentCategory_id__exact=id).values_list('id', flat=True))
+            # allCategoryIds = list(chain(allChildrenIds, allCategoryIds))
             for id in allChildrenIds:
-                findAllSubcategoriesById(id, all)
+               findAllSubcategoriesById(id)
+                
+            
         
         if searchedCategory:
-            findAllSubcategoriesById(searchedCategory.id, allCategoryIds)
-        return allCategoryIds
+            findAllSubcategoriesById(searchedCategory.id)
+        return self.allCategoryIds
     
     def get_object(self):
         return get_object_or_404(Product, id=self.request.query_params.get("id"))
