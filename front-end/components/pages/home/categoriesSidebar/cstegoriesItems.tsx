@@ -3,6 +3,7 @@ import Image from "next/image"
 import { ProductCategories } from "../../../../helpers/constants/search"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCarBattery, faLightbulb, faOilCan, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons"
+import { CATEGORIES } from "../../../../helpers/constants/categories"
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -114,7 +115,7 @@ function sliceIntoChunks(arr, chunkSize) { // split menu array into chunks (smal
 // ]
 
 const itemsOils: MenuItem[] = [
-    getItem('Моторні мастила', null,
+    getItem('Моторні мастила', CATEGORIES.MotorOils,
     <span className='img-comtainer'>
       <Image
         src={ '/images/previews/main-menu/motor-oil.png' }
@@ -125,7 +126,7 @@ const itemsOils: MenuItem[] = [
       />
     </span>
     ),
-    getItem('Автомобільні мастила', null,
+    getItem('Автомобільні мастила', CATEGORIES.AutomotiveOils,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/wd.jpg' }
@@ -136,7 +137,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Трансмісійні мастила', null,
+    getItem('Трансмісійні мастила', CATEGORIES.TransmissionOils,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/trans-oil.jpg' }
@@ -147,7 +148,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Промивні мастила', null,
+    getItem('Промивні мастила', CATEGORIES.FlushingOils,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/washing-oil.jpg' }
@@ -158,7 +159,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Індустріальні мастила', null,
+    getItem('Індустріальні мастила', CATEGORIES.IndustrialOils,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/industrial-oil.jpg' }
@@ -169,7 +170,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Ланцюгові мастила', null,
+    getItem('Ланцюгові мастила', CATEGORIES.ChainOils,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/chain-oil.webp' }
@@ -180,18 +181,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Промивні мастила', null,
-      <span className='img-comtainer'>
-        <Image
-          src={ '/images/previews/main-menu/flushing-oils.webp' }
-          alt="Img"
-          layout="fixed"
-          width={'40px'}
-          height={'45px'}
-        />
-      </span>
-    ),
-    getItem('Рідини для склоомивача', null,
+    getItem('Рідини для склоомивача', CATEGORIES.WindshieldWasherFluids,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/windshield-washer-fluids.jpeg' }
@@ -202,7 +192,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Гальмівні рідини', null,
+    getItem('Гальмівні рідини', CATEGORIES.BrakeFluids,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/brake-fluids.webp' }
@@ -213,7 +203,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Охолоджувальні рідини', null,
+    getItem('Охолоджувальні рідини', CATEGORIES.Coolants,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/coolants.webp' }
@@ -224,7 +214,7 @@ const itemsOils: MenuItem[] = [
         />
       </span>
     ),
-    getItem('Фарби', null,
+    getItem('Фарби', CATEGORIES.CarPaints,
       <span className='img-comtainer'>
         <Image
           src={ '/images/previews/main-menu/car-paints.webp' }

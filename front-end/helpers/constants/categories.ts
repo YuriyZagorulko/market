@@ -16,5 +16,6 @@ export const CATEGORIES = { // product categories keywords from backend
     AutomotiveSealants : 'AutomotiveSealants',
     CarPaints : 'CarPaints',
     BrakeFluids : 'BrakeFluids',
-    SolventsForCarPaint : 'SolventsForCarPaint',     
+    SolventsForCarPaint : 'SolventsForCarPaint',
+    MotorOils: 'MotorOils',     
 }
