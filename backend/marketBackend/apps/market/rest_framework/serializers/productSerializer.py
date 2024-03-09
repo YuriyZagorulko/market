@@ -8,7 +8,9 @@ class ProductSerializer(serializers.ModelSerializer):
     categoryData = serializers.SerializerMethodField()
     
     def get_imagesSet(self, obj): #get_images
-        images = Image.objects.filter(album_id=obj.images.pk)
+        images = []
+        if obj.images:
+            images = Image.objects.filter(album_id=obj.images.pk)
         serializer_class = ImageSerializer(images, many=True)
         return serializer_class.data
     
