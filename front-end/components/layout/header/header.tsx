@@ -9,18 +9,8 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
-import { OrderService } from '../../../services/order/order.service'
-import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
-import { accessSync } from 'fs'
-
-type headerProps = {
-  name?: string
-  dispatch: any
-}
-type headerState = {
-  headerBanner?: string
-  searchInput?: string
-}
+import { ICartState } from '../../../redux/reducers/cart.reducer'
+import { setSearchText } from '../../../redux/slices/search.slice'
 
 
 function authLinks(isAuth, dispatch) {
@@ -56,39 +46,45 @@ function Header(props: any) {
   const dispatch = useDispatch()
   const [state, setState] = useState({
     headerBanner: '',
-    searchInput: '',
   })
-  
+  const [searchText, setLocalSearchText] = useState('');
+  const router = useRouter()
   const [isRenderAuthLinks, setIsRenderAuthLinks] = useState(true)
   const [isShowCartLength,setIsShowCartLength] = useState(false)
+  const query = router.query
 
   useEffect(() => {
     setIsRenderAuthLinks(!!props.user)
   }, [props.user])
   useEffect(() => {
     setIsShowCartLength(!!props.cartL)
-  }, [props.cartL])
+  }, [props.cart])
 
-  const router = useRouter()
+  useEffect(() => {
+    dispatch({type:controlsConstants.SHOW_LOADER})
+    if (Object.keys(query)?.length > 0) {
+      const paramsObj = JSON.parse(query.search_params as string)
+      setLocalSearchText(paramsObj.text)
+    }
+  }, [query])
 
   const updateInputValue = (evt) => {
     const val: string = evt.target.value
-    setState({
-      ...state,
-      searchInput: val
-    })
+    setLocalSearchText(val)
   }
+
   const redirectToSearchPage = () => {
-    if (state.searchInput) {
+    if (searchText) {
       router.push({
         pathname: '/search',
-        query: { params: JSON.stringify({ text: state.searchInput }) }
+        query: { search_params: JSON.stringify({ text: searchText }) }
       })
     }
   }
   const handleKeyDown = (ev) => {
-    if (state.searchInput) {
+    if (searchText) {
       if (ev.key === 'Enter') {
+        dispatch(setSearchText(searchText))
         redirectToSearchPage()
       }
     }
@@ -116,23 +112,23 @@ function Header(props: any) {
           </div>
         </div>
         <div className={styles.headerItems}>
+        <Link href="/">
           <div className={styles.itemsLeft}>
-            <Link href="/">
-              <a className={styles.logoLink}>
-                <span className={styles.imgWrapper}>
-                  <Image
-                    src="/images/main-logo.svg"
-                    alt="Picture of the author"
-                    width={60}
-                    height={60}
-                  />
-                </span>
-                <span className='link-text'>V16</span>
-              </a>
-            </Link>
-          </div>
+                <a className={styles.logoLink}>
+                  <span className={styles.imgWrapper}>
+                    <Image
+                      src="/images/main-logo.svg"
+                      alt="Picture of the author"
+                      width={60}
+                      height={60}
+                    />
+                  </span>
+                  <span className='link-text'>V16</span>
+                </a>
+            </div>
+          </Link>
           <div className={styles.itemsCenter}>
-            <input onChange={updateInputValue} onKeyDown={handleKeyDown} placeholder="Я шукаю..." />
+            <input onChange={updateInputValue} onKeyDown={handleKeyDown} defaultValue={searchText} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
           <div style={{ position: 'relative' ,padding: '10px' }} className={styles.itemsRight + ' iconsContainer'}>
@@ -160,11 +156,12 @@ const mapStateToProps = (state: IState) => {
     const res = acc += el.quantity
     return res
   }, 0)
-
+  const searchText = state.globalSearch.text 
   return {
     cartL: cartL,
     cart:state.cart,
-    user:state.auth.user
+    user:state.auth.user,
+    searchText
   };
 };
 const connectedConponent = connect(mapStateToProps)(Header)

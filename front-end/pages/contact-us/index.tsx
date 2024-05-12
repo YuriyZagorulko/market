@@ -34,7 +34,7 @@ function ContactUsPage () {
             <h1>Консультації та замовлення за телефонами</h1>
             <div className={style.maincontainer}>
           <div className={style.contentContainer}>
-              <h3>V16</h3>
+              <h3>Телефони:</h3>
               <div className={style.blueText}>{storeContacts.MOBILE_NUMBER}</div>
           </div>
           <div className={style.div_container}>

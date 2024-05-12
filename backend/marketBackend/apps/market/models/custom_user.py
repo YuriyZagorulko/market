@@ -5,6 +5,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 from django.contrib.auth.models import UserManager
+from marketBackend.apps.shared.models_helpers.helpers import GetOrNoneManager
 from datetime import date
 import string
 import random
@@ -36,6 +37,14 @@ class CustomUserManager(UserManager):
         user.save()
 
         return user
+    
+    """Adds get_or_none method to objects
+    """
+    def get_or_none(self, **kwargs):
+        try:
+            return self.get(**kwargs)
+        except self.model.DoesNotExist:
+            return None
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'),  unique=True)
     username = models.CharField(_('username'), max_length=255)

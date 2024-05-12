@@ -1,8 +1,11 @@
 from django.core.management.base import BaseCommand, CommandError
-from marketBackend.secret import NP_API_KEY
 from pathlib import Path
 import requests
 import json
+import os
+
+NP_API_KEY = os.environ.get('NP_API_KEY', '')
+
 class Command(BaseCommand):
     help = 'Closes the specified poll for voting'
     def handle(self, *args, **options):

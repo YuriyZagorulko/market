@@ -3,13 +3,13 @@ from marketBackend.apps.market.models import Product, Image
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from marketBackend.apps.market.rest_framework.serializers.productSerializer import ProductSerializer
-from marketBackend.secret import NP_API_KEY
 from django.conf import settings
 import os
-
 import requests
 import json
+
 ROOT_DIR = os.path.join(settings.BASE_DIR)
+NP_API_KEY = os.environ.get('NP_API_KEY')
 
 class CitiesNPView(APIView):
     def get(self, request, *args, **kwargs):

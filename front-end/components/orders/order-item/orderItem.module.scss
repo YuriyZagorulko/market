@@ -2,69 +2,69 @@
 
 .collapseItem{
 
-&__descriptionHeader{
-    color:#797878;
-    font-size:12px;
-}
-&__image{
-    position:relative;
-    min-height:40px;
-    width:100%;
-    max-height:40px;
-    max-width:40px;     
- 
-}
-&__descriptionImg{
-    max-height:80px;
-    max-width:80px;
-}
-&__productInformation{
-    width:75%;
-}
-&__productItem{
-    display:flex;
-    align-items: center;
-    margin-left:15px;
-}
-
-&__descriptionHref{
-    display:flex;
-    margin-left:15px;
-    max-width:200px;
-    color:#437aac;
-    &:hover{
-        color:red;
+    &__descriptionHeader{
+        color:#797878;
+        font-size:12px;
     }
-}
-&__productPriceWrapper{
-    display:flex;
-    flex-direction:row;
-    width:60%;
-}
-&__productPriceItem{
-    flex-grow:1;
-    display:flex;
-    flex-direction:column;
-    text-align:center;
-    gap:0.5rem;
-
-}
-&__productPriceHeader{
-    font-size:13px;
-    color:#797878;
-
-}
-&__productPriceMark{
-    font-size:16px;
-    font-weight:700;
-    @media (max-width:$screen-size-sm){
-        font-size:14px;
-        font-weight:500;
-        
+    &__image{
+        position:relative;
+        min-height:40px;
+        width:100%;
+        max-height:40px;
+        max-width:40px;     
+    
     }
-}
-&__recipientNameWrapper{
-    display:flex;
-    gap:5px;
-}
+    &__descriptionImg{
+        max-height:80px;
+        max-width:80px;
+    }
+    &__productInformation{
+        width:75%;
+    }
+    &__productItem{
+        display:flex;
+        align-items: center;
+        margin-left:15px;
+    }
+
+    &__descriptionHref{
+        display:flex;
+        margin-left:15px;
+        max-width:200px;
+        color:#437aac;
+        &:hover{
+            color:red;
+        }
+    }
+    &__productPriceWrapper{
+        display:flex;
+        flex-direction:row;
+        width:60%;
+    }
+    &__productPriceItem{
+        flex-grow:1;
+        display:flex;
+        flex-direction:column;
+        text-align:center;
+        gap:0.5rem;
+
+    }
+    &__productPriceHeader{
+        font-size:13px;
+        color:#797878;
+
+    }
+    &__productPriceMark{
+        font-size:16px;
+        font-weight:700;
+        @media (max-width:$screen-size-sm){
+            font-size:14px;
+            font-weight:500;
+            
+        }
+    }
+    &__recipientNameWrapper{
+        display:flex;
+        gap:5px;
+    }
 }

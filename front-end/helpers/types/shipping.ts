@@ -1,4 +1,4 @@
-import { deliveryTypes } from "../order/order.constants";
+import { deliveryTypes } from "../order/order.constants"
 
 export interface IShipping<DATA>{
     type: deliveryTypes

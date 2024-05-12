@@ -4,8 +4,9 @@ import style from './priceCollapse.module.scss'
 import collapseTopStyle from './../AsideCollapse/asideCollapse.module.scss'
 import React from 'react';
 import { IProduct } from '../../../../../helpers/types/responces/products';
+import { useDispatch } from 'react-redux';
+import { changeSearchData } from '../../../../../redux/slices/search.slice';
 interface IProps {
-    products: IProduct[]
     header: string
 }
 const getMinMaxPrices = (products: IProduct[]) => {
@@ -15,9 +16,15 @@ const getMinMaxPrices = (products: IProduct[]) => {
 }
 
 const PriceSlider = (props: IProps) => {
-    const [values, setValues] = useState({minValue:0,maxValue:0})
-    const [minMaxByProduct, setMinMaxByProduct] = useState(null)
+    const dispatch = useDispatch()
+    const [values, setValues] = useState({minValue: 1, maxValue: 100000})
+    const [minVal, setMinVal] = useState(1)
+    const [maxVal, setMaxVal] = useState(100000)
     const [isItemActive, setIsItemActive] = useState<boolean>(true)
+
+    useEffect (() => {
+        dispatch(changeSearchData({ priceFrom: values.minValue, priceTo: values.maxValue }))
+    }, [values])
 
     const onInputMaxChange = (e) => {
         setValues({ ...values, maxValue: e.target.value })
@@ -31,13 +38,6 @@ const PriceSlider = (props: IProps) => {
     const handleToggleCollapse = () => {
         setIsItemActive(!isItemActive)
     }
-    useEffect(() => {
-        if (props.products?.length) {
-            const { min, max } = getMinMaxPrices(props.products)
-            setMinMaxByProduct({ min: min, max: max })
-            setValues({ minValue: min, maxValue: max })
-        }
-    }, [props.products])
 
     return (
         <>
@@ -51,8 +51,7 @@ const PriceSlider = (props: IProps) => {
                     <input onChange={onInputMinChange} className={style.collapseInput} value={values?.minValue} />
                     <span className={style.inputDash}>—</span>
                     <input onChange={onInputMaxChange} className={style.collapseInput} value={values?.maxValue} />
-                    <button className={style.collapseButton}>ok</button>
-                    {minMaxByProduct && <Slider min={minMaxByProduct?.min} max={minMaxByProduct?.max} onChange={onSliderChange}  range defaultValue={[minMaxByProduct?.min, minMaxByProduct?.max]} />}
+                    {values && <Slider min={minVal} max={maxVal} onChange={onSliderChange}  range defaultValue={[minVal, maxVal]} />}
                 </div>
 
             </div>

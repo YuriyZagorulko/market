@@ -1,9 +1,11 @@
 import { IOrder } from './../orders'
 import config from "../../../config"
+import { IProductCategory } from '..'
 
 export interface IMain{
-    recomended: [],
+    recomended: []
     popular: []
+    popularCategories: []
 }
 export interface IImage {
     id: number,
@@ -15,16 +17,17 @@ export interface IImage {
     album: number
 }
 export interface IProduct {
-    id: number,
-    title: string,
-    price: number,
-    description: string,
-    images: number,
-    created_at: string,
-    updated_at: string,
-    url?: string,
-    characteristics?: any,
-    imagesSet: IImage [],
+    id: number
+    title: string
+    price: number
+    description: string
+    images: number
+    created_at: string
+    updated_at: string
+    url?: string
+    characteristics?: any
+    imagesSet: IImage []
+    categoryData?: IProductCategory
 }
 export interface AddedProduct{
     product: IProduct
@@ -43,6 +46,12 @@ export function getProductImg(product: IProduct): string{
 export function getPreviewImgUrl(product: IProduct): string {
     if (product?.imagesSet?.length > 0) {
         return config.mainDomain + getFirstImg(product)
+    }
+    return '/images/icons/shared/product-default.svg'
+}
+export function getStringPreviewImgUrl(img: string): string {
+    if (img) {
+        return config.mainDomain + img
     }
     return '/images/icons/shared/product-default.svg'
 }

@@ -34,7 +34,6 @@ def createOrder(data):
                     order = newOrder, 
                     product_id = int(product['id'])
                 )
-                print(details)
                 details.save()
             except Exception as e: 
                 print(e)

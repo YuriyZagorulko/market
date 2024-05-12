@@ -2,8 +2,6 @@ import React from 'react'
 import styles from "./productLine.module.scss"
 import Link from 'next/link'
 import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { IProduct } from '../../../helpers/types/responces/products'
 import ProductPrev from '../productPrev/productPrev'
 
