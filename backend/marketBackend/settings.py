@@ -146,7 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 60
+    'PAGE_SIZE': 10
 }
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 

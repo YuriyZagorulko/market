@@ -9,8 +9,8 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { IState, store } from '../../../redux/store'
-import { cartReducer, ICartState } from '../../../redux/reducers/cart.reducer'
-import { changeSearchData } from '../../../redux/slices/search.slice'
+import { ICartState } from '../../../redux/reducers/cart.reducer'
+import { setSearchText } from '../../../redux/slices/search.slice'
 
 
 function authLinks(isAuth, dispatch) {
@@ -47,40 +47,44 @@ function Header(props: any) {
   const [state, setState] = useState({
     headerBanner: '',
   })
-  
+  const [searchText, setLocalSearchText] = useState('');
   const router = useRouter()
   const [isRenderAuthLinks, setIsRenderAuthLinks] = useState(true)
   const [isShowCartLength,setIsShowCartLength] = useState(false)
+  const query = router.query
 
   useEffect(() => {
     setIsRenderAuthLinks(!!props.user)
   }, [props.user])
   useEffect(() => {
     setIsShowCartLength(!!props.cartL)
-  }, [props.cartL])
+  }, [props.cart])
 
+  useEffect(() => {
+    dispatch({type:controlsConstants.SHOW_LOADER})
+    if (Object.keys(query)?.length > 0) {
+      const paramsObj = JSON.parse(query.search_params as string)
+      setLocalSearchText(paramsObj.text)
+    }
+  }, [query])
 
   const updateInputValue = (evt) => {
     const val: string = evt.target.value
-    // setState({
-    //   ...state,
-    //   searchInput: val
-    // })
-    dispatch(changeSearchData({
-      text: val
-    }))
+    setLocalSearchText(val)
   }
+
   const redirectToSearchPage = () => {
-    if (props.searchText) {
+    if (searchText) {
       router.push({
         pathname: '/search',
-        query: { search_params: JSON.stringify({ text: props.searchText }) }
+        query: { search_params: JSON.stringify({ text: searchText }) }
       })
     }
   }
   const handleKeyDown = (ev) => {
-    if (props.searchText) {
+    if (searchText) {
       if (ev.key === 'Enter') {
+        dispatch(setSearchText(searchText))
         redirectToSearchPage()
       }
     }
@@ -124,7 +128,7 @@ function Header(props: any) {
             </div>
           </Link>
           <div className={styles.itemsCenter}>
-            <input onChange={updateInputValue} onKeyDown={handleKeyDown} value={props.searchText} placeholder="Я шукаю..." />
+            <input onChange={updateInputValue} onKeyDown={handleKeyDown} defaultValue={searchText} placeholder="Я шукаю..." />
             <FontAwesomeIcon icon={faSearch as IconProp} onClick={redirectToSearchPage} />
           </div>
           <div style={{ position: 'relative' ,padding: '10px' }} className={styles.itemsRight + ' iconsContainer'}>

@@ -15,6 +15,7 @@ class SearchViewSet(ModelViewSet):
     authentication_classes = []
     permission_classes = [] 
     pagination_class = CustomPagination
+    serializer_class = ProductSerializer
     allCategoryIds = []
     
     def findAllSubcategoriesByKeyword(self, keyword):
@@ -65,13 +66,14 @@ class SearchViewSet(ModelViewSet):
             qPrice &= Q(price__gte=priceFrom, price__lte=priceTo)
 
         products = Product.objects.filter(qText).filter(qCategory).filter(qPrice).order_by(orderBy)
+        temp = products.count()
         page = self.paginate_queryset(products)
         if page is not None:
             serializer = ProductSerializer(page, many=True)
             return self.get_paginated_response(serializer.data)
         
         serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+        return self.get_paginated_response(serializer.data)
 
     def perform_destroy(self, instance):
         instance.is_active = False

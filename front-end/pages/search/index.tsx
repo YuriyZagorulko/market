@@ -7,17 +7,33 @@ import SearchItems from "../../components/pages/search/search_items"
 import AsideMenu from "../../components/pages/search/AsideMenu/AsideMenu"
 import ProductsSortMenu from "../../components/pages/search/ProductsSortMenu/ProductsSortMenu"
 import { controlsConstants } from "../../helpers/constants/controls"
-import Loader from "../../components/shared/Loader/Loader"
 import { IControlsState } from "../../redux/reducers/controls.reducer"
 import MobileAside from "../../components/pages/search/MobileAside/MobileAside"
 import Head from "next/head"
-import { IGlobalSearchState, changeSearchData, clearAll } from "../../redux/slices/search.slice"
+import { IGlobalSearchState, changeSearchData, setSearchPageNumber } from "../../redux/slices/search.slice"
 import { IState } from "../../redux/store"
+import { Pagination } from "antd"
+import { IProduct } from "../../helpers/types/responces/products"
 
 
 interface IProps {
   controls: IControlsState
   searchState: IGlobalSearchState
+}
+
+export interface ISearchResult{
+  config?:{
+    params?: {
+      text: string
+    }
+  }
+  data: {
+    numPages: number
+    currentPage: number
+    data: IProduct []
+    count: number
+    totalItemsOnPage: number
+  }
 }
 
 function SearchPage(props: IProps) {
@@ -26,8 +42,17 @@ function SearchPage(props: IProps) {
     main: false,
     chosenCategory: false,
   })
-  const [{ requestData }, setSate] = useState({
-    requestData: null,
+  const { searchState } = props;
+  const { pagination } = searchState;
+  const [searchResult , setSearchResult] = useState<ISearchResult>({
+    data: {
+      numPages: 5,
+      currentPage: 0,
+      data: [],
+      count: 0,
+      totalItemsOnPage: 20,
+    },
+    
   })
   let paramsObj = {}
   const router = useRouter()
@@ -38,22 +63,18 @@ function SearchPage(props: IProps) {
     if (Object.keys(query)?.length > 0) {
       paramsObj = JSON.parse(query.search_params as string)
       dispatch(changeSearchData(paramsObj))
-      searchService
-        .search(paramsObj)
-        .then((val) => {
-          setSate({ requestData: val })
-        })
-        .finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
-      return () => {
-        dispatch({ type: controlsConstants.HIDE_LOADER })
-        dispatch(clearAll())
-      }
     }
   }, [query])
 
   useEffect(() => {
-
-  }, [props.searchState])
+    dispatch({type:controlsConstants.SHOW_LOADER})
+    searchService
+      .search(searchState)
+      .then((val) => {
+        setSearchResult(val as any)
+      })
+      .finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
+  }, [searchState])
   
   function onToggleMobileAside() {
     setIsMobileMenuActive({
@@ -61,14 +82,20 @@ function SearchPage(props: IProps) {
       main: !isMobileMenuActive.main,
     })
   }
+
   function onExitFromCategoryAside() {
     setIsMobileMenuActive({ main: false, chosenCategory: false })
   }
+
   function onToggleCategoryAside() {
     setIsMobileMenuActive({
       ...isMobileMenuActive,
       chosenCategory: !isMobileMenuActive.chosenCategory,
     })
+  }
+
+  const onPaginationChange = (page: number) => {
+    dispatch(setSearchPageNumber(page))
   }
 
   return (
@@ -78,7 +105,7 @@ function SearchPage(props: IProps) {
         <meta name="robots" content="noindex,nofollow" />
         <meta
           name="description"
-          content={`V16 - Результаты поиска по запросу: ${requestData?.config?.params?.text}`}
+          content={`V16 - Результаты поиска по запросу: ${searchResult?.config?.params?.text}`}
         />
         <meta name="keywords" content=""/>
       </Head>
@@ -114,7 +141,7 @@ function SearchPage(props: IProps) {
         {/* <div className={'search__order'}>
           sort order
         </div> */}
-        {requestData !== null && !requestData?.data?.count ? (
+        {searchResult !== null && !searchResult?.data?.count ? (
           <div className={style.nothingFound}>
             На жаль, за вашим запитом нічого не знайдено...
           </div>
@@ -124,7 +151,17 @@ function SearchPage(props: IProps) {
               <AsideMenu />
             </div>
             <div className={style.searchContent}>
-              <SearchItems paginatedData={requestData?.data} />
+              <div className={style.searchContentItems}>
+                <SearchItems paginatedData={searchResult?.data} />
+              </div>
+              <div className={style.searchPagination}>
+                <Pagination 
+                  current={searchResult.data.currentPage} 
+                  onChange={onPaginationChange} 
+                  total={searchResult.data.count} 
+                  pageSize={searchResult.data.totalItemsOnPage}
+                />
+              </div>
             </div>
           </div>
         )}

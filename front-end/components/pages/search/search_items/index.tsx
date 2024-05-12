@@ -1,9 +1,13 @@
 import style from './search_items.module.scss'
 import React, { useState, useEffect } from 'react'
-import { IPaginatedData } from '../../../../helpers/types'
 import ProductPrev from '../../../shared/productPrev/productPrev'
+import { IProduct } from '../../../../helpers/types/responces/products'
 
-function SearchItems (props: { paginatedData :  IPaginatedData}) {
+interface IProps {
+  data: IProduct []
+}
+
+function SearchItems (props: { paginatedData :  IProps }) {
   const [state, setSate] = useState({
     data: props.paginatedData,
     rowsArr: []
