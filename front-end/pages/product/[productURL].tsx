@@ -31,13 +31,16 @@ const Product = (props: IProps) => {
     const [product, setProduct] = useState<IProduct>(null)
     const { productURL } = router.query
 
-    if (productURL && !product) {
-        productService.getProduct(productURL.toString()).then((data) => {
-            setProduct(data)
-        }).catch(err => {
-            console.log(err)
-        }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
-    }
+    React.useEffect(() => {
+        if (productURL && !product) {
+            productService.getProduct(productURL.toString()).then((data) => {
+                setProduct(data)
+            }).catch(err => {
+                console.log(err)
+            }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
+        }
+    }, [product, productURL])
+
 
     const buyProduct = () => {
         dispatch({ type: cartConstants.ADD_PRODUCT, product })
@@ -66,7 +69,8 @@ const Product = (props: IProps) => {
                             </div>
                             <div className={style.top}>
                                 <div className={style.topLeft}>
-                                    {product.imagesSet.length <= 1 ? <div className={style.images}>
+                                    {product.imagesSet.length <= 1 ? 
+                                    <div className={style.images}>
                                         <div className={style.img} >
                                             <CustomImg img={getProductImg(product)} />
                                         </div>

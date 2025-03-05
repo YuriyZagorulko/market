@@ -1,6 +1,10 @@
 @import '/styles/constants.scss';
 
-.container{
+.sliderCcontainer{
+    display: flex;
+    max-width: 100%;
+}
+.imageContainer{
     position: relative;
     display: flex;
     background-image: url("../../../../public/images/pages/home/ukr_header.jpg");
@@ -24,14 +28,15 @@
         position: absolute;
         z-index: 1;
     }
-}
-.title{
-    display: flex;
-    z-index: 2;
-    font-size: $font-size-title-x;
-}
-.subtitle{
-    display: flex;
-    z-index: 2;
-    font-size: $font-size-subtitle;
+
+    .title{
+        display: flex;
+        z-index: 2;
+        font-size: $font-size-title-x;
+    }
+    .subtitle{
+        display: flex;
+        z-index: 2;
+        font-size: $font-size-subtitle;
+    }
 }

@@ -15,6 +15,9 @@ ENV PYTHONUNBUFFERED=1
 # RUN apt-get install -y postgresql
 # RUN apt-get install -y net-tools
 
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools wheel
+
 # Install pip requirements
 COPY ./backend/requirements.txt .
 RUN python -m pip install -r requirements.txt
@@ -22,7 +25,6 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
 
-RUN pip install --upgrade pip
 RUN pip install -r ./backend/requirements.txt
 RUN python ./backend/manage.py update_post_officess
 # RUN python ./backend/manage.py migrate

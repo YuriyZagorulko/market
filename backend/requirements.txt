@@ -6,6 +6,6 @@ psycopg2-binary>=2.8
 djangorestframework>=3.11.1,<4.0
 djangorestframework_simplejwt==5.0.0
 django-cors-headers>=3.5.0,<4.0
-Pillow>=8.0,<9.0
+Pillow==11.1.0.0
 requests>=2.0,<2.25.2
 cryptography==40.0.2

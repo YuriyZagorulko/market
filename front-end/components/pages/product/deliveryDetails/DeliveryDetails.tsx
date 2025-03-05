@@ -33,7 +33,7 @@ function DeliveryDetails() {
                                 <Image layout='fill' src="/images/icons/delivery-truck-icon.svg" alt="delivery" />
                             </div>
                             <div className={style.bodyPromotionTextWrapper}>
-                                <span className={style.bodyPromotionDescription}>Закази від 3000грн</span>
+                                <span className={style.bodyPromotionDescription}>Замовлення від 1000грн</span>
                                 <strong className={style.bodyPromotionHeader}>Доставка безкоштовно</strong>
                             </div>
                         </div>

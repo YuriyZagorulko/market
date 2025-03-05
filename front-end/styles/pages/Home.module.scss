@@ -22,3 +22,13 @@
     flex-direction: column;
   }
 }
+
+.headerContainer{
+  display: flex;
+  width: calc(100% - 302px);
+}
+.sidebarContainer{
+  min-width:283px;
+
+  margin: 0 20px 0 0;
+}

@@ -77,13 +77,18 @@ function HomePage(props: IProps) {
     
       <div className={styles.container + ' global-width-limiter'}>
         <div className={styles.head}>
-          <CategoriesSidebar />
-          <HomeHeader />
+          <div className={styles.sidebarContainer}>
+            <CategoriesSidebar />
+          </div>
+          <div className={styles.headerContainer}>
+            <HomeHeader />
+          </div>
         </div>
         <div className={styles.content}>
-          <>{
+          {/* add when there will be more content and categories */}
+          {/* <>{
             categoriesGroup({ categories: popularCategories, title: 'Популярні категорії' })
-          }</>
+          }</> */}
           {productLines(localProducts)}
         </div>
       </div>

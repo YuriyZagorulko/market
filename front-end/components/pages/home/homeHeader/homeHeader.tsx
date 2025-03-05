@@ -4,13 +4,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper'
 
-// type headerProps = {
-//   name?: string
-// }
-// type headerState = {
-//   headerBanner?: string
-// }
 export default class HomeHeader extends React.Component {
     constructor(props){
       super(props)
@@ -18,10 +17,30 @@ export default class HomeHeader extends React.Component {
     }
     render() {
       return (
-        <div className={styles.container}>
-          <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
-          <div className={styles.subtitle}>Слава Україні!</div>
-        </div>
+        <>
+          {/* <div className={styles.imageContainer}>
+            <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
+            <div className={styles.subtitle}>Слава Україні!</div>
+          </div> */}
+          <div className={styles.sliderCcontainer} >
+            <Swiper
+              modules={[Navigation, Pagination ]}
+              spaceBetween={50}
+              slidesPerView={1}
+              onSlideChange={() => console.log('slide change')}
+              onSwiper={(swiper) => console.log(swiper)}
+              pagination={{ clickable: true }}
+              loop={true}
+              navigation
+            >
+              <SwiperSlide>Slide 1</SwiperSlide>
+              <SwiperSlide>Slide 2</SwiperSlide>
+              <SwiperSlide>Slide 3</SwiperSlide>
+              <SwiperSlide>Slide 4</SwiperSlide>
+            </Swiper>
+          </div>
+
+        </>
       )
     }
   }
