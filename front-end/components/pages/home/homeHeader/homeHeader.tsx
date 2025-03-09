@@ -9,38 +9,60 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper'
+import { redirectToCategory } from '../../../../helpers/other'
+import { useRouter } from 'next/router'
 
-export default class HomeHeader extends React.Component {
-    constructor(props){
-      super(props)
-      this.state = {}
-    }
-    render() {
-      return (
-        <>
-          {/* <div className={styles.imageContainer}>
-            <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
-            <div className={styles.subtitle}>Слава Україні!</div>
-          </div> */}
-          <div className={styles.sliderCcontainer} >
-            <Swiper
-              modules={[Navigation, Pagination ]}
-              spaceBetween={50}
-              slidesPerView={1}
-              onSlideChange={() => console.log('slide change')}
-              onSwiper={(swiper) => console.log(swiper)}
-              pagination={{ clickable: true }}
-              loop={true}
-              navigation
-            >
-              <SwiperSlide>Slide 1</SwiperSlide>
-              <SwiperSlide>Slide 2</SwiperSlide>
-              <SwiperSlide>Slide 3</SwiperSlide>
-              <SwiperSlide>Slide 4</SwiperSlide>
-            </Swiper>
-          </div>
-
-        </>
-      )
-    }
+const slides = [
+  {
+    imgPath: '/images/pages/home/mechanic-changing-engine-oil-car-vehicle-min.jpg',
+    link: '',
+    title: 'Моторні мастина',
+    subtitle: 'Висока якість для тривалої роботи',
+  },
+  {
+    imgPath: '/images/pages/home/tools-2145770_1280-min.jpg',
+    link: '',
+    title: 'Інструменти',
+    subtitle: 'Все для швидкого та якісного обслуговування',
   }
+];
+export default function HomeHeader (){
+    const router = useRouter()
+    const handleSliderClick = e => {
+      redirectToCategory({ keyWord: e.key } as any, router)();
+    }
+    return (
+      <>
+        {/* <div className={styles.imageContainer}>
+          <div className={styles.subtitle}>Частина грошей з кожної покупки на цьому сайті буде йти на допомогу ЗСУ</div>
+          <div className={styles.subtitle}>Слава Україні!</div>
+        </div> */}
+        <div className={styles.sliderCcontainer} >
+          <Swiper
+            modules={[Navigation, Pagination ]}
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
+            pagination={{ clickable: true }}
+            loop={true}
+            navigation
+          >
+            {slides.map((slide) => (
+              <SwiperSlide >
+                <button className='slider-content-wrapper' onClick={handleSliderClick}>
+                    <img className={'slide-img'} src={slide.imgPath} alt="slide" />
+                    <div className={'slide-content-text'}>
+                      <div className={'slide-title'}>{slide.title}</div>
+                      <div className={'slide-subtitle'}>{slide.subtitle}</div>
+                    </div>
+                </button>
+              </SwiperSlide>
+            ))}
+            
+          </Swiper>
+        </div>
+
+      </>
+    )
+}

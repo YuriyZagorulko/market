@@ -4,6 +4,7 @@ import { Card, Menu, MenuProps } from 'antd'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { itemsOils } from './cstegoriesItems'
+import { redirectToCategory } from '../../../../helpers/other'
 
 // const itemsOld: MenuItem[] = [
 //   getItem('Масла', 'sub1', <span className={'iconContainer'}><FontAwesomeIcon icon={faOilCan} /></span>, [
@@ -101,20 +102,11 @@ import { itemsOils } from './cstegoriesItems'
 //   ]),
 // ]
 
-const redirectToCategory = (router, category) => {
-  if (category) {
-    router.push({
-        pathname: '/search',
-        query: {search_params: JSON.stringify({ category })}
-    })
-  }
-}
-
 function CategoriesSidebar (props: { }) {
   const router = useRouter()
 
   const onClick = e => {
-    redirectToCategory(router, e.key)
+    redirectToCategory({ keyWord: e.key } as any, router)();
   }
   return (
     <div className={style.container + ' global'}>

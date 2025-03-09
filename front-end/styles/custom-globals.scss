@@ -269,3 +269,54 @@ body{
 .ant-menu-item{
   display:flex;
 }
+
+.slider-content-wrapper {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+  height: -webkit-fill-available;
+  background: none;
+  width: 100%;
+
+  img.slide-img{
+    width: 100%;
+    position: absolute;
+    z-index: -2;
+    left: 0;
+    top: 0;
+  }
+
+  &::before{
+    content: "";
+    width: 100%;
+    background-color: #000;
+    opacity: 0.35;
+    position: absolute;
+    z-index: -1;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &:hover{
+    .slide-content-text{
+      text-decoration: underline;
+    }
+  }
+
+  .slide-content-text{
+    display: flex;
+    color: #fff;
+    font-size: 24px;
+    justify-content: center;
+    flex-direction: column;
+
+    .slide-title{
+      font-size: 36px;
+    }
+  }
+}
+

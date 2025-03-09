@@ -39,10 +39,12 @@ export const Carousel = (props: IProps) => {
                     watchSlidesProgress
                     slidesPerView={5}
                     onSwiper={setThumbsSwiper}>
-                    {props.images.map((el,i) => <SwiperSlide key={i} className={style.sliderThumb}>
+                    {props.images.map((el,i) => 
+                    <SwiperSlide key={i} className={style.sliderThumb}>
                         <button className='product-images-slider-thumbs-wrapper'>
                             <img className={style.sliderThumb} src={el} alt="slide" />
-                        </button></SwiperSlide>)}
+                        </button>
+                    </SwiperSlide>)}
                 </Swiper>
             </div>
 
