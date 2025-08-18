@@ -37,7 +37,7 @@ const Product = (props: IProps) => {
                 setProduct(data)
             }).catch(err => {
                 console.log(err)
-            }).finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
+            })
         }
     }, [product, productURL])
 
@@ -60,56 +60,55 @@ const Product = (props: IProps) => {
                 <meta property="og:image" content={getPreviewImgUrl(product)} />
                 <meta property="og:description" content={`Купить ${product?.title} (${storeContacts.MOBILE_NUMBER}) с гарантией. Отзывы. Характеристики. Фото. Доставка в Киев, Харьков, Днепр, Одессу и другие города Украины.`} />
             </Head>
-            {props.controls.isLoaderShown ? <Loader /> :
-                <div className={style.wrapper}>
-                    {product ?
-                        <div className={style.content + ' global-width-limiter'}>
-                            <div className={style.header}>
-                                <Breadcrumbs inputCategory={product.categoryData}/>
+            <div className={style.wrapper}>
+                {product ?
+                    <div className={style.content + ' global-width-limiter'}>
+                        <div className={style.header}>
+                            <Breadcrumbs inputCategory={product.categoryData}/>
+                        </div>
+                        <div className={style.top}>
+                            <div className={style.topLeft}>
+                                {product.imagesSet.length <= 1 ? 
+                                <div className={style.images}>
+                                    <div className={style.img} >
+                                        <CustomImg img={getProductImg(product)} />
+                                    </div>
+                                </div> :
+                                    <Carousel images={getAllProductImages(product)} />}
                             </div>
-                            <div className={style.top}>
-                                <div className={style.topLeft}>
-                                    {product.imagesSet.length <= 1 ? 
-                                    <div className={style.images}>
-                                        <div className={style.img} >
-                                            <CustomImg img={getProductImg(product)} />
-                                        </div>
-                                    </div> :
-                                        <Carousel images={getAllProductImages(product)} />}
+                            <div className={style.topRight}>
+                                <div className={style.title}>
+                                    {product.title}
                                 </div>
-                                <div className={style.topRight}>
-                                    <div className={style.title}>
-                                        {product.title}
-                                    </div>
-                                    <div className={style.description}>
-                                        {product.description}
-                                    </div>
-                                    <div className={style.trade}>
-                                        <div className={style.price}>
-                                            {product.price} ₴
-                                        </div>
-                                        <div className={style.buy}>
-                                            <button className={`button-primary`} onClick={buyProduct}>
-                                                <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
-                                                Купити
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <DeliveryDetails />
+                                <div className={style.description}>
+                                    {product.description}
                                 </div>
-                            </div>
-                            <div className={style.bottom}>
-                                <div className={style.bottomLeft}>
-                                    <Characteristics characteristics={product.characteristics} />
+                                <div className={style.trade}>
+                                    <div className={style.price}>
+                                        {product.price} ₴
+                                    </div>
+                                    <div className={style.buy}>
+                                        <button className={`button-primary`} onClick={buyProduct}>
+                                            <FontAwesomeIcon className={style.buttonIcon} icon={faShoppingCart as IconProp} />
+                                            Купити
+                                        </button>
+                                    </div>
                                 </div>
+                                <DeliveryDetails />
                             </div>
                         </div>
-                        :
-                        <div className={style.content + ' global-width-limiter'}>
-                            {!!product && 'no content loaded...'}
+                        <div className={style.bottom}>
+                            <div className={style.bottomLeft}>
+                                <Characteristics characteristics={product.characteristics} />
+                            </div>
                         </div>
-                    }
-                </div>}
+                    </div>
+                    :
+                    <div className={style.content + ' global-width-limiter'}>
+                        {!!product && 'no content loaded...'}
+                    </div>
+                }
+            </div>
         </>)
 }
 

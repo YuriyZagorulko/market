@@ -22,6 +22,10 @@
         
         padding:5px 16px;
         position:relative;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
     &__priceWrapper{
         display:flex;
@@ -82,32 +86,17 @@
    
 
     &__content{
-        background-color:#ffffff;
-        border-top:1px solid black;
-        max-height: 0;
+        background-color: #ffffff;
+        border-top: 1px solid black;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
         overflow: hidden;
         background: #d5d5d5;
-        flex-direction:row;
-        padding:5px 16px;
-        position:relative;
-        opacity: 0;
-        transition: all 0.25s ease-in ;
-
-        &Active{
-            background-color:#ffffff;
-            border-top:1px solid #95969a;
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 15px 15px;
-            display:flex;
-            flex-direction:row;
-            padding:5px 16px;
-            position:relative;
-            opacity: 1;
-            max-height: auto;
-            transition: all 0.25s ease-in ;
-            @media(max-width:$screen-size-mob){
-                flex-direction:column;
-            }
-        }
+        flex-direction: row;
+        padding: 5px 16px;
+        position: relative;
+        transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 
     }
     &__adressInformation{
@@ -167,4 +156,20 @@
     width: 5px;
     margin-right: 5px;
     border-radius: 10px;
+}
+
+.activeContent {
+    background-color: #ffffff;
+    border-top: 1px solid #95969a;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 15px 15px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 16px;
+    position: relative;
+    opacity: 1;
+    transform: scaleY(1);
+
+    @media (max-width: $screen-size-mob) {
+        flex-direction: column;
+    }
 }

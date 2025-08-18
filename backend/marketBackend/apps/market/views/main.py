@@ -5,6 +5,9 @@ from rest_framework.response import Response
 
 popularCategoriesKeys = ['MotorOils', 'TransmissionOils', 'CarCleaners', 'ChainOils', 'WindshieldWasherFluids', 'Coolants']
 class MainView(APIView):
+    authentication_classes = [] #disables authentication
+    permission_classes = [] #disables permission
+    
     def get(self, request):
         recomended = Product.objects.all().order_by('id')[:10]
         popular = Product.objects.all().order_by('-id')[:10]

@@ -73,7 +73,6 @@ function SearchPage(props: IProps) {
       .then((val) => {
         setSearchResult(val as any)
       })
-      .finally(() => dispatch({ type: controlsConstants.HIDE_LOADER }))
   }, [searchState])
   
   function onToggleMobileAside() {

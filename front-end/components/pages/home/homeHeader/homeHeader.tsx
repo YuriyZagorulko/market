@@ -26,7 +26,7 @@ const slides = [
     subtitle: 'Все для швидкого та якісного обслуговування',
   }
 ];
-export default function HomeHeader (){
+export default function HomeHeader () {
     const router = useRouter()
     const handleSliderClick = e => {
       redirectToCategory({ keyWord: e.key } as any, router)();
@@ -42,14 +42,12 @@ export default function HomeHeader (){
             modules={[Navigation, Pagination ]}
             spaceBetween={50}
             slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
             pagination={{ clickable: true }}
             loop={true}
             navigation
           >
-            {slides.map((slide) => (
-              <SwiperSlide >
+            {slides.map((slide, key) => (
+              <SwiperSlide key={key}>
                 <button className='slider-content-wrapper' onClick={handleSliderClick}>
                     <img className={'slide-img'} src={slide.imgPath} alt="slide" />
                     <div className={'slide-content-text'}>

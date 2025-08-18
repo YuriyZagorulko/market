@@ -51,14 +51,13 @@ function HomePage(props: IProps) {
 
 
   useEffect(() => {
-    dispatch({type:controlsConstants.SHOW_LOADER})
     productService.mainPage().then((val) => {
       setLocalProducts({
         recomended: val.recomended,
         popular: val.popular,
       })
       setPopularCategories(val.popularCategories)
-    }).finally(()=> dispatch({type:controlsConstants.HIDE_LOADER}))
+    })
   }, [])
 
   return (

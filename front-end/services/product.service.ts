@@ -1,5 +1,6 @@
 import config from '../config'
 import { IMain, IProduct } from '../helpers/types/responces/products'
+import { mainAxios } from './axios'
 import { handleErrors } from './service.helpers'
 export const productService = {
     mainPage,
@@ -7,38 +8,13 @@ export const productService = {
 }
 
 function mainPage() {
-    const requestOptions = {
-        method: 'GET',
-    }
-
-    return fetch(`${config.apiUrl}/market/main-page`, requestOptions)
-        .then(handleResponse)
-        .then((responce: IMain) => {
-            return responce
-        })
+    return mainAxios.get(`${config.apiUrl}/market/main-page`)
+    .then((res) => res?.data)
 }
 function getProduct(url: string): Promise<IProduct> {
     if (url) {
-    const requestOptions = {
-        method: 'GET',
+
+    return mainAxios.get(`${config.apiUrl}/market/product?productUrl=` + url)
+        .then((res) => res?.data?.product)
     }
-
-    return fetch(`${config.apiUrl}/market/product?productUrl=` + url, requestOptions)
-        .then(handleResponse)
-        .then((responce: {product: IProduct}) => {
-            return responce.product
-        }).catch(handleErrors)
-    }
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text)
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText
-            return Promise.reject(error)
-        }
-
-        return data
-    })
 }

@@ -5,6 +5,9 @@ from rest_framework.response import Response
 from marketBackend.apps.market.rest_framework.serializers.productSerializer import ProductSerializer
 
 class ProductView(APIView):
+    authentication_classes = [] #disables authentication
+    permission_classes = [] #disables permission
+    
     def get(self, request, *args, **kwargs):
         productUrl = request.GET.get('productUrl')
 

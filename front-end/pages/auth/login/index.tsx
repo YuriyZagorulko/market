@@ -1,6 +1,6 @@
 import style from './Login.module.scss'
-import React, { useState } from 'react'
-import { Form, Input, Button, Checkbox, notification, FormInstance } from 'antd'
+import React from 'react'
+import { Form, Input, notification, FormInstance } from 'antd'
 import { connect, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { userService } from '../../../services/user.service'

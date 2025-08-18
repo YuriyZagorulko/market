@@ -1,27 +1,15 @@
 import config from '../config'
-import { IMain, IProduct } from '../helpers/types/responces/products'
-import { handleErrors } from './service.helpers'
+import { IProduct } from '../helpers/types/responces/products'
+import { mainAxios } from './axios'
+
 export const productService = {
     getOrders
 }
 
 function getOrders(): Promise<IProduct> {
 
-    return fetch(`${config.apiUrl}/market/user/orders`)
-        .then(handleResponse)
+    return mainAxios.get(`${config.apiUrl}/market/user/orders`)
         .then((responce) => {
             return responce.data
-        }).catch(handleErrors)
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text)
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText
-            return Promise.reject(error)
-        }
-
-        return data
-    })
+        })
 }

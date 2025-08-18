@@ -61,7 +61,6 @@ function Header(props: any) {
   }, [props.cart])
 
   useEffect(() => {
-    dispatch({type:controlsConstants.SHOW_LOADER})
     if (Object.keys(query)?.length > 0 && query.search_params) {
       const paramsObj = JSON.parse(query.search_params as string)
       setLocalSearchText(paramsObj.text)

@@ -53,30 +53,24 @@ function OrderLine(props: OrderProps) {
           className={isActive ? style.collapseItem__chevronActive : style.collapseItem__chevron}
         />
       </div>
-      <div className={isActive ? style.collapseItem__contentActive : style.collapseItem__content}>
+      <div className={`${isActive ? style.activeContent : ''} ${style.collapseItem__content}`}>
         <div className={style.collapseItem__adressInformation}>
           <h4 className={style.collapseItem__descriptionHeader}>Інформація про замовлення</h4>
           <div className={style.collapseItem__adressDetailsWrapper}>
             <div className={style.collapseItem__deliveryCityDetailsHeader}>Місто доставки:</div>
             <span className={style.collapseItem__deliveryAdressDetails}>{props.order.city}</span>
             <div className={style.collapseItem__deliveryCityDetailsHeader}>Адреса доставки:</div>
-            {props.order.officeDescription.length ? <div className={style.collapseItem__deliveryAdressDetails}>{props.order.officeDescription}</div> :
-              <div className={style.collapseItem__deliveryAdressDetails}>Вулиця Лебедина, будинок № 63, квартира № 44</div>}
-
-
+            <div className={style.collapseItem__deliveryAdressDetails}>{props.order.officeDescription}</div>
           </div>
           <div className={style.collapseItem__deliveryCityDetailsHeader}>Отримувач:</div>
           <div className={style.collapseItem__recipientNameWrapper}>
             <p className={style.collapseItem__recipientName}>{props.order.recipientName}</p>
             <p className={style.collapseItem__recipientName}>{props.order.recipientSecondName}</p>
             <p className={style.collapseItem__recipientName}>{props.order.recipientSurname}</p>
-
           </div>
         </div>
         <div className={style.collapseItem__productInformation}>
-          {props.order.details.map(el => <OrderItem key={el.product.id} details={el} />
-
-          )}
+          {props.order.details.map(el => <OrderItem key={el.product.id} details={el} />)}
         </div>
       </div>
     </li>

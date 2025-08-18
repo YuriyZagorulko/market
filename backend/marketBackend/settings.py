@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': os.getenv('DATABASE_NAME', 'postgres'),
         'USER': os.getenv('DATABASE_USERNAME', 'postgres'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
-        'HOST': os.getenv('DATEBASE_EDPOINT', '172.17.0.1'),
+        'HOST': 'host.docker.internal',
         'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
 }
@@ -118,7 +118,7 @@ CSRF_TRUSTED_ORIGINS = json.loads( os.environ.get('CORS_ALLOWED_ORIGINS', '["htt
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'Europe/Kyiv'
 
 USE_I18N = True
 

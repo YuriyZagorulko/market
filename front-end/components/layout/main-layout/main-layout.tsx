@@ -21,7 +21,6 @@ export default function MainLayout (props) {
   })
   return (
       <React.Fragment>
-        { state.controls.isLoaderShown &&  <Loader/> }
         <Header/>
         <main className={styles.content}>
           {props.children}

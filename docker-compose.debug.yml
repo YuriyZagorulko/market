@@ -19,3 +19,9 @@ services:
       - 5678:5678
     volumes:
       - .:/app
+    networks:
+      - market_net
+
+networks:
+  market_net:
+    external: true
