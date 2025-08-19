@@ -1,17 +1,20 @@
-version: '3.4'
+version: '3.8'
 
 services:
   market:
-    image: market
-    env_file:
-      - ./.env.dev
     build:
       context: .
       dockerfile: ./Dockerfile
-    command: python ./backend/manage.py runserver 0.0.0.0:8000
+    image: market:debug
+    env_file:
+      - ./.env.dev
+    command: >
+      sh -c "python backend/manage.py migrate &&
+             python -m debugpy --listen 0.0.0.0:5678 --wait-for-client
+             backend/manage.py runserver 0.0.0.0:8000 --nothreading"
     ports:
-      - 8000:8000
-      - 5678:5678
+      - "8000:8000"
+      - "5678:5678"
     volumes:
       - .:/app
     networks:
