@@ -7,19 +7,19 @@ from marketBackend.apps.market.rest_framework.serializers.productSerializer impo
 class ProductView(APIView):
     authentication_classes = [] #disables authentication
     permission_classes = [] #disables permission
-    
+        
     def get(self, request, *args, **kwargs):
         productUrl = request.GET.get('productUrl')
 
         product = None
         try:
-            product = Product.objects.get(url=productUrl)
+            product = Product.objects.prefetch_related('categories').get(url=productUrl)
         except Product.DoesNotExist:
             try:
-                product = Product.objects.get(id=int(productUrl))
+                product = Product.objects.prefetch_related('categories').get(id=int(productUrl))
             except:
                 raise Http404
         serializer = ProductSerializer(product)
         return Response({
             'product': serializer.data
-        })  # products.values()
+        })

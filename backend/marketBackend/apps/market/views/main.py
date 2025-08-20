@@ -1,5 +1,6 @@
 from marketBackend.apps.market.models import Product, ProductCategory
-from marketBackend.apps.market.rest_framework.serializers.productSerializer import ProductSerializer, ProductCategorySerializer
+from marketBackend.apps.market.rest_framework.serializers.productCategorySerializer import ProductCategorySerializer
+from marketBackend.apps.market.rest_framework.serializers.productSerializer import ProductSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 

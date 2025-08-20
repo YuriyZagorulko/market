@@ -15,16 +15,16 @@ type IProps = {
 function Breadcrumbs (props: IProps) {
   const router = useRouter()
 
-  const renderBreadcrumbs = (currentCategory: IProductCategory, breadcrumbs: IProductCategory[] = []) => {
+  const extractBreadcrumbs = (currentCategory: IProductCategory, breadcrumbs: IProductCategory[] = []) => {
     if (currentCategory.parentCategoryData) {
       const updatedBreadcrumbs = [currentCategory, ...breadcrumbs];
-      return renderBreadcrumbs(currentCategory.parentCategoryData, updatedBreadcrumbs);
+      return extractBreadcrumbs(currentCategory.parentCategoryData, updatedBreadcrumbs);
     }
 
     return [currentCategory, ...breadcrumbs, ];
   };
 
-  const breadcrumbs = renderBreadcrumbs(props.inputCategory);
+  const breadcrumbs = extractBreadcrumbs(props.inputCategory);
   return (
     <div className={styles.container}>
       <div className="breadcrumb">
