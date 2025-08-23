@@ -1,4 +1,3 @@
-import { IOrder } from './../orders'
 import config from "../../../config"
 import { IProductCategory } from '..'
 
@@ -61,5 +60,4 @@ export function getAllProductImages(product:IProduct):string[]{
         links.push(config.mainDomain+el.image)
     }
     return links
-  
 }

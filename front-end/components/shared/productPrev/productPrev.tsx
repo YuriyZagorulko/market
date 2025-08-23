@@ -31,7 +31,7 @@ export default class ProductPrev extends React.Component<productProps, previewSt
           }}>
         <a className={styles.content}>
           <div className={styles.image}>
-            <CustomImg img={getPreviewImgUrl(this.props.product)} />
+            <CustomImg img={getPreviewImgUrl(this.props.product)} noContainer={true} />
           </div>
           <div className={styles.description}>
             {this.props.product.title}

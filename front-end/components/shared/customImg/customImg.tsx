@@ -11,6 +11,8 @@ type ImgProps = {
   imgProps?: any,
   alt?: string,
   layout?: string,
+  noContainer?: boolean,
+  containerProps?: any,
 }
 
 function CustomImg(props: ImgProps) {
@@ -49,26 +51,42 @@ function CustomImg(props: ImgProps) {
     })
   }
 
+  const renderImage = () => {
+    return (
+      <React.Fragment>
+        <Image src={imgPreview}
+          className={state.isShowPreview ? style.visible : style.invisible}
+          layout="fill"
+          objectFit='contain'
+          {...props.imgProps}
+        />
+        <Image
+          className={state.isShowPreview ? style.invisible : style.visible}
+          src={state.displayImg}
+          alt='Img'
+          layout="fill"
+          objectFit='contain'
+          {...props.imgProps}
+          onError={imageErrorHandler}
+          onLoadingComplete={productImgLoadHandler}
+        />
+      </React.Fragment>
+    )
+  }
   return (
-    <React.Fragment>
-      <Image src={imgPreview}
-        className={state.isShowPreview ? style.visible : style.invisible}
-        layout="fill"
-        objectFit='contain'
-        {...props.imgProps}
-      />
-      <Image
-        className={state.isShowPreview ? style.invisible : style.visible}
-        src={state.displayImg}
-        alt='Img'
-        layout="fill"
-        objectFit='contain'
-        {...props.imgProps}
-        onError={imageErrorHandler}
-        onLoadingComplete={productImgLoadHandler}
-      />
-    </React.Fragment>
-
+    (props.noContainer ? renderImage() : (
+      <div
+        className={'relative-container'}
+        style={{
+          height: '100px',
+          width: '100px',
+          ...(props.containerProps?.style || {})
+        }}
+        {...props.containerProps}
+      >
+        {renderImage()}
+      </div>
+    )) 
   )
 
 }

@@ -7,6 +7,7 @@ from marketBackend.apps.market.views import CitiesNPView
 from marketBackend.apps.market.views import MainView
 from marketBackend.apps.market.views import ConfirmOrderView
 from marketBackend.apps.market.views import SearchViewSet
+from marketBackend.apps.market.views.category import CategoryDetailView
 
 auth_urls = [
     path('orders', OrderView.as_view()),
@@ -20,4 +21,5 @@ urlpatterns = [
     path('shipping/np/offices', OfficesNPView.as_view()),
     path('shipping/confirm-order', ConfirmOrderView.as_view()),
     path('user/', include(auth_urls)),
+    path('category-detail/', CategoryDetailView.as_view(), name='category-detail'),
 ]
