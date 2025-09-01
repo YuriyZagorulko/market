@@ -8,3 +8,4 @@ Pillow==11.1.0.0
 requests>=2.0,<2.25.2
 cryptography==40.0.2
 debugpy==1.8.16
+django-nested-admin==4.1.4

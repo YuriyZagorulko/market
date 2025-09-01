@@ -2,25 +2,36 @@ from rest_framework import serializers
 from marketBackend.apps.market.models import Product, Image, ProductCategory
 from .imageSerializer import ImageSerializer
 from .productCategorySerializer import ProductCategorySerializer
-from marketBackend.apps.market.rest_framework.serializers.imageSerializer import ImageSerializer
 
 class ProductSerializer(serializers.ModelSerializer):
-    imagesSet = serializers.SerializerMethodField() #images
+    imagesSet = serializers.SerializerMethodField()
     categoryData = serializers.SerializerMethodField()
     categories = ProductCategorySerializer(many=True)
-    
-    def get_imagesSet(self, obj): #get_images
-        images = []
-        if obj.images:
-            images = Image.objects.filter(album_id=obj.images.pk)
-        serializer_class = ImageSerializer(images, many=True)
-        return serializer_class.data
-    
+
+    def get_imagesSet(self, obj):
+        if hasattr(obj, "album") and obj.album:
+            images = obj.album.images.all()
+            return ImageSerializer(images, many=True).data
+        return []
+
     def get_categoryData(self, obj):
         category = obj.categories.first()
-        serializer_class = ProductCategorySerializer(category)
-        return serializer_class.data
+        if category:
+            return ProductCategorySerializer(category).data
+        return None
+
     class Meta:
         model = Product
-        fields = ['id', 'title', 'price', 'description', 'images', 'created_at', 'updated_at', 'imagesSet', 'url', 'characteristics', 'categories', 'categoryData']
-        
+        fields = [
+            "id",
+            "title",
+            "price",
+            "description",
+            "created_at",
+            "updated_at",
+            "url",
+            "characteristics",
+            "categories",
+            "imagesSet",     # nested images
+            "categoryData",  # first category info
+        ]

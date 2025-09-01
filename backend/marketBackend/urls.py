@@ -5,9 +5,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import settings
 
 urlpatterns = [
-    path('api/market/', include('marketBackend.apps.market.urls')),
-    path('api/auth/', include('marketBackend.apps.auth.urls')),
-    path('api/admin/', admin.site.urls),
+    path("api/", include([
+        path("market/", include("marketBackend.apps.market.urls")),
+        path("auth/", include("marketBackend.apps.auth.urls")),
+        path("admin/", admin.site.urls),
+    ])),
+    path("_nested_admin/", include("nested_admin.urls")),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

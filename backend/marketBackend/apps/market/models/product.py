@@ -30,7 +30,6 @@ class Product(models.Model):
     title = models.CharField(max_length=300)
     price = models.IntegerField()
     description = models.TextField(max_length=2000, help_text="This is the description of the product")
-    images = models.OneToOneField(ImageAlbum, related_name='model', blank=True, null=True, on_delete=models.CASCADE) #album
     shortDescription = models.TextField(max_length=300, default='')
     categories = models.ManyToManyField(ProductCategory, related_name='products', blank=True)
     brand = models.ForeignKey(ProductBrand, null=True, default=None, blank=True, on_delete=models.DO_NOTHING) 
